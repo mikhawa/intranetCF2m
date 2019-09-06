@@ -48,12 +48,19 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 /*
  * create a PDO connection with MyPDO
  */
+ 
+ // try
+ try{
 $db_connect = new MyPDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME .';port=' . DB_PORT .';charset=' . DB_CHARSET,
         DB_LOGIN,
         DB_PWD,
         null,
         PRODUCT);
-
+ }catch(PDOException $e){
+	 echo 'Message d\'erreur : ' .$e->getMessage();
+     echo '<br>';
+     echo 'Code d\'erreur : ' .$e->getCode();
+ }
 /*
  * Pas connecté, donc on veut afficher le contrôleur public
  */
