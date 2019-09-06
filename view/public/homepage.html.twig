@@ -1,3 +1,54 @@
 {% extends "exemple-fichiers-externes.html.twig" %}
 
-{% block haut %}<h1>Intranet du CF2m</h1>{% endblock %}
+
+
+{% block haut %}<h1>logo</h1>{% endblock %}
+
+{% block title %}{{ parent() }} | Accueil {% endblock %}
+
+{% block menuhaut %}
+{% include "hautEtmenu.html.twig" %}
+{% endblock %}
+
+{% block milieu %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+                <p class="lead">Home Page</p>
+               
+            </div>
+            
+            <br>
+            <div class="col-lg-6 text-left">
+                {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
+                {% for item in detailfiliere %}
+                    <h4 class="mt-3">{{ item.lenom }} | <a href="?update={{ item.idlafiliere }}">modifier</a> | <a href="?delete={{ item.idlafiliere }}">supprimer</a></h4>
+                    <p>{{ item.lacronyme }}</p>
+                    <h6>Stagiaires:</h6>
+                    {# création de 2 variables pour éclater (avec split) le nom et prénom des stagiaires #}
+                    {% set lenom = item.lenom|split("|||") %}
+                    
+                    {% for detailfiliere in lenom %}
+                        {# si vide #}
+                        {% if detailfiliere is empty %}
+                            <p>Pas de filiere</p>
+                        {% else %}
+                        {# on utilise loop.index0 pour prendre le prénom associé au nom sur lequel on fait la boucle #}
+                        <p>{{ detailfiliere }} {{ lenom[loop.index0] }}</p>
+                        {%  endif %}
+                    {% endfor %}
+
+                {% else %}
+                <h4 class="mt-3">Bienvenue sur le site du CF2Maccueil</h4>
+                {% endfor %}
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}
