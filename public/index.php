@@ -48,6 +48,8 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 /*
  * create a PDO connection with MyPDO
  */
+ 
+ // try
 $db_connect = new MyPDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME .';port=' . DB_PORT .';charset=' . DB_CHARSET,
         DB_LOGIN,
         DB_PWD,
