@@ -1,5 +1,6 @@
 <?php
 
+
 	$utilisateurManager = new lutilisateurManager($db_connect);
 	
 	if(isset($_POST['login']) && isset($_POST['password'])) {
@@ -12,4 +13,5 @@
 
     // lien vers la page d'accueil
     echo $twig->render("public/homepage.html.twig");
+
 
