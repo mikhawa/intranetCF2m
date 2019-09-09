@@ -9,3 +9,5 @@ $stagiaire = $theStagiaireM->creerMenu($stagiaire);
 echo $twig->render("view/theStagiaire.html.twig",["lemenu"=>$lemenu,"stagiaire"=>$stagiaire]);
 
 }
+
+
