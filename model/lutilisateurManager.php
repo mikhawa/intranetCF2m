@@ -24,9 +24,9 @@ class lutilisateurManager
 		
 		$result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
 		if($login == $result['login'] && password_verify((trim($pwd)), $result['pwd'])) {
-			return ['True', $result];
+			return [True, $result];
 		} else {
-			return ['False', $result];
+			return [False, $result];
 		}
 	}
 	
