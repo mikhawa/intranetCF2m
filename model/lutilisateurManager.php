@@ -86,19 +86,7 @@ class lutilisateurManager
 		$sqlQuery->execute();
 	}
 	
-	public function deleteLutilisateur(int $id): void {
-		global $PDOConnect;
-	
-		$sql = "
-		DELETE
-		FROM
-			lutilisateur
-		WHERE
-			idlutilisateur = :id;";
-		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
-		$sqlQuery->execute();
-	}
+
 	
 	public function selectAllLutilisateur(): array {
 		global $PDOConnect;

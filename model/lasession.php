@@ -1,6 +1,6 @@
 <?php
 
-include_once '../kint.phar';
+
 
 class  lasession
 {
@@ -132,5 +132,5 @@ echo "<pre>";
 
 $data3 = ["lenumero" => 5, "idlasession" => 4, "lanne" => 6, "lenom" => 7, "lacronyme" => 8, "letype" => 9, "debut" => 10, "fin" => 11, "lafiliere_idfiliere" => 12];
 $test4 = new lasession($data3);
-Kint::dump($test4);
+var_dump($test4);
 echo "</pre>";
