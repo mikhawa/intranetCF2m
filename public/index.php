@@ -66,4 +66,4 @@ $db_connect = new MyPDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME .';port='
  */
 if(!isset($_SESSION['TheIdSess'])||$_SESSION['TheIdSess']!= session_id()){
     require_once '../controller/PublicController.php';
-}
+} else echo "Oui oui tu es connecté";

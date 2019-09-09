@@ -9,5 +9,14 @@
 {% else %}
     <li class="nav-item"><a class="nav-link" href="#">Pas encore d'éléments dans le menu</a></li>
 {% endfor %}
-    <li class="nav-item"><a class="nav-link" href="?connect">Connexion</a></li>
+    <li class="nav-item">
+		<form method='POST'>
+			<fieldset>
+				<legend>Connexion</legend>
+				<label for='login'>Login</label><br><input id='login' name='login'><br><br>
+				<label for='password'>Password</label><br><input id='password' type='password' name='password'><br><br>
+				<button type='submit'>Connexion</button>
+			</fieldset>
+		</form>
+	</li>
 </ul>
