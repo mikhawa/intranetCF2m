@@ -1,6 +1,6 @@
 <?php
 echo "<h3>Codage de admin avec password_hash</h3>";
-echo $a = password_hash("admin",PASSWORD_DEFAULT);
+echo $a = password_hash("pierre",PASSWORD_DEFAULT);
 echo "<br>";
 echo $b = password_hash("admin",PASSWORD_DEFAULT);
 echo "<br>";
