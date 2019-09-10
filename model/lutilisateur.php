@@ -102,13 +102,18 @@ protected function hydrate (array $tablehydrate ){
      */
     public function setLenomutilisateur (string $lenomutilisateur)
     {
-        $this->lenomutilisateur =htmlspecialchars(strip_tags(trim($lenomutilisateur)),ENT_QUOTES);
+        $this->lenomutilisateur = htmlspecialchars(strip_tags(trim($lenomutilisateur)),ENT_QUOTES);
     }
 
     /**
      * @param mixed $lemotdepasse
      */
     public function setLemotdepasse($lemotdepasse)
+    {
+        $this->lemotdepasse = trim($lemotdepasse);
+    }
+	
+	public function setLemotdepasseCrypte($lemotdepasse)
     {
         $this->lemotdepasse = password_hash((trim($lemotdepasse)), PASSWORD_DEFAULT);
     }

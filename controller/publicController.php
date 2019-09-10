@@ -3,9 +3,9 @@
 
 	$utilisateurManager = new lutilisateurManager($db_connect);
 	
-	if(isset($_POST['login']) && isset($_POST['password'])) {
-		$connectionStatus = $utilisateurManager->connectLutilisateur($_POST['login'], $_POST['password']);
-		if($connectionStatus[0] === True) $_SESSION['TheIdSess'] = session_id();
+	if(isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
+		$utilisateur = new lutilisateur($_POST);
+		$connectionStatus = $utilisateurManager->connectLutilisateur($utilisateur);
 		header("Location: ./");
 	}
 	
