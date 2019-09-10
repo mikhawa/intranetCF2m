@@ -65,11 +65,13 @@ $db_connect = new MyPDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME .';port='
  * Pas connecté, donc on veut afficher le contrôleur public
  */
 if(!isset($_SESSION['TheIdSess'])||$_SESSION['TheIdSess']!= session_id()){
-    require_once '../controller/PublicController.php';
-    //require_once '../controller/roles/superAdminController.php';
-} else echo "Oui oui tu es connecté";
 
 
 
 
+
+    require_once '../controller/publicController.php';
+} else {
+    require_once '../controller/privateController.php';
+}
 
