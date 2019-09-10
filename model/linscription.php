@@ -1,7 +1,7 @@
 <?php
 
 
-class inscription
+class linscription
 {
 protected $idlinscription;
 protected $debut;
