@@ -15,8 +15,8 @@ class lutilisateurManager
 			lutilisateur.lenomutilisateur AS login, lutilisateur.lemotdepasse AS pwd, lerole.idlerole AS role
 		FROM
 			lutilisateur
-		LEFT JOIN lutilisateur_has_lerole ON lutilisateur.idlutilisateur = lerole_idlerole
-		LEFT JOIN lerole ON lerole.idlerole = lutilisateur_idutilisateur
+		LEFT JOIN lutilisateur_has_lerole ON lutilisateur.idlutilisateur = lutilisateur_has_lerole.lerole_idlerole
+		LEFT JOIN lerole ON lerole.idlerole = lutilisateur_has_lerole.lutilisateur_idutilisateur
 		WHERE lutilisateur.lenomutilisateur = '" . $login . "'" . "
 		LIMIT 1;";
 		$sqlQuery = $this->db->prepare($sql);
