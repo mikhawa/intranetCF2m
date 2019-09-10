@@ -3,37 +3,47 @@
 
 class linscription
 {
-protected $idlinscription;
-protected $debut;
-protected $fin;
-protected $idutilisateur;
-protected $idsession;
 
+    protected $idlinscription;
+    protected $debut;
+    protected $fin;
+    protected $utilisateur_idutilisateur;
+    protected $lasession_idsession;
 
 //méthodes
 
-public function __construct (array $data = [])
-{
-    if(!empty($data)){       
-        $this->hydrate($data);
-    }
-}
-
-protected function hydrate (array $tablehydrate ){
-    foreach ($tablehydrate AS $key=>$value){
-        $setterName = "set".ucfirst($key);
-        if(method_exists($this,$setterName)){
-            $this->$setterName($value);
+    public function __construct(array $data = [])
+    {
+        if (!empty($data)) {
+            $this->hydrate($data);
         }
     }
-}
+
+    protected function hydrate(array $tablehydrate)
+    {
+        foreach ($tablehydrate AS $key => $value) {
+            $setterName = "set" . ucfirst($key);
+            if (method_exists($this, $setterName)) {
+                $this->$setterName($value);
+            }
+        }
+    }
 
     /**
-     * GETTERS
+     * @return mixed
      */
     public function getIdlinscription()
     {
-        return htmlspecialchars_decode($this->idlinscription,ENT_QUOTES);
+        return $this->idlinscription;
+    }
+
+    /**
+     * @param mixed $idlinscription
+     */
+    public function setIdlinscription($idlinscription): void
+    {
+        $this->idlinscription = $idlinscription;
+
     }
 
     /**
@@ -45,79 +55,61 @@ protected function hydrate (array $tablehydrate ){
     }
 
     /**
+     * @param mixed $debut
+     */
+    public function setDebut($debut): void
+    {
+        $this->debut = $debut;
+    }
+
+    /**
      * @return mixed
      */
-  public function getFin()
+    public function getFin()
     {
         return $this->fin;
     }
 
-     /**
+    /**
+     * @param mixed $fin
+     */
+    public function setFin($fin): void
+    {
+        $this->fin = $fin;
+    }
+
+    /**
      * @return mixed
      */
-  public function getIdutilisateur()
-  {
-      return $this->idutilisateur;
-  }
+    public function getUtilisateurIdutilisateur()
+    {
+        return $this->utilisateur_idutilisateur;
+    }
 
-   /**
+    /**
+     * @param mixed $utilisateur_idutilisateur
+     */
+    public function setUtilisateurIdutilisateur($utilisateur_idutilisateur): void
+    {
+        $this->utilisateur_idutilisateur = $utilisateur_idutilisateur;
+    }
+
+    /**
      * @return mixed
      */
-    public function getIdsession()
+    public function getLasessionIdsession()
     {
-        return $this->idsession;
-    }
-
-   
-
-    /**
-     * SETTERS
-     */
-    public function setIdlinscription( int $idlinscription)
-    {
-        if(!empty($idlinscription)){
-
-            $this->idlinscription = $idlinscription;
-        }
+        return $this->lasession_idsession;
     }
 
     /**
-     * @param mixed $lenomutilisateur
+     * @param mixed $lasession_idsession
      */
-    public function setDebut (string $debut)
+    public function setLasessionIdsession($lasession_idsession): void
     {
-        $this->debut =htmlspecialchars(strip_tags(trim($debut)),ENT_QUOTES);
+        $this->lasession_idsession = $lasession_idsession;
     }
-
-    /**
-     * @param mixed $lemotdepasse
-     */
-    public function setFin($fin)
-    {
-        $this->fin =htmlspecialchars(strip_tags(trim($fin)),ENT_QUOTES);
-    }
-
-     /**
-     * @param mixed $lemotdepasse
-     */
-    public function setIdutilsateur($idutilisateur)
-    {
-        $this->idutilisateur =htmlspecialchars(strip_tags(trim($idutilisateur)),ENT_QUOTES);
-    }
-
-
-     /**
-     * @param mixed $lemotdepasse
-     */
-    public function setIdsession($idsession)
-    {
-        $this->idsession =htmlspecialchars(strip_tags(trim($idsession)),ENT_QUOTES);
-    }
-
-   
-
 
 
 }
-
 
