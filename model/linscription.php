@@ -63,7 +63,7 @@ protected function hydrate (array $tablehydrate ){
    /**
      * @return mixed
      */
-    public function getdsession()
+    public function getIdsession()
     {
         return $this->idsession;
     }
