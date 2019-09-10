@@ -51,7 +51,8 @@ class ledroitManager
     //recuperation d'une filiere par son ID
     public function selectionnerLedroitParId(int $idledroit): array
     {
-        if (empty($idledroit)) {
+        if (empty($idledroit)) 
+        {
             return [];
 
         }

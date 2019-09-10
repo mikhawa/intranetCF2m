@@ -1,27 +1,27 @@
 <?php
 
-if(isset($_GET['deconnect'])){
+if (isset($_GET['deconnect'])) {
 
-$theuserM->deconnecterSession();
+    $theuserM->deconnecterSession();
 
-}elseif(isset($_GET['stagiaireContorller'])){
+} elseif (isset($_GET['stagiaireContorller'])) {
 
-require_once "../controller/roles/stagiaireContorller.php";
+    require_once "../controller/roles/stagiaireContorller.php";
 
-}elseif(isset($_GET['superAdminController'])){
+} elseif (isset($_GET['superAdminController'])) {
 
-require_once "../controller/roles/superAdminController.php";
+    require_once "../controller/roles/superAdminController.php";
 
-}elseif(isset($_GET['accueilController'])){
+} elseif (isset($_GET['accueilController'])) {
 
-require_once "../controller/roles/accueilController.php";
+    require_once "../controller/roles/accueilController.php";
 
-}elseif(isset($_GET['referentController'])){
+} elseif (isset($_GET['referentController'])) {
 
-require_once "../controller/roles/referentController.php";
+    require_once "../controller/roles/referentController.php";
 
-}elseif(isset($_GET['personelController'])){
+} elseif (isset($_GET['personelController'])) {
 
-require_once "../controller/roles/personelController.php";
+    require_once "../controller/roles/personelController.php";
 
 }
