@@ -3,6 +3,7 @@
 
 class linscription
 {
+
     protected $idlinscription;
     protected $debut;
     protected $fin;
@@ -42,6 +43,7 @@ class linscription
     public function setIdlinscription($idlinscription): void
     {
         $this->idlinscription = $idlinscription;
+
     }
 
     /**
@@ -110,3 +112,4 @@ class linscription
 
 
 }
+

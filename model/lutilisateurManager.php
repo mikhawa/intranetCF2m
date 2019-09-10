@@ -85,5 +85,39 @@ class lutilisateurManager
 		$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
 		$sqlQuery->execute();
 	}
+	
+
+	
+	public function selectAllLutilisateur(): array {
+		global $PDOConnect;
+	
+		$sql = "
+		SELECT
+			*
+		FROM
+			lutilisateur";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+	public function selectLutilisateurJoinLerole(string $joinType = "inner"): array {
+		global $PDOConnect;
+		$joinType = strtolower($joinType);
+		if($joinType !== "inner" && $joinType !== "left" && $joinType !== "right") {return [];}
+	
+		$sql = "
+		SELECT
+			lutilisateur.idlutilisateur AS lutilisateur_idlutilisateur, lutilisateur.lenomutilisateur AS lutilisateur_lenomutilisateur, lutilisateur.lemotdepasse AS lutilisateur_lemotdepasse, lutilisateur.lenom AS lutilisateur_lenom, lutilisateur.leprenom AS lutilisateur_leprenom, lutilisateur.lemail AS lutilisateur_lemail, lutilisateur.luniqueid AS lutilisateur_luniqueid, lutilisateur_has_lerole.lutilisateur_idutilisateur AS lutilisateur_has_lerole_lutilisateur_idutilisateur, lutilisateur_has_lerole.lerole_idlerole AS lutilisateur_has_lerole_lerole_idlerole, lerole.idlerole AS lerole_idlerole, lerole.lintitule AS lerole_lintitule, lerole.ladescription AS lerole_ladescription
+		FROM
+			lutilisateur
+		" . $joinType . " JOIN lutilisateur_has_lerole ON lutilisateur.idlutilisateur = lerole_idlerole
+		" . $joinType . " JOIN lerole ON lerole.idlerole = lutilisateur_idutilisateur;";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+	}
 
 }
