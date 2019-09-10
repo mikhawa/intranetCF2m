@@ -51,7 +51,7 @@ class sessionManager
   }
 
 
-public function  SessionCreation( lasession $lasession) {
+public function  sessionCreate( lasession $lasession) {
 
     if(empty($lasession->getLenom())||empty($lasession->getLacronyme())||empty($lasession->getLanne())||empty($lasession->getLenumero())||empty($lasession->getLetype())||empty($lasession->getDebut())||empty($lasession->getFin())){
        return false;
