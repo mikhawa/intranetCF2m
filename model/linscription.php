@@ -1,7 +1,7 @@
 <?php
 
 
-class lerole
+class linscription
 {
 protected $idlinscription;
 protected $debut;
@@ -63,7 +63,7 @@ protected function hydrate (array $tablehydrate ){
    /**
      * @return mixed
      */
-    public function getdsession()
+    public function getIdsession()
     {
         return $this->idsession;
     }
