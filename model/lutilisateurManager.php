@@ -9,7 +9,7 @@ class lutilisateurManager
 		$this->db = $connect;
 	}
 	
-	public function connectLutilisateur(string $login, string $pwd): array {
+	public function connectLutilisateur(lutilisateur $user): bool {
 		$sql = "
 		SELECT
 			lutilisateur.lenomutilisateur AS login, lutilisateur.lemotdepasse AS pwd, lerole.idlerole AS role
@@ -17,20 +17,24 @@ class lutilisateurManager
 			lutilisateur
 		LEFT JOIN lutilisateur_has_lerole ON lutilisateur.idlutilisateur = lerole_idlerole
 		LEFT JOIN lerole ON lerole.idlerole = lutilisateur_idutilisateur
-		WHERE lutilisateur.lenomutilisateur = '" . $login . "'" . "
+		WHERE lutilisateur.lenomutilisateur = :login
 		LIMIT 1;";
 		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(":login", $user->getLenomutilisateur(), PDO::PARAM_STR);
 		$sqlQuery->execute();
 		
 		$result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
-		if($login == $result['login'] && password_verify((trim($pwd)), $result['pwd'])) {
-			return [True, $result];
+		if($user->getLenomutilisateur() == $result['login'] && password_verify($user->getLemotdepasse(), $result['pwd'])) {
+			$_SESSION['TheIdSess'] = session_id();
+			$_SESSION['login'] = $result['login'];
+			$_SESSION['role'] = $result['role'];
+			return True;
 		} else {
-			return [False, $result];
+			return False;
 		}
 	}
 	
-	public function displayContentLutilisateur(): array {
+	public function lutilisateurDisplayContent(): array {
 		$sql = "
 		DESCRIBE
 			lutilisateur;";
@@ -40,7 +44,7 @@ class lutilisateurManager
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	public function selectLutilisateur(int $id): array {
+	public function lutilisateurSelectById(lutilisateur $user): array {
 		$sql = "
 		SELECT
 			*
@@ -49,13 +53,13 @@ class lutilisateurManager
 		WHERE
 			idlutilisateur = :id;";
 		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+		$sqlQuery->bindValue(":id", $user->getIdutilisateur(), PDO::PARAM_INT);
 		$sqlQuery->execute();
 		
 		return $sqlQuery->fetch(PDO::FETCH_ASSOC);
 	}
 	
-	public function updateLutilisateur(int $id, array $datas) {
+	public function lutilisateurUpdate(lutilisateur $user, array $datas) {
 		$updateDatas = "";
 		foreach($datas as $dataField => $data) {
 			$updateDatas .= $dataField . " = '" . $data . "', ";
@@ -70,11 +74,11 @@ class lutilisateurManager
 		WHERE
 			idlutilisateur = :id;";
 		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+		$sqlQuery->bindValue(":id", $user->getIdutilisateur(), PDO::PARAM_INT);
 		$sqlQuery->execute();
 	}
 
-	public function deleteLutilisateur(int $id): void {
+	public function lutilisateurDelete(lutilisateur $user): void {
 		$sql = "
 		DELETE
 		FROM
@@ -82,15 +86,13 @@ class lutilisateurManager
 		WHERE
 			idlutilisateur = :id;";
 		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+		$sqlQuery->bindValue(":id", $user->getIdutilisateur(), PDO::PARAM_INT);
 		$sqlQuery->execute();
 	}
 	
 
 	
-	public function selectAllLutilisateur(): array {
-		global $PDOConnect;
-	
+	public function lutilisateurSelectAll(): array {	
 		$sql = "
 		SELECT
 			*
@@ -102,8 +104,7 @@ class lutilisateurManager
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	public function selectLutilisateurJoinLerole(string $joinType = "inner"): array {
-		global $PDOConnect;
+	public function lutilisateurSelectAllJoinLerole(string $joinType = "inner"): array {
 		$joinType = strtolower($joinType);
 		if($joinType !== "inner" && $joinType !== "left" && $joinType !== "right") {return [];}
 	
