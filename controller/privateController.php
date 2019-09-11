@@ -6,27 +6,24 @@ if(isset($_GET['deconnect'])){
 
 	$theuserM->deconnecterSession();
 
+}
 
-}elseif(isset($_GET['stagiaireContorller'])){
-
-    require_once "../controller/roles/stagiaireContorller.php";
-
-}elseif(isset($_GET['superAdminController'])){
-
-    require_once "../controller/roles/superAdminController.php";
-
-}elseif(isset($_GET['accueilController'])){
-
-    require_once "../controller/roles/accueilController.php";
-
-}elseif(isset($_GET['referentController'])){
-
-    require_once "../controller/roles/referentController.php";
-
-}elseif(isset($_GET['personelController'])){
-
-    require_once "../controller/roles/personelController.php";
-
-
-
+switch ($_SESSION['role']) {
+    case "1":
+        include "roles/personnelController.php";
+        break;
+    case "2":
+        include "roles/accueilController.php";
+        break;
+    case "3":
+        include "roles/pedagogiqueController.php";
+        break;
+    case "4":
+        include "roles/superAdmniController.php";
+        break;
+    case "5":
+        include "roles/stagiaireController.php";
+        break;
+    default:
+        echo "Session introuvable";
 }
