@@ -1,6 +1,6 @@
 <?php
 
-var_dump($_SESSION);
+$utilisateurManager=new lutilisateurManager($db_connect);
 
 if(isset($_GET['deconnect'])){
 
