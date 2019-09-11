@@ -1,40 +1,12 @@
 {% extends "bootstrap.html.twig" %}
-
-
-
-{% block haut %}<h1>logo</h1>{% endblock %}
-
+{% block haut %}{% endblock %}
 {% block title %}{{ parent() }} | Accueil {% endblock %}
 
 {% block menuhaut %}
 {% include "hautEtmenu.html.twig" %}
 {% endblock %}
 
-{% block milieu %}
-    <!-- Page Content -->
-<main role="main" class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1 class="mt-5">Intranet CF2m</h1>
-                <p class="lead">Home Page</p>
-               
-            </div>
-            
-            <br>
-
-            <div class="col-lg-6 text-left">
-
-               
-                <h4 class="mt-3">Bienvenue sur le site du CF2M accueil</h4>
-               
-
-                
-            </div>
-        </div>
-</main>
-
-
-{% endblock %}
+{% block milieu %}{% endblock %}
 
 {% block bas %}
 {% include "footer.html.twig" %}
