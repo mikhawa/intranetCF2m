@@ -10,7 +10,7 @@
 		} else {
 			echo $twig->render("public/homepage.html.twig", ["error_connection" => 'Votre nom d\'utilisateur ou votre login est erroné. Veuillez retenter.']);
 		}
-	} else {
+
 	
 // page d'accueil
 
