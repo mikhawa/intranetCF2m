@@ -26,9 +26,9 @@ class lutilisateurManager
 		
 		$result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
 		if($user->getLenomutilisateur() == $result['login'] && password_verify($user->getLemotdepasse(), $result['pwd'])) {
+            $_SESSION = $result;
 			$_SESSION['TheIdSess'] = session_id();
-			$_SESSION['login'] = $result['login'];
-			$_SESSION['role'] = $result['role'];
+			
 			return True;
 		} else {
 			return False;
