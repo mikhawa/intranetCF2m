@@ -20,25 +20,26 @@ class lutilisateurManager
 		LEFT JOIN lerole ON lerole.idlerole = lutilisateur_has_lerole.lerole_idlerole
 		WHERE lutilisateur.lenomutilisateur = :lenomutilisateur " . "
 		LIMIT 1;"; // LIMIT 1 tant que l'on utilise un utilisateur ne peut avoir qu'un rôle
-        $sqlQuery = $this->db->prepare($sql);
-        $sqlQuery->bindValue(":lenomutilisateur", $user->getLenomutilisateur(), PDO::PARAM_STR);
-        $sqlQuery->execute();
 
-        $result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
-        if($user->getLenomutilisateur() == $result['lenomutilisateur'] && password_verify($user->getLemotdepasse(), $result['pwd'])) {
-            $_SESSION['TheIdSess'] = session_id();
-            $_SESSION['lenomutilisateur'] = $result;
-            $_SESSION['idlerole'] = $result['idlerole'];
-            return True;
-        } else {
-            return False;
-        }
-    }
 
-    public function lutilisateurDisplayContent(): array {
-        $sql = "
-		DESCRIBE
-			lutilisateur;";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(":login", $user->getLenomutilisateur(), PDO::PARAM_STR);
+		$sqlQuery->execute();
+		
+		$result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+		if($user->getLenomutilisateur() == $result['lenomutilisateur'] && password_verify($user->getLemotdepasse(), $result['pwd'])) {
+      $_SESSION = $result;
+			$_SESSION['TheIdSess'] = session_id();
+			unset($_SESSION['pwd']);
+			
+			return True;
+		} else {
+			return False;
+		}
+	}
+	
+	public function lutilisateurDisplayContent(): array {
+		$sql = "DESCRIBE lutilisateur;";
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->execute();
 
