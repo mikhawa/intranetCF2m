@@ -1,20 +1,29 @@
 <?php
-echo "<h3>Codage de admin avec password_hash</h3>";
-echo $a = password_hash("pierre",PASSWORD_DEFAULT);
+echo "<h1>Codage des lutilisateur avec password_hash</h1>";
+echo "<h2>sylviane.mol</h2>";
+echo $a = password_hash("sylviane",PASSWORD_DEFAULT);
 echo "<br>";
-echo $b = password_hash("admin",PASSWORD_DEFAULT);
+echo "<h2>pierre.sandron</h2>";
+echo $b = password_hash("pierre",PASSWORD_DEFAULT);
 echo "<br>";
-echo $c = password_hash("admin",PASSWORD_DEFAULT);
+echo "<h2>oumar.abakar</h2>";
+echo $c = password_hash("oumar",PASSWORD_DEFAULT);
 echo "<br>";
-echo $d = password_hash("admin",PASSWORD_DEFAULT);
+echo "<h2>dimitri.bouvy</h2>";
+echo $d = password_hash("dimitri",PASSWORD_DEFAULT);
 echo "<br>";
-echo password_verify("admin",$a);
+echo "<h2>michael.pitz</h2>";
+echo $e = password_hash("michael",PASSWORD_DEFAULT);
 echo "<br>";
-echo password_verify("admin",$b);
+echo password_verify("sylviane",$a);
 echo "<br>";
-echo password_verify("admin",$c);
+echo password_verify("pierre",$b);
 echo "<br>";
-echo password_verify("admin",$d);
+echo password_verify("oumar",$c);
+echo "<br>";
+echo password_verify("dimitri",$d);
+echo "<br>";
+echo password_verify("michael",$e);
 echo "<br>";
 
 
