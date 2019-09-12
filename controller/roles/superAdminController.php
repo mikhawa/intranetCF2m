@@ -31,7 +31,7 @@ if (isset($_GET['createLinscription'])) {
         }
 
     }else{
-    $section = $linscriptionManager->linscriptionSelectAll();
+    $section = $linscriptionManager->lutilisateurSelectAll();
 
 // on appelle la vue générée par twig
 
