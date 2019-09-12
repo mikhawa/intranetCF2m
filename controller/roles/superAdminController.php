@@ -31,15 +31,9 @@ if (isset($_GET['createLinscription'])) {
         }
 
     }else{
-    $section = $linscriptionManager->linscriptionSelectAll();
+    $section = $linscriptionManager->lutilisateurSelectAll();
 
 // on appelle la vue générée par twig
 
     echo $twig->render('ajoutLinscription.html.twig',['section'=>$section]);
 }
-
-
-// page d'accueil
-
-    // lien vers la page d'accueil
-    echo $twig->render("public/homepage.html.twig");
