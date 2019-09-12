@@ -1,0 +1,21 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ parent() }} | Accueil de l'administration {% endblock %}
+
+{% block menuhaut %}
+{% endblock %}
+{% block haut %}<h1>Accueil de l'administration</h1>
+    <h3>Bienvenue {{ session.login }} </h3>
+{% endblock %}
+
+{% block milieu %}
+
+
+<!-- container -->
+
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}
