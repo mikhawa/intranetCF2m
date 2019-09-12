@@ -19,7 +19,7 @@ switch ($_SESSION['role']) {
         include "roles/pedagogiqueController.php";
         break;
     case "4":
-        include "roles/superAdmniController.php";
+        include "roles/superAdminController.php";
         break;
     case "5":
         include "roles/stagiaireController.php";
