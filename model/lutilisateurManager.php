@@ -18,7 +18,7 @@ class lutilisateurManager
 
 		LEFT JOIN lutilisateur_has_lerole ON lutilisateur.idlutilisateur = lutilisateur_has_lerole.lutilisateur_idutilisateur
 		LEFT JOIN lerole ON lerole.idlerole = lutilisateur_has_lerole.lerole_idlerole
-		WHERE lutilisateur.lenomutilisateur = :lenomutilisateur " . "
+		WHERE lutilisateur.lenomutilisateur = :login " . "
 		LIMIT 1;"; // LIMIT 1 tant que l'on utilise un utilisateur ne peut avoir qu'un rôle
 
 
