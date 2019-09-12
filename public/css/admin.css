@@ -1,0 +1,65 @@
+html,body{
+    height: 90%;
+    margin-bottom: 0px;
+}
+#menu-g{
+    min-height: 100%;
+    border-right: 1px solid rgba(0,0,0,0.3);
+}
+#content-admin h1{
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    color:grey;
+}
+.logo{
+    margin-top:15%;
+}
+.circle{
+    position: relative;
+    width: 5%;
+    height: 0;
+    padding: 2.5% 0;
+    border-radius: 50%;
+    background: #0494d7;
+}
+.page-title{
+    padding-left: 50px;
+    margin-top: 1%;
+}
+.page-title h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 350;
+    font-size: 35px;
+    margin-top: 20px;
+}
+.circle img{
+    width: 100%;
+    position: absolute;
+    top:24%;
+}
+.page-title{
+    margin-top: 2.5%;
+}
+/* menu admmin */
+#menu-admin ul{
+    margin-top: 15%;
+    list-style: none;
+}
+#menu-admin ul li{
+    padding:25px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #0494d7;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+}
+#menu-admin ul li img{
+    position: absolute;
+    top: 25%;
+    left: 8%;
+    width: 10%;
+}
