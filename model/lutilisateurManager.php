@@ -23,7 +23,7 @@ class lutilisateurManager
 
 
 		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->bindValue(":login", $user->getLenomutilisateur(), PDO::PARAM_STR);
+		$sqlQuery->bindValue(":lenomutilisateur", $user->getLenomutilisateur(), PDO::PARAM_STR);
 		$sqlQuery->execute();
 		
 		$result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
