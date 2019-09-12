@@ -8,7 +8,7 @@ if(isset($_GET['deconnect'])){
 
 }
 
-switch ($_SESSION['role']) {
+switch ($_SESSION['idlerole']) {
     case "1":
         include "roles/personnelController.php";
         break;
