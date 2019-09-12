@@ -28,6 +28,7 @@ class lutilisateurManager
 		if($user->getLenomutilisateur() == $result['login'] && password_verify($user->getLemotdepasse(), $result['pwd'])) {
             $_SESSION = $result;
 			$_SESSION['TheIdSess'] = session_id();
+			unset($_SESSION['pwd']);
 			
 			return True;
 		} else {
