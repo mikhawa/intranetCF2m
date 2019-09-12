@@ -1,21 +1,50 @@
-{% extends "template.html.twig" %}
+{% extends "roles/admin/template.admin.html.twig" %}
 
-{% block title %}{{ parent() }} | Accueil de l'administration {% endblock %}
 
-{% block menuhaut %}
-{% endblock %}
-{% block haut %}<h1>Accueil de l'administration</h1>
-    <h3>Bienvenue {{ session.login }} </h3>
-{% endblock %}
 
 {% block milieu %}
 
-
 <!-- container -->
+<div class="container-fluid row h-100">
+    <!-- menu gauche -->
+    <div id="menu-g" class="col-lg-2">
+        <img class="col-lg-12 logo" src="../img/logo.png" alt="logo-cfm2m"/>
+    </div><!-- end menu gauche -->
+    <!-- content admin -->
+    <div id="content-admin" class="col-lg-10">
+        <!-- content titre page -->
+        <div class="row page-title">
+                <div class="circle">
+                    <img class="col-lg-12" src="img/home.png"/>
+                </div>
+            <!-- titre de la page -->
+            <div class="col-lg-11">
+                <h1 class="col-lg-11">Accueil</h1>
+            </div><!-- fin titre de la page -->
+        </div><!-- end titre page -->
 
+        <!-- menu générale admin -->
+        <div id="menu-admin" class="row justify-content-center">
+            <ul class="col-lg-3">
+                <li class="col-lg-12">
+                    <img src="../img/user.png" alt="gestion des utilisateurs" class="">
+                    Gestion des utilisateurs
+                </li>
+                <li class="col-lg-12">
+                    <img src="../img/groupe.png" alt="gestion des utilisateurs" class="">
+                    Gestion des groupes
+                </li>
+                <li class="col-lg-12">
+                    <img src="../img/droit.png" alt="gestion des utilisateurs" class="">
+                    Gestions des rôles
+                </li>
+            </ul>
+        </div><!-- end menu générale admin -->
+
+    </div><!-- end content-admin-->
+</div><!-- end container -->
 
 {% endblock %}
-
 {% block bas %}
 {% include "footer.html.twig" %}
 {% endblock %}
