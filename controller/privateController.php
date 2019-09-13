@@ -1,13 +1,16 @@
 <?php
 
-$utilisateurManager=new lutilisateurManager($db_connect);
 
+// load lutilisateur manager
+$lutilisateurM=new lutilisateurManager($db_connect);
+
+// deconnection
 if(isset($_GET['deconnect'])){
-
-	$theuserM->deconnecterSession();
+	$lutilisateurM->disconnectLutilisateur();
 
 }
 
+// switch suivant l'id des rôles (pour le moment, un rôle, un controleur)
 switch ($_SESSION['idlerole']) {
     case "1":
         include "roles/personnelController.php";
