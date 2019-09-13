@@ -20,7 +20,7 @@ $lasessionM=new lasessionManager($db_connect);
 $lafiliereM=new lafiliereManager($db_connect);
 
 // load lutilisateur conge
-$congeM=new congeManager($db_connect);
+//$lecongeM=new lecongeManager($db_connect);
 
 // deconnection
 if(isset($_GET['deconnect'])){
