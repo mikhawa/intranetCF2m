@@ -1,11 +1,13 @@
 <?php
 
 
-class lerole
+class leConge
 {
 protected $idconge;
 protected $debut;
 protected $fin;
+protected $letype;
+protected $lasession_idlasession;
 
 
 
@@ -52,6 +54,22 @@ protected function hydrate (array $tablehydrate ){
     }
 
      
+    /**
+     * @return mixed
+     */
+  public function getLetype()
+  {
+      return $this->letype;
+  }
+
+
+  /**
+     * @return mixed
+     */
+    public function getLasession_idlasession()
+    {
+        return $this->fin;
+    }
 
    
 
@@ -67,7 +85,7 @@ protected function hydrate (array $tablehydrate ){
     }
 
     /**
-     * @param mixed $lenomutilisateur
+     * @param mixed $debut
      */
     public function setDebut (string $debut)
     {
@@ -75,11 +93,29 @@ protected function hydrate (array $tablehydrate ){
     }
 
     /**
-     * @param mixed $lemotdepasse
+     * @param mixed $fin
      */
     public function setFin($fin)
     {
         $this->fin =htmlspecialchars(strip_tags(trim($fin)),ENT_QUOTES);
+    }
+
+
+    /**
+     * @param mixed $letype
+     */
+    public function setLetype($letype)
+    {
+        $this->letype =htmlspecialchars(strip_tags(trim($letype)),ENT_QUOTES);
+    }
+
+
+    /**
+     * @param mixed $lasession_idlasession
+     */
+    public function setLasession_idlasession($lasession_idlasession)
+    {
+        $this->lasession_idlasession =htmlspecialchars(strip_tags(trim($lasession_idlasession)),ENT_QUOTES);
     }
 
      
