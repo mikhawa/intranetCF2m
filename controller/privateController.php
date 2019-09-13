@@ -2,7 +2,7 @@
 
 if (isset($_GET['deconnect'])) {
 
-    $lutilisateurM->connectLutilisateur();
+    $lutilisateurM->deconnectLutilisateur();
 
 } elseif (isset($_GET['stagiaireContorller === 1'])) {
 
