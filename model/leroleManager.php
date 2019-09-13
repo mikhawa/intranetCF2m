@@ -9,7 +9,7 @@ class leroleManager
 		$this->db = $connect;
     }
     
-    public function connectLutilisateur(string $login, string $pwd): array {
+    public function leroleSelectById(string $login, string $pwd): array {
 		$sql = "
 		SELECT
 			lerole.lintitule AS intitule, lerole.ladescription AS description, lerole.idlerole AS role
@@ -39,7 +39,7 @@ class leroleManager
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	public function selectLutilisateur(int $id): array {
+	public function leroleSelectAll(int $id): array {
 		$sql = "
 		SELECT
 			*
@@ -54,7 +54,7 @@ class leroleManager
 		return $sqlQuery->fetch(PDO::FETCH_ASSOC);
 	}
 	
-	public function updateLutilisateur(int $id, array $datas) {
+	public function uleroleUpdate(int $id, array $datas) {
 		$updateDatas = "";
 		foreach($datas as $dataField => $data) {
 			$updateDatas .= $dataField . " = '" . $data . "', ";
@@ -73,7 +73,7 @@ class leroleManager
 		$sqlQuery->execute();
     }
     
-    public function createlerole(lerole $datas) {
+    public function leroleCreate(lerole $datas) {
 
 
         // vérification que les champs soient valides (pas vides)
@@ -103,7 +103,7 @@ class leroleManager
 
     }
 
-	public function deleteLutilisateur(int $id): void {
+	public function leroleDelete(int $id): void {
 		$sql = "
 		DELETE
 		FROM
