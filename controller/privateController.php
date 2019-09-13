@@ -1,11 +1,13 @@
 <?php
 
+
 // load lutilisateur manager
 $lutilisateurM=new lutilisateurManager($db_connect);
 
 // deconnection
 if(isset($_GET['deconnect'])){
 	$lutilisateurM->disconnectLutilisateur();
+
 }
 
 // switch suivant l'id des rôles (pour le moment, un rôle, un controleur)
