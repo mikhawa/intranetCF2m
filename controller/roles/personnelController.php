@@ -1,4 +1,4 @@
 <?php
 
     
-echo $twig->render("lutilisateur/lutilisateur_afficher_presence.html.twiigig");
+echo $twig->render("lutilisateur/lutilisateur_afficher_presence.html.twing");
