@@ -1,7 +1,6 @@
 <?php
 
-class lutilisateurManager
-{
+class lutilisateurManager {
 
     private $db;
 
@@ -9,37 +8,46 @@ class lutilisateurManager
         $this->db = $connect;
     }
 
+    /*
+     * Connexion
+     */
+
     public function connectLutilisateur(lutilisateur $user): bool {
-        $sql = "
-		SELECT
-			lutilisateur.idlutilisateur,lutilisateur.lenomutilisateur  , lutilisateur.lenom, lutilisateur.lemotdepasse AS pwd ,lutilisateur.leprenom,lutilisateur.lemail,lutilisateur.luniqueid, lerole.idlerole,lerole.lintitule,lerole.ladescription
-		FROM
-			lutilisateur
+        /*
+         * Query to take an user
+         */
+        $sql = "SELECT lutilisateur.idlutilisateur, lutilisateur.lenomutilisateur, lutilisateur.lenom, lutilisateur.lemotdepasse AS pwd ,lutilisateur.leprenom, lutilisateur.lemail, lutilisateur.luniqueid, 
+            lerole.idlerole, lerole.lintitule, lerole.ladescription
+		FROM 
+                    lutilisateur
+		LEFT JOIN 
+                    lutilisateur_has_lerole ON lutilisateur.idlutilisateur = lutilisateur_has_lerole.lutilisateur_idutilisateur
+		LEFT JOIN 
+                    lerole ON lerole.idlerole = lutilisateur_has_lerole.lerole_idlerole
+		WHERE lutilisateur.lenomutilisateur = :lenomutilisateur 
+		LIMIT 1;"; // LIMIT 1 tant qu'un utilisateur ne peut avoir qu'un rôle (many to one artificiel, car la db permet le many to many)
+        // on récupère l'utilisateur si valide par le champs "lenomutilisateur" sans vérifier le mot de passe
+        $sqlQuery = $this->db->prepare($sql);
+        $sqlQuery->bindValue(":lenomutilisateur", $user->getLenomutilisateur(), PDO::PARAM_STR);
+        $sqlQuery->execute();
+        $result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
 
-		LEFT JOIN lutilisateur_has_lerole ON lutilisateur.idlutilisateur = lutilisateur_has_lerole.lutilisateur_idutilisateur
-		LEFT JOIN lerole ON lerole.idlerole = lutilisateur_has_lerole.lerole_idlerole
-		WHERE lutilisateur.lenomutilisateur = :lenomutilisateur " . "
-		LIMIT 1;"; // LIMIT 1 tant que l'on utilise un utilisateur ne peut avoir qu'un rôle
+        // si le mot de passe est valide, on vérifie le mot de passe crypté avec password_hash(mot_de_passe, PASSWORD_DEFAULT), soit décrypté et valide avec la fonction password_verify(mdp_formulaire, mdp_db))
+        if ($user->getLenomutilisateur() == $result['lenomutilisateur'] && password_verify($user->getLemotdepasse(), $result['pwd'])) {
 
+            // si ok création de la session qui contient tous les champs des 2 tables sélectionnées lors de la connexion, + la session_id, - pwd qu'on ne souhaite pas garder dans e mdp dans la session, utilisation de unset qui détruit la variable $_SESSION['pwd']
+            $_SESSION = $result;
+            $_SESSION['TheIdSess'] = session_id();
+            unset($_SESSION['pwd']);
 
-		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->bindValue(":lenomutilisateur", $user->getLenomutilisateur(), PDO::PARAM_STR);
-		$sqlQuery->execute();
-		
-		$result = $sqlQuery->fetch(PDO::FETCH_ASSOC);
-		if($user->getLenomutilisateur() == $result['lenomutilisateur'] && password_verify($user->getLemotdepasse(), $result['pwd'])) {
-      $_SESSION = $result;
-			$_SESSION['TheIdSess'] = session_id();
-			unset($_SESSION['pwd']);
-			
-			return True;
-		} else {
-			return False;
-		}
-	}
-	
-	public function lutilisateurDisplayContent(): array {
-		$sql = "DESCRIBE lutilisateur;";
+            return True;
+        } else {
+            return False;
+        }
+    }
+
+    public function lutilisateurDisplayContent(): array {
+        $sql = "DESCRIBE lutilisateur;";
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->execute();
 
@@ -63,7 +71,7 @@ class lutilisateurManager
 
     public function lutilisateurUpdate(lutilisateur $user, array $datas) {
         $updateDatas = "";
-        foreach($datas as $dataField => $data) {
+        foreach ($datas as $dataField => $data) {
             $updateDatas .= $dataField . " = '" . $data . "', ";
         }
         $updateDatas = substr($updateDatas, 0, -2);
@@ -92,8 +100,6 @@ class lutilisateurManager
         $sqlQuery->execute();
     }
 
-
-
     public function lutilisateurSelectAll(): array {
         $sql = "
 		SELECT
@@ -108,7 +114,9 @@ class lutilisateurManager
 
     public function lutilisateurSelectAllJoinLerole(string $joinType = "inner"): array {
         $joinType = strtolower($joinType);
-        if($joinType !== "inner" && $joinType !== "left" && $joinType !== "right") {return [];}
+        if ($joinType !== "inner" && $joinType !== "left" && $joinType !== "right") {
+            return [];
+        }
 
         $sql = "
 		SELECT
@@ -123,17 +131,16 @@ class lutilisateurManager
         return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    //methode de deconnexion
-
-    public function disconnectLutilisateur(){
+    // methode de deconnexion
+    public function disconnectLutilisateur() {
 
         $_SESSION = array();
 
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"],
-                $params["secure"], $params["httponly"]
+                    $params["path"], $params["domain"],
+                    $params["secure"], $params["httponly"]
             );
         }
 
