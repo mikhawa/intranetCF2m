@@ -1,35 +1,43 @@
 <?php
 
-
 class lafiliereManager{
 
-   private $db;
+	private $db;
 
-   public function __construct(MyPDO $connect)
-   {
-         $this->db=$connect;       
-   }
+	public function __construct(MyPDO $connect)
+	{
+		 $this->db=$connect;       
+	}
 
+   public function displayContentLafiliere(): array {
+		$sql = "
+		DESCRIBE
+			lafiliere;";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+	}
 
 	
 	public function filiereSelectAll (): array{
 		
 		$sql = "SELECT * FROM lafiliere  ;";
-        $recup = $this->db->query($sql);
+		$recup = $this->db->query($sql);
 
-        if($recup->rowCount()===0){
-            return [];
-        }
-            return $recup->fetchAll(PDO::FETCH_ASSOC);
+		if($recup->rowCount()===0){
+			return [];
+		}
+			return $recup->fetchAll(PDO::FETCH_ASSOC);
 
-    }
-	
+	}
+
 		
 	public function filiereSelectById (int $idlafiliere): array{
 		if(empty($idlafiliere)){
 			return[];
 		}
-	
+
 		$sql = "SELECT * FROM lafiliere WHERE idlafiliere = ? ;";
 		$recup = $this->db->prepare($sql);
 
@@ -38,8 +46,8 @@ class lafiliereManager{
 		$recup->execute();
 
 		if($recup->rowCount()===0){
-            return [];
-        }
+			return [];
+		}
 		return $recup->fetch(PDO::FETCH_ASSOC);
 	}
 
@@ -52,7 +60,7 @@ class lafiliereManager{
 		if(empty($datas->getlenom())||empty($datas->getlacronyme())){
 					return false;
 		}
-	
+
 		$sql = "INSERT INTO lafiliere (lenom, lacronyme) VALUES (?,?);"; 
 
 		$insert = $this->db->prepare($sql);
@@ -62,17 +70,17 @@ class lafiliereManager{
 
 
 		try {
-            $insert->execute();
-            return true;
+			$insert->execute();
+			return true;
 
-        }catch(PDOException $e){
-            echo $e->getCode();
-            return false;
+		}catch(PDOException $e){
+			echo $e->getCode();
+			return false;
 
-        }
+		}
 	}
-	
-	
+
+
 
 
 	public function filiereUpdate(lafiliere $datas, int $get){
@@ -83,9 +91,9 @@ class lafiliereManager{
 		
 		if($datas->getidlafiliere()!=$get){
 			return false;
-	
+
 		}
-	
+
 
 	$sql = "UPDATE lafiliere SET lenom=?, lacronyme=? WHERE idlafiliere=?,";
 	$update = $this->db->prepare($sql);
@@ -103,13 +111,13 @@ class lafiliereManager{
 		
 		}
 	}
-	
-	
+
+
 
 
 	public function filiereDelete(int $lafiliere){
 		
-		$sql = "DELETE FROM lafiliere WHERE $idlafiere=?";
+		$sql = "DELETE FROM lafiliere WHERE $idlafiliere=?";
 		
 		$delete  = $this->db->prepare($sql);
 		$delete->bindValue(1,$idlafiliere, PDO::PARAM_INT);
