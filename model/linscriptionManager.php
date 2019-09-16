@@ -6,7 +6,7 @@
  * Time: 15:13
  */
 
-class lutilisateurManager
+class linscriptionManager
 {
 
     private $db;

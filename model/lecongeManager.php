@@ -1,10 +1,8 @@
 <?php
 
-/*
- * Manageur de l'instance de type "thesection", il peut servir à la création de différentes formes de CRUD, mais également aux actions et interactions entre instances (par exemple afficher les étudiants d'une section)
- */
 
-class congeManager
+
+class lecongeManager
 {
     private $db; // connexion MyPDO (PDO étendue)
 
@@ -25,7 +23,7 @@ class congeManager
      */
 
     // création du menu qui nous renvoie un tableau
-    public function conge(): array {
+    public function leconge(): array {
         $sql = "SELECT idconge,debut,fin FROM conge ORDER BY debut ASC ;";
         $recup = $this->db->query($sql);
 
@@ -38,7 +36,7 @@ class congeManager
     }
 
     // création de l'affichage de toutes les sections sur l'accueil publique du site
-    public function selectionnerConge(): array {
+    public function lecongeSelectAll(): array {
         $sql = "SELECT * FROM conge ORDER BY debut ASC ;";
         $recup = $this->db->query($sql);
 
@@ -50,7 +48,7 @@ class congeManager
     }
 
     // récupération d'une section d'après son id (détail des sections)
-    public function selectionnerCongeParId(int $idconge): array {
+    public function lecongeSelectByld(int $idconge): array {
         // si la variable vaut 0 (id ne peux valoir 0 ou la conversion a donné 0)
         if(empty($idconge)){
             return [];
@@ -78,23 +76,42 @@ class congeManager
 
     // création de l'affichage de toutes les sections avec ses utilisateurs sur l'accueil de l'administration du site
 
-    public function selectionnerCongeIndexAdmin(): array {
-        $sql = "SELECT idconge, debut,
-	GROUP_CONCAT(c.thename SEPARATOR '|||') AS thename, 
-    GROUP_CONCAT(c.thesurname SEPARATOR '|||') AS thesurname
-	FROM conge a
-		LEFT JOIN thesection_has_thestudent b
-			ON a.idthesection = b.thesection_idthesection
-		LEFT JOIN thestudent c
-			ON b.thestudent_idthestudent = c.idthestudent
-    GROUP BY a.idthesection        
-    ;";
-        $recup = $this->db->query($sql);
-
-        if($recup->rowCount()===0){
-            return [];
+    public function lecongeCreate(leconge $conge){
+        if (empty($conge->getIdleconge()) || empty($conge->getDebut())||empty($conge->getFin()) || empty($conge->getLetype()) || empty($conge->getLasession_idlasession())) {
+            return false;
         }
-        return $recup->fetchAll(PDO::FETCH_ASSOC);
+
+        $sql = "INSERT INTO leconge (idleconge, debut, fin, lasession_idlasession) VALUES(?,?,?,?,?);";
+
+        $insert = $this->db->prepare($sql);
+
+
+
+        $insert->bindValue(1, $conge->getIdleconge(), PDO::PARAM_STR);
+        $insert->bindValue(2, $conge->getDebut(), PDO::PARAM_STR);
+        $insert->bindValue(3, $conge->getFin(), PDO::PARAM_STR);
+        $insert->bindValue(4, $conge->getLetype(), PDO::PARAM_STR);
+        $insert->bindValue(5, $conge->getLasession_idlasession(), PDO::PARAM_STR);
+
+            
+
+
+        try{
+
+    $insert ->execute();
+       return true;
+
+        } catch(PDOException $e){
+
+         echo $e->getCode();
+              return false;
+
+        }
+
+
+
+
+
 
     }
 
