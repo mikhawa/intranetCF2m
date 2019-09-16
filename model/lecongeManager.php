@@ -2,7 +2,9 @@
 
 
 
+
 class lecongeManager
+  
 {
     private $db; // connexion MyPDO (PDO étendue)
 
