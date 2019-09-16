@@ -1,10 +1,10 @@
 <?php
 
-/*
- * Manageur de l'instance de type "thesection", il peut servir à la création de différentes formes de CRUD, mais également aux actions et interactions entre instances (par exemple afficher les étudiants d'une section)
- */
 
-class congeManager
+
+
+class lecongeManager
+  
 {
     private $db; // connexion MyPDO (PDO étendue)
 

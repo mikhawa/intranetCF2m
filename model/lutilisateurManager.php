@@ -148,7 +148,6 @@ class lutilisateurManager {
 
 
 
-
     // methode de deconnexion
     public function disconnectLutilisateur() {
         $_SESSION = array();
