@@ -1,4 +1,13 @@
 {% extends "bootstrap.html.twig" %}
 
-{% block haut %}
+{% block milieu %}
+    
+<!-- container -->
+<div class="container-fluid row h-100">
+    {% block menugauche %}
+    
+    {% endblock %}
+    {% block centre %}{% endblock %}
+    
+</div><!-- end container -->
 {% endblock %}
