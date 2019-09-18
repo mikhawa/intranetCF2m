@@ -16,6 +16,7 @@
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Admin | Ajouter une filiere</p>
             </div>
+            {% for item in detail %}
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="" method="post" name="createFiliere">
@@ -25,6 +26,8 @@
                 </form>
                 <h3>{{ error }}</h3>
             </div>
+            {% endfor %}
+
         </div>
 </main>
 
