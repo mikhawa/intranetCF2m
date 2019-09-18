@@ -1,6 +1,5 @@
 <?php
 
-
 class lafiliere
 {
 protected $idlafiliere;
