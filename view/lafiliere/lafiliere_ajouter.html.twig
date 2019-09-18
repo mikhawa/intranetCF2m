@@ -16,18 +16,22 @@
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Admin | Ajouter une filiere</p>
             </div>
+            {% for item in detail %}
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="" method="post" name="createFiliere">
                     <input name="lenom" type="text" placeholder="Titre de la filiere" required><br>
                     <textarea name="lacronyme" placeholder="Acronyme de la filiere" required></textarea><br>
+                     <input name="lacouleur" type="text" placeholder="La couleur" required><br>
+                      <input name="lepicto" type="text" placeholder="le picto" required><br>
                     <input type="submit" value="Envoyer">
                 </form>
                 <h3>{{ error }}</h3>
             </div>
+            {% endfor %}
+
         </div>
 </main>
-
 {% endblock %}
 
 {% block bas %}
