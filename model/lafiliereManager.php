@@ -61,12 +61,14 @@ class lafiliereManager{
 					return false;
 		}
 
-		$sql = "INSERT INTO lafiliere (lenom, lacronyme) VALUES (?,?);"; 
+		$sql = "INSERT INTO lafiliere (lenom, lacronyme, lacouleur, lepicto) VALUES (?,?,?,?);"; 
 
 		$insert = $this->db->prepare($sql);
 
-		$insert->binValue(1,$datas->getlenom(),PDO::PARAM_STR);
-		$insert->binValue(1,$datas->getlacronyme(),PDO::PARAM_STR);
+		$insert->bindValue(1,$datas->getLenom(),PDO::PARAM_STR);
+		$insert->bindValue(2,$datas->getLacronyme(),PDO::PARAM_STR);
+		$insert->bindValue(3,$datas->getLacouleur(),PDO::PARAM_STR);
+		$insert->bindValue(4,$datas->getLepicto(),PDO::PARAM_STR);
 
 
 		try {
@@ -115,17 +117,17 @@ class lafiliereManager{
 
 
 
-	public function filiereDelete(int $lafiliere){
+	public function filiereDelete(int $idlafiliere){
 		
-		$sql = "DELETE FROM lafiliere WHERE $idlafiliere=?";
+		$sql = "DELETE FROM lafiliere WHERE idlafiliere=?";
 		
 		$delete  = $this->db->prepare($sql);
 		$delete->bindValue(1,$idlafiliere, PDO::PARAM_INT);
 		
 		try{
-			$delete->excute();
+			$delete->execute();
 			return true;
-		}catch(PDOException $e){
+		}catch (PDOException $e){
 			echo $e->getCode();
 			return false;
 		}
