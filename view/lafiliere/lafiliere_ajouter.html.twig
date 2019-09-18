@@ -21,13 +21,14 @@
                 <form action="" method="post" name="createFiliere">
                     <input name="lenom" type="text" placeholder="Titre de la filiere" required><br>
                     <textarea name="lacronyme" placeholder="Acronyme de la filiere" required></textarea><br>
+                     <input name="lacouleur" type="text" placeholder="La couleur" required><br>
+                      <input name="lepicto" type="text" placeholder="le picto" required><br>
                     <input type="submit" value="Envoyer">
                 </form>
                 <h3>{{ error }}</h3>
             </div>
         </div>
 </main>
-
 {% endblock %}
 
 {% block bas %}
