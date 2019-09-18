@@ -18,6 +18,27 @@
 
 <!-- menu rapide -->
 <script src='../../js/jquery.min.js'></script>
+
+
+ <!-- close msg error box -->
+<script>
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function() {
+                div.style.display = "none";
+            }, 600);
+        }
+    }
+    //disparait après quelques seconde si non cliqué
+    $('#fade').fadeIn().delay(9000).fadeOut('slow');
+</script>
+
+
+
 {% endblock %}
 
 
