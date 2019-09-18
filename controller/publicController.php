@@ -7,7 +7,7 @@ if (isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
     if ($utilisateurManager->connectLutilisateur($utilisateur)) {
         header('Location: ./');
     } else {
-        echo $twig->render("public/homepage.html.twig", ["error_connection" => 'Votre nom d\'utilisateur ou votre login est erroné. Veuillez retenter.']);
+        echo $twig->render("public/homepage.html.twig", ["error_connection" =>  true ]);
     }
 } else {
 
