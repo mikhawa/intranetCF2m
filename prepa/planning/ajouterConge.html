@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Ajouter un congé</title>
+    </head>
+    <body>
+<h2>Ajouter un congé</h2>
+
+<form class="form-horizontal">
+
+<fieldset>
+<legend>Quelle(s) date(s)</legend>
+<div class="form-group form-inline">
+  <label class="col-2 control-label" for="radios">Quel(s) jour(s)</label>
+  <div class="col-10 form-inline"> 
+    <label class="radio-inline col-sm-6" for="radios-0">
+      <input type="radio" name="radios" id="radios-0" value="uneseuledate" checked="checked">&nbsp;Ajouter une seule date
+    </label> 
+    <label class="radio-inline col-sm-6" for="radios-1">
+      <input type="radio" name="radios" id="radios-1" value="uneperiode">&nbsp;Ajouter une période
+    </label>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group form-inline">
+    <div class="offset-2 col-2">
+        <div class="form-group">
+            <label class="control-label" for="textinput">Le&nbsp;<input id="jourConge" name="jourConge" type="date" placeholder="15/06/2019" class="form-control">
+            </label>
+        </div>    
+    </div>
+    <div class="col-6 ml-auto"> 
+        <div class="form-group">
+            <label class="radio-inline" for="radios-0">
+              <input type="radio" name="radios" id="radios-0" value="1" checked="checked">&nbsp;Matin&nbsp;
+            </label> 
+            <label class="radio-inline" for="radios-1">
+              <input type="radio" name="radios" id="radios-1" value="2">&nbsp;Après-midi&nbsp;
+            </label> 
+            <label class="radio-inline" for="radios-2">
+              <input type="radio" name="radios" id="radios-2" value="3">&nbsp;Journée&nbsp;
+            </label>
+          </div>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="debutPeriode">Du</label>  
+  <div class="col-md-4">
+  <input id="debutPeriode" name="debutPeriode" type="text" placeholder="Date de début" class="form-control input-md">
+  <span class="help-block">Entrez les dates de début et de fin de la période</span>  
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Au</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="textinput" type="text" placeholder="Date de fin" class="form-control input-md">
+    
+  </div>
+</div>
+</fieldset>
+<!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="checkboxes">Quelle(s) session(s)</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="checkboxes-0">
+      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      WEB 2019
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-1">
+      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+      PAO 2019
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-2">
+      <input type="checkbox" name="checkboxes" id="checkboxes-2" value="">
+      AMM 2019
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-3">
+      <input type="checkbox" name="checkboxes" id="checkboxes-3" value="">
+      Autres :
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Ajouter</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+  
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
