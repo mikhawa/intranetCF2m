@@ -15,21 +15,27 @@
             <div class="col-lg-12 text-center">
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Gestion des filières</p>
-               
+
             </div>
             <div <div class="col-lg-12 text-center">
             <h4><a href="?insertlafiliere">Ajouter une filiere</a></h4> 
             </div>
             <br>
-            <div class="col-lg-6 text-left">
+            <div class="col-lg-12 text-left">
                 {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
                 {% for item in detailfiliere %}
-                    <h4 class="mt-3">{{ item.lenom }} | <a href="?updatelafiliere={{ item.idlafiliere }}">modifier</a> | <a href="?deletelafiliere={{ item.idlafiliere }}">supprimer</a></h4>
+                    <div class="section col-lg-12">
+                    <h4 class="mt-3">{{ item.lenom }}
+                    <div class="content-menu">
+                        <a href="?updatelafiliere={{ item.idlafiliere }}" class="modified">modifier</a>  
+                        <a class="delete" href="?deletelafiliere={{ item.idlafiliere }}">supprimer</a>
+                    </div>
+                    </h4>  
                     <p>{{ item.lacronyme }}</p>
                     <h6>Stagiaires:</h6>
                     {# création de 2 variables pour éclater (avec split) le nom et prénom des stagiaires #}
                     {% set lenom = item.lenom|split("|||") %}
-                    
+
                     {% for detailfiliere in lenom %}
                         {# si vide #}
                         {% if detailfiliere is empty %}
@@ -37,6 +43,7 @@
                         {% else %}
                         {# on utilise loop.index0 pour prendre le prénom associé au nom sur lequel on fait la boucle #}
                         <p>{{ detailfiliere }} {{ lenom[loop.index0] }}</p>
+                        </div>
                         {%  endif %}
                     {% endfor %}
 
