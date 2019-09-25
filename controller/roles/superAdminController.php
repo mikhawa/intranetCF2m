@@ -44,6 +44,10 @@ if (isset($_GET['viewlafiliere'])) {
         
         $updatelafiliere = new lafiliere($_POST);
         
+        $lafiliereM->filiereUpdate($updatelafiliere,$_GET["updatelafiliere"]);
+        
+        header("Location: ./?viewlafiliere");
+        
     }else{
         
     echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
