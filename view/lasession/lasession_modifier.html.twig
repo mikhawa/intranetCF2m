@@ -18,14 +18,18 @@
             </div>
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
-                
-                    <form action="" method="post" name="update">
-                    <input name="lenom" type="text" placeholder="Titre de la session" value="{{ section.lenom }}" required><br>
-                    <textarea name="lacronyme" placeholder="acronyme" required>{{ section.lacronyme }}</textarea><br>
-                    <input type="hidden" name="idlasession" value="{{ section.idlasession }}">
-                    <input type="submit" value="Envoyer">
+                <form action="./" method="post">
+                    <label for="lenom">Titre de session </label><input id="lenom" name="lenom" size="18" placeholder="Titre de la session" value="{{ detailsession.lenom }}" required><br><br>
+                    <label for="lacronyme">Acronyme de session </label><input id="lacronyme" name="lacronyme" size="18" placeholder="Acronyme de la session " value="{{ detailsession.lacronyme }}" required><br><br>
+					<label for="lannee">Annee de session </label><input id="lannee" name="lannee" type="number" min='1950' max='2100' value="{{ detailsession.lannee }}" required><br><br>
+					<label for="lenumero">Numéro de session </label><input id="lenumero" name="lenumero" type="number"  value="{{ detailsession.lenumero }}" required><br><br>
+					<label for="letype">Type de session </label><input id="letype" name="letype" type="number" value="{{ detailsession.letype }}" required><br><br>
+					<label for="debut">Début de session </label><input id="debut" name="debut" type="date" value="{{ detailsession.debut }}" required><br><br>
+					<label for="fin">Fin de session </label><input id="fin" name="fin" type="date" value="{{ detailsession.fin }}" required><br><br>
+					<label for="lafiliere_idfiliere">Filière de session </label><input id="lafiliere_idfiliere" name="lafiliere_idfiliere" type="number" value="{{ detailsession.lafiliere_idfiliere }}" required><br><br>
+                    <input type="hidden" name="idlasession" value="{{ detailsession.idlasession }}">
+					<input type="submit" value="Envoyer"><input type="reset" value="Réinitialiser les valeurs">
                 </form>
-                
                 <h3>{{ error }}</h3>
             </div>
         </div>

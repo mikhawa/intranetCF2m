@@ -67,11 +67,11 @@ class  lasession
     }
 
 
-    public function getLanne()
+    public function getLannee()
     {
         return $this->lannee;
     }
-    public function setLanne(int $lannee)
+    public function setLannee(int $lannee)
     {
         $this->lannee = $lannee;
     }
@@ -121,16 +121,8 @@ class  lasession
     {
         return $this->lafiliere_idfiliere;
     }
-    public function setLafiliere_idfiliere($lafiliere_idfiliere)
+    public function setLafiliere_idfiliere(int $lafiliere_idfiliere)
     {
-        $this->lafiliere_idfiliere = htmlspecialchars(strip_tags(trim($lafiliere_idfiliere)), ENT_QUOTES);
+        $this->lafiliere_idfiliere = $lafiliere_idfiliere;
     }
 }
-
-//
-echo "<pre>";
-
-$data3 = ["lenumero" => 5, "idlasession" => 4, "lanne" => 6, "lenom" => 7, "lacronyme" => 8, "letype" => 9, "debut" => 10, "fin" => 11, "lafiliere_idfiliere" => 12];
-$test4 = new lasession($data3);
-var_dump($test4);
-echo "</pre>";

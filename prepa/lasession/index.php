@@ -49,7 +49,20 @@
 	}
 	
 	$lasessionManager = new lasessionManager($db_connect);
-
+	$lafiliereManager = new lafiliereManager($db_connect);
+	
+	
+	// Delete, Insert conditions
+	if( isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmationdeletelasession']) ) {
+		$lasessionManager->sessionDelete($_GET['confirmationdeletelasession']);
+	} else if( isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && isset($_POST['lenumero']) && isset($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) ) {
+		$lasession = new lasession($_POST);
+		var_dump($lasession);
+		$lasessionManager->sessionCreate($lasession);
+	}
+	
+	
+	// Display views
 	if( isset($_GET['viewlasession']) ) {
 		echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession'=>$lasessionManager->sessionSelectALL()]);
 	} 
@@ -57,8 +70,8 @@
 		echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession'=>$lasessionManager->sessionSelectByID($_GET['updatelasession'])]);
 	} 
 	elseif ( isset($_GET['insertlasession']) ) {
-		echo $twig->render("lasession/lasession_ajouter.html.twig");
+		echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereManager->filiereSelectAll()]);
 	} 
-	elseif ( isset($_GET['deletelasession']) && ctype_digit($_GET['deletelasession'])) {
-		$db_connect->exec('DELETE FROM lasession WHERE idlasession = ' . $_GET['deletelasession']);
-	}
+	/*elseif ( isset($_GET['deletelasession']) && ctype_digit($_GET['deletelasession'])) {
+		void;
+	}*/
