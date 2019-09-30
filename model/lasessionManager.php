@@ -38,7 +38,7 @@ class lasessionManager
       }
     
     
-    $sql="SELECT idlasession FROM lasession where idlasession=?;";
+    $sql="SELECT * FROM lasession where idlasession=?;";
     $recup = $this->db->prepare($sql);
     $recup->bindValue(1, $idlasession, PDO::PARAM_INT);
     $recup->execute();
@@ -51,35 +51,36 @@ class lasessionManager
   }
 
 
-public function  sessionCreate( lasession $lasession) {
+public function sessionCreate(lasession $lasession) {
 
-    if(empty($lasession->getLenom())||empty($lasession->getLacronyme())||empty($lasession->getLanne())||empty($lasession->getLenumero())||empty($lasession->getLetype())||empty($lasession->getDebut())||empty($lasession->getFin())){
+    if( empty($lasession->getLenom()) || empty($lasession->getLacronyme()) || empty($lasession->getLannee()) || empty($lasession->getLenumero())|| empty($lasession->getLetype()) || empty($lasession->getDebut()) || empty($lasession->getFin()) ) {
        return false;
 
     }
 
-
-    $sql="INSERT INTO  thesession (lenom,lacronyme,lanne,lenumero,letype,debut,fin) VALUE(?,?);";
+    $sql="INSERT INTO lasession (lenom, lacronyme, lannee, lenumero, letype, debut, fin, lafiliere_idfiliere) VALUE(?, ?, ?, ?, ?, ?, ?, ?);";
 
     $insert= $this->db->prepare($sql);
     $insert->bindValue(1,$lasession->getLenom(),PDO::PARAM_STR);
     $insert->bindValue(2, $lasession->getLacronyme(), PDO::PARAM_STR);
-    $insert->bindValue(3, $lasession->getLanne(), PDO::PARAM_STR);
-    $insert->bindValue(4, $lasession->getLenumero(), PDO::PARAM_STR);
-    $insert->bindValue(5, $lasession->getLetype(), PDO::PARAM_STR);
+    $insert->bindValue(3, $lasession->getLannee(), PDO::PARAM_INT);
+    $insert->bindValue(4, $lasession->getLenumero(), PDO::PARAM_INT);
+    $insert->bindValue(5, $lasession->getLetype(), PDO::PARAM_INT);
     $insert->bindValue(6, $lasession->getDebut(), PDO::PARAM_STR);
     $insert->bindValue(7, $lasession->getFin(), PDO::PARAM_STR);
+	$insert->bindValue(8, $lasession->getLafiliere_idfiliere(), PDO::PARAM_INT);
    
    try{
-       
-    $insert->execute();
-    return true;
 
-   } catch(PDOException $a){
-        echo $a->getCode();
-        return false;
-        
-   }
+		$insert->execute();
+		return true;
+
+    } catch(PDOException $a){
+		
+        echo '<h2 style="color: red;">ERROR: ' . $a->getMessage() . '</h2>';
+        return false;     
+		
+	}
 
 
 
@@ -91,40 +92,38 @@ public function  sessionCreate( lasession $lasession) {
 
 
 
-    public function sessionUpdate(lasession $lasession, int $get){
+    public function sessionUpdate(lasession $lasession){
 
 
-        if (empty($lasession->getLenom()) || empty($lasession->getLacronyme()) || empty($lasession->getLanne()) || empty($lasession->getLenumero()) || empty($lasession->getLetype()) || empty($lasession->getDebut()) || empty($lasession->getFin())|| empty($lasession->getIdlasession())) {
+        if ( empty($lasession->getLenom()) || empty($lasession->getLacronyme()) || empty($lasession->getLannee()) || empty($lasession->getLenumero()) || empty($lasession->getLetype()) || empty($lasession->getDebut()) || empty($lasession->getFin()) || empty($lasession->getIdlasession()) ) {
             return false;
     }
 
-        if ($datas->getIdthesection() != $get){ 
-            return false;
-        }
-         $sql ="UPDATE lasession SET lenom=?, lacronyme=?, lanne=?, lenumero=?,letype=?, debut=?, fin=? WHERE idlasession=?";
+         $sql ="UPDATE lasession SET lenom=?, lacronyme=?, lannee=?, lenumero=?, letype=?, debut=?, fin=?, lafiliere_idfiliere=? WHERE idlasession=?";
 
 
         $update = $this->db->prepare($sql);
         $update->bindValue(1, $lasession->getLenom(), PDO::PARAM_STR);
         $update->bindValue(2, $lasession->getLacronyme(), PDO::PARAM_STR);
-        $update->bindValue(3, $lasession->getLanne(), PDO::PARAM_STR);
-        $update->bindValue(4, $lasession->getLenumero(), PDO::PARAM_STR);
-        $update->bindValue(5, $lasession->getLetype(), PDO::PARAM_STR);
+        $update->bindValue(3, $lasession->getLannee(), PDO::PARAM_INT);
+        $update->bindValue(4, $lasession->getLenumero(), PDO::PARAM_INT);
+        $update->bindValue(5, $lasession->getLetype(), PDO::PARAM_INT);
         $update->bindValue(6, $lasession->getDebut(), PDO::PARAM_STR);
         $update->bindValue(7, $lasession->getFin(), PDO::PARAM_STR);
-        $update->bindValue(8,$lasession->getIdlasession(),PDO::PARAM_INT);
+		$update->bindValue(8, $lasession->getLafiliere_idfiliere(), PDO::PARAM_INT);
+        $update->bindValue(9, $lasession->getIdlasession(),PDO::PARAM_INT);
 
         try{
 
             $update->execute();
             return true;
 
-         } catch(PDOException $e){
+        } catch(PDOException $e){
 
-             echo $e->getCode();
-              return false;
+            echo '<h2 style="color: red;">ERROR: ' . $a->getMessage() . '</h2>';
+            return false;
 
-         }
+        }
    
 }
 
