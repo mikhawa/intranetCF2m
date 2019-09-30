@@ -66,7 +66,12 @@ if (isset($_GET['viewlafiliere'])) {
 		
         echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
 		
-    }   
+    }
+
+    if(isset($_POST['fichier'])){
+
+        echo $twig->render("lafiliere/lafiliere_ajout.html.twig");
+    }
 	
 // Display views for sessions
 } else if( isset($_GET['viewlasession']) ) {
