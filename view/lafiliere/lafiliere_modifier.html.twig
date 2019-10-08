@@ -19,12 +19,13 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 
-                    <form action="" method="post" name="update">
+                    <form action="" enctype="multipart/form-data" method="post" name="createFiliere">
                     <input name="lenom" type="text" placeholder="Titre de la filiere" value="{{ section.lenom }}" required><br>
                     <textarea name="lacronyme" placeholder="acronyme" required>{{ section.lacronyme }}</textarea><br>
                     <input type="hidden" name="idlafiliere" value="{{ section.idlafiliere }}">
                     <input name="lacouleur" type="text" placeholder="La couleur" value="{{ section.lacouleur }}" required><br>
                       <input name="lepicto" type="text" placeholder="le picto" value="{{ section.lepicto }}" required><br>
+                      <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                     <input type="submit" value="Envoyer">
                 </form>
                 
