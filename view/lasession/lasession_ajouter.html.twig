@@ -19,24 +19,24 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="./?viewlasession" method="post">
-                    <label for="lenom">Titre de la session </label><input id="lenom" name="lenom" size="18" placeholder="Titre de session" required><br><br>
-                    <label for="lacronyme">Acronyme de la session </label><input id="lacronyme" name="lacronyme" size="18" placeholder="Acronyme de session " required><br><br>
-					<label for="lannee">Année de session </label><input id="lannee" name="lannee" type="number" min='1950' max='2100' required><br><br>
-					<label for="lenumero">Numéro de session pour l'année actuelle </label><input id="lenumero" name="lenumero" type="number"  value="1" required><br><br>					
-					<label for="letype">Type de session </label>
+                    <label for="lenom">Titre de la session&nbsp</label><input id="lenom" name="lenom" size="24" placeholder="Titre de session" maxlength="45" required><br><br>
+                    <label for="lacronyme">Acronyme de la session&nbsp</label><input id="lacronyme" name="lacronyme" size="15" placeholder="Acronyme de session " maxlength="10" required><br><br>
+					<label for="lannee">Année de session&nbsp</label><input id="lannee" name="lannee" type="number" min='2019' max='2100' value='2019' required><br><br>
+					<label for="lenumero">Numéro de session pour l'année actuelle&nbsp</label><input id="lenumero" name="lenumero" type="number"  value="1" min="0" max="9" required><br><br>					
+					<label for="letype">Type de session&nbsp</label>
 					<select id="letype" name="letype" required>
 						<option value="1">Pré-formation</option>
 						<option value="2">Formation</option>
 					</select><br><br>
-					<label for="debut">Début de session </label><input id="debut" name="debut" type="date" required><br><br>
-					<label for="fin">Fin de session </label><input id="fin" name="fin" type="date" required><br><br>
-					<label for="lafiliere_idfiliere">Filière de session </label>
+					<label for="debut">Début de session&nbsp</label><input id="debut" name="debut" type="date" max="2100-12-12" required><br><br>
+					<label for="fin">Fin de session&nbsp</label><input id="fin" name="fin" type="date" max="2100-12-12" required><br><br>
+					<label for="lafiliere_idfiliere">Filière de session&nbsp</label>
 					<select id="lafiliere_idfiliere" name="lafiliere_idfiliere" required>
 					{% for filiere in filieres %}
 						<option value="{{ filiere.idlafiliere }}">{{ filiere.lenom }}</option>
 					{% endfor %}
 					</select><br><br>
-					<input type="submit" value="Envoyer">
+					<input onclick="if( $('#debut').val() > $('#fin').val() ) {alert('woops'); }" type="submit" value="Envoyer">
                 </form>				
                 <h3>{{ error }}</h3>
             </div>
