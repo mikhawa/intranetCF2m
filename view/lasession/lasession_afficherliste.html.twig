@@ -22,10 +22,20 @@
             <br>
             <div class="col-lg-6 text-left">
                 {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
-                {% for item in detailsession %}
-                    <h4 class="mt-3">{{ item.lenom }} | <a href="?updatelasession={{ item.idlasession }}">modifier</a> | <a onclick="if(window.confirm('Voulez-vous vraiment supprimer cette session ?')) location='./?confirmationdeletelasession={{ item.idlasession }}';" href="#">supprimer</a></h4>
-                    <p>{{ item.lacronyme }}</p>
+                {% for item in detailsession %}					
+					<div class="section col-lg-12">
+                    <h4 class="mt-3">{{ item.lenom }} | {{ item.lannee }}
+                    <div class="content-menu">
+                        <a href="?updatelasession={{ item.idlasession }}" class="modified">modifier</a>  
+                        <a class="delete" href="javascript:if(window.confirm('Voulez-vous vraiment supprimer cette session ?')) location='./?confirmationdeletelasession={{ item.idlasession }}';">supprimer</a>
+                    </div>
+                    </h4>  
+                    <p>Acronyme : {{ item.lacronyme }}</p>
+					<p>Type session : {{ item.letype == 1 ? "Pré-formation" : "Formation" }} | Filière : TODO</p>
 					<p>Début: {{ item.debut }} | Fin: {{ item.fin }}</p>
+                    </div>
+
+					
                 {% else %}
 					<h4 class="mt-3">Pas encore de session sur notre page accueil</h4>
                 {% endfor %}
