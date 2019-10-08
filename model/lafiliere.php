@@ -1,7 +1,6 @@
 <?php
 
-
-class lerole
+class lafiliere
 {
 protected $idlafiliere;
 protected $lenom;

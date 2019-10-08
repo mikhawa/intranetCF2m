@@ -4,6 +4,11 @@
 
 {% block centre %}
  <!-- content admin -->
+    <div id="fade" class="alert-connected">
+        <span class="closebtn" onclick="this.partelement.style.display="none";">&times;</span>
+        Bienvenue:<b>{{ " " }}{{ session.leprenom }}{{ " " }}{{ session.lenom }}</b> Vous êtes connecté en tant que <b>" {{ " " }}{{ session.lintitule }} "</b>
+    </div>
+
     <div id="content-admin" class="col-lg-10">
         <!-- content titre page -->
         <div class="row page-title">
@@ -15,26 +20,33 @@
                 <h1 class="col-lg-11">Accueil</h1>
             </div><!-- fin titre de la page -->
         </div><!-- end titre page -->
-
-        <h3>Bienvenue:{{ " " }}{{ session.leprenom }}{{ " " }}{{ session.lenom }}</h3>
-        <h5>Vous êtes connecté en tant que:{{ " " }}{{ session.lintitule }}</h5>
-
-
         <!-- menu générale admin -->
         <div id="menu-admin" class="row justify-content-center">
             <ul class="col-lg-3">
-                <li class="col-lg-12">
-                      <img src="../img/user.png" alt="gestion des utilisateurs" class="">
-                      Gestion des utilisateurs
-                </li>
-                <li class="col-lg-12">
-                    <img src="../img/groupe.png" alt="gestion des utilisateurs" class="">
-                    Gestion des filières
-                </li>
-                <li class="col-lg-12">
-                    <img src="../img/droit.png" alt="gestion des utilisateurs" class="">
-                    Gestions des rôles
-                </li>
+                <a href="#">
+                    <li class="col-lg-12">
+                        <img src="../img/user.png" alt="gestion des utilisateurs" class="">
+                        Gestions des rôles
+                        </li>
+                </a>
+                <a href="?viewlafiliere" alt="Gestions des filières">
+                    <li class="col-lg-12">
+                        <img src="../img/groupe.png" alt="gestion des utilisateurs" class="">
+                        Gestions des filières
+                        </li>
+                </a>
+                <a href="#">
+                    <li class="col-lg-12">
+                        <img src="../img/droit.png" alt="gestion des utilisateurs" class="">
+                        Gestions des rôles
+                        </li>
+                </a>
+				<a href="./?viewlasession">
+                    <li class="col-lg-12">
+                        <img src="../img/droit.png" alt="gestion des sessions" class="">
+                        Gestions des sessions
+                        </li>
+                </a>
             </ul>
         </div><!-- end menu générale admin -->
 

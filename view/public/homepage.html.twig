@@ -27,7 +27,9 @@
 			<!-- button connexion -->
 			<button name="envoyer" id="envoyer" class="btn btn-primary col-lg-10" role="button">Se connecter</button>
         </form><!-- end form -->
-        <h3>{{error_connection}}</h3>
+        {% if error_connection == true %}
+        <div id="fade" class="alert-false"><span class="closebtn" onclick="this.partelement.style.display="none";">&times;</span>Ouups ! Mauvais login ou mot de passe !</div>
+        {% endif %}
         </div><!-- END container -->
 		
     </div>

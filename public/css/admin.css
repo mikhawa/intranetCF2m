@@ -63,3 +63,6 @@ html,body{
     left: 8%;
     width: 10%;
 }
+#menu-admin ul a{
+    text-decoration: none;
+}

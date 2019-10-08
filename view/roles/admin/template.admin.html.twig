@@ -2,17 +2,19 @@
 {% block menugauche %}
 <!-- menu gauche -->
     <div id="menu-g" class="col-lg-2">
+      <a href="index.php">
         <img class="col-lg-12 logo" src="../img/logo.png" alt="logo-cfm2m"/>
+      </a>
         <!-- menu rapide -->
   <div class='swanky_wrapper'>
-    <a id='Dashboard' src="#">
       <label for='Dashboard'>
-            <div class="content-img">
-              <img src='../../img/home.png'>
-            </div>
-              <span>Accueil</span>
+        <a href="index.php">
+          <div class="content-img">
+            <img src='../../img/home.png'>
+          </div>
+          <span>Accueil</span>
+        </a>
         </label>
-    </a>
     <input id='Sales' name='radio' type='radio' class="user">
     <label for='Sales'>
       <div class="content-img">
@@ -23,22 +25,26 @@
       <div class='bar'></div>
       <div class='swanky_wrapper__content_user'>
         <ul>
+          <a href="#" alt="stagiaires">
           <li class="sub-menu">
             <div class="content-img-in">
               <img src='../../img/stagiaire.png'>
             </div>
               <span>Stagiaires</span>
+              </a>
           </li>
+          <a href="#" alt="personnel">
           <li class="sub-menu">
             <div class="content-img-in">
               <img src='../../img/personnel.png'>
             </div>
               <span>Personnel</span>
           </li>
+          </a>
         </ul>
       </div>
     </label>
-    <input id='Messages' name='radio' type='radio'>
+    <input id='Messages' name='radio' type='radio' class="filieres">
     <label for='Messages'>
       <div class="content-img">
         <img src='../../img/groupe.png'>
@@ -46,10 +52,24 @@
       <span>Gestion des filières</span>
       <div class='lil_arrow'></div>
       <div class='bar'></div>
-      <div class='swanky_wrapper__content'>
+      <div class='swanky_wrapper__content_filieres'>
         <ul>
-          <li>Inbox</li>
-          <li>Outbox</li>
+        <a href="?insertlafiliere" alt="Ajouter filière">
+          <li class="sub-menu">
+            <div class="content-img-in">
+              <img src='../../img/add.png'>
+            </div>
+              <span>Ajouter</span>
+          </li>
+          </a>
+          <a href="?viewlafiliere" alt="modifier filière">
+          <li class="sub-menu">
+            <div class="content-img-in">
+              <img src='../../img/modified.png'>
+            </div>
+              <span>Modifier</span>
+          </li>
+          </a>
         </ul>
       </div>
     </label>
@@ -61,10 +81,53 @@
       <span>Gestions des droits</span>
       <div class='lil_arrow'></div>
       <div class='bar'></div>
-      <div class='swanky_wrapper__content'>
+      <div class='swanky_wrapper__content_droits'>
         <ul>
-          <li>New User</li>
-          <li>User Groups</li>
+        <a href="#" alt="ajouter droit">
+          <li class="sub-menu">
+            <div class="content-img-in">
+              <img src='../../img/add.png'>
+            </div>
+              <span>Ajouter</span>
+          </li>
+          </a>
+          <a href="#" alt="modifier droits">
+          <li class="sub-menu">
+            <div class="content-img-in">
+              <img src='../../img/modified.png'>
+            </div>
+              <span>Modifier</span>
+          </li>
+          </a>
+        </ul>
+      </div>
+    </label>
+	<input id='Sessions' name='radio' type='radio'>
+    <label for='Sessions'>
+      <div class="content-img">
+        <img src='../../img/droit.png'>
+      </div>
+      <span>Gestions des sessions</span>
+      <div class='lil_arrow'></div>
+      <div class='bar'></div>
+      <div class='swanky_wrapper__content_droits'>
+        <ul>
+        <a href="./?insertlasession" alt="ajouter session">
+          <li class="sub-menu">
+            <div class="content-img-in">
+              <img src='../../img/add.png'>
+            </div>
+              <span>Ajouter</span>
+          </li>
+          </a>
+          <a href="./?viewlasession" alt="modifier sessions">
+          <li class="sub-menu">
+            <div class="content-img-in">
+              <img src='../../img/modified.png'>
+            </div>
+              <span>Modifier</span>
+          </li>
+          </a>
         </ul>
       </div>
     </label>

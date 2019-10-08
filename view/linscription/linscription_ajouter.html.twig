@@ -16,11 +16,13 @@
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Admin | Ajouter une inscription</p>
             </div>
-            <div class="col-lg-6 text-left">
-                
+            <div class="col-lg-10 text-left">
+               
+               
+                {# Affichage du formulaire d'inscription #}
                 <form action="" method="post" name="createinscription">
-                    <input name="debut DATE" type="text" placeholder="Date de début" required><br>
-                    <textarea name="fin DATE" placeholder="Date de fin" required></textarea><br>
+                    <input name="idlinscription" type="text" placeholder="Date de debut" required><br>
+                    <input name="debut DATE" type="text" placeholder="Date de fin" required><br>
                     <input type="submit" value="inscription">
                 </form>
                 <h3>{{ error }}</h3>
