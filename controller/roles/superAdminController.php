@@ -24,7 +24,7 @@ if (isset($_GET['viewlafiliere'])) {
     if (isset($_POST['lenom'])) {
         
         $newfiliere = new lafiliere($_POST);
-
+        s($newfiliere);
         if(!empty($_FILES)){
 
             $newfiliere->setLepicto($_FILES['lepicto']['name']);
@@ -34,8 +34,8 @@ if (isset($_GET['viewlafiliere'])) {
         
         $lafiliereM->filiereCreate($newfiliere);
 
-       var_dump($newfiliere,$_POST,$_FILES);
-        header("Location: ./?viewlafiliere");
+        s($newfiliere,$_POST,$_FILES);
+        // header("Location: ./?viewlafiliere");
 
     
     }else{
