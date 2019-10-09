@@ -18,12 +18,13 @@
             </div>
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
-                <form action="" method="post" name="createFiliere">
+                <form action="" enctype="multipart/form-data" method="post" name="createFiliere">
                     <input name="lenom" type="text" placeholder="Titre de la filiere" required><br>
                     <textarea name="lacronyme" placeholder="Acronyme de la filiere" required></textarea><br>
-                     <input name="lacouleur" type="text" placeholder="La couleur" required><br>
-                      <input name="lepicto" type="text" placeholder="le picto" required><br>
-                    <input type="submit" value="Envoyer">
+                     <input name="lacouleur" type="text" placeholder="La couleur"  required><br>
+                      <input type="file" name="lepicto">
+                      <input type="hidden" name="MAX_FILE_SIZE" value="100000" >                  
+                      <input type="submit" value="Envoyer">
                 </form>
                 <h3>{{ error }}</h3>
             </div>

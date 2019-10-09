@@ -24,14 +24,27 @@ if (isset($_GET['viewlafiliere'])) {
     if (isset($_POST['lenom'])) {
         
         $newfiliere = new lafiliere($_POST);
+
+        if(!empty($_FILES)){
+
+            $newfiliere->setLepicto($_FILES['lepicto']['name']);
+
+        $upload = $lafiliereM->uploadFichier($_FILES['lepicto']);
+        }
         
-        $insert = $lafiliereM->filiereCreate($newfiliere);
-        
+        $lafiliereM->filiereCreate($newfiliere);
+
+       var_dump($newfiliere,$_POST,$_FILES);
         header("Location: ./?viewlafiliere");
-        exit;
-    }
+
+    
+    }else{
 
     echo $twig->render('lafiliere/lafiliere_ajouter.html.twig');
+    
+    }
+
+
 
 // delete a filiere    
 } elseif (isset($_GET['deletelafiliere']) && ctype_digit($_GET['deletelafiliere'])) {
@@ -66,10 +79,15 @@ if (isset($_GET['viewlafiliere'])) {
 		
         echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
 		
-    }   
+    }
+
+
+        
+
+
 	
 // Display views for sessions
-} else if( isset($_GET['viewlasession']) ) {
+} elseif( isset($_GET['viewlasession']) ) {
 	echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession'=>$lasessionM->sessionSelectALL()]);
 } 
 elseif ( isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession']) ) {

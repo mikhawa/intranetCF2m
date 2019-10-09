@@ -67,6 +67,8 @@ protected function hydrate (array $tablehydrate ){
         return $this->lepicto;
     }
 
+
+
    
 
     /**
@@ -112,6 +114,8 @@ protected function hydrate (array $tablehydrate ){
     {
         $this->lepicto =htmlspecialchars(strip_tags(trim($lepicto)),ENT_QUOTES);
     }
+
+    
 
    
 
