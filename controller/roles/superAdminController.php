@@ -34,7 +34,7 @@ if (isset($_GET['viewlafiliere'])) {
         
         $lafiliereM->filiereCreate($newfiliere);
 
-        s($newfiliere,$_POST,$_FILES);
+        d($newfiliere,$_POST,$_FILES);
         // header("Location: ./?viewlafiliere");
 
     
