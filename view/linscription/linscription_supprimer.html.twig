@@ -1,2 +1,49 @@
 <? php
 
+{% extends "template1.html.twig" %}
+
+{% block title %}{{ parent() }} | Suppression de l'article : {{ lutilisateur.idlutilisateur  }} {% endblock %}
+
+{% block menuhaut %}
+{% include "admin/hautEtMenu.html.twig" %}
+{% endblock %}
+
+{% block milieu %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Suppression de lutilisateur : {{ lutilisateur.idlutilisateur }}</h1>
+                <p class="lead">Voulez-vous vraiment supprimer lutilisateur?</p>
+            </div>
+            <div class="col-lg-10 text-left">
+                {# dump de kint au format barre de débogage #}
+               {{ d(article) }}
+               
+               <h2>{{ lutilisateur.idlutilisateur  }}</h2>
+               <p>Presént dans les rubriques: 
+
+          {% set tabId = lutilisateur.idlutilisateur  %}
+          {# s(tabId[0]) #}
+          {% if tabId[0]  %} 
+            {% for categ in tabId %}
+          
+             {{ categ }} |
+
+            {% endfor %}
+          {% else %}
+             Aucun utilisateur
+          {% endif %}
+      </p>
+      <a href='?delete={{ lutilisateur.idlutilisateur  }}&ok'>OK</a> 
+      <a href='./'>Annuler</a> 
+               
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}
