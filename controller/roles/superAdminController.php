@@ -39,13 +39,10 @@ if (isset($_GET['viewlafiliere'])) {
             }
         }
 
-<<<<<<< HEAD
-        
-        header("Location: ./?viewlafiliere");
-=======
+
         // insertion dans la db
         $lafiliereM->filiereCreate($newfiliere);
->>>>>>> 0f8c770aa7fa164f60ee26f72d523d77f8f60612
+
 
         //d($newfiliere,$_POST,$_FILES);
         header("Location: ./?viewlafiliere");
@@ -81,6 +78,23 @@ if (isset($_GET['viewlafiliere'])) {
         $updatelafiliere = new lafiliere($_POST);
 
         $lafiliereM->filiereUpdate($updatelafiliere, $_GET["updatelafiliere"]);
+        
+        //verification et modif du FILES dans update
+        if (!empty($_FILES)) {
+
+            $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
+            // changement du nom pour l'insertion dans la db
+            $newfiliere->setLepicto($nouveauNom);
+
+            // changement du nom pour l'upload de fichier
+            $_FILES['lepicto']['name'] = $nouveauNom;
+
+            // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
+            $upload = uploadDoc::uploadFichier($_FILES['lepicto'], 'img/upload/lafiliere/');
+            if (!$upload) {
+                exit();
+            }
+        }
 
         header("Location: ./?viewlafiliere");
     } else {
@@ -100,6 +114,8 @@ if (isset($_GET['viewlafiliere'])) {
     echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
 } elseif (isset($_GET['insertlasession'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
-} else {
-    echo $twig->render('roles/admin/admin_homepage.html.twig', ['session' => $_SESSION]);
+} elseif(isset($_GET['viewlerole'])) {
+    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['update' => $leroleM->selectLerole($_GET['idlerole'])]);
+} else{
+    echo $twig->render('roles/admin/admin_homepage.html.twig');
 }

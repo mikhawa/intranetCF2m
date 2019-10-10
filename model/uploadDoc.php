@@ -22,22 +22,23 @@ class uploadDoc {
     }
     
     // static function, peuvent être appelées sans instanciation de la classe avec les :: par exemple uploadDoc::uploadFichier avec le $_FILES envoyé sous forme de tableau nommé $data, et un argument qui a déjà des valeurs par défauts, on peut les changer au cas où on décide l'upload de fichier spécique
-    public static function uploadFichier(array $datas, string $folder, array $extensions = [
-        '.png', // img
-        '.gif', // img
-        '.jpg', // img
-        '.jpeg',// img
-        ".svg", // img
-        ".pdf", // doc
-        ".doc", // doc
-        ".docx",// doc
-        ".txt", // txt
-        ".rtf",// doc
-        ".tiff", // img
-        ".psd", // photoshop
-        ".xls", // accès
-        ".odt", // openoffice
-        ".ppt" // powerpoint
+    public static function uploadFichier(array $datas, string $folder, array $extensions = 
+    [
+            '.png', // img
+            '.gif', // img
+            '.jpg', // img
+            ".jpeg",// img
+            ".svg", // img
+            ".pdf", // doc
+            ".doc", // doc
+            ".docx",// doc
+            ".txt", // txt
+            ".rtf",// doc
+            ".tiff", // img
+            ".psd", // photoshop
+            ".xls", // accès
+            ".odt", // openoffice
+            ".ppt" // powerpoint
         ]) {
 
         $dossier = $folder;
