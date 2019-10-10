@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6d237f1a13af08856552d63b79e8912",
+    "content-hash": "671e54a14be292bcf6f4ff9ffafb0ff9",
     "packages": [
+        {
+            "name": "fernandozueet/php-upload-server",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FernandoZueet/php-upload-server.git",
+                "reference": "c3fa9897757e198633c08c1c228eb5040922ae35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FernandoZueet/php-upload-server/zipball/c3fa9897757e198633c08c1c228eb5040922ae35",
+                "reference": "c3fa9897757e198633c08c1c228eb5040922ae35",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/dbunit": ">=1.2",
+                "phpunit/phpunit": "5.5.*",
+                "phpunit/phpunit-selenium": ">=1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FzUpload\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fernando Zueet",
+                    "email": "fernandozueet@hotmail.com",
+                    "homepage": "https://github.com/FernandoZueet"
+                }
+            ],
+            "description": "Upload and manipulation image, crop, resize, watermarks, filters, flip, rotate, image text and gamma correct",
+            "keywords": [
+                "crop",
+                "image",
+                "image manipulation",
+                "resize",
+                "upload",
+                "watermaks image"
+            ],
+            "time": "2019-03-20T17:42:14+00:00"
+        },
         {
             "name": "kint-php/kint",
             "version": "3.2.2",
