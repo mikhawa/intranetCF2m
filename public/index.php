@@ -22,6 +22,8 @@ require_once '../config.php';
  * vendor autoload for
  * - Twig
  * - Twig extensions
+ * - Kint
+ * - Kint for twig
  */
 require_once '../vendor/autoload.php';
 
