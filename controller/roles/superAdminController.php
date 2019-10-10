@@ -84,53 +84,9 @@ if (isset($_GET['viewlafiliere'])) {
     }
 
 
-}elseif (isset($_GET)) {
- 
+}elseif (isset($_GET["ajouterinscription"])) {
     
-// insert linscription    
-} elseif (isset($_GET['insertlinscription'])) {
-
-    if (isset($_POST['lenom'])) {
-
-        $newlinscription = new linscription($_POST);
-        //s($newlinscription);
-        if (!empty($_FILES)) {
-
-            $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
-            // changement du nom pour l'insertion dans la db
-            $newfiliere->setLepicto($nouveauNom);
-
-            // changement du nom pour l'upload de fichier
-            $_FILES['lepicto']['name'] = $nouveauNom;
-
-            // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
-            $upload = uploadDoc::uploadFichier($_FILES['lepicto'], 'img/upload/linscription/');
-            if (!$upload) {
-                exit();
-            }
-        }
-
-        // insertion dans la db
-        $lafiliereM->filiereCreate($newfiliere);
-
-        //d($newfiliere,$_POST,$_FILES);
-        header("Location: ./?viewlafiliere");
-    } else {
-
-        echo $twig->render('lafiliere/lafiliere_ajouter.html.twig');
-    }
-
-
-
-
-
-
-
-
-
-
-
-
+echo $twig->render('linscription/linscription_ajouter.html.twig');
 // Display views for sessions
 } elseif (isset($_GET['viewlasession'])) {
     echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
