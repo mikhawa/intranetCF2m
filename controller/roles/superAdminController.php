@@ -39,13 +39,10 @@ if (isset($_GET['viewlafiliere'])) {
             }
         }
 
-<<<<<<< HEAD
-        
-        header("Location: ./?viewlafiliere");
-=======
+
         // insertion dans la db
         $lafiliereM->filiereCreate($newfiliere);
->>>>>>> 0f8c770aa7fa164f60ee26f72d523d77f8f60612
+
 
         //d($newfiliere,$_POST,$_FILES);
         header("Location: ./?viewlafiliere");
