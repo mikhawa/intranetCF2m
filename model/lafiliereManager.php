@@ -34,15 +34,14 @@ class lafiliereManager {
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
     public function filiereCreate(lafiliere $datas) {
-        if (empty($datas->getlenom()) || empty($datas->getlacronyme())) {
-            return false;
-        }
+       
         $sql = "INSERT INTO lafiliere (lenom, lacronyme, lacouleur, lepicto) VALUES (?,?,?,?);";
         $insert = $this->db->prepare($sql);
         $insert->bindValue(1, $datas->getLenom(), PDO::PARAM_STR);
         $insert->bindValue(2, $datas->getLacronyme(), PDO::PARAM_STR);
         $insert->bindValue(3, $datas->getLacouleur(), PDO::PARAM_STR);
         $insert->bindValue(4, $datas->getLepicto(), PDO::PARAM_STR);
+        
         try {
             $insert->execute();
             return true;
@@ -50,7 +49,10 @@ class lafiliereManager {
             echo $e->getCode();
             return false;
         }
+    
     }
+        
+    
     public function filiereUpdate(lafiliere $datas, int $get) {
         if (empty($datas->getlenom()) || empty($datas->getlacronyme()) || empty($datas->getidlafiliere()) || empty($datas->getLacouleur()) || empty($datas->getLepicto())) {
             return false;
@@ -65,6 +67,7 @@ class lafiliereManager {
         $update->bindValue(3, $datas->getLacouleur(), PDO::PARAM_STR);
         $update->bindValue(4, $datas->getLepicto(), PDO::PARAM_STR);
         $update->bindValue(5, $datas->getIdlafiliere(), PDO::PARAM_INT);
+        
         try {
             $update->execute();
             return true;
@@ -85,4 +88,8 @@ class lafiliereManager {
             return false;
         }
     }
+/*
+UPLOAD de fichiers
+*/
+    
 }
