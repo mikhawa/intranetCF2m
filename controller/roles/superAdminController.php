@@ -67,14 +67,24 @@ if (isset($_GET['viewlafiliere'])) {
         echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
 		
     }   
-	
+  //Ajouter inscription  
+}elseif (isset($_GET['ajouterlinscription'])) {
+    echo $twig->render('linscription/linscription_ajouter.html.twig');
+		
+// Modifier inscription
+}elseif (isset($_GET['modifierlinscription'])) {
+    echo $twig->render('linscription/linscription_modifier.html.twig');
+		
 // Display views for sessions
-} else if( isset($_GET['viewlasession']) ) {
+}
+elseif ( isset($_GET['viewlasession']) ) {
 	echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession'=>$lasessionM->sessionSelectALL()]);
 } 
+
 elseif ( isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession']) ) {
 	echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession'=>$lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
 } 
+
 elseif ( isset($_GET['insertlasession']) ) {
 	echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
 }
