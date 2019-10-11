@@ -12,6 +12,8 @@ echo "<br>";
 echo "<h2>dimitri.bouvy</h2>";
 echo $d = password_hash("dimitri",PASSWORD_DEFAULT);
 echo "<br>";
+echo  "<h2>tarik.el</h2>";
+echo $f =password_hash("tarik",PASSWORD_DEFAULT);
 echo "<h2>michael.pitz</h2>";
 echo $e = password_hash("michael",PASSWORD_DEFAULT);
 echo "<br>";
@@ -24,6 +26,8 @@ echo "<br>";
 echo password_verify("dimitri",$d);
 echo "<br>";
 echo password_verify("michael",$e);
+echo "<br>";
+echo password_verify("tarik",$f);
 echo "<br>";
 
 
