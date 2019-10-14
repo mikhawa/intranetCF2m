@@ -68,5 +68,15 @@ class uploadDoc {
             return false;
         }
     }
+    
+    
+    public static function uploadRedim(string $cheminIMG,$Large,$Haut){
+        //echo $cheminIMG,$Large,$Haut;
+    }
+    
+    public static function uploadThumb(string $cheminIMG,$Large,$Haut){
+        //echo $cheminIMG,$Large,$Haut;
+    }
+    
 
 }
