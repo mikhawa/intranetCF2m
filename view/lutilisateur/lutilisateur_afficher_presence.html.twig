@@ -20,7 +20,7 @@
                 <p class="lead">Gestion des filières</p>
 
             </div>
-            <div<a <div class="col-lg-12 text-center"> <h4> href="?insert={{addfiliere.idlafiliere}}">Ajouter une filiere</a>
+            <div<a <div class="col-lg-12 text-center"> <h4> href="?insert={{ addfiliere.idlafiliere }}">Ajouter une filiere</a>
         </h4>
     </div>
     <br>
@@ -47,7 +47,7 @@
                     {# on utilise loop.index0 pour prendre le prénom associé au nom sur lequel on fait la boucle #}
                     <p>{{ detailfiliere }}
                         {{ lenom[loop.index0] }}</p>
-                {%  endif %}
+                {% endif %}
             {% endfor %}
 
         {% else %}
