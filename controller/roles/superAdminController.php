@@ -24,7 +24,7 @@ if (isset($_GET['viewlafiliere'])) {
         $newfiliere = new lafiliere($_POST);
         //s($newfiliere,$_FILES);
         
-        // si on attache pas de nouvelle images
+        // si on attache une nouvelle images
         if ($_FILES['lepicto']['error']!=4) {
 
             $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
@@ -79,7 +79,7 @@ if (isset($_GET['viewlafiliere'])) {
         $updatelafiliere = new lafiliere($_POST);
         //s($_FILES);
         // si on attache une nouvelle images
-        if (!empty($_FILES)) {
+        if ($_FILES['lepicto']['error']!=4) {
 
             $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
             // changement du nom pour l'insertion dans la db

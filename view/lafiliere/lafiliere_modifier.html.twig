@@ -20,7 +20,7 @@
                 {# Affichage du formulaire #}
 
 
-                <form action="" method="post" name="update">
+                <form action="" method="post" name="update" enctype="multipart/form-data">
                     <div class ="form-group">
                         <label for="Nondelafilier">Non de la fillier</label>
                         <input name="lenom" type="text"  class="form-control" placeholder="Titre de la filiere" value="{{ section.lenom }}" required><br></input>
@@ -32,12 +32,8 @@
                                placeholder="acronyme" value="{{ section.lacronyme }}" required></input><br>
                     </div>
                     <input type="hidden" name="idlafiliere" value="{{ section.idlafiliere }}">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+
                     <div class="mx-auto" style="width: 200px;">
-
-
-
-
 
                         <label for="color">Choix du couleur</label>
                         <input name="lacouleur" type="color" class="form-control" placeholder="La couleur"value="{{ section.lacouleur }}" required><br>
