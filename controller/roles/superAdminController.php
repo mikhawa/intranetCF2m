@@ -58,7 +58,7 @@ if (isset($_GET['viewlafiliere'])) {
 
 
         //d($newfiliere,$_POST,$_FILES);
-        // header("Location: ./?viewlafiliere");
+        header("Location: ./?viewlafiliere");
     } else {
 
         echo $twig->render('lafiliere/lafiliere_ajouter.html.twig');
@@ -121,7 +121,7 @@ if (isset($_GET['viewlafiliere'])) {
             $_FILES['lepicto']['name'] = $nouveauNom;
 
             // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
-            $upload = uploadDoc::uploadFichier($_FILES['lepicto'], 'img/upload/lafiliere/');
+            $upload = uploadDoc::uploadFichier($_FILES['lepicto']);
             if (!$upload) {
                 exit();
             }
@@ -147,8 +147,8 @@ if (isset($_GET['viewlafiliere'])) {
     echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
 } elseif (isset($_GET['insertlasession'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
-} elseif(isset($_GET['update'])) {
-    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['update' => $leroleM->selectAllLerole()]);
+} elseif(isset($_GET['viewlerole'])) {
+    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrôle' => $leroleM->selectAllLerole()]);
 } else{
     echo $twig->render('roles/admin/admin_homepage.html.twig');
 }
