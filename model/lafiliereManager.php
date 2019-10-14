@@ -49,9 +49,7 @@ class lafiliereManager {
 
     public function filiereCreate(lafiliere $datas) {
 
-        if (empty($datas->getlenom()) || empty($datas->getlacronyme())) {
-            return false;
-        }
+       
 
         $sql = "INSERT INTO lafiliere (lenom, lacronyme, lacouleur, lepicto) VALUES (?,?,?,?);";
 
@@ -61,6 +59,7 @@ class lafiliereManager {
         $insert->bindValue(2, $datas->getLacronyme(), PDO::PARAM_STR);
         $insert->bindValue(3, $datas->getLacouleur(), PDO::PARAM_STR);
         $insert->bindValue(4, $datas->getLepicto(), PDO::PARAM_STR);
+        
 
 
         try {
@@ -70,7 +69,11 @@ class lafiliereManager {
             echo $e->getCode();
             return false;
         }
+    
     }
+
+        
+    
 
     public function filiereUpdate(lafiliere $datas, int $get) {
 
@@ -91,6 +94,7 @@ class lafiliereManager {
         $update->bindValue(3, $datas->getLacouleur(), PDO::PARAM_STR);
         $update->bindValue(4, $datas->getLepicto(), PDO::PARAM_STR);
         $update->bindValue(5, $datas->getIdlafiliere(), PDO::PARAM_INT);
+        
 
         try {
             $update->execute();
@@ -116,5 +120,14 @@ class lafiliereManager {
             return false;
         }
     }
+
+
+
+
+/*
+UPLOAD de fichiers
+*/
+
+    
 
 }
