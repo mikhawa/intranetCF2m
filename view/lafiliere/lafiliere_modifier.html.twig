@@ -31,8 +31,6 @@
                     <input name="lacronyme" type="text" class="form-control"
                      placeholder="acronyme" value="{{ section.lacronyme }}" required></input><br>
                     </div>
-                    <input type="hidden" name="idlafiliere" value="{{ section.idlafiliere }}">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="100000">
 <div class="mx-auto" style="width: 200px;">
 
 
@@ -45,7 +43,7 @@
 <div class="col-lg-6 text-left">
 
                     <label for="image">Le pictogramme</label>
-                      <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" value="{{ section.lepicto }}"><br>
+                      <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" value="{{ section.lepicto }}" required><br>
                     <button type="submit" class="btn btn-primary">Envoyer</button>
      </div>
 

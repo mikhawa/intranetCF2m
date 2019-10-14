@@ -94,6 +94,8 @@ if (isset($_GET['viewlafiliere'])) {
             if (!$upload) {
                 exit();
             }
+
+            $lafiliereM->filiereUpdate($updatelafiliere, $_GET["updatelafiliere"]);
         }
 
         header("Location: ./?viewlafiliere");
@@ -114,8 +116,8 @@ if (isset($_GET['viewlafiliere'])) {
     echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
 } elseif (isset($_GET['insertlasession'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
-} elseif(isset($_GET['viewlerole'])) {
-    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['update' => $leroleM->selectLerole($_GET['idlerole'])]);
+} elseif(isset($_GET['update'])) {
+    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['update' => $leroleM->selectAllLerole()]);
 } else{
     echo $twig->render('roles/admin/admin_homepage.html.twig');
 }
