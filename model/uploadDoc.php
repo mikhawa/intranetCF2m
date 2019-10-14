@@ -22,6 +22,7 @@ class uploadDoc {
     }
     
     // static function, peuvent être appelées sans instanciation de la classe avec les :: par exemple uploadDoc::uploadFichier avec le $_FILES envoyé sous forme de tableau nommé $data, et un argument qui a déjà des valeurs par défauts, on peut les changer au cas où on décide l'upload de fichier spécique
+<<<<<<< HEAD
     public static function uploadFichier(array $datas, string $folder, array $extensions = 
     [
             '.png', // img
@@ -40,6 +41,28 @@ class uploadDoc {
             ".odt", // openoffice
             ".ppt" // powerpoint
         ]) {
+=======
+    public static function uploadFichier(array $datas, // le $_FILES
+            array $extensions = [
+        '.png', // img
+        '.gif', // img
+        '.jpg', // img
+        '.jpeg',// img
+        ".svg", // img
+        ".pdf", // doc
+        ".doc", // doc
+        ".docx",// doc
+        ".txt", // txt
+        ".rtf",// doc
+        ".tiff", // img
+        ".psd", // photoshop
+        ".xls", // accès
+        ".odt", // openoffice
+        ".ppt" // powerpoint
+        ], // les extensions acceptées
+        $folder=UPLOAD_FILE // le chemin de sauvegarde
+        ) {
+>>>>>>> 0095f0d7224469e1d1b5435098585f622abe8e98
 
         $dossier = $folder;
         $fichier = basename($datas['name']);
@@ -55,10 +78,11 @@ class uploadDoc {
         }
         if (!isset($erreur)) { //S'il n'y a pas d'erreur, on upload
 
-            if (move_uploaded_file($datas['tmp_name'], $dossier . $fichier)) { //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-                return true;
+            if (move_uploaded_file($datas['tmp_name'], $dossier . $fichier)) { //Si la fonction renvoie TRUE, c'est que ça a fonctionné..., on renvoie le chemin du fichier
+                return $dossier . $fichier;
             } else { //Sinon (la fonction renvoie FALSE).
                 echo 'Echec de l\'upload !';
+                return false;
             }
         } else {
             echo $erreur;
