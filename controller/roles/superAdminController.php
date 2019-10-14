@@ -24,7 +24,7 @@ if (isset($_GET['viewlafiliere'])) {
         $newfiliere = new lafiliere($_POST);
         //s($newfiliere,$_FILES);
         
-        // si on attache pas de nouvelle images
+        // si on attache une nouvelle images
         if ($_FILES['lepicto']['error']!=4) {
 
             $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
@@ -35,9 +35,20 @@ if (isset($_GET['viewlafiliere'])) {
             $_FILES['lepicto']['name'] = $nouveauNom;
 
             // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
-            $upload = uploadDoc::uploadFichier($_FILES['lepicto']);
+            $upload = uploadDoc::uploadFichier($_FILES['lepicto'],
+                    ['.png', '.gif', '.jpg', '.jpeg'], // on souhaite que des images
+                    $folder=IMG_ORIGIN // on les mets dans le dossier imagesoriginales
+                    );
             if (!$upload) {
                 exit();
+            // l'image a bien été envoyée    
+            }else{
+                // chemin de l'image
+
+                // redimension avec proportion
+                uploadDoc::uploadRedim($upload,500,400);
+                // redimension avec crop dans l'iamge
+                uploadDoc::uploadThumb($upload,30,30);
             }
         }
 
@@ -47,7 +58,7 @@ if (isset($_GET['viewlafiliere'])) {
 
 
         //d($newfiliere,$_POST,$_FILES);
-        header("Location: ./?viewlafiliere");
+        // header("Location: ./?viewlafiliere");
     } else {
 
         echo $twig->render('lafiliere/lafiliere_ajouter.html.twig');
@@ -81,7 +92,7 @@ if (isset($_GET['viewlafiliere'])) {
         $updatelafiliere = new lafiliere($_POST);
         //s($_FILES);
         // si on attache une nouvelle images
-        if (!empty($_FILES)) {
+        if ($_FILES['lepicto']['error']!=4) {
 
             $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
             // changement du nom pour l'insertion dans la db
