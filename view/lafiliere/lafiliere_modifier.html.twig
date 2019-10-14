@@ -10,7 +10,7 @@
 
 {% block centre %}
     <!-- Page Content -->
-<main role="main" class="container">
+    <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 class="mt-5">Administration du CF2m</h1>
@@ -18,46 +18,48 @@
             </div>
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
-                
 
-                    <form action="" method="post" name="update">
+
+                <form action="" method="post" name="update">
                     <div class ="form-group">
-                    <label for="Nondelafilier">Non de la fillier</label>
-                    <input name="lenom" type="text"  class="form-control" placeholder="Titre de la filiere" value="{{ section.lenom }}" required><br></input>
+                        <label for="Nondelafilier">Non de la fillier</label>
+                        <input name="lenom" type="text"  class="form-control" placeholder="Titre de la filiere" value="{{ section.lenom }}" required><br></input>
                     </div>
                     <div class ="form-group">
-                    <label for="lacronyme">Lacronyme</label>
-                    <input name="lenom" type="text"  class="form-control" placeholder="Lacronyme" value="{{ section.lenom }}" required><br></input>
-                    <input name="lacronyme" type="text" class="form-control"
-                     placeholder="acronyme" value="{{ section.lacronyme }}" required></input><br>
+                        <label for="lacronyme">Lacronyme</label>
+
+                        <input name="lacronyme" type="text" class="form-control"
+                               placeholder="acronyme" value="{{ section.lacronyme }}" required></input><br>
                     </div>
                     <input type="hidden" name="idlafiliere" value="{{ section.idlafiliere }}">
                     <input type="hidden" name="MAX_FILE_SIZE" value="100000">
-<div class="mx-auto" style="width: 200px;">
+                    <div class="mx-auto" style="width: 200px;">
 
 
 
 
 
-                    <label for="color">Choix du couleur</label>
-                   <input name="textcolor" type="color" class="form-control" placeholder="La couleur"value="#fad345""{{ section.lacouleur }}" required><br>
+                        <label for="color">Choix du couleur</label>
+                        <input name="lacouleur" type="color" class="form-control" placeholder="La couleur"value="{{ section.lacouleur }}" required><br>
                     </div><br><br>
-<div class="col-lg-6 text-left">
+                    <div class="col-lg-6 text-left">
 
-                    <label for="image">Le pictogramme</label>
-                      <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" value="{{ section.lepicto }}" required><br>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-     </div>
+                        <label for="image">Le pictogramme</label>
+                        <input name="lepicto" type="file" class="form-control-file" placeholder="le picto"> Actuellement : {% if (section.lepicto) %} {{ section.lepicto }} <input type="hidden" name="lepicto" value="{{ section.lepicto }}"> {% else %} Vide
+                        {% endif %}<br>
+
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </div>
 
                 </form>
-                
+
                 <h3>{{ error }}</h3>
             </div>
         </div>
-</main>
+    </main>
 
-{% endblock %}
+    {% endblock %}
 
-{% block bas %}
-{% include "footer.html.twig" %}
-{% endblock %}
+        {% block bas %}
+            {% include "footer.html.twig" %}
+        {% endblock %}

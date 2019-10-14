@@ -22,8 +22,10 @@ if (isset($_GET['viewlafiliere'])) {
     if (isset($_POST['lenom'])) {
 
         $newfiliere = new lafiliere($_POST);
-        //s($newfiliere);
-        if (!empty($_FILES)) {
+        //s($newfiliere,$_FILES);
+        
+        // si on attache pas de nouvelle images
+        if ($_FILES['lepicto']['error']!=4) {
 
             $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
             // changement du nom pour l'insertion dans la db
@@ -33,7 +35,7 @@ if (isset($_GET['viewlafiliere'])) {
             $_FILES['lepicto']['name'] = $nouveauNom;
 
             // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
-            $upload = uploadDoc::uploadFichier($_FILES['lepicto'], 'img/upload/lafiliere/');
+            $upload = uploadDoc::uploadFichier($_FILES['lepicto']);
             if (!$upload) {
                 exit();
             }
@@ -73,11 +75,29 @@ if (isset($_GET['viewlafiliere'])) {
     // submit updating filiere
     if (isset($_POST['idlafiliere'])) {
 
+        
         $updatelafiliere = new lafiliere($_POST);
+        s($_FILES);
+        // si on attache pas une nouvelle images
+        if (!empty($_FILES)) {
 
+            $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
+            // changement du nom pour l'insertion dans la db
+            $updatelafiliere->setLepicto($nouveauNom);
+
+            // changement du nom pour l'upload de fichier
+            $_FILES['lepicto']['name'] = $nouveauNom;
+
+            // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
+            $upload = uploadDoc::uploadFichier($_FILES['lepicto']);
+            if (!$upload) {
+                exit();
+            }
+        }
+        s($updatelafiliere);
         $lafiliereM->filiereUpdate($updatelafiliere, $_GET["updatelafiliere"]);
 
-        header("Location: ./?viewlafiliere");
+        //header("Location: ./?viewlafiliere");
     } else {
 
         echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
