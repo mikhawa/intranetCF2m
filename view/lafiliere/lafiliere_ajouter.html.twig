@@ -19,41 +19,7 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="" enctype="multipart/form-data" method="post" name="createFiliere">
-<<<<<<< HEAD
-                <div class="form-group">
-                <label for ="rajoutfillier">Non de la fillier</label>
-                    <input name="lenom" type="text" class="form-control" placeholder="Titre de la filiere" required><br></input>
-                <label for="lacronyme">Lacronyme</label>
-                    <input name="lacronyme" type="text" class="form-control" placeholder="Acronyme de la filiere" required></input><br>
-<div class="mx-auto" style="width: 200px;">
 
-
-    <label for="color">Choix du couleur</label>
-    <input name="lacouleur" type="color" class="form-control" placeholder="La couleur" value="#fad345" "{{ section.lacouleur }}" required><br>
-</div><br><br>
-<div class="col-lg-6 text-left">
-
-    <label for="image">Le pictogramme</label>
-    <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" value="{{ section.lepicto }}" ><br>
-    <button type="submit" class="btn btn-primary">Envoyer</button>
-</div>
-
-
-
-
-                 
-                    
-                </form>
-                <h3>{{ error }}</h3>
-            </div>
-        </div>
-</main>
-{% endblock %}
-
-{% block bas %}
-{% include "footer.html.twig" %}
-{% endblock %}
-=======
                     <div class="form-group">
                         <label for ="rajoutfillier">Non de la fillier</label>
                         <input name="lenom" maxlength="45" type="text" class="form-control" placeholder="Titre de la filiere" required><br></input>
@@ -68,7 +34,7 @@
                         <div class="col-lg-6 text-left">
 
                             <label for="image">Le pictogramme</label>
-                            <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" ><br>
+                            <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" enctype="multipart/form-data" ><br>
                             <button type="submit" class="btn btn-primary">Envoyer</button>
 
 
@@ -82,4 +48,4 @@
                 {% block bas %}
                     {% include "footer.html.twig" %}
                 {% endblock %}
->>>>>>> 0095f0d7224469e1d1b5435098585f622abe8e98
+
