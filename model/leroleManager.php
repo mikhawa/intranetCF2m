@@ -84,7 +84,8 @@ class leroleManager
 		SELECT
 			*
 		FROM
-			lerole";
+			lerole
+		LIMIT 3, 10";
 		$sqlQuery = $this->db->prepare($sql);
 		$sqlQuery->execute();
 		
