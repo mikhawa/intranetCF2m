@@ -1,6 +1,8 @@
 <?php
 
-class leroleManager extends lapagination
+
+class leroleManager
+
 {
 	
 	private $db;
@@ -84,11 +86,13 @@ class leroleManager extends lapagination
 		SELECT
 			*
 		FROM
-			lerole";
+			lerole
+		";
 		$sqlQuery = $this->db->prepare($sql);
 		$sqlQuery->execute();
 		
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
 	}
 	
 	public function selectLeroleJoinLedroit(string $joinType = "inner"): array {
@@ -124,5 +128,7 @@ class leroleManager extends lapagination
 		
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+
 	
 }
