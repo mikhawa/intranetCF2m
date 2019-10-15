@@ -1,9 +1,11 @@
 <?php
 
 /*
+ * PROVISOIRE
+ *
  * Classe permettant d'afficher la pagination suivant le nombre d'éléments par page
  */
-class pagination
+class lapagination
 {
     public static function pagine(int $nbTotalElement, int $nbParPage, string $variableGET): string {
 

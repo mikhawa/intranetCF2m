@@ -1,6 +1,6 @@
 <?php
 
-class leroleManager
+class leroleManager extends lapagination
 {
 	
 	private $db;

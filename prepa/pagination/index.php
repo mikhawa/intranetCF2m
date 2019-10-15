@@ -1,3 +1,6 @@
+<?php
+require_once "pagination.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,10 +55,14 @@
         <div class="col-lg-12 text-center">
             <h1 class="mt-5">A Bootstrap 4 Starter Template</h1>
             <p class="lead">Complete with pre-defined file paths and responsive navigation!</p>
-            <ul class="list-unstyled">
-                <li>Bootstrap 4.2.1</li>
-                <li>jQuery 3.3.1</li>
-            </ul>
+            <h5>On a 27 éléments, on en veut 5 par pages, et la variable get sera nommée "pg"</h5>
+            <p><?php
+                echo lapagination::pagine(27,5,"pg");
+                ?></p>
+            <h5>On a 163 éléments, on en veut 10 par pages, et la variable get sera nommée "page"</h5>
+            <p><?php
+                echo lapagination::pagine(163,10,"page");
+                ?></p>
         </div>
     </div>
 </div>
