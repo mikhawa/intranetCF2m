@@ -2,18 +2,21 @@
 
 class pagination{
 
-   public static function page($messageParPage){
+   public static function page(int $nbTotalElement, int $nbPage, string $variableGet){
 
-   $messageParPage = 5;
+       $sortie="";
 
-      if(isset($_GET['suite1'])){
+   $nbPages = ceil($nbTotalElement/$nbPage);
+        if($nbPages==1){
 
-        echo $twig->render(lerole/lerole_page2.html.twig);
 
+         }else{
+            $sortie.="<div>";
+            for($i=1; $i<+$nbPages;$i++){
+                $sortie.= "<a href='?$variableGet=$i'>$i</a>";
+            }
 
-      }else{
-        header("Location: ./");
-      }
+         }
 
 
 
