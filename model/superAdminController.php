@@ -147,21 +147,17 @@ if (isset($_GET['viewlafiliere'])) {
     echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
 } elseif (isset($_GET['insertlasession'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
-
 } elseif(isset($_GET['viewlerole'])) {
-    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectAllLerole()]);
+    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrôle' => $leroleM->selectAllLerole()]);
 
-} elseif(isset($_GET['role'])){
+} elseif(isset($_GET['suite1'])){
 
-       if(isset($_GET['update'])){
-          
-        echo $twig->render('lerole/lerole_page2.html.twig',['detailrole'=> $leroleM->selectAllLerolePage2()]);
+    if(isset($_GET['insert'])){
 
-       }else{
-           header ('Location: ./');
-       }
+        echo $twig->render('lerole/lerole_page2.html.twig', ['page2'=> $leroleM->selectAllLerole()]);
+    
 
 }else{
-
     echo $twig->render('roles/admin/admin_homepage.html.twig');
+   }
 }

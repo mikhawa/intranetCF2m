@@ -1,6 +1,6 @@
 <?php
 
-class leroleManager
+class leroleManager extends pagination
 {
 	
 	private $db;
@@ -84,11 +84,13 @@ class leroleManager
 		SELECT
 			*
 		FROM
-			lerole";
+			lerole
+		LIMIT 3, 10";
 		$sqlQuery = $this->db->prepare($sql);
 		$sqlQuery->execute();
 		
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
 	}
 	
 	public function selectLeroleJoinLedroit(string $joinType = "inner"): array {
@@ -124,5 +126,7 @@ class leroleManager
 		
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+
 	
 }
