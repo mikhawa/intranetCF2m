@@ -11,22 +11,28 @@
     <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 class="mt-5">Insertion d'un nouvel utilisateur</h1>
+                <h1 class="mt-5">Insertion d'une nouvelle inscription</h1>
                 <p class="lead">Veuillez remplir tous les champs</p>
             </div>
             <div class="col-lg-10 text-left">
 
-                <form method='POST' name='myForm' action=''>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1"></label>
-                        <input type="text" name="lenomutilisateur" placeholder="votre nom" required><br>
-                    </div>
+                <form action="./?viewlinscription" method="post">
+                   <label for="letype">Faites votre choix&nbsp</label>
+					<select id="letype" name="letype" required>
+						<option value="1" {{ detailinscription.letype == 1 ? "selected" }}></option>
+						<option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}></option>
+					</select><br><br>
+
+                    <label for="letype">Choisissez une session&nbsp</label>
+					<select id="letype" name="letype" required>
+						<option value="1" {{ detailinscription.letype == 1 ? "selected" }}>Technicien(ne support pc et réseaux)</option>
+						<option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Développeur web</option>
+                        <option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Infographiste PAO</option>
+					</select><br><br>
                     
                     
-                    <div class="form-group">
-                        <label for="exampleFormControlInput2"></label>
-                        <input type="text" name="lemotdepasse" placeholder="votre mot de passe" required><br>
-                    </div>
+                    
+                    
                     
                     
                     <button type="submit" class="btn btn-primary">Inscription</button>

@@ -1,8 +1,8 @@
 <? php
 
-{% extends "template1.html.twig" %}
+{% extends "template.html.twig" %}
 
-{% block title %}{{ parent() }} | Suppression de l'article : {{ lutilisateur.idlutilisateur  }} {% endblock %}
+{% block title %}{{ parent() }} | Suppression de linscription : {{ linscription.idlinscription  }} {% endblock %}
 
 {% block menuhaut %}
 {% include "admin/hautEtMenu.html.twig" %}
@@ -13,32 +13,19 @@
 <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 class="mt-5">Suppression de lutilisateur : {{ lutilisateur.idlutilisateur }}</h1>
-                <p class="lead">Voulez-vous vraiment supprimer lutilisateur?</p>
+                <h1 class="mt-5">Suppression de linscription : {{ linscription.idlinscription }}</h1>
+                <p class="lead">Voulez-vous vraiment supprimer linscription?</p>
             </div>
+
             <div class="col-lg-10 text-left">
-                {# dump de kint au format barre de débogage #}
-               {{ d(article) }}
-               
-               <h2>{{ lutilisateur.idlutilisateur  }}</h2>
-               <p>Presént dans les rubriques: 
-
-          {% set tabId = lutilisateur.idlutilisateur  %}
-          {# s(tabId[0]) #}
-          {% if tabId[0]  %} 
-            {% for categ in tabId %}
-          
-             {{ categ }} |
-
-            {% endfor %}
-          {% else %}
-             Aucun utilisateur
-          {% endif %}
-      </p>
-      <a href='?delete={{ lutilisateur.idlutilisateur  }}&ok'>OK</a> 
-      <a href='./'>Annuler</a> 
-               
-            </div>
+                {# Affichage du formulaire #}
+                <h1>Confirmez la suppression de l'inscription {{id}}</h1>
+                 <div><a type="button" href="?deletelinscription={{ id }}&ok" class="btn btn-primary">Supprimer</a> 
+                 <a type="button" href="?admin" class="btn btn-secondary">Annuler</a> </div>
+                
+                <h3>{{ error }}</h3>
+                
+               </div>
         </div>
 </main>
 
