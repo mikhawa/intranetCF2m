@@ -1,6 +1,8 @@
 <?php
 
-class leroleManager extends pagination
+
+class leroleManager
+
 {
 	
 	private $db;
