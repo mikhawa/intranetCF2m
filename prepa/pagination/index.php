@@ -57,11 +57,13 @@ require_once "pagination.php";
             <p class="lead">Complete with pre-defined file paths and responsive navigation!</p>
             <h5>On a 27 éléments, on en veut 5 par pages, et la variable get sera nommée "pg"</h5>
             <p><?php
-                echo lapagination::pagine(27,5,"pg");
+                $pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1 ;
+                echo pagination::pagine(27,5, $pg,"pg");
                 ?></p>
             <h5>On a 163 éléments, on en veut 10 par pages, et la variable get sera nommée "page"</h5>
             <p><?php
-                echo lapagination::pagine(163,10,"page");
+                $pag = (isset($_GET['page']))?(int) $_GET['page'] : 1;
+                echo pagination::pagine(163,10,  $pag, "page");
                 ?></p>
         </div>
     </div>
