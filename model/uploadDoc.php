@@ -109,6 +109,8 @@ class uploadDoc {
                 break;
             case "image/png":
                 $nouvelle = imagecreatefrompng($cheminOriginal);
+                imagealphablending($nouvelle, true);
+                imageSaveAlpha($nouvelle, true);
                 break;
             default:
                 die("Format de fichier incorrecte");
@@ -116,6 +118,12 @@ class uploadDoc {
 
         // on va créer l'image réceptrice de notre copie avec les dimensions souhaitées (create)
         $newImage = imagecreatetruecolor($newWidth, $newHeight);
+        $background = imagecolorallocate($newImage , 0, 0, 0);
+        // removing the black from the placeholder
+        imagecolortransparent($newImage, $background);
+        imagealphablending($newImage, false);
+        imageSaveAlpha($newImage, true);
+
 
         // on va "coller" l'image originale dans la nouvelle image
         imagecopyresampled($newImage, $nouvelle, 0, 0, 0, 0, $newWidth, $newHeight, $largeurOri, $hauteurOri);
@@ -124,13 +132,13 @@ class uploadDoc {
         switch ($taille_original['mime']) {
             case "image/jpeg":
             case "image/pjpeg":
-                $nouvelle = imagejpeg($newImage, $dossierFinal.$nomFichier, $qualite);
+                imagejpeg($newImage, $dossierFinal.$nomFichier, $qualite);
                 break;
             case "image/gif":
-                $nouvelle = imagegif($newImage, $dossierFinal.$nomFichier, $qualite);
+                imagegif($newImage, $dossierFinal.$nomFichier, $qualite);
                 break;
             case "image/png":
-                $nouvelle = imagepng($newImage, $dossierFinal.$nomFichier, $qualite);
+                imagepng($newImage, $dossierFinal.$nomFichier);
                 break;
             default:
                 die("Format de fichier incorrecte");
