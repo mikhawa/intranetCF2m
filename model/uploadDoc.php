@@ -22,7 +22,9 @@ class uploadDoc {
     }
     
     // static function, peuvent être appelées sans instanciation de la classe avec les :: par exemple uploadDoc::uploadFichier avec le $_FILES envoyé sous forme de tableau nommé $data, et un argument qui a déjà des valeurs par défauts, on peut les changer au cas où on décide l'upload de fichier spécique
-    public static function uploadFichier(array $datas, string $folder, array $extensions = [
+
+    public static function uploadFichier(array $datas, // le $_FILES
+            array $extensions = [
         '.png', // img
         '.gif', // img
         '.jpg', // img
@@ -38,7 +40,10 @@ class uploadDoc {
         ".xls", // accès
         ".odt", // openoffice
         ".ppt" // powerpoint
-        ]) {
+        ], // les extensions acceptées
+        $folder=UPLOAD_FILE // le chemin de sauvegarde
+        ) {
+
 
         $dossier = $folder;
         $fichier = basename($datas['name']);
@@ -54,15 +59,26 @@ class uploadDoc {
         }
         if (!isset($erreur)) { //S'il n'y a pas d'erreur, on upload
 
-            if (move_uploaded_file($datas['tmp_name'], $dossier . $fichier)) { //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-                return true;
+            if (move_uploaded_file($datas['tmp_name'], $dossier . $fichier)) { //Si la fonction renvoie TRUE, c'est que ça a fonctionné..., on renvoie le chemin du fichier
+                return $dossier . $fichier;
             } else { //Sinon (la fonction renvoie FALSE).
                 echo 'Echec de l\'upload !';
+                return false;
             }
         } else {
             echo $erreur;
             return false;
         }
     }
+    
+    
+    public static function uploadRedim(string $cheminIMG,$Large,$Haut){
+        //echo $cheminIMG,$Large,$Haut;
+    }
+    
+    public static function uploadThumb(string $cheminIMG,$Large,$Haut){
+        //echo $cheminIMG,$Large,$Haut;
+    }
+    
 
 }

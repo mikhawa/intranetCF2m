@@ -1,0 +1,30 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+{% block title %}{{ parent() }} | Admin | Supprimer un rôle{% endblock %}
+
+
+{% block centre %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+                <p class="lead">Admin | Supprimer un rôle</p>
+            </div>
+            <div class="col-lg-6 text-left">
+                {# Affichage du formulaire #}
+                <h1>Confirmez la suppression du rôle {{id}}</h1>
+                 <div><a type="button" href="?deletelerole={{ id }}&ok" class="btn btn-primary">Supprimer</a> <a type="button" href="?admin" class="btn btn-secondary">Annuler</a> </div>
+                
+                <h3>{{ error }}</h3>
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}

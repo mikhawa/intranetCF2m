@@ -10,7 +10,7 @@
 
 {% block centre %}
     <!-- Page Content -->
-<main role="main" class="container">
+    <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 class="mt-5">Administration du CF2m</h1>
@@ -19,35 +19,33 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="" enctype="multipart/form-data" method="post" name="createFiliere">
-                <div class="form-group">
-                <label for ="rajoutfillier">Non de la fillier</label>
-                    <input name="lenom" maxlength="45" type="text" class="form-control" placeholder="Titre de la filiere" required><br></input>
-                <label for="lacronyme">Lacronyme</label>
-                    <input name="lacronyme" maxlength="10" type="text" class="form-control" placeholder="Acronyme de la filiere" required></input><br>
-<div class="mx-auto" style="width: 200px;">
+
+                    <div class="form-group">
+                        <label for ="rajoutfillier">Non de la fillier</label>
+                        <input name="lenom" maxlength="45" type="text" class="form-control" placeholder="Titre de la filiere" required><br></input>
+                        <label for="lacronyme">Lacronyme</label>
+                        <input name="lacronyme" maxlength="10" type="text" class="form-control" placeholder="Acronyme de la filiere" required></input><br>
+                        <div class="mx-auto" style="width: 200px;">
 
 
-    <label for="color">Choix du couleur</label>
-    <input name="lacouleur" type="color" class="form-control" placeholder="La couleur" value="#fad345" "{{ section.lacouleur }}" required><br>
-</div><br><br>
-<div class="col-lg-6 text-left">
+                            <label for="color">Choix du couleur</label>
+                            <input name="lacouleur" type="color" class="form-control" placeholder="La couleur" value="#fad345"  required><br>
+                        </div><br><br>
+                        <div class="col-lg-6 text-left">
 
-     <label for="image">Le pictogramme</label>
-                      <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" value="{{ section.lepicto }}" required><br></input>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-
-
+                            <label for="image">Le pictogramme</label>
+                            <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" enctype="multipart/form-data" ><br>
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
 
 
-                 
-                    
-                </form>
-                <h3>{{ error }}</h3>
-            </div>
-        </div>
-</main>
-{% endblock %}
+                            </form>
+                            <h3>{{ error }}</h3>
+                        </div>
+                    </div>
+                    </main>
+                {% endblock %}
 
-{% block bas %}
-{% include "footer.html.twig" %}
-{% endblock %}
+                {% block bas %}
+                    {% include "footer.html.twig" %}
+                {% endblock %}
+

@@ -1,7 +1,7 @@
 <?php
 // constantes de connexion à la DB
-define("DB_HOST","localhost");
-define("DB_NAME","intranetV4");
+define("DB_HOST","127.0.0.1");
+define("DB_NAME","intranetv4");
 define("DB_LOGIN","root");
 define("DB_PWD","");
 define("DB_PORT","3301");
@@ -14,11 +14,11 @@ define("PRODUCT",false);
  *  chemins d'upload
  */
 // racine du dossier d'upload
-define("UPLOAD_RACINE", __DIR__."/img/upload/");
+define("UPLOAD_RACINE", "img\upload\\");
 
 // pour envoyer un fichier à télécharger (.doc, .pdf , etc...)
-define("UPLOAD_FILE",UPLOAD_RACINE."download/");
+define("UPLOAD_FILE",UPLOAD_RACINE."download\\");
 
 // chemin pour les images originales
-define("IMG_ORIGIN",UPLOAD_RACINE."origin/");
+define("IMG_ORIGIN",UPLOAD_RACINE."origin\\");
 
