@@ -150,19 +150,15 @@ if (isset($_GET['viewlafiliere'])) {
 
 } elseif(isset($_GET['viewlerole'])) {
 
-    $pagination = $leroleM::pagination($nbTotalElement 26, $nbPage 3, $variableGet: "viewlerole&pg");
 
 
-    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectAllLerole()
-    , 'pagination'=>$pagination]);
+
+    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectAllLerole()]);
 
 } elseif(isset($_GET['role'])){
 
 
-    }else{
 
-    header('Location: ./');
-}
 
 
           
