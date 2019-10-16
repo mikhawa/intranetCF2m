@@ -15,7 +15,7 @@ class uploadDoc {
         $extension = strrchr($originName, '.');
         
         // création d'un nom avec la date plus un chiffre au hasard pour soit unique (et classé)
-        $newName = date("YmdHis").mt_rand(1000,9999);
+        $newName = date("YmdHis").mt_rand(10000,99999);
         
         // envoie du nouveau nom avec l'extension d'origine
         return $newName.$extension;
