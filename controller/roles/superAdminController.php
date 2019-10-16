@@ -163,5 +163,5 @@ if (isset($_GET['viewlafiliere'])) {
 
 }else{
 
-    echo $twig->render('roles/admin/admin_homepage.html.twig');
+    echo $twig->render('roles/admin/admin_homepage.html.twig', ['session' => $_SESSION]);
 }
