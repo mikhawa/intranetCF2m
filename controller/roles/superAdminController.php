@@ -51,7 +51,7 @@ if (isset($_GET['viewlafiliere'])) {
                 // chemin de l'image
 
                 // redimension avec proportion
-                uploadDoc::uploadRedim($upload,500,400);
+                uploadDoc::uploadRedim($upload,IMG_MEDIUM,300,300,90);
                 // redimension avec crop dans l'iamge
                 uploadDoc::uploadThumb($upload,30,30);
             }
@@ -63,7 +63,7 @@ if (isset($_GET['viewlafiliere'])) {
 
 
         //d($newfiliere,$_POST,$_FILES);
-        header("Location: ./?viewlafiliere");
+       header("Location: ./?viewlafiliere");
     } else {
 
         echo $twig->render('lafiliere/lafiliere_ajouter.html.twig');
