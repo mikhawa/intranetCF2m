@@ -71,9 +71,71 @@ class uploadDoc {
         }
     }
     
-    
-    public static function uploadRedim(string $cheminIMG,$Large,$Haut){
-        //echo $cheminIMG,$Large,$Haut;
+    // redimension de l'image
+    public static function uploadRedim(string $cheminOriginal, string $dossierFinal, int $Large, int $Haut, int $qualite=90){
+
+        $nomFichier = strrchr($cheminOriginal, '\\');
+
+        $taille_original = getimagesize($cheminOriginal);
+
+        $largeurOri = $taille_original[0];
+        $hauteurOri = $taille_original[1];
+
+        // si l'image est plus petite en hauteur comme en largeur que les dimensions maximales, inutile de redimensionner
+        if ($hauteurOri <= $Haut && $largeurOri <= $Large) {
+            // taille originale
+            $newWidth = $largeurOri;
+            $newHeight = $hauteurOri;
+        } else {
+            // si l'image est en paysage
+            if ($largeurOri > $hauteurOri) {
+                $ratio = $Large / $largeurOri;
+                // nous sommes en portrait ou l'image est carré
+            } else {
+                $ratio = $Haut / $hauteurOri;
+            }
+            // valeurs arrondies en pixel
+            $newWidth = round($largeurOri * $ratio);
+            $newHeight = round($hauteurOri * $ratio);
+        }
+        // on va créer les copies d'images suivant le type MIME de celles-ci (copier)
+        switch ($taille_original['mime']) {
+            case "image/jpeg":
+            case "image/pjpeg":
+                $nouvelle = imagecreatefromjpeg($cheminOriginal);
+                break;
+            case "image/gif":
+                $nouvelle = imagecreatefromgif($cheminOriginal);
+                break;
+            case "image/png":
+                $nouvelle = imagecreatefrompng($cheminOriginal);
+                break;
+            default:
+                die("Format de fichier incorrecte");
+        }
+
+        // on va créer l'image réceptrice de notre copie avec les dimensions souhaitées (create)
+        $newImage = imagecreatetruecolor($newWidth, $newHeight);
+
+        // on va "coller" l'image originale dans la nouvelle image
+        imagecopyresampled($newImage, $nouvelle, 0, 0, 0, 0, $newWidth, $newHeight, $largeurOri, $hauteurOri);
+
+        // on crée physiquement l'image
+        switch ($taille_original['mime']) {
+            case "image/jpeg":
+            case "image/pjpeg":
+                $nouvelle = imagejpeg($newImage, $dossierFinal.$nomFichier, $qualite);
+                break;
+            case "image/gif":
+                $nouvelle = imagegif($newImage, $dossierFinal.$nomFichier, $qualite);
+                break;
+            case "image/png":
+                $nouvelle = imagepng($newImage, $dossierFinal.$nomFichier, $qualite);
+                break;
+            default:
+                die("Format de fichier incorrecte");
+        }
+        return true;
     }
     
     public static function uploadThumb(string $cheminIMG,$Large,$Haut){
