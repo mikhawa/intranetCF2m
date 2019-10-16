@@ -22,8 +22,3 @@ define("UPLOAD_FILE",UPLOAD_RACINE."download/");
 // chemin pour les images originales
 define("IMG_ORIGIN",UPLOAD_RACINE."origin/");
 
-// chemin pour les images redimensionnées (avec les proportions)
-define("IMG_ORIGIN",UPLOAD_RACINE."medium/");
-
-// chemin pour les images coupées et redimesionnées (carrées)
-define("IMG_ORIGIN",UPLOAD_RACINE."thumb/");
