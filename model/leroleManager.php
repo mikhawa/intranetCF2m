@@ -138,13 +138,19 @@ class leroleManager
 
          $sqlQuery = $this->db->query($sql);
 
+
          $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
          return (int) $recup['nb'];
 
 
+         $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
+         return (int) $recup['nb'];
+
 	}
 
+
     public function selectRoleWithLimit(int $page,int $nbParPage): array{
+
 
 	    $premsLIMIT = ($page-1)*$nbParPage;
 		$sql = "
