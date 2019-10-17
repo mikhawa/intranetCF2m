@@ -20,7 +20,7 @@ if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmati
 if (isset($_GET['viewlafiliere'])) {
 
 
-    $paginFiliere = (isset($_GET['pgFiliere'])?(int)$_get['pgFiliere']:1);
+    $paginFiliere = (isset($_GET['pgFiliere'])?(int)$_GET['pgFiliere']:1);
 
     $nbFiliere = $lafiliereM->selectFiliereCountById();
 
