@@ -143,17 +143,36 @@ if (isset($_GET['viewlafiliere'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
 
 } elseif(isset($_GET['viewlerole'])) {
-    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectAllLerole()]);
 
-} elseif(isset($_GET['role'])){
+    $limitParPage = (isset($_GET['pg']))?(int)$_GET['pg']:1;
 
-       if(isset($_GET['update'])){
+     $leroleM->selectRoleWithLimit($limitParPage);
+    
+
+    $pageactu = (isset ($_GET['pg']))?(int)$_GET['pg']:1;
+
+     $affichePagination = pagination::pagine(4,1,$pageactu,"viewlerole&pg");
+      
+      echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectRoleCountById(), "pagination"=>$affichePagination]);
+
+
+
+      
+      
+
+} elseif(isset($_GET[''])){
+
+    
+
+
+
+
+
+
           
-        echo $twig->render('lerole/lerole_page2.html.twig',['detailrole'=> $leroleM->selectAllLerolePage2()]);
 
-       }else{
-           header ('Location: ./');
-       }
+
+
 
 }else{
 

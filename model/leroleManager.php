@@ -129,6 +129,39 @@ class leroleManager
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	
+	public function selectRoleCountById(): array {
+
+		$sql="SELECT COUNT(idlerole) 
+			  FROM lerole";
+			  
+
+         $sqlQuery = $this->db->prepare($sql);
+         $sqlQuery->execute();
+
+         return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);	  
+
+
+	}
+
+    public function selectRoleWithLimit(): array{
+
+		$sql = "
+		SELECT
+			*
+		FROM
+			lerole
+		LIMIT  3
+		";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+	}
+
+
 
 	
 }
