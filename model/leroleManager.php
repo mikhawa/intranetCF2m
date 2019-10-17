@@ -130,21 +130,21 @@ class leroleManager
 	}
 
 	
-	public function selectRoleCountById(): array {
+	public function selectRoleCountById(): int {
 
-		$sql="SELECT COUNT(idlerole) 
+		$sql="SELECT COUNT(idlerole) AS nb
 			  FROM lerole";
 			  
 
-         $sqlQuery = $this->db->prepare($sql);
-         $sqlQuery->execute();
+         $sqlQuery = $this->db->query($sql);
+         
 
-         return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);	  
-
+         $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
+         return (int) $recup['nb'];
 
 	}
 
-    public function selectRoleWithLimit(): array{
+    public function selectRoleWithLimit(int $lapage, int $nbParPage ): array{
 
 		$sql = "
 		SELECT
