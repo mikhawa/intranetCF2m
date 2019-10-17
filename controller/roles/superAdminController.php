@@ -95,7 +95,7 @@ if (isset($_GET['viewlafiliere'])) {
 
         
         $updatelafiliere = new lafiliere($_POST);
-        s($_FILES);
+        //s($_FILES);
         // si on attache une nouvelle images
         if ($_FILES['lepicto']['error']!=4) {
 
@@ -111,6 +111,11 @@ if (isset($_GET['viewlafiliere'])) {
                     $folder=IMG_ORIGIN );
             if (!$upload) {
                 exit();
+            }else{
+                // redimension avec proportion
+                uploadDoc::uploadRedim($upload,IMG_MEDIUM,300,300,90);
+                // redimension avec crop dans l'iamge
+                uploadDoc::uploadThumb($upload,30,30);
             }
         }
         //s($updatelafiliere);
@@ -118,7 +123,7 @@ if (isset($_GET['viewlafiliere'])) {
         
 
 
-        //header("Location: ./?viewlafiliere");
+        header("Location: ./?viewlafiliere");
     } else {
 
         echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
