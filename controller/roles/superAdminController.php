@@ -53,7 +53,7 @@ if (isset($_GET['viewlafiliere'])) {
                 // redimension avec proportion
                 uploadDoc::uploadRedim($upload,IMG_MEDIUM,300,300,90);
                 // redimension avec crop dans l'iamge
-                uploadDoc::uploadThumb($upload,30,30);
+                uploadDoc::uploadThumb($upload,IMG_THUMB,50,50,80);
             }
         }
 
@@ -115,7 +115,7 @@ if (isset($_GET['viewlafiliere'])) {
                 // redimension avec proportion
                 uploadDoc::uploadRedim($upload,IMG_MEDIUM,300,300,90);
                 // redimension avec crop dans l'iamge
-                uploadDoc::uploadThumb($upload,30,30);
+                uploadDoc::uploadThumb($upload,IMG_THUMB,50,50,80);
             }
         }
         //s($updatelafiliere);
