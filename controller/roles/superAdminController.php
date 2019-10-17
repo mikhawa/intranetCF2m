@@ -1,11 +1,16 @@
 <?php
 
-// Delete, Update, Insert conditions
+/*
+ * lasession
+ */
+// Delete
 if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmationdeletelasession'])) {
     $lasessionM->sessionDelete($_GET['confirmationdeletelasession']);
+// Update
 } else if (isset($_POST['idlasession']) && ctype_digit($_POST['idlasession']) && isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
     $lasession = new lasession($_POST);
     $lasessionM->sessionUpdate($lasession);
+// INSERT
 } else if (isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
     $lasession = new lasession($_POST);
     $lasessionM->sessionCreate($lasession);
@@ -46,9 +51,9 @@ if (isset($_GET['viewlafiliere'])) {
                 // chemin de l'image
 
                 // redimension avec proportion
-                uploadDoc::uploadRedim($upload,500,400);
+                uploadDoc::uploadRedim($upload,IMG_MEDIUM,300,300,90);
                 // redimension avec crop dans l'iamge
-                uploadDoc::uploadThumb($upload,30,30);
+                uploadDoc::uploadThumb($upload,IMG_THUMB,50,50,80);
             }
         }
 
@@ -58,7 +63,7 @@ if (isset($_GET['viewlafiliere'])) {
 
 
         //d($newfiliere,$_POST,$_FILES);
-        header("Location: ./?viewlafiliere");
+       header("Location: ./?viewlafiliere");
     } else {
 
         echo $twig->render('lafiliere/lafiliere_ajouter.html.twig');
@@ -83,7 +88,7 @@ if (isset($_GET['viewlafiliere'])) {
     }
 
 // update a filiere    
-} else if (isset($_GET["updatelafiliere"]) && ctype_digit($_GET["updatelafiliere"])) {
+} elseif (isset($_GET["updatelafiliere"]) && ctype_digit($_GET["updatelafiliere"])) {
 
     // submit updating filiere
     if (isset($_POST['idlafiliere'])) {
@@ -102,32 +107,21 @@ if (isset($_GET['viewlafiliere'])) {
             $_FILES['lepicto']['name'] = $nouveauNom;
 
             // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
-            $upload = uploadDoc::uploadFichier($_FILES['lepicto']);
+            $upload = uploadDoc::uploadFichier($_FILES['lepicto'],['.png', '.gif', '.jpg', '.jpeg'], // on souhaite que des images
+                    $folder=IMG_ORIGIN );
             if (!$upload) {
                 exit();
+            }else{
+                // redimension avec proportion
+                uploadDoc::uploadRedim($upload,IMG_MEDIUM,300,300,90);
+                // redimension avec crop dans l'iamge
+                uploadDoc::uploadThumb($upload,IMG_THUMB,50,50,80);
             }
         }
         //s($updatelafiliere);
         $lafiliereM->filiereUpdate($updatelafiliere, $_GET["updatelafiliere"]);
         
-        //verification et modif du FILES dans update
-        if (!empty($_FILES)) {
 
-            $nouveauNom = uploadDoc::renameDoc($_FILES['lepicto']['name']);
-            // changement du nom pour l'insertion dans la db
-            $newfiliere->setLepicto($nouveauNom);
-
-            // changement du nom pour l'upload de fichier
-            $_FILES['lepicto']['name'] = $nouveauNom;
-
-            // Appel de la classe statique updloadDoc dans laquelle on va chercher la méthode statique uploadFichier avec ::
-            $upload = uploadDoc::uploadFichier($_FILES['lepicto']);
-            if (!$upload) {
-                exit();
-            }
-
-            $lafiliereM->filiereUpdate($updatelafiliere, $_GET["updatelafiliere"]);
-        }
 
         header("Location: ./?viewlafiliere");
     } else {
@@ -168,5 +162,5 @@ if (isset($_GET['viewlafiliere'])) {
 
 }else{
 
-    echo $twig->render('roles/admin/admin_homepage.html.twig');
+    echo $twig->render('roles/admin/admin_homepage.html.twig', ['session' => $_SESSION]);
 }
