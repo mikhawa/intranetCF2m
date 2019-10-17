@@ -144,12 +144,26 @@ if (isset($_GET['viewlafiliere'])) {
 
 } elseif(isset($_GET['viewlerole'])) {
 
+    $limitParPage = (isset($_GET['pg']))?(int)$_GET['pg']:1;
+
+     $leroleM->selectRoleWithLimit($limitParPage);
+    
+
+    $pageactu = (isset ($_GET['pg']))?(int)$_GET['pg']:1;
+
+     $affichePagination = pagination::pagine(4,1,$pageactu,"viewlerole&pg");
+      
+      echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectRoleCountById(), "pagination"=>$affichePagination]);
 
 
 
-    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectAllLerole()]);
+      
+      
 
-} elseif(isset($_GET['role'])){
+} elseif(isset($_GET[''])){
+
+    
+
 
 
 
