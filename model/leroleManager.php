@@ -137,23 +137,32 @@ class leroleManager
 			  
 
          $sqlQuery = $this->db->query($sql);
-         
+
+
+         $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+         return (int) $recup['nb'];
+
 
          $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
          return (int) $recup['nb'];
 
 	}
 
-    public function selectRoleWithLimit(int $lapage, int $nbParPage ): array{
 
+    public function selectRoleWithLimit(int $page,int $nbParPage): array{
+
+
+	    $premsLIMIT = ($page-1)*$nbParPage;
 		$sql = "
 		SELECT
 			*
 		FROM
 			lerole
-		LIMIT  3
+		LIMIT  ?, ?
 		";
 		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+		$sqlQuery->bindValue(2,$nbParPage,PDO::PARAM_INT);
 		$sqlQuery->execute();
 		
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
