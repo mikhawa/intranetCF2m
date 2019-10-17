@@ -24,9 +24,9 @@ if (isset($_GET['viewlafiliere'])) {
 
     $nbFiliere = $lafiliereM->selectFiliereCountById();
 
-    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,1);
+    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,3);
 
-    $PaginationFiliere = pagination::pagine($nbFiliere,1,$paginFiliere,"viewlafiliere&pgFiliere");
+    $PaginationFiliere = pagination::pagine($nbFiliere,3,$paginFiliere,"viewlafiliere&pgFiliere");
 
     echo $twig->render('lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere"=>$PaginationFiliere]);
 
