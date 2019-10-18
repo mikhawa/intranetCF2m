@@ -1,0 +1,54 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+
+{% block title %}{{ parent() }} | Accueil linscription{% endblock %}
+
+
+{% block menuhaut %}
+
+{% endblock %}
+
+{% block centre %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+
+                <p class="lead">Gestion de linscription</p>
+
+            </div>
+            <div <div class="col-lg-12 text-center">
+            <h4><a href="?insertlafiliere">Ajouter une filiere</a></h4> 
+
+            </div>
+            <br>
+            <div class="col-lg-12 text-left">
+                {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
+
+                {% for item in detailfiliere %}
+                    <div class="section col-lg-12">
+                    <h4 class="mt-3">{{ item.lenom }}
+                    <div class="content-menu">
+                        <a href="?updatelafiliere={{ item.idlafiliere }}" class="modified">modifier</a>  
+                        <a class="delete" href="?deletelafiliere={{ item.idlafiliere }}">supprimer</a>
+                    </div>
+                    </h4>  
+                    <p>Acronyme : {{ item.lacronyme }}</p>
+                    </div>
+
+                {% else %}
+                <h4 class="mt-3">Pas encore de filière sur notre page accueil</h4>
+
+                {% endfor %}
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}

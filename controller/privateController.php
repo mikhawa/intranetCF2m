@@ -1,33 +1,22 @@
 <?php
-
-
 // load lutilisateur manager
 $lutilisateurM=new lutilisateurManager($db_connect);
-
 // load lutilisateur inscription
 $linscriptionM=new linscriptionManager($db_connect);
-
 // load lutilisateur role
 $leroleM=new leroleManager($db_connect);
-
 // load lutilisateur droit
 $ledroitM=new ledroitManager($db_connect);
-
 // load lutilisateur session
 $lasessionM=new lasessionManager($db_connect);
-
 // load lutilisateur filiere
 $lafiliereM=new lafiliereManager($db_connect);
-
 // load lutilisateur conge
 $lecongeM=new lecongeManager($db_connect);
-
 // deconnection
 if(isset($_GET['deconnect'])){
 	$lutilisateurM->disconnectLutilisateur();
-
 }
-
 // switch suivant l'id des rôles (pour le moment, un rôle, un controleur)
 switch ($_SESSION['idlerole']) {
     case "1":

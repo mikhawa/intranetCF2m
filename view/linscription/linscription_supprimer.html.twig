@@ -1,0 +1,35 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ parent() }} | Suppression de linscription : {{ linscription.idlinscription  }} {% endblock %}
+
+{% block menuhaut %}
+{% include "admin/hautEtMenu.html.twig" %}
+{% endblock %}
+
+{% block milieu %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Suppression de linscription : {{ linscription.idlinscription }}</h1>
+                <p class="lead">Voulez-vous vraiment supprimer linscription?</p>
+            </div>
+
+            <div class="col-lg-10 text-left">
+                {# Affichage du formulaire #}
+                <h1>Confirmez la suppression de l'inscription {{id}}</h1>
+                 <div><a type="button" href="?deletelinscription={{ id }}&ok" class="btn btn-primary">Supprimer</a> 
+                 <a type="button" href="?admin" class="btn btn-secondary">Annuler</a> </div>
+                
+                <h3>{{ error }}</h3>
+                
+               </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}
+
