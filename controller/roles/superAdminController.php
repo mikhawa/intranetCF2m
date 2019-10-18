@@ -162,23 +162,53 @@ if (isset($_GET['viewlafiliere'])) {
 
 
     // on va récupérer les rôles de la page actuelle
-    $articlesPageActu = $leroleM->selectRoleWithLimit($pageactu,1);
+    $articlesPageActu = $leroleM->selectRoleWithLimit($pageactu,2);
 
 
     // création de la pagination
-    $affichePagination = pagination::pagine($nbRoles,1,$pageactu,"viewlerole&pg");
+    $affichePagination = pagination::pagine($nbRoles,2,$pageactu,"viewlerole&pg");
 
       
       echo $twig->render('lerole/lerole_afficherliste.html.twig', [ "detailrole"=>$articlesPageActu,"pagination"=>$affichePagination]);
 
 
-
+ 
       
-      
+//insert un nouveau rôle
+} elseif(isset($_GET['insertLeRole'])){
 
-} elseif(isset($_GET[''])){
+    if(!empty($_POST)){
 
+        $newLeRole = new lerole($_POST);
+
+
+        echo $twig->render('lerole/lerole_ajouter.html.twig',['lintitule'=>$leroleM->insertLerole($newLeRole)]);
+
+      header('Location: ./?viewlerole');
+        }
+          
     
+    else{
+
+        echo $twig->render('lerole/lerole_ajouter.html.twig');
+    
+
+    }
+
+//update un rôlr
+    
+}elseif(isset($_GET['update']) && ctype_digit($_GET['update'])){
+
+    if(!empty($_POST['updateLeRole'])){
+
+        $updateLeRole = new lerole($_POST);
+
+        echo $twig->render('lerole/lerole_modifier.html.twig',['lintitule'=>$leroleM->updateLerole($updateLeRole)]);
+
+
+    }
+
+
 
 
 
