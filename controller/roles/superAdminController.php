@@ -1,8 +1,11 @@
 <?php
+
 /*
  * lasession
  */
-// Delete
+
+// Delete, Update, Insert conditions for sessions
+
 if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmationdeletelasession'])) {
     $lasessionM->sessionDelete($_GET['confirmationdeletelasession']);
 // Update
@@ -14,6 +17,13 @@ if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmati
     $lasession = new lasession($_POST);
     $lasessionM->sessionCreate($lasession);
 }
+
+// Insert conditions for inscriptions
+if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurIdutilisateur']) && ctype_digit($_POST['utilisateurIdutilisateur']) && isset($_POST['lasessionIdsession']) && ctype_digit($_POST['lasessionIdsession'])) {
+    $linscription = new linscription($_POST);
+    $linscriptionM->linscriptionCreate($linscription);
+}
+
 // view all filieres
 if (isset($_GET['viewlafiliere'])) {
     $paginFiliere = (isset($_GET['pgFiliere'])?(int)$_GET['pgFiliere']:1);
@@ -21,10 +31,14 @@ if (isset($_GET['viewlafiliere'])) {
     $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,5);
     $PaginationFiliere = pagination::pagine($nbFiliere,5,$paginFiliere,"viewlafiliere&pgFiliere");
     echo $twig->render('lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere"=>$PaginationFiliere]);
+
+
+
 // insert a filiere    
 } elseif (isset($_GET['insertlafiliere'])) {
     if (isset($_POST['lenom'])) {
         $newfiliere = new lafiliere($_POST);
+
         //s($newfiliere,$_FILES);
         
         // si on attache une nouvelle images
@@ -52,6 +66,7 @@ if (isset($_GET['viewlafiliere'])) {
         }
         // insertion dans la db
         $lafiliereM->filiereCreate($newfiliere);
+
         //d($newfiliere,$_POST,$_FILES);
        header("Location: ./?viewlafiliere");
     } else {
@@ -68,6 +83,7 @@ if (isset($_GET['viewlafiliere'])) {
         echo $twig->render('lafiliere/lafiliere_delete.html.twig', ['id' => $idlafiliere]);
     }
 // update a filiere    
+
 } elseif (isset($_GET["updatelafiliere"]) && ctype_digit($_GET["updatelafiliere"])) {
     // submit updating filiere
     if (isset($_POST['idlafiliere'])) {
@@ -164,9 +180,12 @@ elseif(isset($_GET['viewlerole']))
     
 }elseif(isset($_GET['updateLeRole']) && ctype_digit($_GET['updateLeRole'])){
 
+
     if(isset($_POST['idlerole'])){
 
         $updateLeRole = new lerole($_POST);
+
+
 
         $leroleM->updateLerole($updateLeRole);
 
@@ -176,11 +195,27 @@ elseif(isset($_GET['viewlerole']))
         echo $twig->render('lerole/lerole_modifier.html.twig',['section'=>$leroleM->roleSelectById($_GET['updateLeRole'])]);
     }
 
-        
+}elseif (isset($_GET["viewlinscription"])) {
+    echo $twig->render("linscription/linscription_afficherliste.html.twig", ['linscription' => $linscriptionM->linscriptionSelectAll()]);
 
+}elseif (isset($_GET["ajouterlinscription"])) {
+    echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
+}elseif (isset($_GET["modifierlinscription"])) {
+    echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
+
+// Display views for sessions
+} elseif (isset($_GET['viewlasession'])) {
+    echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
+
+} elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {
+    echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
+
+} elseif (isset($_GET['insertlasession'])) {
+    echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
 
           
 }else{
+
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
     if(!isset($_SESSION['bandeau'])){
         $pourEntree = true;
