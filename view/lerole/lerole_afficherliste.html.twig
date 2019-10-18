@@ -8,7 +8,7 @@
 
 {% endblock %}
 
-{% block milieu %}
+{% block centre %}
     <!-- Page Content -->
 <main role="main" class="container">
         <div class="row">
@@ -18,13 +18,14 @@
                
             </div>
             <div <div class="col-lg-12 text-center">
-            <h4><a href="?insert={{addrole.idlerole}}">Ajouter un rôle</a></h4> 
+            <h4><a href="?insertLeRole">Ajouter un rôle</a></h4> 
             </div>
             <br>
             <div class="col-lg-6 text-left">
+                {{ pagination|raw }}
                 {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
                 {% for item in detailrole %}
-                    <h4 class="mt-3">{{ item.lintitule }} | <a href="?update={{ item.idlerole }}">modifier</a> | <a href="?delete={{ item.idlerole }}">supprimer</a></h4>
+                    <h4 class="mt-3">{{ item.lintitule }} | <a href="?updateLeRole={{ item.idlerole }}">modifier</a> | <a href="?deleteLeRole={{ item.idlerole }}">supprimer</a></h4>
                     <p>{{ item.ladescription }}</p>
                     <h6>Stagiaires:</h6>
                     {# création de 2 variables pour éclater (avec split) le nom et prénom des stagiaires #}
