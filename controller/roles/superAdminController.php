@@ -127,11 +127,11 @@ elseif(isset($_GET['viewlerole']))
     // nombre de rôles totaux à afficher
     $nbRoles = $leroleM->selectRoleCountById();
     // on va récupérer les rôles de la page actuelle
-    $articlesPageActu = $leroleM->selectRoleWithLimit($pageactu,2);
+    $articlesPageActu = $leroleM->selectRoleWithLimit($pageactu,5);
 
 
     // création de la pagination
-    $affichePagination = pagination::pagine($nbRoles,2,$pageactu,"viewlerole&pg");
+    $affichePagination = pagination::pagine($nbRoles,5,$pageactu,"viewlerole&pg");
 
       
       echo $twig->render('lerole/lerole_afficherliste.html.twig', [ "detailrole"=>$articlesPageActu,"pagination"=>$affichePagination]);
