@@ -4,11 +4,12 @@
 
 {% block centre %}
  <!-- content admin -->
+{% if entree %}
     <div id="fade" class="alert-connected">
         <span class="closebtn" onclick="this.partelement.style.display="none";">&times;</span>
         Bienvenue:<b>{{ " " }}{{ session.leprenom }}{{ " " }}{{ session.lenom }}</b> Vous êtes connecté en tant que <b>" {{ " " }}{{ session.lintitule }} "</b>
     </div>
-
+    {% endif %}
     <div id="content-admin" class="col-lg-10">
         <!-- content titre page -->
         <div class="row page-title">

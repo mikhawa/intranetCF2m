@@ -55,18 +55,25 @@ class leroleManager
 		$sqlQuery->execute();
 	}
 	
-	public function insertLerole(array $datas): void {
+	public function insertLerole(lerole $datas) {
 		$sql = "
 		INSERT INTO lerole(lintitule, ladescription)
-		VALUES
-			(";
-		foreach($datas as $data) {
-			$sql .= (gettype($data) == "string" ? "'" . $data . "'" : $data) . ", ";
-		}
-		$sql = substr($sql, 0, -2);
-		$sql .= ");";
+		VALUES (?,?);";
+
+
 		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->execute();
+
+		$sqlQuery->bindValue(1, $datas->getLintitule(), PDO::PARAM_STR);
+		$sqlQuery->bindValue(2, $datas->getLadescription(), PDO::PARAM_STR);
+		
+		try {
+            $sqlQuery->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getCode();
+            return false;
+        }
+		
 	}
 
 	public function deleteLerole(int $id): void {
@@ -128,6 +135,48 @@ class leroleManager
 		
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	
+	public function selectRoleCountById(): int {
+
+		$sql="SELECT COUNT(idlerole) AS nb
+			  FROM lerole";
+			  
+
+         $sqlQuery = $this->db->query($sql);
+
+
+         $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+         return (int) $recup['nb'];
+
+
+         $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
+         return (int) $recup['nb'];
+
+	}
+
+
+    public function selectRoleWithLimit(int $page,int $nbParPage): array{
+
+
+	    $premsLIMIT = ($page-1)*$nbParPage;
+		$sql = "
+		SELECT
+			*
+		FROM
+			lerole
+		LIMIT  ?, ?
+		";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+		$sqlQuery->bindValue(2,$nbParPage,PDO::PARAM_INT);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+	}
+
 
 
 	
