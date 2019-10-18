@@ -208,5 +208,13 @@ elseif(isset($_GET['viewlerole']))
 
 }else{
 
-    echo $twig->render('roles/admin/admin_homepage.html.twig', ['session' => $_SESSION]);
+    // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
+    if(!isset($_SESSION['bandeau'])){
+        $pourEntree = true;
+        $_SESSION['bandeau']=true;
+    }else{
+        $pourEntree = false;
+    }
+
+    echo $twig->render('roles/admin/admin_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]);
 }
