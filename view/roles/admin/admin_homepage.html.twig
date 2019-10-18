@@ -4,9 +4,9 @@
 
 {% block centre %}
  <!-- content admin -->
-    <div id="fade" class="alert-connected">
+        <div id="fade" class="alert-connected">
         <span class="closebtn" onclick="this.partelement.style.display="none";">&times;</span>
-        Bienvenue:<b>{{ " " }}{{ session.leprenom }}{{ " " }}{{ session.lenom }}</b> Vous êtes connecté en tant que <b>" {{ " " }}{{ session.lintitule }} "</b>
+        Bienvenue:<b>{{ " " }}{{ session.leprenom }}{{ " " }}{{ session.lenom }}</b> Vous êtes connecté en tant que <b>" {{ " " }}{{ session.lintitule }} " {{coucou}}</b>
     </div>
 
     <div id="content-admin" class="col-lg-10">
