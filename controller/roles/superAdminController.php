@@ -211,20 +211,28 @@ if (isset($_GET['viewlafiliere'])) {
         echo $twig->render('lerole/lerole_modifier.html.twig',['section'=>$leroleM->roleSelectById($_GET['updateLeRole'])]);
     }
 
+//delete le role
+
+}elseif(isset($_GET['deleteLeRole']) && ctype_digit($_GET['deleteLeRole'])){
+
+    $idDeleteRole = (int)$_GET['deleteLeRole'];
+
+    if(isset($_GET['ok'])){
+
+        $leroleM->deleteLerole($idDeleteRole);
+
+        header("Location: ./?viewlerole");
+
+
+
+}else{
+
+    echo $twig->render('lerole/lerole_delete.html.twig',['id'=>$idDeleteRole]);
+    }
+
+
+
         
-
-
-
-
-
-
-
-
-          
-
-
-
-
 }else{
 
     echo $twig->render('roles/admin/admin_homepage.html.twig', ['session' => $_SESSION]);
