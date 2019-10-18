@@ -2,23 +2,25 @@
 {% extends "template.html.twig" %}
 
 {# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
-{% block title %}{{ parent() }} | Accueil filiere{% endblock %}
-
-{% block menuhaut %}
-
+{% block title %}
+    {{ parent() }}
+    | Accueil filiere
 {% endblock %}
+
+{% block menuhaut %}{% endblock %}
 
 {% block centre %}
     <!-- Page Content -->
-<main role="main" class="container">
+    <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Gestion des filières</p>
 
             </div>
-            <div <div class="col-lg-12 text-center">
-            <h4><a href="?insertlafiliere">Ajouter une filiere</a></h4> 
+            <div class- class="col-lg-12 text-center">
+                    <a class="btn-ajout" href="?insertlafiliere">
+                    <img src="../img/user.png" style="width:25px;"/>Ajouter une filiere</a>
             </div>
             <br>
             <div class="col-lg-12 text-left">
@@ -26,39 +28,31 @@
                 {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
                 {% for item in detailfiliere %}
                     <div class="section col-lg-12">
-                    <h4 class="mt-3">{{ item.lenom }}
-                    <div class="content-menu">
-                        <a href="?updatelafiliere={{ item.idlafiliere }}" class="modified">modifier |</a>  
-                        <a class="delete" href="?deletelafiliere={{ item.idlafiliere }}">supprimer</a>
-                    </div>
-                    </h4>  
-                    <p>Acronyme : {{ item.lacronyme }}</p>
-                    
-                     <div>
-<p>couleur de filiere:<div style="width: 80px; background-color :{{ item.lacouleur }}; border-radius:30px; text-align:center ">✔️</p>
-</p>
+                        <h4 class="mt-12">
+                        <p class="title-picto">
+                        <a href="img/upload/medium/{{item.lepicto}}" target="_blank"><img src="img/upload/thumb/{{item.lepicto}}" /></a>
+                        {{ item.lenom }}
+                        </p>
+                            <div class="content-menu">
+                                <a href="?updatelafiliere={{ item.idlafiliere }}" class="modified">modifier</a>
+                                <a class="delete" href="?deletelafiliere={{ item.idlafiliere }}">supprimer</a>
+                            </div>
+                        </h4>
+                        <p>Acronyme :
+                            {{ item.lacronyme }}</p>
 
-
-
-    </div>
-</P>
-
-                    <p>fichier: <a href="img/upload/medium/{{item.lepicto}}" target="_blank"><img src="img/upload/thumb/{{item.lepicto}}" /></a></p>
-                    </div>
-                    </div>
-
-
-                {% else %}
-                <h4 class="mt-3">Pas encore de filière sur notre page accueil</h4>
-                {% endfor %}{{paginationFiliere|raw}}
+                        <div>
+                            <p>couleur de filiere:<div style="width: 80px; background-color :{{ item.lacouleur }}; border-radius:30px; text-align:center ">✔️</p>
+                            </p>
+                        </div>
+                    </P>
+                </div>
             </div>
-        </div>
-</main>
 
 
-
-{% endblock %}
-
-{% block bas %}
-{% include "footer.html.twig" %}
-{% endblock %}
+        {% else %}
+            <h4 class="mt-3">Pas encore de filière sur notre page accueil</h4>
+        {% endfor %}
+        {{paginationFiliere|raw}}
+    </div>
+</div></main>{% endblock %}{% block bas %}{% include "footer.html.twig" %}{% endblock %}
