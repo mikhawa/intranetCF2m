@@ -160,18 +160,23 @@ elseif(isset($_GET['viewlerole']))
 
     }
 
-//update un rôlr
+//update un rôle
     
-}elseif(isset($_GET['update']) && ctype_digit($_GET['update'])){
+}elseif(isset($_GET['updateLeRole']) && ctype_digit($_GET['updateLeRole'])){
 
-    if(!empty($_POST['updateLeRole'])){
+    if(isset($_POST['idlerole'])){
 
         $updateLeRole = new lerole($_POST);
 
-        echo $twig->render('lerole/lerole_modifier.html.twig',['lintitule'=>$leroleM->updateLerole($updateLeRole)]);
+        $leroleM->updateLerole($updateLeRole);
 
+        header("Location: ./?viewlerole");
+    }else{
 
+        echo $twig->render('lerole/lerole_modifier.html.twig',['section'=>$leroleM->roleSelectById($_GET['updateLeRole'])]);
     }
+
+        
 
 
           

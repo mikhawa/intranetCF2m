@@ -36,23 +36,30 @@ class leroleManager
 		return $sqlQuery->fetch(PDO::FETCH_ASSOC);
 	}
 	
-	public function updateLerole(int $id, array $datas) {
-		$updateDatas = "";
-		foreach($datas as $dataField => $data) {
-			$updateDatas .= $dataField . " = '" . $data . "', ";
-		}
-		$updateDatas = substr($updateDatas, 0, -2);
-	
-		$sql = "
-		UPDATE
-			lerole
-		SET
-			" . $updateDatas . "
-		WHERE
-			idlerole = :id;";
-		$sqlQuery = $this->db->prepare($sql);
-		$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
-		$sqlQuery->execute();
+	public function updateLerole(lerole $lerole) {
+		if ( empty($lerole->getIdlerole()) || empty($lerole->getLintitule()) || empty($lerole->getLadescription()) ) {
+            return false;
+    	}
+
+         $sql ="UPDATE lerole SET Lintitule=?, Ladescription=? WHERE idlerole=?";
+
+
+        $update = $this->db->prepare($sql);
+        $update->bindValue(1, $lerole->getLintitule(), PDO::PARAM_STR);
+        $update->bindValue(2, $lerole->getLadescription(), PDO::PARAM_STR);
+		$update->bindValue(3, $lerole->getIdlerole(), PDO::PARAM_INT);
+
+        try{
+
+            $update->execute();
+            return true;
+
+        } catch(PDOException $e){
+
+            echo '<h2 style="color: red;">ERROR: ' . $a->getMessage() . '</h2>';
+            return false;
+
+        }
 	}
 	
 	public function insertLerole(lerole $datas) {
@@ -176,6 +183,26 @@ class leroleManager
 
 
 	}
+
+
+
+	public function roleSelectById(int $idlerole): array {
+        if (empty($idlerole)) {
+            return[];
+        }
+
+        $sql = "SELECT * FROM lerole WHERE idlerole = ? ;";
+        $recup = $this->db->prepare($sql);
+
+        $recup->bindValue(1, $idlerole, PDO::PARAM_INT);
+
+        $recup->execute();
+
+        if ($recup->rowCount() === 0) {
+            return [];
+        }
+        return $recup->fetch(PDO::FETCH_ASSOC);
+    }
 
 
 
