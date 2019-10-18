@@ -153,8 +153,7 @@ elseif(isset($_GET['viewlerole']))
       echo $twig->render('lerole/lerole_afficherliste.html.twig', [ "detailrole"=>$articlesPageActu,"pagination"=>$affichePagination]);
 
 
-<<<<<<< HEAD
-// Display views for sessions
+// Display views for conges
 }
 elseif (isset($_GET['viewleconge']))
 {
@@ -177,9 +176,7 @@ elseif (isset($_GET['insertleconge']))
 {
     echo $twig->render("leconge/leconge_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
       
-=======
- 
->>>>>>> d66a28aaffd8c3c0eae28e178bef97ce4e3d8eaa
+	  
       
 //insert un nouveau rôle
 } elseif(isset($_GET['insertLeRole'])){
