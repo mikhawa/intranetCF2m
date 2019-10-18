@@ -31,9 +31,19 @@
                         <input name="lacronyme" type="text" class="form-control"
                                placeholder="acronyme" value="{{ section.lacronyme }}" required></input><br>
                     </div>
+
                     <input type="hidden" name="idlafiliere" value="{{ section.idlafiliere }}">
+<<<<<<< HEAD
+                    
+                    <div class="mx-auto" style="width: 200px;">
+
+
+
+=======
+>>>>>>> 86a18ea287f3814f890187cf9161c9052641e022
 
                     <div class="mx-auto" style="width: 200px;">
+
 
                         <label for="color">Choix du couleur</label>
                         <input name="lacouleur" type="color" class="form-control" placeholder="La couleur"value="{{ section.lacouleur }}" required><br>
@@ -41,7 +51,7 @@
                     <div class="col-lg-6 text-left">
 
                         <label for="image">Le pictogramme</label>
-                        <input name="lepicto" type="file" class="form-control-file" placeholder="le picto"> Actuellement : {% if (section.lepicto) %} {{ section.lepicto }} <input type="hidden" name="lepicto" value="{{ section.lepicto }}"> {% else %} Vide
+                        <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" enctype="multipart/form-data"> Actuellement : {% if (section.lepicto) %} {{ section.lepicto }} <input type="hidden" name="lepicto" value="{{ section.lepicto }}"> {% else %} Vide
                         {% endif %}<br>
 
                             <button type="submit" class="btn btn-primary">Envoyer</button>

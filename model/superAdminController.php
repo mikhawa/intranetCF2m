@@ -1,6 +1,6 @@
 <?php
 
-// Delete, Update, Insert conditions for sessions
+// Delete, Update, Insert conditions
 if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmationdeletelasession'])) {
     $lasessionM->sessionDelete($_GET['confirmationdeletelasession']);
 } else if (isset($_POST['idlasession']) && ctype_digit($_POST['idlasession']) && isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
@@ -9,12 +9,6 @@ if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmati
 } else if (isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
     $lasession = new lasession($_POST);
     $lasessionM->sessionCreate($lasession);
-}
-
-// Insert conditions for inscriptions
-if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurIdutilisateur']) && ctype_digit($_POST['utilisateurIdutilisateur']) && isset($_POST['lasessionIdsession']) && ctype_digit($_POST['lasessionIdsession'])) {
-    $linscription = new linscription($_POST);
-    $linscriptionM->linscriptionCreate($linscription);
 }
 
 // view all filieres
@@ -142,40 +136,28 @@ if (isset($_GET['viewlafiliere'])) {
     }
 
 
-}elseif (isset($_GET["viewlinscription"])) {
-    echo $twig->render("linscription/linscription_afficherliste.html.twig", ['linscription' => $linscriptionM->linscriptionSelectAll()]);
-
-}elseif (isset($_GET["ajouterlinscription"])) {
-    echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
 
 
-}elseif (isset($_GET["modifierlinscription"])) {
-    echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
+
 
 // Display views for sessions
 } elseif (isset($_GET['viewlasession'])) {
     echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
-
 } elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {
     echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
-
 } elseif (isset($_GET['insertlasession'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
-
 } elseif(isset($_GET['viewlerole'])) {
-    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrole' => $leroleM->selectAllLerole()]);
+    echo $twig->render('lerole/lerole_afficherliste.html.twig', ['detailrôle' => $leroleM->selectAllLerole()]);
 
-} elseif(isset($_GET['role'])){
+} elseif(isset($_GET['suite1'])){
 
-       if(isset($_GET['update'])){
-          
-        echo $twig->render('lerole/lerole_page2.html.twig',['detailrole'=> $leroleM->selectAllLerolePage2()]);
+    if(isset($_GET['insert'])){
 
-       }else{
-           header ('Location: ./');
-       }
+        echo $twig->render('lerole/lerole_page2.html.twig', ['page2'=> $leroleM->selectAllLerole()]);
+    
 
 }else{
-
     echo $twig->render('roles/admin/admin_homepage.html.twig');
+   }
 }

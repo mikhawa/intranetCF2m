@@ -19,6 +19,7 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="" enctype="multipart/form-data" method="post" name="createFiliere">
+
                     <div class="form-group">
                         <label for ="rajoutfillier">Non de la fillier</label>
                         <input name="lenom" maxlength="45" type="text" class="form-control" placeholder="Titre de la filiere" required><br></input>
@@ -33,7 +34,7 @@
                         <div class="col-lg-6 text-left">
 
                             <label for="image">Le pictogramme</label>
-                            <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" ><br>
+                            <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" enctype="multipart/form-data" ><br>
                             <button type="submit" class="btn btn-primary">Envoyer</button>
 
 
@@ -47,3 +48,4 @@
                 {% block bas %}
                     {% include "footer.html.twig" %}
                 {% endblock %}
+

@@ -13,31 +13,35 @@
             <div class="col-lg-12 text-center">
                 <h1 class="mt-5">Insertion d'une nouvelle inscription</h1>
                 <p class="lead">Veuillez remplir tous les champs</p>
-            </div>
+        </div>
             <div class="col-lg-10 text-left">
-
+                
+                       
                 <form action="./?viewlinscription" method="post">
-                   <label for="letype">Faites votre choix&nbsp</label>
-					<select id="letype" name="letype" required>
-						<option value="1" {{ detailinscription.letype == 1 ? "selected" }}></option>
-						<option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}></option>
+                       <label for="debut">Début de session&nbsp</label>
+                            <input id="debut" name="debut" type="date" max="2100-12-12" required><br><br>
+					    <label for="fin">Fin de session&nbsp</label>
+                            <input id="fin" name="fin" type="date" max="2100-12-12" required><br><br>
+
+                        <label for="lutilisateur">Entrez un utilisateur&nbsp</label>
+                        
+					<select id="lutilisateur" name="utilisateurIdutilisateur" required>
+					{% for user in detailUsers %}
+						<option value="{{ user.idlutilisateur }}">{{ user.lenom }}</option>
+					{% endfor %}
 					</select><br><br>
 
-                    <label for="letype">Choisissez une session&nbsp</label>
-					<select id="letype" name="letype" required>
-						<option value="1" {{ detailinscription.letype == 1 ? "selected" }}>Technicien(ne support pc et réseaux)</option>
-						<option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Développeur web</option>
-                        <option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Infographiste PAO</option>
-                        <option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Animateur Multimédia</option>
-                        <option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Aide comptable</option>
-                        <option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Atouts jeunes</option>
-                        <option value="2" {{ detailinscriptiop.letype == 2 ? "selected" }}>Orientation métiers T.I.C.</option>
+                      <label for="lasession">Choisissez une session&nbsp</label>
+					<select id="lasession" name="lasessionIdsession" required>
+					{% for lasession in detailSession %}
+						<option value="{{ lasession.idlasession }}">{{ lasession.lenom }}</option>
+					{% endfor %}
 					</select><br><br>
-                    
-                    
-                    <button type="submit" class="btn btn-primary">Inscription</button>
+
+
+                    <input onclick="if( $('#debut').val() > $('#fin').val() ) {alert('woops'); }" type="submit" value="Inscription">
+
                 </form>
-
             </div>
         </div>
         
