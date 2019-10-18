@@ -110,21 +110,13 @@ class lutilisateurManager {
         $sqlQuery->execute();
         return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
     }
-
-
-
     //create a new user
-
     public function lutilisateurCreate( lutilisateur $user) {
-
         if( empty($user->getIdlutilisateur()) ||empty($user->getLenomutilisateur()) ||empty($user->getLemotdepasse()) ||empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail()) ||empty($user->getLuniqueid())){
           return false;
     }
-
     $sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
-
     $insert = $this->db->prepare($sql);
-
     $insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
     $insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
     $insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
@@ -132,9 +124,7 @@ class lutilisateurManager {
     $insert->bindvalue(5, $user->getLeprenom(),PDO::PARAM_STR);
     $insert->bindvalue(6, $user->getLemail(),PDO::PARAM_STR);
     $insert->bindvalue(7, $user->getLuniqueid(),PDO::PARAM_STR);
-
     //gestion des erreurs avec try catch
-
     try{
         $insert->execute();
         return true;
@@ -142,12 +132,7 @@ class lutilisateurManager {
         echo $e->getCode();
         return false;
     }
-
 }
-
-
-
-
     // methode de deconnexion
     public function disconnectLutilisateur() {
         $_SESSION = array();
@@ -162,4 +147,3 @@ class lutilisateurManager {
         header("Location: ./");
     }
 }
-

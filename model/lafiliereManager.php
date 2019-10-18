@@ -54,6 +54,7 @@ class lafiliereManager {
         
     
     public function filiereUpdate(lafiliere $datas, int $get) {
+
         if (empty($datas->getlenom()) || empty($datas->getlacronyme()) || empty($datas->getidlafiliere()) || empty($datas->getLacouleur())) {
             return false;
         }
