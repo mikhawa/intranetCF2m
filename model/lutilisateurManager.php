@@ -161,5 +161,45 @@ class lutilisateurManager {
         session_destroy();
         header("Location: ./");
     }
+    public function motDePasseOublier(lutilisateur $user){
+
+
+        $sql="UPDATE lutilisateur SET lemotdepasse = ?  WHERE idlutilisateur = ?;";
+        $insert = $this->db->prepare($sql);
+
+        $insert->bindvalue(1, $user->getLemotdepasse(),PDO::PARAM_STR);
+        $insert->bindvalue(2, $user->getIdutilisateur(),PDO::PARAM_STR);
+
+        try{
+            $insert->execute();
+            return true;
+        }catch(PDOException $e){
+            echo $e->getCode();
+            return false;
+        }
+
+    }
+    public function checkMail( string $mail){
+        $sql ="SELECT * FROM lutilisateur WHERE lemail = ? ";
+        $result = $this->db->prepare($sql);
+
+        $result->bindvalue(1, $mail,PDO::PARAM_STR);
+
+        //gestion des erreurs avec try catch
+
+        try{
+            $result->execute();
+            return $result->rowCount()==1 ? true : false;
+
+
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+
+
+    }
+
 }
 
