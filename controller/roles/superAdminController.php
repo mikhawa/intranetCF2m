@@ -144,14 +144,30 @@ if (isset($_GET['viewlafiliere'])) {
 
 
 // Display views for sessions
-} elseif (isset($_GET['viewlasession'])) {
-    echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
-} elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {
-    echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
-} elseif (isset($_GET['insertlasession'])) {
-    echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
+}
+elseif (isset($_GET['viewlasession']))
+{
+	$paginSession = (isset($_GET['pgSession'])?(int)$_GET['pgSession']:1);
 
-} elseif(isset($_GET['viewlerole'])) {
+    $nbSession = $lasessionM->selectSessionCountById();
+
+    $nbPageSession = $lasessionM->selectSessionWithLimit($paginSession,5);
+
+    $PaginationSession = pagination::pagine($nbSession,5,$paginSession,"viewlasession&pgSession");
+	
+	echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $nbPageSession,"pagination"=>$PaginationSession]);
+	
+}
+elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession']))
+{
+    echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
+}
+elseif (isset($_GET['insertlasession']))
+{
+    echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
+}
+elseif(isset($_GET['viewlerole']))
+{
 
     // page actuelle
     $pageactu = (isset ($_GET['pg']))?(int)$_GET['pg']:1;
