@@ -188,7 +188,28 @@ elseif(isset($_GET['viewlerole']))
       echo $twig->render('lerole/lerole_afficherliste.html.twig', [ "detailrole"=>$articlesPageActu,"pagination"=>$affichePagination]);
 
 
+// Display views for sessions
+}
+elseif (isset($_GET['viewleconge']))
+{
+	$paginConge = (isset($_GET['pgConge'])?(int)$_GET['pgConge']:1);
 
+    $nbConge = $lecongeM->selectCongeCountById();
+
+    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,5);
+
+    $PaginationConge = pagination::pagine($nbConge,5,$paginConge,"viewleconge&pgConge");
+	
+	echo $twig->render("leconge/leconge_afficherliste.html.twig", ['detailConge' => $nbPageConge,"pagination"=>$PaginationConge]);
+	
+}
+elseif (isset($_GET['updateleconge']) && ctype_digit($_GET['updateleconge']))
+{
+    echo $twig->render("leconge/leconge_modifier.html.twig", ['detailConge' => $lecongeM->congeSelectByID($_GET['updateleconge']), "filieres" => $lafiliereM->filiereSelectAll()]);
+}
+elseif (isset($_GET['insertleconge']))
+{
+    echo $twig->render("leconge/leconge_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
       
       
 

@@ -199,6 +199,47 @@ class lecongeManager
         }
 
     }
+	
+	public function selectCongeCountById(): int {
+
+	$sql="SELECT COUNT(idleconge) AS nb
+		  FROM leconge";
+		  
+
+	 $sqlQuery = $this->db->query($sql);
+
+
+	 $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+	 return (int) $recup['nb'];
+
+
+	 $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
+	 return (int) $recup['nb'];
+
+}
+
+
+public function selectCongeWithLimit(int $pageConge,int $nbParPageConge): array{
+
+
+	$premsLIMIT = ($pageConge-1)*$nbParPageConge;
+	$sql = "
+	SELECT
+		*
+	FROM
+		leconge
+	ORDER BY debut
+	LIMIT  ?, ?
+	";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+	$sqlQuery->bindValue(2,$nbParPageConge,PDO::PARAM_INT);
+	$sqlQuery->execute();
+	
+	return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+}
 
 
 }
