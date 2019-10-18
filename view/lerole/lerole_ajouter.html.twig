@@ -8,7 +8,7 @@
 
 {% endblock %}
 
-{% block milieu %}
+{% block centre %}
     <!-- Page Content -->
 <main role="main" class="container">
         <div class="row">
@@ -20,7 +20,7 @@
                 {# Affichage du formulaire #}
                 <form action="" method="post" name="createRole">
                     <input name="lintitule" type="text" placeholder="Titre du role" required><br>
-                    <textarea name="lintitule" placeholder="description du role" required></textarea><br>
+                    <textarea name="ladescription" placeholder="description du role" required></textarea><br>
                     <input type="submit" value="Envoyer">
                 </form>
                 <h3>{{ error }}</h3>
