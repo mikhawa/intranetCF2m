@@ -195,6 +195,28 @@ elseif(isset($_GET['viewlerole']))
         echo $twig->render('lerole/lerole_modifier.html.twig',['section'=>$leroleM->roleSelectById($_GET['updateLeRole'])]);
     }
 
+
+//delete le role
+
+}elseif(isset($_GET['deleteLeRole']) && ctype_digit($_GET['deleteLeRole'])){
+
+    $idDeleteRole = (int)$_GET['deleteLeRole'];
+
+    if(isset($_GET['ok'])){
+
+        $leroleM->deleteLerole($idDeleteRole);
+
+        header("Location: ./?viewlerole");
+      
+      
+      }else{
+
+    echo $twig->render('lerole/lerole_delete.html.twig',['id'=>$idDeleteRole]);
+    }
+  
+  
+//inscription
+  
 }elseif (isset($_GET["viewlinscription"])) {
     echo $twig->render("linscription/linscription_afficherliste.html.twig", ['linscription' => $linscriptionM->linscriptionSelectAll()]);
 
@@ -207,13 +229,14 @@ elseif(isset($_GET['viewlerole']))
 } elseif (isset($_GET['viewlasession'])) {
     echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
 
+
 } elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {
     echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
 
 } elseif (isset($_GET['insertlasession'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
 
-          
+
 }else{
 
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
