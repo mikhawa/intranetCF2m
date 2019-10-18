@@ -177,6 +177,7 @@ public function selectSessionWithLimit(int $pageSession,int $nbParPageSession): 
 		*
 	FROM
 		lasession
+	ORDER BY debut
 	LIMIT  ?, ?
 	";
 	$sqlQuery = $this->db->prepare($sql);
