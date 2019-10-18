@@ -1,7 +1,5 @@
 <?php
-
 $utilisateurManager = new lutilisateurManager($db_connect);
-
 if (isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
     $utilisateur = new lutilisateur($_POST);
     if ($utilisateurManager->connectLutilisateur($utilisateur)) {
@@ -61,7 +59,6 @@ if (isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
 
 } else {
 
-// page d'accueil
   if(isset ($_GET['mail'])&& !empty($_GET['mail'])&& !$utilisateurManager->checkMail(urldecode($_GET['mail']))){
     echo '<div id="fade" class="alert-false"><span class="closebtn" onclick="this.partelement.style.display="none";">&times;</span>Ouups ! Ce mail n\'existe pas !</div>';
   }
@@ -69,3 +66,4 @@ if (isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
     echo $twig->render("public/homepage.html.twig",);
 
 }
+

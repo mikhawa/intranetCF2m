@@ -102,7 +102,30 @@ protected function hydrate (array $tablehydrate ){
      */
     public function setLenomutilisateur (string $lenomutilisateur)
     {
-        $this->lenomutilisateur = htmlspecialchars(strip_tags(trim($lenomutilisateur)),ENT_QUOTES);
+		$patterns = [ 
+			'/[ÀÄÂàäâ]/u',
+			'/[ÉÈËÊéèëê]/u',
+			'/[ÏÎïî]/u',
+			'/[ÖÔöô]/u',
+			'/[ÙÜÛùüû]/u',
+			'/[Çç]/u',
+			'/[Ææ]/u',
+			'/[Œœ]/u',
+		];
+		$replacements = [
+			'a',
+			'e',
+			'i',
+			'o',
+			'u',
+			'c',
+			'ae',
+			'oe'
+		];
+		$nomFormatted = preg_replace($patterns, $replacements, strtolower(implode('.', explode(' ', $lenomutilisateur))));
+		if(strlen($nomFormatted) <= 80) {
+			$this->lenomutilisateur = $nomFormatted;
+		}
     }
 
     /**
@@ -124,7 +147,10 @@ protected function hydrate (array $tablehydrate ){
 
     public function setLenom( string $lenom)
     {
-        $this->lenom = htmlspecialchars(strip_tags(trim($lenom)),ENT_QUOTES);
+		if(strlen($lenom) <= 45) {
+			$this->lenom = htmlspecialchars(strip_tags(trim($lenom)),ENT_QUOTES);
+			$this->setLenomutilisateur($this->lenom);
+		}
     }
 
     /**
@@ -140,7 +166,9 @@ protected function hydrate (array $tablehydrate ){
      */
     public function setLemail(string $lemail)
     {
-        $this->lemail =htmlspecialchars(strip_tags(trim($lemail)),ENT_QUOTES);
+		if(strlen($lemail) <= 180) {
+			$this->lemail =htmlspecialchars(strip_tags(trim($lemail)),ENT_QUOTES);
+		}
     }
 
     /**
