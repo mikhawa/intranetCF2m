@@ -54,16 +54,14 @@ class lafiliereManager {
         
     
     public function filiereUpdate(lafiliere $datas, int $get) {
-        if (empty($datas->getlenom()) || empty($datas->getlacronyme()) || empty($datas->getidlafiliere()) || empty($datas->getLacouleur()) || empty($datas->getLepicto())) {
-            return false;
-        }
-        if ($datas->getidlafiliere() != $get) {
+
+        if (empty($datas->getlenom()) || empty($datas->getlacronyme()) || empty($datas->getidlafiliere()) || empty($datas->getLacouleur())) {
             return false;
         }
         $sql = "UPDATE lafiliere SET lenom=?, lacronyme=?, lacouleur=?, lepicto=? WHERE idlafiliere=?;";
         $update = $this->db->prepare($sql);
-        $update->bindValue(1, $datas->getlenom(), PDO::PARAM_STR);
-        $update->bindValue(2, $datas->getlacronyme(), PDO::PARAM_STR);
+        $update->bindValue(1, $datas->getLenom(), PDO::PARAM_STR);
+        $update->bindValue(2, $datas->getLacronyme(), PDO::PARAM_STR);
         $update->bindValue(3, $datas->getLacouleur(), PDO::PARAM_STR);
         $update->bindValue(4, $datas->getLepicto(), PDO::PARAM_STR);
         $update->bindValue(5, $datas->getIdlafiliere(), PDO::PARAM_INT);

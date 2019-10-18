@@ -34,20 +34,19 @@ class linscriptionManager
 
     // vérification que les champs soient valides (pas vides)
 
-    if(empty($datas->getIdlinscription())||empty($datas->getDebut()||empty($datas->getFin()||empty($datas->getUtilisateurIdutilisateur()||empty($datas->getLasessionIdsession()))))){
+    if(empty($datas->getDebut()||empty($datas->getFin()||empty($datas->getUtilisateurIdutilisateur()||empty($datas->getLasessionIdsession()))))){
         return false;
     }
 
-    $sql = "INSERT INTO linscription (idlinscription, debut, fin, utilisateur_idutilisateur,lasession_idsession) VALUES(?,?,?,?,?);";
+    $sql = "INSERT INTO linscription (debut, fin, utilisateur_idutilisateur,lasession_idsession) VALUES(?,?,?,?);";
 
     $insert = $this->db->prepare($sql);
 
 
-    $insert->bindValue(1,$datas->getIdlinscription(),PDO::PARAM_STR);
-    $insert->bindValue(2,$datas->getDebut(),PDO::PARAM_STR);
-    $insert->bindValue(3,$datas->getFin(),PDO::PARAM_STR);
-    $insert->bindValue(4,$datas->getUtilisateurIdutilisateur(),PDO::PARAM_STR);
-    $insert->bindValue(5,$datas->getLasessionIdsession(),PDO::PARAM_STR);
+    $insert->bindValue(1,$datas->getDebut(),PDO::PARAM_STR);
+    $insert->bindValue(2,$datas->getFin(),PDO::PARAM_STR);
+    $insert->bindValue(3,$datas->getUtilisateurIdutilisateur(),PDO::PARAM_STR);
+    $insert->bindValue(4,$datas->getLasessionIdsession(),PDO::PARAM_STR);
 
 
 
