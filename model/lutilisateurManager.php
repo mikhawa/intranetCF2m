@@ -120,30 +120,46 @@ class lutilisateurManager {
         if( empty($user->getIdlutilisateur()) ||empty($user->getLenomutilisateur()) ||empty($user->getLemotdepasse()) ||empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail()) ||empty($user->getLuniqueid())){
           return false;
     }
-
-    $sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
-
-    $insert = $this->db->prepare($sql);
-
-    $insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
-    $insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
-    $insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
-    $insert->bindvalue(4, $user->getLenom(),PDO::PARAM_STR);
-    $insert->bindvalue(5, $user->getLeprenom(),PDO::PARAM_STR);
-    $insert->bindvalue(6, $user->getLemail(),PDO::PARAM_STR);
-    $insert->bindvalue(7, $user->getLuniqueid(),PDO::PARAM_STR);
-
-    //gestion des erreurs avec try catch
-
-    try{
-        $insert->execute();
-        return true;
+	
+	$sql = "SELECT COUNT(*) AS emailCount FROM lutilisateur WHERE lemail = ?;";
+	
+	$insert->bindvalue(1, $user->getLemail(),PDO::PARAM_STR);
+	
+	try{
+        $sqlQuery = $insert->execute();
+        $emailExists = $sqlQuery->fetch(PDO::FETCH_ASSOC)['emailCount'] ? True : False;
     }catch(PDOException $e){
         echo $e->getCode();
         return false;
     }
 
-}
+	if(!$emailExists) {
+		$sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
+
+		$insert = $this->db->prepare($sql);
+
+		$insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
+		$insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
+		$insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
+		$insert->bindvalue(4, $user->getLenom(),PDO::PARAM_STR);
+		$insert->bindvalue(5, $user->getLeprenom(),PDO::PARAM_STR);
+		$insert->bindvalue(6, $user->getLemail(),PDO::PARAM_STR);
+		$insert->bindvalue(7, $user->getLuniqueid(),PDO::PARAM_STR);
+
+		//gestion des erreurs avec try catch
+
+		try{
+			$insert->execute();
+			return true;
+		}catch(PDOException $e){
+			echo $e->getCode();
+			return false;
+		}
+	} else {
+		return false;
+	}
+
+	}
 
 
 
