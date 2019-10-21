@@ -143,23 +143,15 @@ class leroleManager
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-	
-	public function selectRoleCountById(): int {
-
-		$sql="SELECT COUNT(idlerole) AS nb
-			  FROM lerole";
-			  
-
-         $sqlQuery = $this->db->query($sql);
-
-
-         $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
-         return (int) $recup['nb'];
-
-
-         $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
-         return (int) $recup['nb'];
-
+	public function selectRoleCountById(): int {	
+		$sql="SELECT COUNT(idlerole) AS nb	
+			  FROM lerole";	
+			  	
+         $sqlQuery = $this->db->query($sql);	
+         $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);	
+         return (int) $recup['nb'];	
+         $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  	
+         return (int) $recup['nb'];	
 	}
 
 
@@ -186,6 +178,7 @@ class leroleManager
 
 
 
+
 	public function roleSelectById(int $idlerole): array {
         if (empty($idlerole)) {
             return[];
@@ -203,6 +196,7 @@ class leroleManager
         }
         return $recup->fetch(PDO::FETCH_ASSOC);
 	}
+
 
 
 
