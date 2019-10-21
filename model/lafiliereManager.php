@@ -54,16 +54,14 @@ class lafiliereManager {
         
     
     public function filiereUpdate(lafiliere $datas, int $get) {
-        if (empty($datas->getlenom()) || empty($datas->getlacronyme()) || empty($datas->getidlafiliere()) || empty($datas->getLacouleur()) || empty($datas->getLepicto())) {
-            return false;
-        }
-        if ($datas->getidlafiliere() != $get) {
+
+        if (empty($datas->getlenom()) || empty($datas->getlacronyme()) || empty($datas->getidlafiliere()) || empty($datas->getLacouleur())) {
             return false;
         }
         $sql = "UPDATE lafiliere SET lenom=?, lacronyme=?, lacouleur=?, lepicto=? WHERE idlafiliere=?;";
         $update = $this->db->prepare($sql);
-        $update->bindValue(1, $datas->getlenom(), PDO::PARAM_STR);
-        $update->bindValue(2, $datas->getlacronyme(), PDO::PARAM_STR);
+        $update->bindValue(1, $datas->getLenom(), PDO::PARAM_STR);
+        $update->bindValue(2, $datas->getLacronyme(), PDO::PARAM_STR);
         $update->bindValue(3, $datas->getLacouleur(), PDO::PARAM_STR);
         $update->bindValue(4, $datas->getLepicto(), PDO::PARAM_STR);
         $update->bindValue(5, $datas->getIdlafiliere(), PDO::PARAM_INT);
@@ -88,8 +86,49 @@ class lafiliereManager {
             return false;
         }
     }
-/*
-UPLOAD de fichiers
-*/
+
+
+
+
+    public function selectFiliereCountById(): int {
+
+		$sql="SELECT COUNT(idlafiliere) AS nb
+			  FROM lafiliere";
+			  
+
+         $sqlQuery = $this->db->query($sql);
+
+
+         $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+         return (int) $recup['nb'];
+
+
+         $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
+         return (int) $recup['nb'];
+
+    }
+    
+
+    public function selectFiliereWithLimit(int $pageFiliere,int $nbParPageFiliere): array{
+
+
+	    $premsLIMIT = ($pageFiliere-1)*$nbParPageFiliere;
+		$sql = "
+		SELECT
+			*
+		FROM
+			lafiliere
+		LIMIT  ?, ?
+		";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+		$sqlQuery->bindValue(2,$nbParPageFiliere,PDO::PARAM_INT);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+	}
+
     
 }

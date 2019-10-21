@@ -39,7 +39,7 @@ protected function hydrate (array $tablehydrate ){
      */
     public function getLintitule()
     {
-        return $this->lintitule;
+        return htmlspecialchars_decode ($this->lintitule,ENT_QUOTES) ;
     }
 
     /**
@@ -47,7 +47,7 @@ protected function hydrate (array $tablehydrate ){
      */
   public function getLadescription()
     {
-        return $this->ladescription;
+        return htmlspecialchars_decode ($this->ladescription,ENT_QUOTES);
     }
 
    

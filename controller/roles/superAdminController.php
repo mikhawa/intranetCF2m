@@ -57,6 +57,7 @@ if (isset($_GET['viewlafiliere'])) {
         }
         // insertion dans la db
         $lafiliereM->filiereCreate($newfiliere);
+
         //d($newfiliere,$_POST,$_FILES);
        header("Location: ./?viewlafiliere");
     } else {

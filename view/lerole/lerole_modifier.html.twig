@@ -19,9 +19,9 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 
-                    <form action="" method="post" name="update">
+                    <form action="" method="post" name="updateLeRole">
                     <input name="lintitule" type="text" placeholder="Titre du role" value="{{ section.lintitule }}" required><br>
-                    <textarea name="lintitule" placeholder="acronyme" required>{{ section.lintitule }}</textarea><br>
+                    <textarea name="ladescription" placeholder="acronyme" required>{{ section.ladescription }}</textarea><br>
                     <input type="hidden" name="idlerole" value="{{ section.idlerole }}">
                     <input type="submit" value="Envoyer">
                 </form>

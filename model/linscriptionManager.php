@@ -10,6 +10,7 @@ class linscriptionManager
         $this->db = $connect;
     }
 
+
 public function displayContentLinscription(): array {
 		$sql = "
 		DESCRIBE
@@ -33,6 +34,54 @@ public function selectLinscription(int $id): array {
 	$sqlQuery->execute();
 	
 	return $sqlQuery->fetch(PDO::FETCH_ASSOC);
+}
+
+
+
+
+
+     public function linscriptionDelete(int $id):void{
+    $sql="DELETE FROM linscription WHERE idlinscription=?";
+    $req = $this->db->prepare($sql);
+    $req->bindValue(1,$id, PDO::PARAM_INT);
+    $req->execute();
+
+
+
+} 
+public function linscriptionCreate(linscription $datas) {
+
+
+    // vérification que les champs soient valides (pas vides)
+
+    if(empty($datas->getDebut()||empty($datas->getFin()||empty($datas->getUtilisateurIdutilisateur()||empty($datas->getLasessionIdsession()))))){
+        return false;
+    }
+
+    $sql = "INSERT INTO linscription (debut, fin, utilisateur_idutilisateur,lasession_idsession) VALUES(?,?,?,?);";
+
+    $insert = $this->db->prepare($sql);
+
+
+    $insert->bindValue(1,$datas->getDebut(),PDO::PARAM_STR);
+    $insert->bindValue(2,$datas->getFin(),PDO::PARAM_STR);
+    $insert->bindValue(3,$datas->getUtilisateurIdutilisateur(),PDO::PARAM_STR);
+    $insert->bindValue(4,$datas->getLasessionIdsession(),PDO::PARAM_STR);
+
+
+
+    // gestion des erreurs avec try catch
+    try {
+        $insert->execute();
+        return true;
+
+    }catch(PDOException $e){
+        echo $e->getCode();
+        return false;
+
+    }
+
+
 }
 
 public function updateLinscription(int $id, array $datas) {
