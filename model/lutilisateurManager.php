@@ -115,7 +115,6 @@ class lutilisateurManager {
         if( empty($user->getIdlutilisateur()) ||empty($user->getLenomutilisateur()) ||empty($user->getLemotdepasse()) ||empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail()) ||empty($user->getLuniqueid())){
           return false;
     }
-
     $sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
     $insert = $this->db->prepare($sql);
     $insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
@@ -133,13 +132,9 @@ class lutilisateurManager {
         echo $e->getCode();
         return false;
     }
-
-
 	if(!$emailExists) {
 		$sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
-
 		$insert = $this->db->prepare($sql);
-
 		$insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
 		$insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
 		$insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
@@ -147,9 +142,7 @@ class lutilisateurManager {
 		$insert->bindvalue(5, $user->getLeprenom(),PDO::PARAM_STR);
 		$insert->bindvalue(6, $user->getLemail(),PDO::PARAM_STR);
 		$insert->bindvalue(7, $user->getLuniqueid(),PDO::PARAM_STR);
-
 		//gestion des erreurs avec try catch
-
 		try{
 			$insert->execute();
 			return true;
@@ -160,9 +153,7 @@ class lutilisateurManager {
 	} else {
 		return false;
 	}
-
 	}
-
     // methode de deconnexion
     public function disconnectLutilisateur() {
         $_SESSION = array();
@@ -178,14 +169,10 @@ class lutilisateurManager {
     }
   
     public function motDePasseOublier(lutilisateur $user){
-
-
         $sql="UPDATE lutilisateur SET lemotdepasse = ?  WHERE idlutilisateur = ?;";
         $insert = $this->db->prepare($sql);
-
         $insert->bindvalue(1, $user->getLemotdepasse(),PDO::PARAM_STR);
         $insert->bindvalue(2, $user->getIdutilisateur(),PDO::PARAM_STR);
-
         try{
             $insert->execute();
             return true;
@@ -193,27 +180,18 @@ class lutilisateurManager {
             echo $e->getCode();
             return false;
         }
-
     }
     public function checkMail( string $mail){
         $sql ="SELECT * FROM lutilisateur WHERE lemail = ? ";
         $result = $this->db->prepare($sql);
-
         $result->bindvalue(1, $mail,PDO::PARAM_STR);
-
         //gestion des erreurs avec try catch
-
         try{
             $result->execute();
             return $result->rowCount()==1 ? true : false;
-
-
-
         }catch(PDOException $e){
             echo $e->getMessage();
             return false;
         }
-
     }
-
 }

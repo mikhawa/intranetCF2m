@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bogdan.rusu
- * Date: 01-07-19
- * Time: 15:13
- */
 
 class linscriptionManager
 {
@@ -16,6 +10,31 @@ class linscriptionManager
         $this->db = $connect;
     }
 
+
+public function displayContentLinscription(): array {
+		$sql = "
+		DESCRIBE
+			linscription;";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+public function selectLinscription(int $id): array {
+	$sql = "
+	SELECT
+		*
+	FROM
+		linscription
+	WHERE
+		idlinscription = :id;";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+	$sqlQuery->execute();
+	
+	return $sqlQuery->fetch(PDO::FETCH_ASSOC);
+}
 
 
 
@@ -29,7 +48,8 @@ class linscriptionManager
 
 
 
-} public function linscriptionCreate(linscription $datas) {
+} 
+public function linscriptionCreate(linscription $datas) {
 
 
     // vérification que les champs soient valides (pas vides)
@@ -61,38 +81,64 @@ class linscriptionManager
 
     }
 
+
 }
 
-    public function linscriptionSelectAll()
-    {
+public function updateLinscription(int $id, array $datas) {
+	$updateDatas = "";
+	foreach($datas as $dataField => $data) {
+		$updateDatas .= $dataField . " = '" . $data . "', ";
+	}
+	$updateDatas = substr($updateDatas, 0, -2);
 
+	$sql = "
+	UPDATE
+		linscription
+	SET
+		" . $updateDatas . "
+	WHERE
+		idlinscription = :id;";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+	$sqlQuery->execute();
+}
 
-        $sql = "SELECT lutilisateur.idlutilisateur,lutilisateur.lenom,lutilisateur.leprenom,lutilisateur.lemail,
- linscription.debut,linscription.fin,
- GROUP_CONCAT(lasession.lenom SEPARATOR '|||')AS nom_session,lasession.debut AS debut_session,lasession.fin AS fin_session,
- GROUP_CONCAT(lafiliere.lenom SEPARATOR '|||') AS lenom_filiere,lafiliere.lepicto,
- lerole.lintitule  AS lerole_Intitule,ledroit.lintitule AS droit
- FROM lutilisateur
- LEFT JOIN linscription ON lutilisateur.idlutilisateur=linscription.utilisateur_idutilisateur
- LEFT JOIN lasession ON linscription.lasession_idsession=lasession.idlasession
- LEFT JOIN lafiliere ON lasession.lafiliere_idfiliere=lafiliere.idlafiliere
- LEFT JOIN lutilisateur_has_lerole ON lutilisateur.idlutilisateur=lutilisateur_has_lerole.lutilisateur_idutilisateur
- LEFT JOIN lerole ON  lutilisateur_has_lerole.lerole_idlerole=lerole.idlerole
- LEFT JOIN lerole_has_ledroit ON lerole.idlerole=lerole_has_ledroit.lerole_idlerole
- LEFT JOIN ledroit ON  lerole_has_ledroit.ledroit_idledroit=ledroit.idledroit
- GROUP BY lutilisateur.idlutilisateur
- ORDER BY lutilisateur.idlutilisateur;";
+public function insertLinscription(array $datas): void {
+	$sql = "
+	INSERT INTO linscription(debut, fin, utilisateur_idutilisateur, lasession_idsession)
+	VALUES
+		(";
+	foreach($datas as $data) {
+		$sql .= (gettype($data) == "string" ? "'" . $data . "'" : $data) . ", ";
+	}
+	$sql = substr($sql, 0, -2);
+	$sql .= ");";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->execute();
+}
 
+public function deleteLinscription(int $id): void {
+	$sql = "
+	DELETE
+	FROM
+		linscription
+	WHERE
+		idlinscription = :id;";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+	$sqlQuery->execute();
+}
 
-        $recup = $this->db->query($sql);
-
-        if ($recup->rowCount() === 0) {
-            return [];
-        }
-        return $recup->fetchAll(PDO::FETCH_ASSOC);
-
-
-    }
-
-    }
-
+public function selectAllLinscription(): array {
+	$sql = "
+	SELECT
+		*
+	FROM
+		linscription";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->execute();
+	
+	return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+}
+	
+}
