@@ -23,7 +23,7 @@ if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurI
 if (isset($_GET['viewlafiliere'])) {
     $paginFiliere = (isset($_GET['pgFiliere'])?(int)$_GET['pgFiliere']:1);
     $nbFiliere = $lafiliereM->selectFiliereCountById();
-    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,5);
+    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,3);
     $PaginationFiliere = pagination::pagine($nbFiliere,5,$paginFiliere,"viewlafiliere&pgFiliere");
     echo $twig->render('lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere"=>$PaginationFiliere]);
 // insert a filiere    
@@ -112,7 +112,7 @@ elseif (isset($_GET['viewlasession']))
 {
 	$paginSession = (isset($_GET['pgSession'])?(int)$_GET['pgSession']:1);
     $nbSession = $lasessionM->selectSessionCountById();
-    $nbPageSession = $lasessionM->selectSessionWithLimit($paginSession,5);
+    $nbPageSession = $lasessionM->selectSessionWithLimit($paginSession,3);
     $PaginationSession = pagination::pagine($nbSession,5,$paginSession,"viewlasession&pgSession");
 	
 	echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $nbPageSession,"pagination"=>$PaginationSession]);
@@ -144,7 +144,7 @@ elseif (isset($_GET['viewleconge']))
 {
 	$paginConge = (isset($_GET['pgConge'])?(int)$_GET['pgConge']:1);
     $nbConge = $lecongeM->selectCongeCountById();
-    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,5);
+    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,3);
     $PaginationConge = pagination::pagine($nbConge,5,$paginConge,"viewleconge&pgConge");
 	
 	echo $twig->render("leconge/leconge_afficherliste.html.twig", ['detailConge' => $nbPageConge,"pagination"=>$PaginationConge]);
@@ -216,7 +216,7 @@ elseif (isset($_GET['insertleconge']))
 }elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
-    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,5);
+    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,3);
     $pagesLutisateur=pagination::pagine($nblutilisateur,5,$pageLutisateur,"viewutilisateur&pglutilisateur");
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
 }elseif(isset($_GET['insertutilisateur'])){

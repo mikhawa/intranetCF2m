@@ -143,6 +143,16 @@ class leroleManager
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	public function selectRoleCountById(): int {	
+		$sql="SELECT COUNT(idlerole) AS nb	
+			  FROM lerole";	
+			  	
+         $sqlQuery = $this->db->query($sql);	
+         $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);	
+         return (int) $recup['nb'];	
+         $recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  	
+         return (int) $recup['nb'];	
+	}
 
 
     public function selectRoleWithLimit(int $page,int $nbParPage): array{
