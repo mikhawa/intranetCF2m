@@ -194,4 +194,57 @@ class lutilisateurManager {
             return false;
         }
     }
+
+
+
+
+    public function selectlutilisateurWithLimit(int $page, int $nbParPage): array
+    {
+
+
+        $premsLIMIT = ($page - 1) * $nbParPage;
+        $sql = "SELECT * FROM lutilisateur
+		LIMIT  ?, ?
+		";
+        $sqlQuery = $this->db->prepare($sql);
+        $sqlQuery->bindValue(1, $premsLIMIT, PDO::PARAM_INT);
+        $sqlQuery->bindValue(2, $nbParPage, PDO::PARAM_INT);
+        $sqlQuery->execute();
+
+        return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+ 
+ 
+ 
+    }
+
+
+
+    public function selectLutilisateurCountById(): int
+    {
+
+        $sql = "SELECT COUNT(idlutilisateur) AS b
+			  FROM lutilisateur";
+
+
+        $sqlQuery = $this->db->query($sql);
+
+
+        $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+        return (int) $recup['b'];
+
+
+        $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+        return (int) $recup['b'];
+    }
+
+
+
+
+
+
+    
 }
+
+
+}
+

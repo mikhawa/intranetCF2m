@@ -20,14 +20,16 @@
                 <p class="lead">Gestion des utilisateur</p>
 
             </div>
-            <div<a <div class="col-lg-12 text-center"> <h4><a href="?insertutilisateur">ajout</a>
+            <div<div class="col-lg-12 text-center"> <h4><a href="?insertutilisateur">ajout</a>
         </h4>
     </div>
     <br>
     <div
         class="col-lg-6 text-left">
+{{ pagination|raw }}
+
         {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
-        {% for item in detailutilisateur %}
+        {% for item in lutilisateur %}
             <h4 class="mt-3">{{ item.lenom }}
                 |
                 <a href="?update={{ item.idlafiliere }}">modifier</a>

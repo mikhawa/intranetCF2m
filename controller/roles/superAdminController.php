@@ -211,6 +211,40 @@ elseif (isset($_GET['insertleconge']))
     echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
 } elseif (isset($_GET['insertlasession'])) {
     echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
+
+
+}elseif (isset($_GET['viewutilisateur'])){
+     $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
+    $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
+    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,5);
+    $pagesLutisateur=pagination::pagine($nblutilisateur,5,$pageLutisateur,"viewutilisateur&pglutilisateur");
+ echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
+}elseif(isset($_GET['insertutilisateur'])){
+      if(!empty($_POST)){
+
+           $newlutilisateur = new lutilisateur($_POST);
+
+           echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig',['lenom'=>$lutilisateurM->lutilisateurCreat($newlutilisateur)]);
+            header('Location: ./?viewutilisateur');
+
+      }else{
+
+          echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig');
+
+      }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 }else{
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
     if(!isset($_SESSION['bandeau'])){
