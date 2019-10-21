@@ -10,7 +10,12 @@ class linscriptionManager
         $this->db = $connect;
     }
 
+<<<<<<< HEAD
 public static function displayContentLinscription(): array {
+=======
+
+public function displayContentLinscription(): array {
+>>>>>>> 0571874b5782e9b88f653f712637d704fe4f9e1b
 		$sql = "
 		DESCRIBE
 			linscription;";
@@ -20,7 +25,11 @@ public static function displayContentLinscription(): array {
 		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
+<<<<<<< HEAD
 public static function selectLinscription(int $id): array {
+=======
+public function selectLinscription(int $id): array {
+>>>>>>> 0571874b5782e9b88f653f712637d704fe4f9e1b
 	$sql = "
 	SELECT
 		*
@@ -35,7 +44,59 @@ public static function selectLinscription(int $id): array {
 	return $sqlQuery->fetch(PDO::FETCH_ASSOC);
 }
 
+<<<<<<< HEAD
 public static function updateLinscription(int $id, array $datas) {
+=======
+
+
+
+
+     public function linscriptionDelete(int $id):void{
+    $sql="DELETE FROM linscription WHERE idlinscription=?";
+    $req = $this->db->prepare($sql);
+    $req->bindValue(1,$id, PDO::PARAM_INT);
+    $req->execute();
+
+
+
+} 
+public function linscriptionCreate(linscription $datas) {
+
+
+    // vérification que les champs soient valides (pas vides)
+
+    if(empty($datas->getDebut()||empty($datas->getFin()||empty($datas->getUtilisateurIdutilisateur()||empty($datas->getLasessionIdsession()))))){
+        return false;
+    }
+
+    $sql = "INSERT INTO linscription (debut, fin, utilisateur_idutilisateur,lasession_idsession) VALUES(?,?,?,?);";
+
+    $insert = $this->db->prepare($sql);
+
+
+    $insert->bindValue(1,$datas->getDebut(),PDO::PARAM_STR);
+    $insert->bindValue(2,$datas->getFin(),PDO::PARAM_STR);
+    $insert->bindValue(3,$datas->getUtilisateurIdutilisateur(),PDO::PARAM_STR);
+    $insert->bindValue(4,$datas->getLasessionIdsession(),PDO::PARAM_STR);
+
+
+
+    // gestion des erreurs avec try catch
+    try {
+        $insert->execute();
+        return true;
+
+    }catch(PDOException $e){
+        echo $e->getCode();
+        return false;
+
+    }
+
+
+}
+
+public function updateLinscription(int $id, array $datas) {
+>>>>>>> 0571874b5782e9b88f653f712637d704fe4f9e1b
 	$updateDatas = "";
 	foreach($datas as $dataField => $data) {
 		$updateDatas .= $dataField . " = '" . $data . "', ";
@@ -54,7 +115,11 @@ public static function updateLinscription(int $id, array $datas) {
 	$sqlQuery->execute();
 }
 
+<<<<<<< HEAD
 public static function insertLinscription(array $datas): void {
+=======
+public function insertLinscription(array $datas): void {
+>>>>>>> 0571874b5782e9b88f653f712637d704fe4f9e1b
 	$sql = "
 	INSERT INTO linscription(debut, fin, utilisateur_idutilisateur, lasession_idsession)
 	VALUES
@@ -68,7 +133,11 @@ public static function insertLinscription(array $datas): void {
 	$sqlQuery->execute();
 }
 
+<<<<<<< HEAD
 public static function deleteLinscription(int $id): void {
+=======
+public function deleteLinscription(int $id): void {
+>>>>>>> 0571874b5782e9b88f653f712637d704fe4f9e1b
 	$sql = "
 	DELETE
 	FROM
@@ -80,7 +149,11 @@ public static function deleteLinscription(int $id): void {
 	$sqlQuery->execute();
 }
 
+<<<<<<< HEAD
 public static function selectAllLinscription(): array {
+=======
+public function selectAllLinscription(): array {
+>>>>>>> 0571874b5782e9b88f653f712637d704fe4f9e1b
 	$sql = "
 	SELECT
 		*
