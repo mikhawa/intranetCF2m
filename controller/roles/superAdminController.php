@@ -23,8 +23,8 @@ if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurI
 if (isset($_GET['viewlafiliere'])) {
     $paginFiliere = (isset($_GET['pgFiliere'])?(int)$_GET['pgFiliere']:1);
     $nbFiliere = $lafiliereM->selectFiliereCountById();
-    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,3);
-    $PaginationFiliere = pagination::pagine($nbFiliere,5,$paginFiliere,"viewlafiliere&pgFiliere");
+    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,2);
+    $PaginationFiliere = pagination::pagine($nbFiliere,2,$paginFiliere,"viewlafiliere&pgFiliere");
     echo $twig->render('lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere"=>$PaginationFiliere]);
 // insert a filiere    
 } elseif (isset($_GET['insertlafiliere'])) {

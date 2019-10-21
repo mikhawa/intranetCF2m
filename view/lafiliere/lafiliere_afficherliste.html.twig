@@ -10,6 +10,8 @@
 {% block menuhaut %}{% endblock %}
 
 {% block centre %}
+
+
     <!-- Page Content -->
     <main role="main" class="container">
         <div class="row">
@@ -30,22 +32,25 @@
                     <div class="section col-lg-12">
                         <h4 class="mt-12">
                         <p class="title-picto">
-                        <a href="img/upload/medium/{{item.lepicto}}" target="_blank"><img src="img/upload/thumb/{{item.lepicto}}" /></a>
-                        {{ item.lenom }}
+                        <a href="img/upload/medium/{{ item.lepicto }}" target="_blank"><img src="img/upload/thumb/{{ item.lepicto }}" /></a>
+{{ item.lenom }}
+(
+{{ item.lacronyme }}
+)
+
                         </p>
                             <div class="content-menu">
                                 <a href="?updatelafiliere={{ item.idlafiliere }}" class="modified">modifier</a>
                                 <a class="delete" href="?deletelafiliere={{ item.idlafiliere }}">supprimer</a>
                             </div>
                         </h4>
-                        <p>Acronyme :
-                            {{ item.lacronyme }}</p>
+<p><div style="width: 100px; background-color :{{ item.lacouleur }}; border-radius:30px; text-align:center ">&nbsp;</p>
 
-                        <div>
-                            <p>couleur de filiere:<div style="width: 80px; background-color :{{ item.lacouleur }}; border-radius:30px; text-align:center ">✔️</p>
-                            </p>
-                        </div>
-                    </P>
+
+                          
+
+                        
+                    
                 </div>
             </div>
 
@@ -53,6 +58,6 @@
         {% else %}
             <h4 class="mt-3">Pas encore de filière sur notre page accueil</h4>
         {% endfor %}
-        {{paginationFiliere|raw}}
+       
     </div>
 </div></main>{% endblock %}{% block bas %}{% include "footer.html.twig" %}{% endblock %}
