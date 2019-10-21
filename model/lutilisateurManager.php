@@ -238,13 +238,5 @@ class lutilisateurManager {
     }
 
 
-
-
-
-
-    
-}
-
-
 }
 
