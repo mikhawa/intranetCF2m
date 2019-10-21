@@ -35,15 +35,18 @@
 
                 <label for="role">choisissez votre rôle:</label>
 
-<select name="Roles" id="role">
+<select name="Roles" id="role" class ="form-control">
     <option value=""> -- Choix du rôle --</option>
     <option value="Menbre">Membre du personnel</option>
     <option value="Agent">Agent d'acceuil</option>
     <option value="Référent">Référent pédagoqique</option>
     <option value="Administateur">Administateur Tecnique</option>
     <option value="stagiaire">Stagiaire</option>
+
+
    
-</select>
+</select><br><br>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
                 {{ pagination|raw }}    
                 </form>
                 <h3>{{ error }}</h3>
