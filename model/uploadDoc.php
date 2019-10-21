@@ -159,13 +159,13 @@ class uploadDoc {
         // si l'image est en paysage - on inverse la division ($largeurOri devient $largeurOri) pour que le résultat soit plus grand que la miniature carrée
         if ($largeurOri > $hauteurOri) {
             $ratio = $Haut / $hauteurOri;
-            $milieuX = round(($largeurOri * $ratio) / 2);
+            $milieuX = round(($largeurOri * $ratio) / 4);
             $milieuY = 0;
             // nous sommes en portrait ou l'image est carré
         } else {
             $ratio = $Large / $largeurOri;
             $milieuX = 0;
-            $milieuY = round(($hauteurOri * $ratio) / 2);
+            $milieuY = round(($hauteurOri * $ratio) / 4);
         }
         // valeurs arrondies en pixel
         $newWidth = round($largeurOri * $ratio);
