@@ -168,6 +168,7 @@ class leroleManager
 
 
 
+
 	public function roleSelectById(int $idlerole): array {
         if (empty($idlerole)) {
             return[];
@@ -185,6 +186,7 @@ class leroleManager
         }
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
+
 
 
 
