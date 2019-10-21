@@ -1,4 +1,4 @@
-étend le template depuis base.html.twig, qui est donc son parent #}
+{# étend le template depuis base.html.twig, qui est donc son parent #}
 {% extends "template.html.twig" %}
 
 {# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
@@ -11,26 +11,49 @@
     
 {% endblock %}
 
-{% block milieu %}
+{% block centre %}
     <!-- Page Content -->
     <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 class="mt-5">Administration du CF2m</h1>
-                <p class="lead">Admin | Ajouter un utilisateur </p>
+                <p class="lead">Ajouter un utilisateur </p>
             </div>
             <div
                 class="col-lg-6 text-left">
+                
                 {# Affichage du formulaire #}
                 <form action="" method="post" name="createFiliere">
-                    <input name="lenom" type="text" placeholder="Titre de la filiere" required><br>
-                    <textarea name="lacronyme" placeholder="Acronyme de la filiere" required></textarea><br>
-                    <input type="submit" value="Envoyer">
+                <div class="form-group"><br>
+                <label for ="Nom">Nom:</label><br>
+                <input name="lenom"  maxlength="45" type="text" class="form-control" placeholder="Ajout le nom" required><br>
+                <label for ="Prenom">Prénom:</label>
+                <input name="prenom"  maxlength="180" type="text" class="form-control" placeholder="Ajout le prénom" required><br>
+                 <label for ="email">e-mail:</label>
+                <input name="lenom"  maxlength="180" type="email" class="form-control" placeholder="Ajout email" required><br><br>
+
+
+                <label for="role">choisissez votre rôle:</label>
+
+<select name="Roles" id="role" class ="form-control">
+    <option value=""> -- Choix du rôle --</option>
+    <option value="Menbre">Membre du personnel</option>
+    <option value="Agent">Agent d'acceuil</option>
+    <option value="Référent">Référent pédagoqique</option>
+    <option value="Administateur">Administateur Tecnique</option>
+    <option value="stagiaire">Stagiaire</option>
+
+
+   
+</select><br><br>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+                {{ pagination|raw }}    
                 </form>
                 <h3>{{ error }}</h3>
             </div>
         </div>
-    </main>
+    </main> 
+ 
 
 {% endblock %}
 

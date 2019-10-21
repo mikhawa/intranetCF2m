@@ -16,23 +16,26 @@
     <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 class="mt-5">Pour imprimer les feuilles de présences</h1>
-                <p class="lead">Gestion des filières</p>
+                <h1 class="mt-5">La présence </h1>
+                <p class="lead">Gestion des utilisateur</p>
 
             </div>
-            <div<a <div class="col-lg-12 text-center"> <h4> href="?insert={{ addfiliere.idlafiliere }}">Ajouter une filiere</a>
+            <div<div class="col-lg-12 text-center"> <h4><a href="?insertutilisateur">ajout</a>
         </h4>
     </div>
     <br>
     <div
         class="col-lg-6 text-left">
+{{ pagination|raw }}
+
         {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
-        {% for item in detailfiliere %}
+        {% for item in lutilisateur %}
             <h4 class="mt-3">{{ item.lenom }}
                 |
                 <a href="?update={{ item.idlafiliere }}">modifier</a>
                 |
                 <a href="?delete={{ item.idlafiliere }}">supprimer</a>
+                 
             </h4>
             <p>{{ item.lacronyme }}</p>
             <h6>Stagiaires:</h6>
