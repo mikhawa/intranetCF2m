@@ -28,7 +28,7 @@
                     <p>{{ item.ladescription }}</p>
                     <h6>Stagiaires:</h6>
                     {# création de 2 variables pour éclater (avec split) le nom et prénom des stagiaires #}
-                    {% set lenom = item.ladescription|split("|||") %}
+                    {% set lenom = item.lenom|split("|||") %}
                     
                     {% for detailrole in lintitule %}
                         {# si vide #}
