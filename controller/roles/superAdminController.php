@@ -16,6 +16,22 @@ if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmati
 } else if (isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
     $lasession = new lasession($_POST);
     $lasessionM->sessionCreate($lasession);
+	header('Location: ./?viewlasessions');
+}
+
+// Delete, Update, Insert conditions for congés
+
+if (isset($_GET['confirmationdeleteleconge']) && ctype_digit($_GET['confirmationdeleteleconge'])) {
+    $lecongeM->deleteConge($_GET['confirmationdeleteleconge']);
+// Update
+} else if (isset($_POST['idleconge']) && ctype_digit($_POST['idleconge']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['lasession_idlasession']) && ctype_digit($_POST['lasession_idlasession'])) {
+    $leconge = new leconge($_POST);
+    $lecongeM->updateConge($leconge);
+// INSERT
+} else if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['lasession_idlasession']) && ctype_digit($_POST['lasession_idlasession'])) {
+    $leconge = new leconge($_POST);
+    $lecongeM->lecongeCreate($leconge);
+	header('Location: ./?viewleconge');
 }
 
 // Insert conditions for inscriptions
@@ -170,11 +186,11 @@ elseif (isset($_GET['viewleconge']))
 }
 elseif (isset($_GET['updateleconge']) && ctype_digit($_GET['updateleconge']))
 {
-    echo $twig->render("leconge/leconge_modifier.html.twig", ['detailConge' => $lecongeM->congeSelectByID($_GET['updateleconge']), "filieres" => $lafiliereM->filiereSelectAll()]);
+    echo $twig->render("leconge/leconge_modifier.html.twig", ['detailConge' => $lecongeM->lecongeSelectByld($_GET['updateleconge']), "sessions" => $lasessionM->sessionSelectALL()]);
 }
 elseif (isset($_GET['insertleconge']))
 {
-    echo $twig->render("leconge/leconge_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
+    echo $twig->render("leconge/leconge_ajouter.html.twig", ["sessions" => $lasessionM->sessionSelectALL()]);
       
 	  
       
