@@ -185,8 +185,7 @@ class leroleManager
 	}
 
 
-<<<<<<< HEAD
-=======
+
 
 	public function roleSelectById(int $idlerole): array {
         if (empty($idlerole)) {
@@ -207,7 +206,7 @@ class leroleManager
     }
 
 
->>>>>>> a939e922f970a11f3b8edf992a1d337ea2190e90
+
 
 	
 }
