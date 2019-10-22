@@ -10,6 +10,14 @@ if(isset($_GET['viewdetailsession'])) {
 
 
 
+}elseif(isset($_GET['choixFiliere'])){
+
+    $nomStagiaire = $evaluationM->selectAllStagiairesForEval();
+
+    echo $twig->render("view_stagiaires/evaluation.html.twig",['lutilisateur'=>$nomStagiaire]);
+
+
+
 }
 else{
 

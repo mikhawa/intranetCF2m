@@ -27,7 +27,7 @@ class evaluationManager {
 
     public function selectAllFiliereForEval(): array{
 
-        $sql="SELECT lenom
+        $sql="SELECT lenom, idlafiliere
               FROM lafiliere";
 
         $recup = $this->db->query($sql);
