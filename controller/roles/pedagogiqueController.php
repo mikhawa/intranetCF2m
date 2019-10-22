@@ -14,7 +14,7 @@ if(isset($_GET['viewdetailsession'])) {
 
     $nomStagiaire = $evaluationM->selectAllStagiairesForEval();
 
-    echo $twig->render("view_stagiaires/evaluation.html.twig",['lutilisateur'=>$nomStagiaire]);
+    echo $twig->render("view_stagiaires/choix_stagiaire.html.twig",['lutilisateur'=>$nomStagiaire]);
 
 
 

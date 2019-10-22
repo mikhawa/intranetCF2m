@@ -20,7 +20,7 @@
                 <p class="lead">Stagiaires inscrits dans cette filière</p>
 
             </div>
-            <div<div class="col-lg-12 text-center"> <h4><a href="?insertstagiaire">ajout</a>
+            <div<div class="col-lg-12 text-center">
         </h4>
     </div>
     <br>
@@ -32,9 +32,9 @@
         {% for item in lutilisateur %}
             <h4 class="mt-3">{{ item.lenom }}
                 |
-                <a href="?update={{ item.idlutilisateur }}">modifier</a>
+                <a href="?update={{ item.idlutilisateur }}">Evaluer</a>
                 |
-                <a href="?delete={{ item.idlutilisateur }}">supprimer</a>
+                <a href="?delete={{ item.idlutilisateur }}">profil</a>
                  
             </h4>
             <p>{{ item.lacronyme }}</p>
