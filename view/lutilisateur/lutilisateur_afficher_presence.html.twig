@@ -26,7 +26,7 @@
 
             <br>
             <div class="col-lg-6 text-left">
-                {{ pagination|raw }}
+                {{ pagination|raw }}<br>
 
                 {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
                 {% for item in lutilisateur %}
@@ -44,7 +44,7 @@
 
 
 
-                        <h6>Stagiaires</h6>
+                       
                         {# création de 2 variables pour éclater (avec split) le nom et prénom des stagiaires #}
                         {% set lenom = item.lenom|split("|||") %}
 
