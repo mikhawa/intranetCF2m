@@ -195,7 +195,8 @@ class leroleManager
             return [];
         }
         return $recup->fetch(PDO::FETCH_ASSOC);
-    }
+	}
+
 
 
 

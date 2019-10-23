@@ -39,5 +39,5 @@ if (isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
     echo '<div id="fade" class="alert-false"><span class="closebtn" onclick="this.partelement.style.display="none";">&times;</span>Ouups ! Ce mail n\'existe pas !</div>';
   }
     $utilisateurManager = new lutilisateurManager($db_connect);
-    echo $twig->render("public/homepage.html.twig",);
+    echo $twig->render("public/homepage.html.twig");
 }
