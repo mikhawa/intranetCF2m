@@ -3,7 +3,7 @@
 
 class leConge
 {
-protected $idconge;
+protected $idleconge;
 protected $debut;
 protected $fin;
 protected $letype;
@@ -32,9 +32,9 @@ protected function hydrate (array $tablehydrate ){
     /**
      * GETTERS
      */
-    public function getIdconge()
+    public function getIdleconge()
     {
-        return htmlspecialchars_decode($this->idconge,ENT_QUOTES);
+        return htmlspecialchars_decode($this->idleconge,ENT_QUOTES);
     }
 
     /**
@@ -68,7 +68,7 @@ protected function hydrate (array $tablehydrate ){
      */
     public function getLasession_idlasession()
     {
-        return $this->fin;
+        return $this->lasession_idlasession;
     }
 
    
@@ -76,11 +76,10 @@ protected function hydrate (array $tablehydrate ){
     /**
      * SETTERS
      */
-    public function setIdconge( int $idconge)
+    public function setIdleconge(string $idconge)
     {
         if(!empty($idconge)){
-
-            $this->idconge = $idconge;
+            $this->idleconge = $idconge;
         }
     }
 

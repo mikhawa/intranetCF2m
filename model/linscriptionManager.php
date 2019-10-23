@@ -10,7 +10,7 @@ class linscriptionManager
         $this->db = $connect;
     }
 
-
+	
 public function displayContentLinscription(): array {
 		$sql = "
 		DESCRIBE
@@ -37,18 +37,15 @@ public function selectLinscription(int $id): array {
 }
 
 
+ public function linscriptionDelete(int $id):void{
+$sql="DELETE FROM linscription WHERE idlinscription=?";
+$req = $this->db->prepare($sql);
+$req->bindValue(1,$id, PDO::PARAM_INT);
+$req->execute();
 
 
+}
 
-     public function linscriptionDelete(int $id):void{
-    $sql="DELETE FROM linscription WHERE idlinscription=?";
-    $req = $this->db->prepare($sql);
-    $req->bindValue(1,$id, PDO::PARAM_INT);
-    $req->execute();
-
-
-
-} 
 public function linscriptionCreate(linscription $datas) {
 
 
