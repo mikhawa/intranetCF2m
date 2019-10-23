@@ -13,6 +13,8 @@ $lasessionM=new lasessionManager($db_connect);
 $lafiliereM=new lafiliereManager($db_connect);
 // load lutilisateur conge
 $lecongeM=new lecongeManager($db_connect);
+// load eval stagiaire
+$evaluationM= new evaluationManager($db_connect);
 // deconnection
 if(isset($_GET['deconnect'])){
 	$lutilisateurM->disconnectLutilisateur();
