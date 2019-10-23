@@ -6,3 +6,9 @@
 
 # dependencies
 /vendor/
+
+# upload folders
+/public/img/upload/
+
+# true config file
+/config.php

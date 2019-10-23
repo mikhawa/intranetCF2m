@@ -1,0 +1,37 @@
+{% extends "template.html.twig" %}
+
+
+{% block title %}{{ parent() }} | Admin | Modifier linscription{% endblock %}
+
+{% block menuhaut %}
+
+
+{% endblock %}
+
+{% block milieu %}
+    <!-- Page Content -->
+
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+                <p class="lead">Admin | Modifier une inscription</p>
+            </div>
+            <div class="col-lg-10 text-left">
+                
+                <form action="" method="post" name="createinscription">
+                    <input name="modifier " type="text" placeholder="Modifier inscription" required><br>
+                    <textarea name="Annuler" placeholder="Inscription annuler" required></textarea><br>
+                    <input type="submit" value="Modifier inscription">
+                </form>
+                <h3>{{ error }}</h3>
+            </div>
+        </div>
+</main>
+
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}

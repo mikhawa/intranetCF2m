@@ -1,0 +1,47 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+{% block title %}{{ parent() }} | Admin | Ajouter un congé{% endblock %}
+
+{% block menuhaut %}
+
+{% endblock %}
+
+{% block centre %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+                <p class="lead">Admin | Ajouter un congé</p>
+            </div>
+            <div class="col-lg-6 text-left">
+                {# Affichage du formulaire #}
+                <form action="./?viewleconge" method="post">			
+					<label for="debut">Début de congé&nbsp</label><input id="debut" name="debut" type="date" max="2100-12-12" required>&nbsp<span id="debutError" style="color: red; visibility: hidden;">La date de début est postérieure à la date de fin !</span><br><br>
+					<label for="fin">Fin de congé&nbsp</label><input id="fin" name="fin" type="date" max="2100-12-12" required><br><br>
+					<label for="letype">Type de congé&nbsp</label>
+					<select id="letype" name="letype" required>
+						<option value="1">Matin</option>
+						<option value="2">Après-midi</option>
+						<option value="3">Journée</option>
+					</select><br><br>
+					<label for="lasession_idlasession">Sessions concernées&nbsp</label>
+					<select id="lasession_idlasession" name="lasession_idlasession" required multiple>
+					{% for session in sessions %}
+						<option class="sessions" value="{{ session.idlasession }}">{{ session.lenom }}</option>
+					{% endfor %}
+					</select><br><br>
+					<input onclick="if( $('#debut').val() > $('#fin').val() ) {$('#debutError').css('visibility', 'visible'); $('#debut').css('box-shadow', '0 0 3px 1px red'); event.preventDefault();}" type="submit" value="Envoyer">
+                </form>				
+                <h3>{{ error }}</h3>
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}

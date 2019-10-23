@@ -3,11 +3,10 @@
 
 class leConge
 {
-protected $idconge;
+protected $idleconge;
 protected $debut;
 protected $fin;
 protected $letype;
-protected $lasession_idlasession;
 
 
 
@@ -32,9 +31,9 @@ protected function hydrate (array $tablehydrate ){
     /**
      * GETTERS
      */
-    public function getIdconge()
+    public function getIdleconge()
     {
-        return htmlspecialchars_decode($this->idconge,ENT_QUOTES);
+        return htmlspecialchars_decode($this->idleconge,ENT_QUOTES);
     }
 
     /**
@@ -63,24 +62,15 @@ protected function hydrate (array $tablehydrate ){
   }
 
 
-  /**
-     * @return mixed
-     */
-    public function getLasession_idlasession()
-    {
-        return $this->fin;
-    }
-
-   
+  
 
     /**
      * SETTERS
      */
-    public function setIdconge( int $idconge)
+    public function setIdleconge(string $idconge)
     {
         if(!empty($idconge)){
-
-            $this->idconge = $idconge;
+            $this->idleconge = $idconge;
         }
     }
 
@@ -108,17 +98,6 @@ protected function hydrate (array $tablehydrate ){
     {
         $this->letype =htmlspecialchars(strip_tags(trim($letype)),ENT_QUOTES);
     }
-
-
-    /**
-     * @param mixed $lasession_idlasession
-     */
-    public function setLasession_idlasession($lasession_idlasession)
-    {
-        $this->lasession_idlasession =htmlspecialchars(strip_tags(trim($lasession_idlasession)),ENT_QUOTES);
-    }
-
-     
 
 
 }
