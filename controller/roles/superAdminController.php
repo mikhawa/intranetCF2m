@@ -13,6 +13,22 @@ if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmati
 } else if (isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
     $lasession = new lasession($_POST);
     $lasessionM->sessionCreate($lasession);
+	header('Location: ./?viewlasessions');
+}
+
+// Delete, Update, Insert conditions for congés
+
+if (isset($_GET['confirmationdeleteleconge']) && ctype_digit($_GET['confirmationdeleteleconge'])) {
+    $lecongeM->deleteConge($_GET['confirmationdeleteleconge']);
+// Update
+} else if (isset($_POST['idleconge']) && ctype_digit($_POST['idleconge']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['lasession_idlasession']) && ctype_digit($_POST['lasession_idlasession'])) {
+    $leconge = new leconge($_POST);
+    $lecongeM->updateConge($leconge);
+// INSERT
+} else if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['lasession_idlasession']) && ctype_digit($_POST['lasession_idlasession'])) {
+    $leconge = new leconge($_POST);
+    $lecongeM->lecongeCreate($leconge);
+	header('Location: ./?viewleconge');
 }
 // Insert conditions for inscriptions
 if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurIdutilisateur']) && ctype_digit($_POST['utilisateurIdutilisateur']) && isset($_POST['lasessionIdsession']) && ctype_digit($_POST['lasessionIdsession'])) {
@@ -23,8 +39,8 @@ if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurI
 if (isset($_GET['viewlafiliere'])) {
     $paginFiliere = (isset($_GET['pgFiliere'])?(int)$_GET['pgFiliere']:1);
     $nbFiliere = $lafiliereM->selectFiliereCountById();
-    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,2);
-    $PaginationFiliere = pagination::pagine($nbFiliere,2,$paginFiliere,"viewlafiliere&pgFiliere");
+    $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere,5);
+    $PaginationFiliere = pagination::pagine($nbFiliere,5,$paginFiliere,"viewlafiliere&pgFiliere");
     echo $twig->render('lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere"=>$PaginationFiliere]);
 // insert a filiere    
 } elseif (isset($_GET['insertlafiliere'])) {
@@ -112,7 +128,7 @@ elseif (isset($_GET['viewlasession']))
 {
 	$paginSession = (isset($_GET['pgSession'])?(int)$_GET['pgSession']:1);
     $nbSession = $lasessionM->selectSessionCountById();
-    $nbPageSession = $lasessionM->selectSessionWithLimit($paginSession,3);
+    $nbPageSession = $lasessionM->selectSessionWithLimit($paginSession,5);
     $PaginationSession = pagination::pagine($nbSession,5,$paginSession,"viewlasession&pgSession");
 	
 	echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $nbPageSession,"pagination"=>$PaginationSession]);
@@ -133,9 +149,14 @@ elseif(isset($_GET['viewlerole']))
     // nombre de rôles totaux à afficher
     $nbRoles = $leroleM->selectRoleCountById();
     // on va récupérer les rôles de la page actuelle
+
     $articlesPageActu = $leroleM->selectRoleWithLimit($pageactu,5);
+
+
     // création de la pagination
     $affichePagination = pagination::pagine($nbRoles,5,$pageactu,"viewlerole&pg");
+
+
       
       echo $twig->render('lerole/lerole_afficherliste.html.twig', [ "detailrole"=>$articlesPageActu,"pagination"=>$affichePagination]);
 // Display views for conges
@@ -144,7 +165,7 @@ elseif (isset($_GET['viewleconge']))
 {
 	$paginConge = (isset($_GET['pgConge'])?(int)$_GET['pgConge']:1);
     $nbConge = $lecongeM->selectCongeCountById();
-    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,3);
+    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,5);
     $PaginationConge = pagination::pagine($nbConge,5,$paginConge,"viewleconge&pgConge");
 	
 	echo $twig->render("leconge/leconge_afficherliste.html.twig", ['detailConge' => $nbPageConge,"pagination"=>$PaginationConge]);
@@ -152,11 +173,11 @@ elseif (isset($_GET['viewleconge']))
 }
 elseif (isset($_GET['updateleconge']) && ctype_digit($_GET['updateleconge']))
 {
-    echo $twig->render("leconge/leconge_modifier.html.twig", ['detailConge' => $lecongeM->congeSelectByID($_GET['updateleconge']), "filieres" => $lafiliereM->filiereSelectAll()]);
+    echo $twig->render("leconge/leconge_modifier.html.twig", ['detailConge' => $lecongeM->lecongeSelectByld($_GET['updateleconge']), "sessions" => $lasessionM->sessionSelectALL()]);
 }
 elseif (isset($_GET['insertleconge']))
 {
-    echo $twig->render("leconge/leconge_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
+    echo $twig->render("leconge/leconge_ajouter.html.twig", ["sessions" => $lasessionM->sessionSelectALL()]);
       
 	  
       
@@ -216,7 +237,7 @@ elseif (isset($_GET['insertleconge']))
 }elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
-    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,3);
+    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,5);
     $pagesLutisateur=pagination::pagine($nblutilisateur,5,$pageLutisateur,"viewutilisateur&pglutilisateur");
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
 }elseif(isset($_GET['insertutilisateur'])){
