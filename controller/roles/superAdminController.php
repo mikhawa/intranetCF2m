@@ -225,6 +225,7 @@ elseif (isset($_GET['insertleconge']))
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
 }elseif (isset($_GET["updatelinscription"])) {
     echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
+    
 // Display views for sessions
 } elseif (isset($_GET['viewlasession'])) {
     echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
