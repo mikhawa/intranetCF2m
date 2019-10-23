@@ -6,3 +6,6 @@
 
 # dependencies
 /vendor/
+
+# upload folders
+/public/img/upload/
