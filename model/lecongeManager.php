@@ -39,7 +39,7 @@ class lecongeManager
 
     // création de l'affichage de toutes les sections sur l'accueil publique du site
     public function lecongeSelectAll(): array {
-        $sql = "SELECT * FROM conge ORDER BY debut ASC ;";
+        $sql = "SELECT * FROM conge ORDER BY debut ASC;";
         $recup = $this->db->query($sql);
 
         if($recup->rowCount()===0){
@@ -55,9 +55,9 @@ class lecongeManager
         if(empty($idconge)){
             return [];
         }
-        $sql = "SELECT * FROM conge WHERE idconge = ? ;";
+        $sql = "SELECT * FROM leconge WHERE idleconge = ? ;";
         $recup = $this->db->prepare($sql);
-        $recup->bindValue(1,$idsection,PDO::PARAM_INT);
+        $recup->bindValue(1,$idconge,PDO::PARAM_INT);
         $recup->execute();
 
         if($recup->rowCount()===0){
@@ -79,41 +79,29 @@ class lecongeManager
     // création de l'affichage de toutes les sections avec ses utilisateurs sur l'accueil de l'administration du site
 
     public function lecongeCreate(leconge $conge){
-        if (empty($conge->getIdleconge()) || empty($conge->getDebut())||empty($conge->getFin()) || empty($conge->getLetype()) || empty($conge->getLasession_idlasession())) {
-            return false;
+        if (empty($conge->getDebut())||empty($conge->getFin()) || empty($conge->getLetype()) ||empty($conge->getLasession_idlasession())) {
+			return false;
         }
 
-        $sql = "INSERT INTO leconge (idleconge, debut, fin, lasession_idlasession) VALUES(?,?,?,?,?);";
+        $sql = "INSERT INTO leconge (debut, fin, letype, lasession_idlasession) VALUES(?,?,?,?);";
 
         $insert = $this->db->prepare($sql);
 
+        $insert->bindValue(1, $conge->getDebut(), PDO::PARAM_STR);
+        $insert->bindValue(2, $conge->getFin(), PDO::PARAM_STR);
+        $insert->bindValue(3, $conge->getLetype(), PDO::PARAM_STR);
+        $insert->bindValue(4, $conge->getLasession_idlasession(), PDO::PARAM_STR);            
 
-
-        $insert->bindValue(1, $conge->getIdleconge(), PDO::PARAM_STR);
-        $insert->bindValue(2, $conge->getDebut(), PDO::PARAM_STR);
-        $insert->bindValue(3, $conge->getFin(), PDO::PARAM_STR);
-        $insert->bindValue(4, $conge->getLetype(), PDO::PARAM_STR);
-        $insert->bindValue(5, $conge->getLasession_idlasession(), PDO::PARAM_STR);
-
-            
-
-
-        try{
-
-    $insert ->execute();
-       return true;
-
-        } catch(PDOException $e){
-
-         echo $e->getCode();
+        try
+		{
+			$insert ->execute();
+			return true;
+        } 
+		catch(PDOException $e)
+		{
+         echo $e->getMessage();
               return false;
-
         }
-
-
-
-
-
 
     }
 
@@ -151,31 +139,28 @@ class lecongeManager
 
     // Requête pour mettre à jour une section en vérifant si la variable get idsection correspond bien à la variable post idsection (usurpation d'identité)
 
-    public function updateConge(conge $datas, int $get){
-
+    public function updateConge(leconge $datas){
+		
         // vérification que les champs soient valides (pas vides)
-        if(empty($datas->getDebut())||empty($datas->getFin())||empty($datas->getIdthesection())){
+        if(empty($datas->getIdleconge())|| empty($datas->getDebut())||empty($datas->getFin())|| empty($datas->getLetype())||empty($datas->getLasession_idlasession())){
             return false;
         }
 
-        // vérification contre le contournement des droits
-        if($datas->getIdconge()!=$get){
-            return false;
-        }
-
-        $sql = "UPDATE conge SET debut=?, fin=? WHERE idconge=?";
+        $sql = "UPDATE leconge SET debut=?, fin=?, letype=?, lasession_idlasession=? WHERE idleconge=?";
 
         $update = $this->db->prepare($sql);
 
         $update->bindValue(1,$datas->getDebut(),PDO::PARAM_STR);
         $update->bindValue(2,$datas->getFin(),PDO::PARAM_STR);
-        $update->bindValue(3,$datas->getIdconge(),PDO::PARAM_INT);
+		$update->bindValue(3,$datas->getLetype(),PDO::PARAM_STR);
+		$update->bindValue(4,$datas->getLasession_idlasession(),PDO::PARAM_STR);
+        $update->bindValue(5,$datas->getIdleconge(),PDO::PARAM_INT);
 
         try{
             $update->execute();
             return true;
         }catch (PDOException $e){
-            echo $e->getCode();
+            echo $e->getMessage();
             return false;
         }
 
@@ -185,16 +170,16 @@ class lecongeManager
 
     public function deleteConge(int $idconge){
 
-        $sql = "DELETE FROM conge WHERE idconge=?";
+        $sql = "DELETE FROM leconge WHERE idleconge=?";
 
         $delete = $this->db->prepare($sql);
-        $delete->bindValue(1,$idconge, PDO::PARAM_INT);
+        $delete->bindValue(1,$idconge, PDO::PARAM_STR);
 
         try{
             $delete->execute();
             return true;
         }catch(PDOException $e){
-            echo $e->getCode();
+            echo $e->getMessage();
             return false;
         }
 
@@ -228,7 +213,7 @@ public function selectCongeWithLimit(int $pageConge,int $nbParPageConge): array{
 		*
 	FROM
 		leconge
-	ORDER BY debut
+	ORDER BY debut DESC
 	LIMIT  ?, ?
 	";
 	$sqlQuery = $this->db->prepare($sql);
