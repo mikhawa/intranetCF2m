@@ -19,6 +19,16 @@ if(isset($_GET['viewdetailsession'])) {
 
 
 
+}elseif(isset($_GET['update']) && ctype_digit($_GET['update'])){
+    $choixProfil = (int)$_GET['update'];
+
+    $profilStagiaire = $evaluationM-> selectProfilStagiaire($choixProfil);
+
+    echo $twig->render('view_stagiaires/profil_stagiaire.html.twig',['leprofil'=>$profilStagiaire]);
+
+
+
+
 }
 else{
 

@@ -1,0 +1,40 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+{% block title %}
+    {{ parent() }}
+    | Accueil stagiare Web
+{% endblock %}
+
+{% block menuhaut %}
+    {% include "hautEtmenu.html.twig" %}
+{% endblock %}
+
+{% block milieu %}
+    <!-- Page Content -->
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">PROFIL </h1>
+                <p class="lead">PROFIL du stagiaire</p>
+
+            </div>
+            <div<div class="col-lg-12 text-center">
+        </h4>
+    </div>
+    <br>
+    <div
+        class="col-lg-6 text-left">
+{{ pagination|raw }}
+
+        {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
+        {% for item in leprofil %}
+            <h4 class="mt-3">{{ item.lenom }}</h4>
+            <h4 class="mt-3">{{ item.leprenom }}</h4>
+            <h4 class="mt-3">{{ item.lenom }}</h4>
+            <h4 class="mt-3">{{ item.lenom }}</h4>
+            
+        {% endfor %}
+    </div>
+</div></main>{% endblock %}{% block bas %}{% include "footer.html.twig" %}{% endblock %}

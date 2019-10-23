@@ -44,6 +44,30 @@ class evaluationManager {
     }
 
 
+    public function selectProfilStagiaire(int $idprofil): array{
+
+        $sql="SELECT u.lenom, u.leprenom, u.lemail, f.lenom, s.lenom
+        FROM lutilisateur u 
+        INNER JOIN lafiliere f 
+        ON f.idlafiliere = u.idlutilisateur
+        INNER JOIN lasession s 
+        ON s.idlasession = u.idlutilisateur
+        WHERE u.idlutilisateur =?";
+
+        $recup = $this->db->prepare($sql);
+        $recup->bindValue(1,$idprofil,PDO::PARAM_INT);
+        $recup->execute();
+
+
+                if ($recup->rowCount() === 0) {
+                    return [];
+                }
+                return $recup->fetchAll(PDO::FETCH_ASSOC);  
+
+
+    }
+
+
 
 
 
