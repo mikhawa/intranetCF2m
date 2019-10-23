@@ -239,13 +239,14 @@ elseif (isset($_GET['insertleconge']))
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
     $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,3);
     $pagesLutisateur=pagination::pagine($nblutilisateur,3,$pageLutisateur,"viewutilisateur&pglutilisateur");
+   
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
 }elseif(isset($_GET['insertutilisateur'])){
       if(!empty($_POST)){
 
            $newlutilisateur = new lutilisateur($_POST);
 
-           echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig',['lenom'=>$lutilisateurM->lutilisateurCreat($newlutilisateur)]);
+           echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig',['lenom'=>$lutilisateurM->lutilisateurCreate($newlutilisateur)]);
             header('Location: ./?viewutilisateur');
 
       }else{
