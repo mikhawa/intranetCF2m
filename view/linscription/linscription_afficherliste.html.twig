@@ -25,12 +25,12 @@
             </div>
             <br>
             <div class="col-lg-12 text-left">
-                {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
+                {# Faites apparaître les inscriptions (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
                 {% for item in detailinscription %}
                     <div class="section col-lg-12">
                     <div class="content-menu">
                         <a href="?updatelinscription={{ item.idlinscription }}" class="modified">modifier</a>  
-                        <a class="delete" href="?deletelinscription={{ item.idlinscription }}">supprimer</a>
+                        <a class="delete" href="javascript:if(window.confirm('Voulez-vous vraiment supprimer cette inscription ?')) location='./?confirmationdeletelinscription={{ item.idlinscription }}';">supprimer</a>
                     </div>
                     </h4>  
                     <p>Début : {{ item.debut }}</p>
@@ -38,7 +38,7 @@
                     </div>
 
                 {% else %}
-                <h4 class="mt-3">Pas encore de stagiaire sur notre page accueil</h4>
+                <h4 class="mt-3">Pas encore d'inscription sur notre page accueil</h4>
                 {% endfor %}
             </div>
         </div>
