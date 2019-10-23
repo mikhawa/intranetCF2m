@@ -9,16 +9,21 @@ class evaluationManager {
 
     //selection de tous les stagiaires
 
-    public function selectAllStagiairesForEval(){
+    public function selectAllStagiairesForEval(int $idlafiliere): array{
 
         $sql = "SELECT u.lenom, u.leprenom
 		FROM lutilisateur u
 		INNER JOIN linscription i
 		ON i.utilisateur_idutilisateur = u.idlutilisateur
 		INNER JOIN lasession s
-        ON s.idlasession = i.lasession_idsession;";
+        ON s.idlasession = i.lasession_idsession
+        INNER JOIN lafiliere f
+        ON f.idlafiliere = s.lafiliere_idfiliere
+        where f.idlafiliere = ?";
         
-        $recup = $this->db->query($sql);
+        $recup = $this->db->prepare($sql);
+        $recup->bindValue(1,$idlafiliere,PDO::PARAM_INT);
+        $recup->execute();
         if ($recup->rowCount() === 0) {
             return [];
         }

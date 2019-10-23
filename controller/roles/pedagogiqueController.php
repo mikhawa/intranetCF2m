@@ -10,9 +10,10 @@ if(isset($_GET['viewdetailsession'])) {
 
 
 
-}elseif(isset($_GET['choixFiliere'])){
+}elseif(isset($_GET['choixFiliere']) && ctype_digit($_GET['choixFiliere'])){
+    $choixFiliere = (int)$_GET['choixFiliere'];
 
-    $nomStagiaire = $evaluationM->selectAllStagiairesForEval();
+    $nomStagiaire = $evaluationM->selectAllStagiairesForEval($choixFiliere);
 
     echo $twig->render("view_stagiaires/choix_stagiaire.html.twig",['lutilisateur'=>$nomStagiaire]);
 
