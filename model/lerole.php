@@ -6,6 +6,7 @@ class lerole
 protected $idlerole;
 protected $lintitule;
 protected $ladescription;
+protected $actif;
 
 
 //méthodes
@@ -50,7 +51,13 @@ protected function hydrate (array $tablehydrate ){
         return htmlspecialchars_decode ($this->ladescription,ENT_QUOTES);
     }
 
-   
+    /**
+     * @return mixed
+     */
+    public function getActif()
+    {
+        return $this->actif ;
+    }
 
     /**
      * SETTERS
@@ -79,6 +86,13 @@ protected function hydrate (array $tablehydrate ){
         $this->ladescription =htmlspecialchars(strip_tags(trim($ladescription)),ENT_QUOTES);
     }
 
+    /**
+     * @param mixed $actif
+     */
+    public function setActif(int $actif)
+    {
+        $this->actif = $actif;
+    }
    
 
 
