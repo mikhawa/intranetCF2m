@@ -1,0 +1,51 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+{% block title %}{{ parent() }} | Admin | Ajouter une filiere{% endblock %}
+
+{% block menuhaut %}
+
+{% endblock %}
+
+{% block centre %}
+    <!-- Page Content -->
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+                <p class="lead">Admin | Ajouter une filiere</p>
+            </div>
+            <div class="col-lg-6 text-left">
+                {# Affichage du formulaire #}
+                <form action="" enctype="multipart/form-data" method="post" name="createFiliere">
+
+                    <div class="form-group">
+                        <label for ="rajoutfillier">Nom de la filière</label>
+                        <input name="lenom" maxlength="45" type="text" class="form-control" placeholder="Titre de la filiere" required><br></input>
+                        <label for="lacronyme">Acronyme</label>
+                        <input name="lacronyme" maxlength="10" type="text" class="form-control" placeholder="Acronyme de la filiere" required></input><br>
+                        <div class="mx-auto" style="width: 200px;">
+
+
+                            <label for="color">Choix du couleur</label>
+                            <input name="lacouleur" type="color" class="form-control" placeholder="La couleur" value="#fad345"  required><br>
+                        </div><br><br>
+                        <div class="col-lg-6 text-left">
+
+                            <label for="image">Le pictogramme</label>
+                            <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" enctype="multipart/form-data" ><br>
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+
+
+                            </form>
+                            <h3>{{ error }}</h3>
+                        </div>
+                    </div>
+                    </main>
+                {% endblock %}
+
+                {% block bas %}
+                    {% include "footer.html.twig" %}
+                {% endblock %}
+

@@ -1,0 +1,69 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+{% block title %}{{ parent() }} | Admin | Modifier une filiere{% endblock %}
+
+{% block menuhaut %}
+
+{% endblock %}
+
+{% block centre %}
+    <!-- Page Content -->
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+                <p class="lead">Admin | Modifier une filière</p>
+            </div>
+            <div class="col-lg-6 text-left">
+                {# Affichage du formulaire #}
+
+
+                <form action="" method="post" name="update" enctype="multipart/form-data">
+                    <div class ="form-group">
+                        <label for="Nondelafilier">Nom de la filière</label>
+                        <input name="lenom" type="text"  class="form-control" placeholder="Titre de la filiere" value="{{ section.lenom }}" required><br></input>
+                    </div>
+                    <div class ="form-group">
+                        <label for="lacronyme">Acronyme</label>
+
+                        <input name="lacronyme" type="text" class="form-control"
+                               placeholder="acronyme" value="{{ section.lacronyme }}" required></input><br>
+                    </div>
+
+                    <input type="hidden" name="idlafiliere" value="{{ section.idlafiliere }}">
+
+
+                    <div class="mx-auto" style="width: 200px;">
+
+
+                        <label for="color">Choix du couleur</label>
+                        <input name="lacouleur" type="color" class="form-control" placeholder="La couleur"value="{{ section.lacouleur }}" required><br>
+                    </div><br><br>
+                    <div class="col-lg-6 text-left">
+
+                        <label for="image">Le pictogramme</label>
+                        <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" enctype="multipart/form-data"> Actuellement : {% if (section.lepicto) %} <img src="img/upload/thumb/{{ section.lepicto }}"/> <input type="hidden" name="lepicto" value="{{ section.lepicto }}"> {% else %} Vide
+                        {% endif %}<br>
+						<label for="visible">Visibilité</label>
+						<select id="visible" name="actif" class="form-control" required>
+							<option value="1" {{ section.actif ? 'selected' }}>Visible</option>
+							<option value="0" {{ not(section.actif) ? 'selected' }}>Non-visible</option>
+						</select><br>
+
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </div>
+
+                </form>
+
+                <h3>{{ error }}</h3>
+            </div>
+        </div>
+    </main>
+
+    {% endblock %}
+
+        {% block bas %}
+            {% include "footer.html.twig" %}
+        {% endblock %}
