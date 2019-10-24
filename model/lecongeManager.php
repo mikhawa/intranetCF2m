@@ -26,7 +26,7 @@ class lecongeManager
 
     // création du menu qui nous renvoie un tableau
     public function leconge(): array {
-        $sql = "SELECT idconge,debut,fin FROM conge ORDER BY debut ASC ;";
+        $sql = "SELECT idleconge,debut,fin FROM leconge ORDER BY debut ASC ;";
         $recup = $this->db->query($sql);
 
         if($recup->rowCount()===0){
@@ -39,7 +39,7 @@ class lecongeManager
 
     // création de l'affichage de toutes les sections sur l'accueil publique du site
     public function lecongeSelectAll(): array {
-        $sql = "SELECT * FROM conge ORDER BY debut ASC;";
+        $sql = "SELECT * FROM leconge ORDER BY debut ASC;";
         $recup = $this->db->query($sql);
 
         if($recup->rowCount()===0){
@@ -83,7 +83,7 @@ class lecongeManager
 			return false;
         }
 
-        $sql = "INSERT INTO leconge (debut, fin, letype, lasession_idlasession) VALUES(?,?,?,?);";
+        $sql = "INSERT INTO leconge (debut, fin, letype) VALUES(?,?,?);";
 
         $insert = $this->db->prepare($sql);
 
@@ -116,7 +116,7 @@ class lecongeManager
             return false;
         }
 
-        $sql = "INSERT INTO conge (debut,fin) VALUES (?,?);";
+        $sql = "INSERT INTO leconge (debut,fin) VALUES (?,?);";
 
         $insert = $this->db->prepare($sql);
 
@@ -146,7 +146,7 @@ class lecongeManager
             return false;
         }
 
-        $sql = "UPDATE leconge SET debut=?, fin=?, letype=?, lasession_idlasession=? WHERE idleconge=?";
+        $sql = "UPDATE leconge SET debut=?, fin=?, letype=? WHERE idleconge=?";
 
         $update = $this->db->prepare($sql);
 
