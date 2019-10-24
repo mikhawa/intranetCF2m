@@ -32,9 +32,9 @@
         {% for item in lutilisateur %}
             <h4 class="mt-3">{{ item.lenom }}
                 |
-                <a href="?update={{ item.idlutilisateur }}">Evaluer</a>
+                <a href="?eval={{ item.idlutilisateur }}">Evaluer</a>
                 |
-                <a href="?delete={{ item.idlutilisateur }}">profil</a>
+                <a href="?profil={{ item.idlutilisateur }}">profil</a>
                  
             </h4>
             <p>{{ item.lacronyme }}</p>

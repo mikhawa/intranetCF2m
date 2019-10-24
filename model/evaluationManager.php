@@ -44,7 +44,7 @@ class evaluationManager {
     }
 
 
-    public function selectProfilStagiaire(int $idprofil): array{
+    public function selectProfilStagiaire(int $idlutilisateur): array{
 
         $sql="SELECT u.lenom, u.leprenom, u.lemail, f.lenom, s.lenom
         FROM lutilisateur u 
@@ -55,7 +55,7 @@ class evaluationManager {
         WHERE u.idlutilisateur =?";
 
         $recup = $this->db->prepare($sql);
-        $recup->bindValue(1,$idprofil,PDO::PARAM_INT);
+        $recup->bindValue(1,$idlutilisateur,PDO::PARAM_INT);
         $recup->execute();
 
 

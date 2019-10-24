@@ -19,17 +19,21 @@ if(isset($_GET['viewdetailsession'])) {
 
 
 
-}elseif(isset($_GET['update']) && ctype_digit($_GET['update'])){
-    $choixProfil = (int)$_GET['update'];
+ }elseif(isset($_GET['profil']) && ctype_digit($_GET['profil'])){
 
-    $profilStagiaire = $evaluationM-> selectProfilStagiaire($choixProfil);
+           $profil=(int)$_GET['profil'];
 
-    echo $twig->render('view_stagiaires/profil_stagiaire.html.twig',['leprofil'=>$profilStagiaire]);
+    
+
+            $profilStagiaire = $evaluationM-> selectProfilStagiaire($profil);
+
+            echo $twig->render('view_stagiaires/profil_stagiaire.html.twig',['leprofil'=>$profilStagiaire]);
+
+        }
+          
 
 
 
-
-}
 else{
 
 if(!isset($_SESSION['bandeau'])){
