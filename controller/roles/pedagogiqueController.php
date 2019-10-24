@@ -4,13 +4,6 @@
 if(isset($_GET['viewdetailsession'])) {
 
 
-//if(!empty($_GET)){
-	
-	//require_once "../controller/modules/gestionLafiliere.php";
-	
-//} elseif(isset($_GET['viewdetailsession'])) {
-
-
     $selectEval = $evaluationM->selectAllFiliereForEval();
 
 
