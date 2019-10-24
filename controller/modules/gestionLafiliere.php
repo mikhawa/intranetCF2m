@@ -6,6 +6,7 @@
  */
 
 switch ($_SESSION['idlerole']) {
+	
     // référent pédagogique
     case 3:
 
@@ -16,10 +17,10 @@ switch ($_SESSION['idlerole']) {
 
             // pagination (toutes les filières pour l'admin, les filières actives pour les autres)
             $nbFiliere = $lafiliereM->selectFiliereCountActif();
-            $nbPageFiliere = $lafiliereM->selectFiliereWithLimit($paginFiliere, NB_PG);
+            $nbPageFiliere = $lafiliereM->selectFiliereWithLimitActif($paginFiliere, NB_PG);
             // création de la pagination
             $PaginationFiliere = pagination::pagine($nbFiliere, NB_PG, $paginFiliere, "viewlafiliere&pgFiliere");
-            echo $twig->render('lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere" => $PaginationFiliere]);
+            echo $twig->render('/roles/pedagogique/lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere" => $PaginationFiliere]);
 
 
             // insert a filiere
@@ -106,8 +107,7 @@ switch ($_SESSION['idlerole']) {
             }
 
         }
-
-
+		
         // le code pour rp
         break;
 
@@ -213,6 +213,7 @@ switch ($_SESSION['idlerole']) {
         }
 
         break;
+		
     default:
         echo "<h3>lafiliere: <small>Il n'est pas prévu que vous puissiez utiliser ce module!</small></h3>";
 }

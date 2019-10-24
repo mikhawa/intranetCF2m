@@ -1,10 +1,5 @@
 <?php
 
-// deconnection
-if(isset($_GET['deconnect'])){
-    $lutilisateurM->disconnectLutilisateur();
-}
-
 // load lutilisateur manager
 $lutilisateurM=new lutilisateurManager($db_connect);
 // load lutilisateur inscription
@@ -21,6 +16,11 @@ $lafiliereM=new lafiliereManager($db_connect);
 $lecongeM=new lecongeManager($db_connect);
 // load eval stagiaire
 $evaluationM= new evaluationManager($db_connect);
+
+// deconnection
+if(isset($_GET['deconnect'])){
+    $lutilisateurM->disconnectLutilisateur();
+}
 
 // switch suivant l'id des rôles (pour le moment, un rôle, un controleur)
 switch ($_SESSION['idlerole']) {

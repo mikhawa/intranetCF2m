@@ -51,46 +51,9 @@ if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurI
     $linscription = new linscription($_POST);
     $linscriptionM->linscriptionCreate($linscription);
 }
-// Display views for sessions
-elseif (isset($_GET['viewlasession']))
-{
-	$paginSession = (isset($_GET['pgSession'])?(int)$_GET['pgSession']:1);
-    $nbSession = $lasessionM->selectSessionCountById();
-    $nbPageSession = $lasessionM->selectSessionWithLimit($paginSession,5);
-    $PaginationSession = pagination::pagine($nbSession,5,$paginSession,"viewlasession&pgSession");
-	
-	echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $nbPageSession,"pagination"=>$PaginationSession]);
-	
-}
-elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession']))
-{
-    echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
-}
-elseif (isset($_GET['insertlasession']))
-{
-    echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
-}
-elseif(isset($_GET['viewlerole']))
-{
-    // page actuelle
-    $pageactu = (isset ($_GET['pg']))?(int)$_GET['pg']:1;
-    // nombre de rôles totaux à afficher
-    $nbRoles = $leroleM->selectRoleCountById();
-    // on va récupérer les rôles de la page actuelle
-
-    $articlesPageActu = $leroleM->selectRoleWithLimit($pageactu,5);
-
-
-    // création de la pagination
-    $affichePagination = pagination::pagine($nbRoles,5,$pageactu,"viewlerole&pg");
-
-
-      
-      echo $twig->render('lerole/lerole_afficherliste.html.twig', [ "detailrole"=>$articlesPageActu,"pagination"=>$affichePagination]);
+ 
 // Display views for conges
-}
-elseif (isset($_GET['viewleconge']))
-{
+if (isset($_GET['viewleconge'])) {
 	$paginConge = (isset($_GET['pgConge'])?(int)$_GET['pgConge']:1);
     $nbConge = $lecongeM->selectCongeCountById();
     $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,5);
