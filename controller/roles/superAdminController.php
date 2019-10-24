@@ -1,10 +1,26 @@
 <?php
+
+/*
+ * Importation des modules accessible à l'administrateur technique
+ */
+
+if(!empty($_GET)){
+
+
+// gestion de lafiliere
+require_once "../controller/modules/gestionLafiliere.php";
+
+
 /*
  * lasession
  */
 // Delete, Update, Insert conditions for sessions
 if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmationdeletelasession'])) {
     $lasessionM->sessionDelete($_GET['confirmationdeletelasession']);
+
+
+
+
 // Update
 } else if (isset($_POST['idlasession']) && ctype_digit($_POST['idlasession']) && isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
     $lasession = new lasession($_POST);
@@ -35,6 +51,7 @@ if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurI
     $linscription = new linscription($_POST);
     $linscriptionM->linscriptionCreate($linscription);
 }
+
 // view all filieres
 if (isset($_GET['viewlafiliere'])) {
     $paginFiliere = (isset($_GET['pgFiliere'])?(int)$_GET['pgFiliere']:1);
@@ -121,8 +138,8 @@ if (isset($_GET['viewlafiliere'])) {
     } else {
         echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
     }
+
 // Display views for sessions
-}
 elseif (isset($_GET['viewlasession']))
 {
 	$paginSession = (isset($_GET['pgSession'])?(int)$_GET['pgSession']:1);
@@ -240,31 +257,22 @@ elseif (isset($_GET['insertleconge']))
     $pagesLutisateur=pagination::pagine($nblutilisateur,5,$pageLutisateur,"viewutilisateur&pglutilisateur");
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
-}elseif(isset($_GET['insertutilisateur'])){
-      if(!empty($_POST)){
+}elseif(isset($_GET['insertutilisateur'])) {
+        if (!empty($_POST)) {
 
-           $newlutilisateur = new lutilisateur($_POST);
+            $newlutilisateur = new lutilisateur($_POST);
 
-           echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig',['lenom'=>$lutilisateurM->lutilisateurCreate($newlutilisateur)]);
+            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig', ['lenom' => $lutilisateurM->lutilisateurCreate($newlutilisateur)]);
             header('Location: ./?viewutilisateur');
 
-      }else{
+        } else {
 
-          echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig');
+            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig');
 
-      }
- 
-
+        }
 
 
-
-
-
-
-
-
-
-
+    }
 
 }else{
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)

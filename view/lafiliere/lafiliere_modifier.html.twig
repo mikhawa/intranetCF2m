@@ -48,8 +48,8 @@
                         {% endif %}<br>
 						<label for="visible">Visibilité</label>
 						<select id="visible" name="actif" class="form-control" required>
-							<option value="1">Visible</option>
-							<option value="0">Non-visible</option>
+							<option value="1" {{ section.actif ? 'selected' }}>Visible</option>
+							<option value="0" {{ not(section.actif) ? 'selected' }}>Non-visible</option>
 						</select><br>
 
                             <button type="submit" class="btn btn-primary">Envoyer</button>
