@@ -18,6 +18,14 @@ if(isset($_GET['viewdetailsession'])) {
 
 
 
+}elseif(isset($_GET['viewlafiliere'])){
+	
+	$paginFiliere = (isset($_GET['pgFiliere'])?(int)$_GET['pgFiliere']:1);
+    $nbFiliere = $lafiliereM->selectFiliereCountById();
+    $nbPageFiliere = $lafiliereM->selectFiliereWithLimitPublic($paginFiliere,5);
+    $PaginationFiliere = pagination::pagine($nbFiliere,5,$paginFiliere,"viewlafiliere&pgFiliere");
+    echo $twig->render('lafiliere/lafiliere_afficherliste.html.twig', ['detailfiliere' => $nbPageFiliere, "paginationFiliere"=>$PaginationFiliere]);
+
 }
 else{
 

@@ -130,5 +130,26 @@ class lafiliereManager {
 
 	}
 
+	public function selectFiliereWithLimitPublic(int $pageFiliere,int $nbParPageFiliere): array{
+
+
+	    $premsLIMIT = ($pageFiliere-1)*$nbParPageFiliere;
+		$sql = "
+		SELECT
+			*
+		FROM
+			lafiliere
+		WHERE actif = 1
+		LIMIT  ?, ?
+		";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+		$sqlQuery->bindValue(2,$nbParPageFiliere,PDO::PARAM_INT);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+	}
     
 }

@@ -93,7 +93,6 @@ if (isset($_GET['viewlafiliere'])) {
 } elseif (isset($_GET["updatelafiliere"]) && ctype_digit($_GET["updatelafiliere"])) {
     // submit updating filiere
     if (isset($_POST['idlafiliere'])) {
-        
         $updatelafiliere = new lafiliere($_POST);
         //s($_FILES);
         // si on attache une nouvelle images
