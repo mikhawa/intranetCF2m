@@ -7,7 +7,6 @@ protected $idleconge;
 protected $debut;
 protected $fin;
 protected $letype;
-protected $lasession_idlasession;
 
 
 
@@ -63,15 +62,7 @@ protected function hydrate (array $tablehydrate ){
   }
 
 
-  /**
-     * @return mixed
-     */
-    public function getLasession_idlasession()
-    {
-        return $this->lasession_idlasession;
-    }
-
-   
+  
 
     /**
      * SETTERS
@@ -107,17 +98,6 @@ protected function hydrate (array $tablehydrate ){
     {
         $this->letype =htmlspecialchars(strip_tags(trim($letype)),ENT_QUOTES);
     }
-
-
-    /**
-     * @param mixed $lasession_idlasession
-     */
-    public function setLasession_idlasession($lasession_idlasession)
-    {
-        $this->lasession_idlasession =htmlspecialchars(strip_tags(trim($lasession_idlasession)),ENT_QUOTES);
-    }
-
-     
 
 
 }

@@ -112,12 +112,12 @@ class lutilisateurManager {
     }
     //create a new user
     public function lutilisateurCreate( lutilisateur $user) {
-        if( empty($user->getIdlutilisateur()) ||empty($user->getLenomutilisateur()) ||empty($user->getLemotdepasse()) ||empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail()) ||empty($user->getLuniqueid())){
+        if( empty($user->getIdutilisateur()) ||empty($user->getLenomutilisateur()) ||empty($user->getLemotdepasse()) ||empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail()) ||empty($user->getLuniqueid())){
           return false;
     }
     $sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
     $insert = $this->db->prepare($sql);
-    $insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
+    $insert->bindvalue(1, $user->getIdutilisateur(),PDO::PARAM_STR);
     $insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
     $insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
     $insert->bindvalue(4, $user->getLenom(),PDO::PARAM_STR);
@@ -135,7 +135,7 @@ class lutilisateurManager {
 	if(!$emailExists) {
 		$sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
 		$insert = $this->db->prepare($sql);
-		$insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
+		$insert->bindvalue(1, $user->getIdutilisateur(),PDO::PARAM_STR);
 		$insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
 		$insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
 		$insert->bindvalue(4, $user->getLenom(),PDO::PARAM_STR);
@@ -203,8 +203,11 @@ class lutilisateurManager {
 
 
         $premsLIMIT = ($page - 1) * $nbParPage;
-        $sql = "SELECT * FROM lutilisateur
-		LIMIT  ?, ?
+        $sql = "SELECT lutilisateur.* ,lerole.lintitule FROM lutilisateur
+          INNER JOIN lutilisateur_has_lerole
+            on lutilisateur_has_lerole.lutilisateur_idutilisateur =lutilisateur.idlutilisateur
+            INNER JOIN lerole
+            on lerole.idlerole= lutilisateur_has_lerole.lerole_idlerole LIMIT ?,?;
 		";
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->bindValue(1, $premsLIMIT, PDO::PARAM_INT);

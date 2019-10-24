@@ -7,6 +7,7 @@ protected $lenom;
 protected $lacronyme;
 protected $lacouleur;
 protected $lepicto;
+protected $actif;
 
 
 //méthodes
@@ -66,6 +67,11 @@ protected function hydrate (array $tablehydrate ){
     {
         return $this->lepicto;
     }
+	
+	public function getActif()
+    {
+        return htmlspecialchars_decode($this->actif,ENT_QUOTES);
+    }
 
 
 
@@ -115,10 +121,12 @@ protected function hydrate (array $tablehydrate ){
         $this->lepicto =htmlspecialchars(strip_tags(trim($lepicto)),ENT_QUOTES);
     }
 
-    
+    public function setActif(int $actif)
+    {
+        if(!empty($actif)){
 
-   
-
-
-
+            $this->actif = $actif;
+        }
+    }
+	
 }
