@@ -99,7 +99,7 @@ public function sessionUpdate(lasession $lasession){
 		return false;
 }
 
-	 $sql ="UPDATE lasession SET lenom=?, lacronyme=?, lannee=?, lenumero=?, letype=?, debut=?, fin=?, lafiliere_idfiliere=? WHERE idlasession=?";
+	 $sql ="UPDATE lasession SET lenom=?, lacronyme=?, lannee=?, lenumero=?, letype=?, debut=?, fin=?, lafiliere_idfiliere=?, actif=? WHERE idlasession=?";
 
 
 	$update = $this->db->prepare($sql);
@@ -111,7 +111,8 @@ public function sessionUpdate(lasession $lasession){
 	$update->bindValue(6, $lasession->getDebut(), PDO::PARAM_STR);
 	$update->bindValue(7, $lasession->getFin(), PDO::PARAM_STR);
 	$update->bindValue(8, $lasession->getLafiliere_idfiliere(), PDO::PARAM_INT);
-	$update->bindValue(9, $lasession->getIdlasession(),PDO::PARAM_INT);
+    $update->bindValue(9, $lasession->getActif(),PDO::PARAM_INT);
+	$update->bindValue(10, $lasession->getIdlasession(),PDO::PARAM_INT);
 
 	try{
 
@@ -120,7 +121,7 @@ public function sessionUpdate(lasession $lasession){
 
 	} catch(PDOException $e){
 
-		echo '<h2 style="color: red;">ERROR: ' . $a->getMessage() . '</h2>';
+		echo '<h2 style="color: red;">ERROR: ' . $e->getMessage() . '</h2>';
 		return false;
 
 	}
@@ -149,7 +150,7 @@ try{
 
 }
 
-public function selectSessionCountById(): int {
+public function selectSessionCount(): int {
 
 	$sql="SELECT COUNT(idlasession) AS nb
 		  FROM lasession";

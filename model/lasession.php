@@ -16,6 +16,7 @@ class  lasession
     protected $debut;
     protected $fin;
     protected $lafiliere_idfiliere;
+    protected $actif=1;
 
     public function __construct(array $donnee = [])
     {
@@ -125,4 +126,22 @@ class  lasession
     {
         $this->lafiliere_idfiliere = $lafiliere_idfiliere;
     }
+
+    /**
+     * @return int
+     */
+    public function getActif(): int
+    {
+        return $this->actif;
+    }
+
+    /**
+     * @param int $actif
+     */
+    public function setActif(int $actif): void
+    {
+        $this->actif = $actif;
+    }
+
 }
+
