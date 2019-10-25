@@ -225,7 +225,7 @@ class lutilisateurManager {
     public function selectLutilisateurCountById(): int
     {
 
-        $sql = "SELECT COUNT(idlutilisateur) AS b, lintitule AS c
+        $sql = "SELECT COUNT(idlutilisateur) AS b
 			  FROM lutilisateur";
 
 
