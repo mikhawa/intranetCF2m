@@ -125,11 +125,19 @@ elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisate
 
         if($udateUtilisateur){
 
-            header("Location: ./");
+            header("Location: ./?viewutilisateur");
         }
     }
 
-}elseif (isset($_GET['viewutilisateur'])){
+
+}elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
+
+    $lutilisateurM->UserDelete($_GET['deleteuser']);
+
+    header("Location: ./?viewutilisateur");
+
+}
+elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
     $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,NB_PG);
