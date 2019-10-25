@@ -9,8 +9,9 @@ if(!empty($_GET)){
 
 // gestion de lafiliere
 require_once "../controller/modules/gestionLafiliere.php";
+
 // gestion de lasession
-    require_once "../controller/modules/gestionLasession.php";
+require_once "../controller/modules/gestionLasession.php";
 
 
 // Delete, Update, Insert conditions for congés
