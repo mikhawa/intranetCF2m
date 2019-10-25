@@ -43,35 +43,8 @@
                         <input type="email" class="form-control" id="lemaila" placeholder="ici votre titre" value='{{ afficheuser.lemail }}' name='lemail'>
                     </div>
 
+                    <p style ="color:blue;">{{ afficheuser.lintitule }}</p>
 
-
-                    {% for cat in afficheroles %}
-
-
-
-                        {% set tabId = afficheuser.idlerole|split(",") %}
-
-                        {% if cat.idlerole in tabId %}
-
-                            {% set value = "checked" %}
-
-                        {% else %}
-                            {% set value = "" %}
-                        {% endif %}
-                        <div class="form-check">
-
-                            <input name='idlerole[]' class="form-check-input" type="checkbox" value="{{ cat.idlerole }}" id="defaultCheck{{ loop.index }}" {{ value }}>
-
-                            <label class="form-check-label" for="defaultCheck{{ loop.index }}">
-                                {{ cat.lintitule }}
-
-                            </label>
-                        </div>
-
-                    {% else %}
-                        <h3>Pas de Catégories!</h3>
-                    {% endfor %}
-                    <br>
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>
             </div>

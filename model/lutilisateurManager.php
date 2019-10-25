@@ -203,11 +203,13 @@ class lutilisateurManager {
 
 
         $premsLIMIT = ($page - 1) * $nbParPage;
-        $sql = "SELECT lutilisateur.* ,lerole.lintitule FROM lutilisateur
+        $sql = "SELECT lutilisateur.* ,lerole.lintitule 
+             FROM lutilisateur
           INNER JOIN lutilisateur_has_lerole
             on lutilisateur_has_lerole.lutilisateur_idutilisateur =lutilisateur.idlutilisateur
             INNER JOIN lerole
-            on lerole.idlerole= lutilisateur_has_lerole.lerole_idlerole LIMIT ?,?;
+            on lerole.idlerole= lutilisateur_has_lerole.lerole_idlerole 
+            LIMIT ?,?;
 		";
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->bindValue(1, $premsLIMIT, PDO::PARAM_INT);
@@ -241,12 +243,12 @@ class lutilisateurManager {
     }
 
     public function SelectUserByRoleid( int $idutilisateur){
-        $sql="SELECT l.idlutilisateur,l.lenomutilisateur,l.lenom,l.leprenom,l.lemail,l.actif,GROUP_CONCAT(le.idlerole) AS idlerole,GROUP_CONCAT(le.lintitule SEPARATOR '|||') AS lintitule
+        $sql="SELECT l.idlutilisateur,l.lenomutilisateur,l.lenom,l.leprenom,l.lemail,l.actif,le.idlerole ,le.lintitule 
 FROM lutilisateur l
 LEFT JOIN lutilisateur_has_lerole lu ON lu.lutilisateur_idutilisateur=l.idlutilisateur
 LEFT JOIN lerole le ON le.idlerole=lu.lerole_idlerole
 WHERE l.idlutilisateur = :id
-GROUP BY l.idlutilisateur
+
 ";
         $recup = $this->db->prepare($sql);
         $recup->bindParam("id", $idutilisateur, PDO::PARAM_INT);
@@ -265,7 +267,7 @@ GROUP BY l.idlutilisateur
             return [];
         }
     }
-    function updateUserandlore(lutilisateur $utilisateur, array $idlore) {
+    function updateUserandlore(lutilisateur $utilisateur) {
 
 
         $this->db->beginTransaction();
@@ -285,37 +287,6 @@ GROUP BY l.idlutilisateur
         $update->bindValue("lemaila", $utilisateur->getLemail(), PDO::PARAM_STR);
 
         $update->execute();
-
-
-
-
-        $sql = "DELETE FROM lutilisateur_has_lerole WHERE lutilisateur_idutilisateur = ?";
-        $delete = $this->db->prepare($sql);
-        $delete->bindValue(1, $utilisateur->getIdutilisateur(), PDO::PARAM_INT);
-
-        $delete->execute();
-
-        if (!empty($idlore)) {
-
-
-            $sql = "INSERT INTO lutilisateur_has_lerole (lutilisateur_idutilisateur,lerole_idlerole) VALUES ";
-
-            foreach ($idlore AS $id) {
-
-
-                $id = (int) $id;
-
-                $sql .= "({$utilisateur->getIdutilisateur()},$id),";
-
-            }
-
-
-            $sql = substr($sql, 0, -1);
-            //s($sql);
-
-            $this->db->exec($sql);
-
-        }
 
         try{
 

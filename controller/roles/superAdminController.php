@@ -96,19 +96,23 @@ elseif (isset($_GET['insertleconge']))
     echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $linscriptionM->selectAllLinscription()]);
 }elseif (isset($_GET["ajouterlinscription"])) {
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
+
+}elseif (isset($_GET['updatelinscription'])&& ctype_digit($_GET['updatelinscription'])){
+
 }
+//Update lutilisateur
 elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
 
 
     $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
 
-    $recuperationRole = $leroleM->SelectAllRoles();
+
 
 
     if(empty($_POST)){
 
 
-        echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
+        echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur]);
 
 
     }else{
@@ -117,9 +121,7 @@ elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisate
 
 
 
-        $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
-
-        $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+        $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate);
 
 
 
@@ -129,7 +131,7 @@ elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisate
         }
     }
 
-
+//Delete l'utilisateur
 }elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
 
     $lutilisateurM->UserDelete($_GET['deleteuser']);
@@ -141,6 +143,7 @@ elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
     $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,NB_PG);
+
     $pagesLutisateur=pagination::pagine($nblutilisateur,NB_PG,$pageLutisateur,"viewutilisateur&pglutilisateur");
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
