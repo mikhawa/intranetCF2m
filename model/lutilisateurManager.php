@@ -52,7 +52,7 @@ class lutilisateurManager {
 		WHERE
 			idlutilisateur = :id;";
         $sqlQuery = $this->db->prepare($sql);
-        $sqlQuery->bindValue(":id", $user->getIdutilisateur(), PDO::PARAM_INT);
+        $sqlQuery->bindValue(":id", $user->getIdlutilisateur(), PDO::PARAM_INT);
         $sqlQuery->execute();
         return $sqlQuery->fetch(PDO::FETCH_ASSOC);
     }
@@ -110,33 +110,38 @@ class lutilisateurManager {
         $sqlQuery->execute();
         return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+
+
     //create a new user
     public function lutilisateurCreate( lutilisateur $user,int $role) {
         if(empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail())){
           return false;
     }
-    $sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUES(?,?,?,?,?,?,?);";
-    $insert = $this->db->prepare(sql);
+    $sql = "INSERT INTO lutilisateur ( lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUES(?,?,?,?,?,?);";
+    $insert = $this->db->prepare($sql);
     // création de l'uniqueid et cryptage du mot de passe (1234 par défaut)
     $user->setLuniqueid();
     $user->setLemotdepasseCrypte(1234);
-    $insert->bindvalue(1, $user->getIdutilisateur(),PDO::PARAM_STR);
-    $insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
-    $insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
-    $insert->bindvalue(4, $user->getLenom(),PDO::PARAM_STR);
-    $insert->bindvalue(5, $user->getLeprenom(),PDO::PARAM_STR);
-    $insert->bindvalue(6, $user->getLemail(),PDO::PARAM_STR);
-    $insert->bindvalue(7, $user->getLuniqueid(),PDO::PARAM_STR);
+
+
+    $insert->bindvalue(1, $user->getLenomutilisateur(),PDO::PARAM_STR);
+    $insert->bindvalue(2, $user->getLemotdepasse(),PDO::PARAM_STR);
+    $insert->bindvalue(3, $user->getLenom(),PDO::PARAM_STR);
+    $insert->bindvalue(4, $user->getLeprenom(),PDO::PARAM_STR);
+    $insert->bindvalue(5, $user->getLemail(),PDO::PARAM_STR);
+    $insert->bindvalue(6, $user->getLuniqueid(),PDO::PARAM_STR);
     //gestion des erreurs avec try catch
     try{
         $insert->execute();
-        return true;
     }catch(PDOException $e){
         echo $e->getCode();
         return false;
     }
 
         $idutilisateur =$this->db->lastInsertId();
+
         $sql = "INSERT INTO  lutilisateur_has_lerole
         (lutilisateur_idutilisateur,lerole_idlerole) VALUES ($idutilisateur,?)";
         $req = $this->db->prepare($sql);
@@ -239,9 +244,6 @@ class lutilisateurManager {
         $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
         return (int) $recup['b'];
 
-
-        $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
-        return (int) $recup['b'];
     }
 
 

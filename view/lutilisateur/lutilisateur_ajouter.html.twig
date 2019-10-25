@@ -38,11 +38,9 @@
 
 <select name="role" id="role" class ="form-control" required>
     <option value=""> -- Choix du rôle --</option>
-    <option value=1>Membre du personnel</option>
-    <option value=2>Agent d'acceuil</option>
-    <option value=3>Référent pédagoqique</option>
-    <option value=4>Administateur Tecnique</option>
-    <option value=5>Stagiaire</option>
+    {% for item in roles %}
+<option value={{item.idlerole}}>{{item.lintitule}}</option>
+{% endfor %}
 
 
    

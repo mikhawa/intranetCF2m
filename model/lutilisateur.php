@@ -3,7 +3,7 @@
 
 class lutilisateur
 {
-protected $idutilisateur;
+protected $idlutilisateur;
 protected $lenomutilisateur;
 protected $lemotdepasse;
 protected $lenom;
@@ -32,9 +32,9 @@ protected function hydrate (array $tablehydrate ){
     /**
      * GETTERS
      */
-    public function getIdutilisateur()
+    public function getIdlutilisateur()
     {
-        return htmlspecialchars_decode($this->idutilisateur,ENT_QUOTES);
+        return htmlspecialchars_decode($this->idlutilisateur,ENT_QUOTES);
     }
 
     /**
@@ -89,11 +89,11 @@ protected function hydrate (array $tablehydrate ){
     /**
      * SETTERS
      */
-    public function setIdutilisateur( int $idutilisateur)
+    public function setIdlutilisateur( int $idutilisateur)
     {
         if(!empty($idutilisateur)){
 
-            $this->idutilisateur = $idutilisateur;
+            $this->idlutilisateur = $idutilisateur;
         }
     }
 
