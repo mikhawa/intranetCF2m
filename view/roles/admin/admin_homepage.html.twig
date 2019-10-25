@@ -1,79 +1,81 @@
 {% extends "roles/admin/template.admin.html.twig" %}
 
 
-
 {% block centre %}
- <!-- content admin -->
-{% if entree %}
-    <div id="fade" class="alert-connected">
-        <span class="closebtn" onclick="this.partelement.style.display="none";">&times;</span>
-        Bienvenue:<b>{{ " " }}{{ session.leprenom }}{{ " " }}{{ session.lenom }}</b> Vous êtes connecté en tant que <b>" {{ " " }}{{ session.lintitule }} "</b>
-    </div>
+    <!-- content admin -->
+    {% if entree %}
+        <div id="fade" class="alert-connected">
+            <span class="closebtn" onclick="this.partelement.style.display=" none";">&times;</span>
+            Bienvenue:<b>{{ " " }}{{ session.leprenom }}{{ " " }}{{ session.lenom }}</b>
+            Vous êtes connecté en tant que
+            <b>"
+                {{ " " }}{{ session.lintitule }}
+                "</b>
+        </div>
     {% endif %}
-    <div id="content-admin" class="col-lg-10">
+    <div
+        id="content-admin" class="col-lg-10">
         <!-- content titre page -->
         <div class="row page-title">
-                <div class="circle">
-                    <img class="col-lg-12" src="img/home.png"/>
-                </div>
+            <div class="circle">
+                <img class="col-lg-12" src="img/home.png"/>
+            </div>
             <!-- titre de la page -->
             <div class="col-lg-11">
                 <h1 class="col-lg-11">Accueil</h1>
-            </div><!-- fin titre de la page -->
-        </div><!-- end titre page -->
+            </div>
+            <!-- fin titre de la page -->
+        </div>
+        <!-- end titre page -->
         <!-- menu générale admin -->
         <div id="menu-admin" class="row justify-content-center">
             <ul class="col-lg-3">
-
-            <a href="?viewutilisateur" alt="Gestions des filières">
-                 <li class="col-lg-12">
-                     <img src="img/user.png" alt="gestion des lutilisateur" class="">
-                     Gestions des lutilisateur
-                </li>
-            </a>
-
-
-
-
+                <a href="?viewutilisateur" alt="Gestions des filières">
+                    <li class="col-lg-12">
+                        <img src="img/user.png" alt="gestion des lutilisateur" class="">
+                        Gestions des lutilisateur
+                    </li>
+                </a>
                 <a href="?viewleconge">
                     <li class="col-lg-12">
-                        <img src="img/user.png" alt="gestion des congés" class="">
+                        <img src="img/calendar.png" alt="gestion des congés" class="">
                         Gestions des congés
-                        </li>
+                    </li>
                 </a>
                 <a href="?viewlafiliere" alt="Gestions des filières">
                     <li class="col-lg-12">
                         <img src="img/groupe.png" alt="gestion des filières" class="">
                         Gestions des filières
-                        </li>
+                    </li>
                 </a>
+                <ul>
                 <a href="?viewlerole">
                     <li class="col-lg-12">
                         <img src="img/droit.png" alt="gestion des rôles" class="">
                         Gestions des rôles
-                        </li>
+                    </li>
                 </a>
-				<a href="./?viewlasession">
+                <a href="./?viewlasession">
                     <li class="col-lg-12">
-                        <img src="img/droit.png" alt="gestion des sessions" class="">
+                        <img src="img/session.png" alt="gestion des sessions" class="">
                         Gestions des sessions
-                        </li>
+                    </li>
                 </a>
                 <a href="?viewlinscription" alt="Gestions des inscriptions">
                     <li class="col-lg-12">
-                        <img src="img/groupe.png" alt="gestion des inscriptions" class="">
+                        <img src="img/inscription.png" alt="gestion des inscriptions" class="">
                         Gestions des inscriptions
-                        </li>
+                    </li>
                 </a>
-
-              
+                </ul>
 
             </ul>
-        </div><!-- end menu générale admin -->
+        </div>
+        <!-- end menu générale admin -->
 
     </div>
- <!-- end content-admin-->
+    <!-- end content-admin-->
 {% endblock %}
 {% block bas %}
-{% include "footer.html.twig" %}
+    {% include "footer.html.twig" %}
 {% endblock %}
