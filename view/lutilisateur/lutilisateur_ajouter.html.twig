@@ -28,14 +28,15 @@
                 <label for ="Nom">Nom:</label><br>
                 <input name="lenom"  maxlength="45" type="text" class="form-control" placeholder="Ajout le nom" required><br>
                 <label for ="Prenom">Prénom:</label>
-                <input name="prenom"  maxlength="180" type="text" class="form-control" placeholder="Ajout le prénom" required><br>
+                <input name="leprenom"  maxlength="180" type="text" class="form-control" placeholder="Ajout le prénom" required><br>
                  <label for ="email">e-mail:</label>
-                <input name="email"  maxlength="180" type="email" class="form-control" placeholder="Ajout email" required><br><br>
+<input name="lemail" maxlength="180" type="email" class="form-control" placeholder="Ajout email" required><br><br>
+
 
 
                 <label for="role">choisissez votre rôle:</label>
 
-<select name="Roles" id="role" class ="form-control">fo
+<select name="role" id="role" class ="form-control" required>
     <option value=""> -- Choix du rôle --</option>
     {% for item in roles %}
 <option value={{item.idlerole}}>{{item.lintitule}}</option>

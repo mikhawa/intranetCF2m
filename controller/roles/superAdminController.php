@@ -145,22 +145,42 @@ elseif (isset($_GET['viewutilisateur'])){
 
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
-}elseif(isset($_GET['insertutilisateur'])) {
-        if (!empty($_POST)) {
 
+
+
+
+}elseif(isset($_GET['insertutilisateur'])){
+      if(empty($_POST)){
+          
+          $recupRoles =$leroleM->selectAllLerole();
+        
+          
+          echo $twig->render("lutilisateur/lutilisateur_ajouter.html.twig",["roles"=> $recupRoles]);
+          
+          
+        }else{
             $newlutilisateur = new lutilisateur($_POST);
 
-            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig', ['lenom' => $lutilisateurM->lutilisateurCreate($newlutilisateur)]);
-            header('Location: ./?viewutilisateur');
+            $role=(int) $_POST['role'];
 
-        } else {
+           $insert =$lutilisateurM->lutilisateurCreate($newlutilisateur,$role);
 
-            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig');
+           if($insert){
+               header("Location: ./?viewutilisateur");
+           }
+      }
+ 
 
-        }
 
 
-    }
+
+
+
+
+}
+
+
+    
 
 }else{
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
