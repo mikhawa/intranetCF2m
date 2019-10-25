@@ -30,18 +30,16 @@
                 <label for ="Prenom">Prénom:</label>
                 <input name="prenom"  maxlength="180" type="text" class="form-control" placeholder="Ajout le prénom" required><br>
                  <label for ="email">e-mail:</label>
-                <input name="lenom"  maxlength="180" type="email" class="form-control" placeholder="Ajout email" required><br><br>
+                <input name="email"  maxlength="180" type="email" class="form-control" placeholder="Ajout email" required><br><br>
 
 
                 <label for="role">choisissez votre rôle:</label>
 
-<select name="Roles" id="role" class ="form-control">
+<select name="Roles" id="role" class ="form-control">fo
     <option value=""> -- Choix du rôle --</option>
-    <option value="Menbre">Membre du personnel</option>
-    <option value="Agent">Agent d'acceuil</option>
-    <option value="Référent">Référent pédagoqique</option>
-    <option value="Administateur">Administateur Tecnique</option>
-    <option value="stagiaire">Stagiaire</option>
+    {% for item in roles %}
+<option value={{item.idlerole}}>{{item.lintitule}}</option>
+{% endfor %}
 
 
    

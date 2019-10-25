@@ -237,29 +237,40 @@ elseif (isset($_GET['insertleconge']))
 }elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
-    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,5);
-    $pagesLutisateur=pagination::pagine($nblutilisateur,5,$pageLutisateur,"viewutilisateur&pglutilisateur");
+    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,3);
+    $pagesLutisateur=pagination::pagine($nblutilisateur,3,$pageLutisateur,"viewutilisateur&pglutilisateur");
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
-}elseif(isset($_GET['insertutilisateur'])){
-      if(!empty($_POST)){
 
-           $newlutilisateur = new lutilisateur($_POST);
+    
 
-           echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig',['lenom'=>$lutilisateurM->lutilisateurCreate($newlutilisateur)]);
-            header('Location: ./?viewutilisateur');
+         
+          
 
+      }elseif (isset($_GET['insertutilisateur'])) {
+          if(!empty($_POST)){
+          $newlutilisateur =new lutilisateur($_POST);
+          $newLeRole =new lerole($_POST);
+      $lutilisateurM->lutilisateurCreate($newlutilisateur);
+        $leroleM->insertLerole($newLeRole);
+      
+           header("Location: ./?viewutilisateur");
+          
+          //  var_dump($_newlutilisateur);
+         
       }else{
-
-          echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig');
+           $role=$leroleM->selectAllLerole();
+        echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig',['roles'=>$role]);
+      
 
       }
+    
  
 
 
 
 
-
+    
 
 
 
