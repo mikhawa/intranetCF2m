@@ -38,8 +38,8 @@ if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurI
 if (isset($_GET['viewleconge'])) {
 	$paginConge = (isset($_GET['pgConge'])?(int)$_GET['pgConge']:1);
     $nbConge = $lecongeM->selectCongeCountById();
-    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,5);
-    $PaginationConge = pagination::pagine($nbConge,5,$paginConge,"viewleconge&pgConge");
+    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,NB_PG);
+    $PaginationConge = pagination::pagine($nbConge,NB_PG,$paginConge,"viewleconge&pgConge");
 	
 	echo $twig->render("leconge/leconge_afficherliste.html.twig", ['detailConge' => $nbPageConge,"pagination"=>$PaginationConge]);
 	
@@ -103,8 +103,8 @@ elseif (isset($_GET['insertleconge']))
 }elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
-    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,5);
-    $pagesLutisateur=pagination::pagine($nblutilisateur,5,$pageLutisateur,"viewutilisateur&pglutilisateur");
+    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,NB_PG);
+    $pagesLutisateur=pagination::pagine($nblutilisateur,NB_PG,$pageLutisateur,"viewutilisateur&pglutilisateur");
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
 }elseif(isset($_GET['insertutilisateur'])) {
