@@ -9,28 +9,9 @@ if(!empty($_GET)){
 
 // gestion de lafiliere
 require_once "../controller/modules/gestionLafiliere.php";
+// gestion de lasession
+    require_once "../controller/modules/gestionLasession.php";
 
-
-/*
- * lasession
- */
-// Delete, Update, Insert conditions for sessions
-if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmationdeletelasession'])) {
-    $lasessionM->sessionDelete($_GET['confirmationdeletelasession']);
-
-
-
-
-// Update
-} else if (isset($_POST['idlasession']) && ctype_digit($_POST['idlasession']) && isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
-    $lasession = new lasession($_POST);
-    $lasessionM->sessionUpdate($lasession);
-// INSERT
-} else if (isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
-    $lasession = new lasession($_POST);
-    $lasessionM->sessionCreate($lasession);
-	header('Location: ./?viewlasessions');
-}
 
 // Delete, Update, Insert conditions for congés
 
@@ -116,13 +97,6 @@ elseif (isset($_GET['insertleconge']))
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
 }elseif (isset($_GET["updatelinscription"])) {
     echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
-// Display views for sessions
-} elseif (isset($_GET['viewlasession'])) {
-    echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
-} elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {
-    echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
-} elseif (isset($_GET['insertlasession'])) {
-    echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
 
 
 }elseif (isset($_GET['viewutilisateur'])){
