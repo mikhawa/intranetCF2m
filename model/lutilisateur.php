@@ -128,9 +128,7 @@ protected function hydrate (array $tablehydrate ){
 		}
     }
 
-    /**
-     * @param mixed $lemotdepasse
-     */
+
     public function setLemotdepasse($lemotdepasse)
     {
         $this->lemotdepasse = trim($lemotdepasse);
@@ -141,9 +139,7 @@ protected function hydrate (array $tablehydrate ){
         $this->lemotdepasse = password_hash((trim($lemotdepasse)), PASSWORD_DEFAULT);
     }
 
-    /**
-     * @param mixed $lenom
-     */
+
 
     public function setLenom( string $lenom)
     {
@@ -153,17 +149,13 @@ protected function hydrate (array $tablehydrate ){
 		}
     }
 
-    /**
-     * @param mixed $leprenom
-     */
+
     public function setLeprenom( string $leprenom)
     {
         $this->leprenom = htmlspecialchars(strip_tags(trim($leprenom)),ENT_QUOTES);
     }
 
-    /**
-     * @param mixed $lemail
-     */
+
     public function setLemail(string $lemail)
     {
 		if(strlen($lemail) <= 180) {
@@ -171,14 +163,12 @@ protected function hydrate (array $tablehydrate ){
 		}
     }
 
-    /**
-     * @param mixed $luniqueid
-     */
+
     
     public function setLuniqueid( string $luniqueid='')
     {
         if(empty($luniqueid)){
-            $this->luniqueid = $uniqid('key',true);
+            $this->luniqueid = uniqid('key',true);
         }else{
             $this->luniqueid = $luniqueid;
         }
