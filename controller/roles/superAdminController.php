@@ -10,27 +10,9 @@ if(!empty($_GET)){
 // gestion de lafiliere
 require_once "../controller/modules/gestionLafiliere.php";
 
+// gestion de lasession
+require_once "../controller/modules/gestionLasession.php";
 
-/*
- * lasession
- */
-// Delete, Update, Insert conditions for sessions
-if (isset($_GET['confirmationdeletelasession']) && ctype_digit($_GET['confirmationdeletelasession'])) {
-    $lasessionM->sessionDelete($_GET['confirmationdeletelasession']);
-
-
-
-
-// Update
-} else if (isset($_POST['idlasession']) && ctype_digit($_POST['idlasession']) && isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
-    $lasession = new lasession($_POST);
-    $lasessionM->sessionUpdate($lasession);
-// INSERT
-} else if (isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
-    $lasession = new lasession($_POST);
-    $lasessionM->sessionCreate($lasession);
-	header('Location: ./?viewlasessions');
-}
 
 // Delete, Update, Insert conditions for congés
 
@@ -56,8 +38,8 @@ if (isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['utilisateurI
 if (isset($_GET['viewleconge'])) {
 	$paginConge = (isset($_GET['pgConge'])?(int)$_GET['pgConge']:1);
     $nbConge = $lecongeM->selectCongeCountById();
-    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,5);
-    $PaginationConge = pagination::pagine($nbConge,5,$paginConge,"viewleconge&pgConge");
+    $nbPageConge = $lecongeM->selectCongeWithLimit($paginConge,NB_PG);
+    $PaginationConge = pagination::pagine($nbConge,NB_PG,$paginConge,"viewleconge&pgConge");
 	
 	echo $twig->render("leconge/leconge_afficherliste.html.twig", ['detailConge' => $nbPageConge,"pagination"=>$PaginationConge]);
 	
@@ -114,22 +96,53 @@ elseif (isset($_GET['insertleconge']))
     echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $linscriptionM->selectAllLinscription()]);
 }elseif (isset($_GET["ajouterlinscription"])) {
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
-}elseif (isset($_GET["updatelinscription"])) {
-    echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
-// Display views for sessions
-} elseif (isset($_GET['viewlasession'])) {
-    echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
-} elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {
-    echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
-} elseif (isset($_GET['insertlasession'])) {
-    echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
+}
+elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
 
 
-}elseif (isset($_GET['viewutilisateur'])){
+    $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
+
+    $recuperationRole = $leroleM->SelectAllRoles();
+
+
+    if(empty($_POST)){
+
+
+        echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
+
+
+    }else{
+
+        $userUpdate = new lutilisateur($_POST);
+
+
+
+        $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
+
+        $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+
+
+
+        if($udateUtilisateur){
+
+            header("Location: ./?viewutilisateur");
+        }
+    }
+
+
+}elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
+
+    $lutilisateurM->UserDelete($_GET['deleteuser']);
+
+    header("Location: ./?viewutilisateur");
+
+}
+elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
     $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,NB_PG);
     $pagesLutisateur=pagination::pagine($nblutilisateur,NB_PG,$pageLutisateur,"viewutilisateur&pglutilisateur");
+
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
 
