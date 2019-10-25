@@ -1,5 +1,6 @@
 <?php
 class lutilisateurManager {
+
     private $db;
     public function __construct(MyPDO $connect) {
         $this->db = $connect;
@@ -208,8 +209,7 @@ class lutilisateurManager {
           INNER JOIN lutilisateur_has_lerole
             on lutilisateur_has_lerole.lutilisateur_idutilisateur =lutilisateur.idlutilisateur
             INNER JOIN lerole
-            on lerole.idlerole= lutilisateur_has_lerole.lerole_idlerole 
-            LIMIT ?,?;
+            on lerole.idlerole= lutilisateur_has_lerole.lerole_idlerole LIMIT ?,?;
 		";
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->bindValue(1, $premsLIMIT, PDO::PARAM_INT);
@@ -267,7 +267,7 @@ WHERE l.idlutilisateur = :id
             return [];
         }
     }
-    function updateUserandlore(lutilisateur $utilisateur) {
+    function updateUserandlore(lutilisateur $utilisateur,string $idlore) {
 
 
         $this->db->beginTransaction();
@@ -288,6 +288,36 @@ WHERE l.idlutilisateur = :id
 
         $update->execute();
 
+
+
+
+        $sql = "DELETE FROM lutilisateur_has_lerole WHERE lutilisateur_idutilisateur = ?";
+        $delete = $this->db->prepare($sql);
+        $delete->bindValue(1, $utilisateur->getIdutilisateur(), PDO::PARAM_INT);
+
+        $delete->execute();
+
+        if (!empty($idlore)) {
+
+
+            $sql = "INSERT INTO lutilisateur_has_lerole (lutilisateur_idutilisateur,lerole_idlerole) VALUES ";
+
+
+
+
+                $id = (int) $idlore;
+
+                $sql .= "({$utilisateur->getIdutilisateur()},$id),";
+
+
+
+            $sql = substr($sql, 0, -1);
+            //s($sql);
+
+            $this->db->exec($sql);
+
+        }
+
         try{
 
             $this->db->commit();
@@ -299,13 +329,5 @@ WHERE l.idlutilisateur = :id
             return false;
         }
     }
-    public function UserDelete(int $id):void
-    {
-        $sql = "DELETE FROM lutilisateur WHERE idlutilisateur=?";
-        $req = $this->db->prepare($sql);
-        $req->bindValue(1, $id, PDO::PARAM_INT);
-        $req->execute();
-    }
 
-    }
-
+}

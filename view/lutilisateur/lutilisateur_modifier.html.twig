@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block centre %}
+
+
+
     <!-- Page Content -->
     <main role="main" class="container">
         <div class="row">
@@ -16,9 +19,6 @@
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Modification utilisateur</p>
             </div>
-
-
-
 
             <div class="section col-lg-12">
                 <div class="section col-lg-12">
@@ -43,8 +43,17 @@
                         <input type="email" class="form-control" id="lemaila" placeholder="ici votre titre" value='{{ afficheuser.lemail }}' name='lemail'>
                     </div>
 
-                    <p style ="color:blue;">{{ afficheuser.lintitule }}</p>
+                        <div class="form-check">
 
+                            <label for="idrole"><h6>Role</h6></label>
+                           <select id="idrole" name ="idlerole">
+                               {% for role in afficheroles %}
+                               <option value="{{ role.idlerole }}">{{ role.lintitule }}</option>
+                               {% endfor %}
+                           </select>
+
+                        </div>
+                    <br>
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>
             </div>

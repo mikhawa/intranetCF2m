@@ -101,36 +101,37 @@ elseif (isset($_GET['insertleconge']))
 
 }
 //Update lutilisateur
-elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
+    elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
 
 
-    $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
+        $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
+
+        $recuperationRole = $leroleM->SelectAllRoles();
 
 
+        if(empty($_POST)){
 
 
-    if(empty($_POST)){
+            echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
 
 
-        echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur]);
+        }else{
 
-
-    }else{
-
-        $userUpdate = new lutilisateur($_POST);
-
-
-
-        $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate);
+            $userUpdate = new lutilisateur($_POST);
 
 
 
-        if($udateUtilisateur){
+            $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
 
-            header("Location: ./?viewutilisateur");
+            $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+
+
+
+            if($udateUtilisateur){
+
+                header("Location: ./");
+            }
         }
-    }
-
 //Delete l'utilisateur
 }elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
 
@@ -143,7 +144,6 @@ elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
     $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,NB_PG);
-
     $pagesLutisateur=pagination::pagine($nblutilisateur,NB_PG,$pageLutisateur,"viewutilisateur&pglutilisateur");
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
