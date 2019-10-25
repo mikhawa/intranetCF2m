@@ -40,7 +40,14 @@ switch ($_SESSION['idlerole']) {
 
 // accueil
         elseif (isset($_GET['viewlasession'])) {
-            echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
+
+            // pagination
+            $paginSession = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
+            $nbSession = $lasessionM->selectSessionCount();
+            $nbPageSession = $lafiliereM->selectFiliereWithLimit($paginSession, NB_PG);
+            $PaginationSession = pagination::pagine($nbSession, NB_PG, $paginSession, "viewlasession&pg");
+
+            echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $nbPageSession,"pagination"=>$PaginationSession]);
 
 // vue d'update
         } elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {

@@ -149,7 +149,7 @@ try{
 
 }
 
-public function selectSessionCountById(): int {
+public function selectSessionCount(): int {
 
 	$sql="SELECT COUNT(idlasession) AS nb
 		  FROM lasession";
