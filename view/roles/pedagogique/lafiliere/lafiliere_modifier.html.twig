@@ -46,11 +46,6 @@
                         <label for="image">Le pictogramme</label>
                         <input name="lepicto" type="file" class="form-control-file" placeholder="le picto" enctype="multipart/form-data"> Actuellement : {% if (section.lepicto) %} <img src="img/upload/thumb/{{ section.lepicto }}"/> <input type="hidden" name="lepicto" value="{{ section.lepicto }}"> {% else %} Vide
                         {% endif %}<br>
-						<label for="visible">Visibilité</label>
-						<select id="visible" name="actif" class="form-control" required>
-							<option value="1" {{ section.actif ? 'selected' }}>Visible</option>
-							<option value="0" {{ not(section.actif) ? 'selected' }}>Non-visible</option>
-						</select><br>
 
                             <button type="submit" class="btn btn-primary">Envoyer</button>
                         </div>
