@@ -199,7 +199,35 @@ class leroleManager
 
 
 
+    public function afficheStagiaireRole(){
+        $sql ="SELECT le.idlerole,le.lintitule 
+FROM lerole le 
+INNER JOIN lutilisateur_has_lerole lu ON lu.lerole_idlerole=le.idlerole 
+INNER JOIN lutilisateur l ON l.idlutilisateur=lu.lutilisateur_idutilisateur  
+	";
+
+        $recup = $this->db->query($sql);
+
+        if ($recup->rowCount() === 0) {
+            return [];
+        }
+        return $recup->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
-	
+    public function SelectAllRoles(){
+        $sql ="SELECT * FROM lerole ORDER BY lintitule ASC ";
+
+        $recup = $this->db->query($sql);
+
+        if($recup->rowCount()){
+            return $recup->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return [];
+        }
+    }
+
+
+
+
 }

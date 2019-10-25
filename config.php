@@ -11,6 +11,9 @@ define("DB_CHARSET","utf8");
 // default development mode, change to true for product mode
 define("PRODUCT",false);
 
+// définition du nombre d'éléments par page
+define("NB_PG",3);
+
 /*
  *  chemins d'upload
  */
