@@ -23,8 +23,9 @@ switch ($_SESSION['idlerole']) {
             header('Location: ./?viewlasession');
 
 // Update
-        } else if (isset($_POST['idlasession']) && ctype_digit($_POST['idlasession']) && isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])) {
+        } else if (isset($_POST['idlasession']) && ctype_digit($_POST['idlasession']) && isset($_POST['lenom']) && isset($_POST['lacronyme']) && isset($_POST['lannee']) && ctype_digit($_POST['lannee']) && isset($_POST['lenumero']) && ctype_digit($_POST['lenumero']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['lafiliere_idfiliere']) && ctype_digit($_POST['lafiliere_idfiliere'])&& isset($_POST['actif']) && ctype_digit($_POST['actif'])) {
             $lasession = new lasession($_POST);
+            //s($lasession);
             $lasessionM->sessionUpdate($lasession);
             header('Location: ./?viewlasession');
 
@@ -44,7 +45,7 @@ switch ($_SESSION['idlerole']) {
             // pagination
             $paginSession = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
             $nbSession = $lasessionM->selectSessionCount();
-            $nbPageSession = $lafiliereM->selectFiliereWithLimit($paginSession, NB_PG);
+            $nbPageSession = $lasessionM->selectSessionWithLimit($paginSession, NB_PG);
             $PaginationSession = pagination::pagine($nbSession, NB_PG, $paginSession, "viewlasession&pg");
 
             echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $nbPageSession,"pagination"=>$PaginationSession]);
