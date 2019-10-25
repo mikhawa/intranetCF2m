@@ -96,9 +96,38 @@ elseif (isset($_GET['insertleconge']))
     echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $linscriptionM->selectAllLinscription()]);
 }elseif (isset($_GET["ajouterlinscription"])) {
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
-}elseif (isset($_GET["updatelinscription"])) {
-    echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
+}
+elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
 
+
+    $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
+
+    $recuperationRole = $leroleM->SelectAllRoles();
+
+
+    if(empty($_POST)){
+
+
+        echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
+
+
+    }else{
+
+        $userUpdate = new lutilisateur($_POST);
+
+
+
+        $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
+
+        $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+
+
+
+        if($udateUtilisateur){
+
+            header("Location: ./");
+        }
+    }
 
 }elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
