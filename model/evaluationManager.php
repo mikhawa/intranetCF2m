@@ -68,7 +68,7 @@ class evaluationManager {
                 if ($recup->rowCount() === 0) {
                     return [];
                 }
-                return $recup->fetchAll(PDO::FETCH_ASSOC);  
+                return $recup->fetch(PDO::FETCH_ASSOC);  
 
 
     }

@@ -39,18 +39,35 @@ if(isset($_GET['viewdetailsession'])) {
 
     $updateStagiaire = new evaluation($_POST);
 
-    $evaluationM->updateStagiaire($updateStagiaire, $_GET['ajoutInfo']);
+    $evaluationM->updateStagiaire($updateStagiaire);
 
     header("Location: ./?ajoutInfo");
-    var_dump($_POST);
+    
     }else{
-
-        echo $twig->render('view_stagiaires/modifier_stagiaire.html.twig',['section'=>$evaluationM->selectProfilStagiaire($_GET['ajoutInfo'])]);
+       $recupStagiaire= $evaluationM->selectProfilStagiaire($_GET['ajoutInfo']);
+        echo $twig->render('view_stagiaires/modifier_stagiaire.html.twig',['section'=>$recupStagiaire]);
+        
     }
 
 
 
 
+
+//vue profils stagiaire - on choisi un stagiaire par son nom ou prenom grâce à l'autocompletion
+}elseif(isset($_GET["viewprofil"]) && ctype_digit($_GET["viewprofil"])){
+
+    $stagiaire = $evaluationM->selectProfilStagiaire($_GET["viewprofil"]);
+
+    if(isset($_POST['stagiaire'])){
+
+
+    $stagiaireProfil = autoCompletion::rechercheUnStagiaire();
+
+    echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['recherche'=>$stagiaireProfil, $stagiaire]);
+    }
+
+
+ 
 
 }
           
