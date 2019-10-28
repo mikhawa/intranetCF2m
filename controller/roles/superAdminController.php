@@ -96,40 +96,43 @@ elseif (isset($_GET['insertleconge']))
     echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $linscriptionM->selectAllLinscription()]);
 }elseif (isset($_GET["ajouterlinscription"])) {
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
+
+}elseif (isset($_GET['updatelinscription'])&& ctype_digit($_GET['updatelinscription'])){
+
 }
-elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
+//Update lutilisateur
+    elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
 
 
-    $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
+        $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
 
-    $recuperationRole = $leroleM->SelectAllRoles();
-
-
-    if(empty($_POST)){
+        $recuperationRole = $leroleM->SelectAllRoles();
 
 
-        echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
+        if(empty($_POST)){
 
 
-    }else{
-
-        $userUpdate = new lutilisateur($_POST);
+            echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
 
 
+        }else{
 
-        $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
-
-        $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+            $userUpdate = new lutilisateur($_POST);
 
 
 
-        if($udateUtilisateur){
+            $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
 
-            header("Location: ./?viewutilisateur");
+            $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+
+
+
+            if($udateUtilisateur){
+
+                header("Location: ./");
+            }
         }
-    }
-
-
+//Delete l'utilisateur
 }elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
 
     $lutilisateurM->UserDelete($_GET['deleteuser']);
