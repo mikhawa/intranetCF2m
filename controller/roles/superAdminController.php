@@ -156,15 +156,28 @@ else{
 
             if($udateUtilisateur){
 
-                header("Location: ./");
+                header("Location: ./?viewutilisateur");
             }
         }
 //Delete l'utilisateur
 }elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
 
-    $lutilisateurM->UserDelete($_GET['deleteuser']);
+    $idUtilisateur = (int) $_GET['deleteuser'];
 
-    header("Location: ./?viewutilisateur");
+
+    if(!isset($_GET['ok'])){
+
+
+
+       $deleteuserok =  $lutilisateurM->SelectUserByRoleid($idUtilisateur);
+
+       echo $twig->render("lutilisateur/lutilisateur_supprimer.html.twig",["afficheuser"=>$deleteuserok]);
+
+    }else {
+        $lutilisateurM->UserDelete($idUtilisateur);
+
+        header("Location: ./?viewutilisateur");
+    }
 
 }
 elseif (isset($_GET['viewutilisateur'])){
