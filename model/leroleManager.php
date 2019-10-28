@@ -39,7 +39,7 @@ class leroleManager
 
     public function updateLeroleActif(lerole $lerole)
     {
-        if (empty($lerole->getIdlerole()) || empty($lerole->getLintitule()) || empty($lerole->getLadescription()) || empty($actif->getActif())) {
+        if (empty($lerole->getIdlerole()) || empty($lerole->getLintitule()) || empty($lerole->getLadescription())) {
             return false;
         }
 
@@ -48,8 +48,8 @@ class leroleManager
         $update = $this->db->prepare($sql);
         $update->bindValue(1, $lerole->getLintitule(), PDO::PARAM_STR);
         $update->bindValue(2, $lerole->getLadescription(), PDO::PARAM_STR);
-        $update->bindValue(3, $lerole->getIdlerole(), PDO::PARAM_INT);
-        $update->bindValue(4, $lerole->getActif(), PDO::PARAM_INT);
+        $update->bindValue(4, $lerole->getIdlerole(), PDO::PARAM_INT);
+        $update->bindValue(3, $lerole->getActif(), PDO::PARAM_INT);
 
         try {
 
