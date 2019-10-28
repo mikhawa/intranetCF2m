@@ -3,7 +3,7 @@
 
 class lutilisateur
 {
-protected $idutilisateur;
+protected $idlutilisateur;
 protected $lenomutilisateur;
 protected $lemotdepasse;
 protected $lenom;
@@ -32,9 +32,9 @@ protected function hydrate (array $tablehydrate ){
     /**
      * GETTERS
      */
-    public function getIdutilisateur()
+    public function getIdlutilisateur()
     {
-        return htmlspecialchars_decode($this->idutilisateur,ENT_QUOTES);
+        return htmlspecialchars_decode($this->idlutilisateur,ENT_QUOTES);
     }
 
     /**
@@ -89,11 +89,11 @@ protected function hydrate (array $tablehydrate ){
     /**
      * SETTERS
      */
-    public function setIdutilisateur( int $idutilisateur)
+    public function setIdlutilisateur( int $idutilisateur)
     {
         if(!empty($idutilisateur)){
 
-            $this->idutilisateur = $idutilisateur;
+            $this->idlutilisateur = $idutilisateur;
         }
     }
 
@@ -128,9 +128,7 @@ protected function hydrate (array $tablehydrate ){
 		}
     }
 
-    /**
-     * @param mixed $lemotdepasse
-     */
+
     public function setLemotdepasse($lemotdepasse)
     {
         $this->lemotdepasse = trim($lemotdepasse);
@@ -141,9 +139,7 @@ protected function hydrate (array $tablehydrate ){
         $this->lemotdepasse = password_hash((trim($lemotdepasse)), PASSWORD_DEFAULT);
     }
 
-    /**
-     * @param mixed $lenom
-     */
+
 
     public function setLenom( string $lenom)
     {
@@ -153,17 +149,13 @@ protected function hydrate (array $tablehydrate ){
 		}
     }
 
-    /**
-     * @param mixed $leprenom
-     */
+
     public function setLeprenom( string $leprenom)
     {
         $this->leprenom = htmlspecialchars(strip_tags(trim($leprenom)),ENT_QUOTES);
     }
 
-    /**
-     * @param mixed $lemail
-     */
+
     public function setLemail(string $lemail)
     {
 		if(strlen($lemail) <= 180) {
@@ -171,14 +163,12 @@ protected function hydrate (array $tablehydrate ){
 		}
     }
 
-    /**
-     * @param mixed $luniqueid
-     */
+
     
     public function setLuniqueid( string $luniqueid='')
     {
         if(empty($luniqueid)){
-            $this->luniqueid = $uniqid('key',true);
+            $this->luniqueid = uniqid('key',true);
         }else{
             $this->luniqueid = $luniqueid;
         }

@@ -58,7 +58,7 @@ switch ($_SESSION['idlerole']) {
                 //d($newfiliere,$_POST,$_FILES);
                 header("Location: ./?viewlafiliere");
             } else {
-                echo $twig->render('lafiliere/lafiliere_ajouter.html.twig');
+                echo $twig->render('/roles/pedagogique/lafiliere/lafiliere_ajouter.html.twig');
             }
 
 
@@ -70,7 +70,7 @@ switch ($_SESSION['idlerole']) {
                 $lafiliereM->filiereDeleteActif($idlafiliere);
                 header("Location: ./?viewlafiliere");
             } else {
-                echo $twig->render('lafiliere/lafiliere_delete.html.twig', ['id' => $idlafiliere]);
+                echo $twig->render('/roles/pedagogique/lafiliere/lafiliere_delete.html.twig', ['id' => $idlafiliere]);
             }
             // update a filiere
         } elseif (isset($_GET["updatelafiliere"]) && ctype_digit($_GET["updatelafiliere"])) {
@@ -103,7 +103,7 @@ switch ($_SESSION['idlerole']) {
 
                 header("Location: ./?viewlafiliere");
             } else {
-                echo $twig->render('lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
+                echo $twig->render('/roles/pedagogique/lafiliere/lafiliere_modifier.html.twig', ['section' => $lafiliereM->filiereSelectById($_GET['updatelafiliere'])]);
             }
 
         }
