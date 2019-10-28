@@ -1,4 +1,5 @@
 <?php
+
 //require_once "jquery-3.3.1.js";
 
 //require_once "jquery-ui";
@@ -56,4 +57,5 @@ class rechercheStagiaire{
 
 
     }
+
 }

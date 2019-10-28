@@ -1,5 +1,6 @@
 <?php
 
+
 if (!empty($_GET)) {
     require_once "../controller/modules/gestionLafiliere.php";
 
@@ -40,6 +41,7 @@ if (!empty($_GET)) {
 
             $updateStagiaire = new evaluation($_POST);
 
+
             $evaluationM->updateStagiaire($updateStagiaire, $_GET['modifInfo']);
 
             header("Location: ./?modifInfo");
@@ -53,17 +55,12 @@ if (!empty($_GET)) {
 //recherche d'un stagiaire avec un moteur de recherche
     }elseif(isset($_GET['viewprofil'])){
 
-        
-
-
 
              $stagiaire = rechercheStagiaire::searchStagiaire($_POST);
 
             echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['user'=>$stagiaire]);
             
         }
-
-
 
 
 
