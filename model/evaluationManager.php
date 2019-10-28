@@ -96,7 +96,7 @@ class evaluationManager {
 
         try{
 
-            $update->execute();
+            $updateLeStagiaire->execute();
             return true;
 
         } catch(PDOException $e){
