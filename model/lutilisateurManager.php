@@ -286,7 +286,7 @@ WHERE l.idlutilisateur = :id
                 lemail = :lemaila
             WHERE idlutilisateur = :idlutilisateura;";
         $update = $this->db->prepare($sql);
-        $update->bindValue("idlutilisateura",$utilisateur->getIdutilisateur(), PDO::PARAM_INT);
+        $update->bindValue("idlutilisateura",$utilisateur->getIdlutilisateur(), PDO::PARAM_INT);
         $update->bindValue("lenomutilisateura", $utilisateur->getLenomutilisateur(), PDO::PARAM_STR);
         $update->bindValue("lenoma", $utilisateur->getLenom(), PDO::PARAM_STR);
         $update->bindValue("leprenoma", $utilisateur->getLeprenom(), PDO::PARAM_STR);
@@ -299,7 +299,7 @@ WHERE l.idlutilisateur = :id
 
         $sql = "DELETE FROM lutilisateur_has_lerole WHERE lutilisateur_idutilisateur = ?";
         $delete = $this->db->prepare($sql);
-        $delete->bindValue(1, $utilisateur->getIdutilisateur(), PDO::PARAM_INT);
+        $delete->bindValue(1, $utilisateur->getIdlutilisateur(), PDO::PARAM_INT);
 
         $delete->execute();
 
@@ -313,12 +313,12 @@ WHERE l.idlutilisateur = :id
 
                 $id = (int) $idlore;
 
-                $sql .= "({$utilisateur->getIdutilisateur()},$id),";
+                $sql .= "(".$utilisateur->getIdlutilisateur().",$id),";
 
 
 
             $sql = substr($sql, 0, -1);
-            //s($sql);
+            s($sql);
 
             $this->db->exec($sql);
 
