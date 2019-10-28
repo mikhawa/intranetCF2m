@@ -1,95 +1,83 @@
 <?php
 
-<<<<<<< HEAD
-//choix des filières
-if(isset($_GET['viewdetailsession'])) {
-=======
-if(!empty($_GET)){
-	
-	require_once "../controller/modules/gestionLafiliere.php";
-	
-} elseif(isset($_GET['viewdetailsession'])) {
->>>>>>> c4fea56d60f9a553646fac6518fd055c26e67d8a
+
+if (!empty($_GET)) {
+    require_once "../controller/modules/gestionLafiliere.php";
 
 
-    $selectEval = $evaluationM->selectAllFiliereForEval();
+    if (isset($_GET['viewdetailsession'])) {
 
 
-     echo $twig->render("view_stagiaires/choix_filiere.html.twig", ['lutilisateur'=>$selectEval]);
+        $selectEval = $evaluationM->selectAllFiliereForEval();
 
+
+        echo $twig->render("view_stagiaires/choix_filiere.html.twig", ['lutilisateur' => $selectEval]);
 
 
 //choix des stagiaires de la filiere choisie
-}elseif(isset($_GET['choixFiliere']) && ctype_digit($_GET['choixFiliere'])){
-    $choixFiliere = (int)$_GET['choixFiliere'];
+    } elseif (isset($_GET['choixFiliere']) && ctype_digit($_GET['choixFiliere'])) {
+        $choixFiliere = (int)$_GET['choixFiliere'];
 
-    $nomStagiaire = $evaluationM->selectAllStagiairesForEval($choixFiliere);
+        $nomStagiaire = $evaluationM->selectAllStagiairesForEval($choixFiliere);
 
-    echo $twig->render("view_stagiaires/choix_stagiaire.html.twig",['lutilisateur'=>$nomStagiaire]);
+        echo $twig->render("view_stagiaires/choix_stagiaire.html.twig", ['lutilisateur' => $nomStagiaire]);
 
 
 // choix du stagiaire pour voir son profil
- }elseif(isset($_GET['profil']) && ctype_digit($_GET['profil'])){
+    } elseif (isset($_GET['profil']) && ctype_digit($_GET['profil'])) {
 
-           $profil=(int)$_GET['profil'];
+        $profil = (int)$_GET['profil'];
 
-    
 
-            $profilStagiaire = $evaluationM->selectProfilStagiaire($profil);
+        $profilStagiaire = $evaluationM->selectProfilStagiaire($profil);
 
-            echo $twig->render('view_stagiaires/profil_stagiaire.html.twig',['idlutilisateur'=>$profilStagiaire]);
+        echo $twig->render('view_stagiaires/profil_stagiaire.html.twig', ['idlutilisateur' => $profilStagiaire]);
 
 
 //update des infos du stagiaire
-}elseif(isset($_GET['ajoutInfo']) && ctype_digit($_GET['ajoutInfo'])){
+    } elseif (isset($_GET['modifInfo']) && ctype_digit($_GET['modifInfo'])) {
 
-    if(isset($_POST['idlutilisateur'])){
+        if (isset($_POST['idlutilisateur'])) {
 
-    $updateStagiaire = new evaluation($_POST);
+            $updateStagiaire = new evaluation($_POST);
 
-    $evaluationM->updateStagiaire($updateStagiaire);
 
-    header("Location: ./?ajoutInfo");
+            $evaluationM->updateStagiaire($updateStagiaire, $_GET['modifInfo']);
+
+            header("Location: ./?modifInfo");
+            var_dump($_POST);
+        } else {
+
+            echo $twig->render('view_stagiaires/modifier_stagiaire.html.twig', ['section' => $evaluationM->selectProfilStagiaire($_GET['modifInfo'])]);
+        }
+
+
+//recherche d'un stagiaire avec un moteur de recherche
+    }elseif(isset($_GET['viewprofil'])){
+
+
+             $stagiaire = rechercheStagiaire::searchStagiaire($_POST);
+
+            echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['user'=>$stagiaire]);
+            
+        }
+
+
+
+
     
-    }else{
-       $recupStagiaire= $evaluationM->selectProfilStagiaire($_GET['ajoutInfo']);
-        echo $twig->render('view_stagiaires/modifier_stagiaire.html.twig',['section'=>$recupStagiaire]);
-        
+
+
+
+    } else {
+
+
+        if (!isset($_SESSION['bandeau'])) {
+            $pourEntree = true;
+            $_SESSION['bandeau'] = true;
+        } else {
+            $pourEntree = false;
+        }
+
+        echo $twig->render('roles/pedagogique/pedagogique_homepage.html.twig', ['entree' => $pourEntree, "session" => $_SESSION]);
     }
-
-
-
-
-
-//vue profils stagiaire - on choisi un stagiaire par son nom ou prenom grâce à l'autocompletion
-}elseif(isset($_GET["viewprofil"]) && ctype_digit($_GET["viewprofil"])){
-
-    $stagiaire = $evaluationM->selectProfilStagiaire($_GET["viewprofil"]);
-
-    if(isset($_POST['stagiaire'])){
-
-
-    $stagiaireProfil = autoCompletion::rechercheUnStagiaire();
-
-    echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['recherche'=>$stagiaireProfil, $stagiaire]);
-    }
-
-
- 
-
-}
-          
-
-
-
-else{
-
-
-if(!isset($_SESSION['bandeau'])){
-    $pourEntree = true;
-    $_SESSION['bandeau']=true;
-}else{
-    $pourEntree = false;
-}
-echo $twig->render('roles/pedagogique/pedagogique_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]);
-}
