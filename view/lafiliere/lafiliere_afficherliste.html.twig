@@ -45,9 +45,9 @@
 						<p><div style="width: 100px; background-color :{{ item.lacouleur }}; border-radius:30px; text-align:center ">&nbsp;</div> {{ item.actif ? 'Active' : 'Non-active' }}</p>
 					</div>
 
-				{% else %}
-					<h4 class="mt-3">Pas encore de filière sur notre page accueil</h4>
-				{% endfor %}
+        {% else %}
+            <h4 class="mt-3">Pas encore de utilisateur sur notre page accueil</h4>
+        {% endfor %}
        
     </div>
 </div></main>{% endblock %}{% block bas %}{% include "footer.html.twig" %}{% endblock %}

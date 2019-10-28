@@ -19,10 +19,24 @@
             </div>
             <div class="col-lg-10 text-left">
                 
-                <form action="" method="post" name="createinscription">
-                    <input name="modifier " type="text" placeholder="Modifier inscription" required><br>
-                    <textarea name="Annuler" placeholder="Inscription annuler" required></textarea><br>
-                    <input type="submit" value="Modifier inscription">
+                {# Affichage du formulaire d'inscription #}
+                <form action="./?viewlinscription" method="post" name"linscriptioncreate">
+
+                    <label for="lutilisateur.idlutilisateur">Nom de l'utilisateur&nbsp</label>
+					<select id="lutilisateur.idlutilisateur" name="lutilisateur.idlutilisateur" required>
+                    {% for utilisateur in detailUsers %}
+						<option value="{{ utilisateur_idlutilisateur }}">{{ utilisateur.lenom }} {{utilisateur.leprenom }}</option>
+					{% endfor %}
+                    </select><br><br>
+                    <label for="lasession.idlasession">Nom de la session&nbsp</label>
+					<select id="lasession.idlasession" name="lasession.idlasession" required>
+					{% for lasession in detailSession %}
+						<option value="{{ lasession.idlasession }}">{{lasession.lenom }}  </option>
+					{% endfor %}
+					</select><br><br>
+					<label for="debut">Début de session&nbsp</label><input id="debut" name="debut" type="date" max="2100-12-12" required>&nbsp<span id="debutError" style="color: red; visibility: hidden;">La date de début est postérieure à la date de fin !</span><br><br>
+					<label for="fin">Fin de session&nbsp</label><input id="fin" name="fin" type="date" max="2100-12-12" required><br><br>
+                    <input onclick="if( $('#debut').val() > $('#fin').val() ) {$('#debutError').css('visibility', 'visible'); $('#debut').css('box-shadow', '0 0 3px 1px red'); event.preventDefault();}" type="submit" value="Inscription">
                 </form>
                 <h3>{{ error }}</h3>
             </div>

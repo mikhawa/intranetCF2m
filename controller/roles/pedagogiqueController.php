@@ -1,7 +1,15 @@
 <?php
 
+<<<<<<< HEAD
 //choix des filières
 if(isset($_GET['viewdetailsession'])) {
+=======
+if(!empty($_GET)){
+	
+	require_once "../controller/modules/gestionLafiliere.php";
+	
+} elseif(isset($_GET['viewdetailsession'])) {
+>>>>>>> c4fea56d60f9a553646fac6518fd055c26e67d8a
 
 
     $selectEval = $evaluationM->selectAllFiliereForEval();

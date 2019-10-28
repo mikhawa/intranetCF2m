@@ -1,0 +1,1 @@
+ALTER TABLE `linscription` DROP FOREIGN KEY `fk_inscription_utilisateur1`; ALTER TABLE `linscription` ADD CONSTRAINT `fk_inscription_utilisateur1` FOREIGN KEY (`utilisateur_idutilisateur`) REFERENCES `lutilisateur`(`idlutilisateur`) ON DELETE CASCADE ON UPDATE NO ACTION;
