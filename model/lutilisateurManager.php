@@ -333,4 +333,13 @@ WHERE l.idlutilisateur = :id
         }
     }
 
+
+    public function UserDelete(int $id):void
+    {
+        $sql = "DELETE FROM lutilisateur WHERE idlutilisateur=?";
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1, $id, PDO::PARAM_INT);
+        $req->execute();
+    }
+
 }
