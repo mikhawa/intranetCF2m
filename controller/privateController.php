@@ -1,4 +1,5 @@
 <?php
+
 // load lutilisateur manager
 $lutilisateurM=new lutilisateurManager($db_connect);
 // load lutilisateur inscription
@@ -15,10 +16,15 @@ $lafiliereM=new lafiliereManager($db_connect);
 $lecongeM=new lecongeManager($db_connect);
 // load eval stagiaire
 $evaluationM= new evaluationManager($db_connect);
+
+// Ajoute une variable global twig contenant le nom et le prénom de l'utilisateur actuel
+$twig->addGlobal('currentUser', $_SESSION['leprenom'] . ' ' . $_SESSION['lenom']);
+
 // deconnection
 if(isset($_GET['deconnect'])){
-	$lutilisateurM->disconnectLutilisateur();
+    $lutilisateurM->disconnectLutilisateur();
 }
+
 // switch suivant l'id des rôles (pour le moment, un rôle, un controleur)
 switch ($_SESSION['idlerole']) {
     case "1":

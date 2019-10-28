@@ -36,6 +36,11 @@
 						<option value="{{ filiere.idlafiliere }}"{{ filiere.idlafiliere == detailsession.lafiliere_idfiliere ? "selected" }}>{{ filiere.lenom }}</option>
 					{% endfor %}
 					</select><br><br>
+                    <label for="actif">Visibilité</label>
+                    <select id="actif" name="actif" required>
+                        <option value=1 {{ detailsession.actif == 1 ? "selected" }}>Actif</option>
+                        <option value=0 {{ detailsession.actif == 0 ? "selected" }}>Non actif</option>
+                    </select><br><br>
                     <input type="hidden" name="idlasession" value="{{ detailsession.idlasession }}">
 					<input type="submit" value="Envoyer"><input type="reset" value="Réinitialiser les valeurs">
                 </form>

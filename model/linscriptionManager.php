@@ -51,7 +51,7 @@ public function linscriptionCreate(linscription $datas) {
 
     // vérification que les champs soient valides (pas vides)
 
-    if(empty($datas->getDebut()||empty($datas->getFin()||empty($datas->getUtilisateurIdutilisateur()||empty($datas->getLasessionIdsession()))))){
+    if(empty($datas->getDebut()||empty($datas->getFin()||empty($datas->getUtilisateur_idutilisateur()||empty($datas->getLasession_idsession()))))){
         return false;
     }
 
@@ -62,8 +62,8 @@ public function linscriptionCreate(linscription $datas) {
 
     $insert->bindValue(1,$datas->getDebut(),PDO::PARAM_STR);
     $insert->bindValue(2,$datas->getFin(),PDO::PARAM_STR);
-    $insert->bindValue(3,$datas->getUtilisateurIdutilisateur(),PDO::PARAM_STR);
-    $insert->bindValue(4,$datas->getLasessionIdsession(),PDO::PARAM_STR);
+    $insert->bindValue(3,$datas->getUtilisateur_idutilisateur(),PDO::PARAM_STR);
+    $insert->bindValue(4,$datas->getLasession_idsession(),PDO::PARAM_STR);
 
 
 
