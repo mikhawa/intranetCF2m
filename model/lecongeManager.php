@@ -95,13 +95,28 @@ class lecongeManager
         try
 		{
 			$insert ->execute();
-			return true;
+			
         } 
 		catch(PDOException $e)
 		{
          echo $e->getMessage();
               return false;
         }
+
+        $idconge =$this->db->lastInsertId();
+
+        $sql = "INSERT INTO  lasession_has_leconge
+        (lasession_idlasession,leconge_idleconge) VALUES ($idconge,?)";
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1, $role, PDO::PARAM_INT);
+           try{
+            $req->execute();
+               return true;
+
+           }catch(PDOException $e){
+              echo $e->getCode();
+                return false;
+           }
 
     }
 
