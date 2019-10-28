@@ -90,39 +90,119 @@ elseif (isset($_GET['insertleconge']))
     }
   
   
-//inscription
-  
+//linscription
 }elseif (isset($_GET["viewlinscription"])) {
     echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $linscriptionM->selectAllLinscription()]);
+
 }elseif (isset($_GET["ajouterlinscription"])) {
+    if(!empty($_POST)){
+        $newlinscription = new linscription($_POST);
+        s($_POST,$newlinscription);
+        // insertion
+        $insert=$linscriptionM->linscriptionCreate($newlinscription);
+        }
+
+else{
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
+
+}
+
+//update linscription
 }elseif (isset($_GET["updatelinscription"])) {
     echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
 
+//delete linscription
+}elseif(isset($_GET['deletelinscription']) && ctype_digit($_GET['deletelinscription'])){
+    $idDeletelinscription = (int)$_GET['deletelinscription'];
+    if(isset($_GET['ok'])){
+        $linscriptionM->deletelinscription($idDeletelinscription);
+      
+      
+      
+      }else{
+    echo $twig->render('',['id'=>$idDeletelinscription]);
+    }
+    
 
-}elseif (isset($_GET['viewutilisateur'])){
+}elseif (isset($_GET['updatelinscription'])&& ctype_digit($_GET['updatelinscription'])){
+
+}
+//Update lutilisateur
+    elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
+
+
+        $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
+
+        $recuperationRole = $leroleM->SelectAllRoles();
+
+
+        if(empty($_POST)){
+
+
+            echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
+
+
+        }else{
+
+            $userUpdate = new lutilisateur($_POST);
+
+
+
+            $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
+
+            $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+
+
+
+            if($udateUtilisateur){
+
+                header("Location: ./");
+            }
+        }
+//Delete l'utilisateur
+}elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
+
+    $lutilisateurM->UserDelete($_GET['deleteuser']);
+
+    header("Location: ./?viewutilisateur");
+
+}
+elseif (isset($_GET['viewutilisateur'])){
      $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
     $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,NB_PG);
     $pagesLutisateur=pagination::pagine($nblutilisateur,NB_PG,$pageLutisateur,"viewutilisateur&pglutilisateur");
+
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
-}elseif(isset($_GET['insertutilisateur'])) {
-        if (!empty($_POST)) {
 
+
+
+
+}elseif(isset($_GET['insertutilisateur'])){
+      if(empty($_POST)){
+          
+          $recupRoles =$leroleM->selectAllLerole();
+        
+          
+          echo $twig->render("lutilisateur/lutilisateur_ajouter.html.twig",["roles"=> $recupRoles]);
+          
+          
+        }else{
             $newlutilisateur = new lutilisateur($_POST);
 
-            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig', ['lenom' => $lutilisateurM->lutilisateurCreate($newlutilisateur)]);
-            header('Location: ./?viewutilisateur');
+            $role=(int) $_POST['role'];
 
-        } else {
+           $insert =$lutilisateurM->lutilisateurCreate($newlutilisateur,$role);
 
-            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig');
+           if($insert){
+               header("Location: ./?viewutilisateur");
+           }
+      }
+ 
 
-        }
+}
 
-
-    }
 
 }else{
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
@@ -132,5 +212,7 @@ elseif (isset($_GET['insertleconge']))
     }else{
         $pourEntree = false;
     }
-    echo $twig->render('roles/admin/admin_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]);
-}
+    echo $twig->render('roles/admin/admin_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]); 
+
+    }
+
