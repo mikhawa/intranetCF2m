@@ -42,17 +42,11 @@ class lerole
         return htmlspecialchars_decode($this->lintitule, ENT_QUOTES);
     }
 
-    /**
-     * @return mixed
-     */
     public function getLadescription()
     {
         return htmlspecialchars_decode($this->ladescription, ENT_QUOTES);
     }
 
-    /**
-     * @return mixed
-     */
     public function getActif()
     {
         return $this->actif;
