@@ -4,11 +4,18 @@ define("DB_HOST","127.0.0.1");
 define("DB_NAME","intranetv5");
 define("DB_LOGIN","root");
 define("DB_PWD","");
+
+
+
 define("DB_PORT","3308");
+
 define("DB_CHARSET","utf8");
 
 // default development mode, change to true for product mode
 define("PRODUCT",false);
+
+// définition du nombre d'éléments par page
+define("NB_PG",3);
 
 /*
  *  chemins d'upload

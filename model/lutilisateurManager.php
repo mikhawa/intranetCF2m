@@ -112,12 +112,12 @@ class lutilisateurManager {
     }
     //create a new user
     public function lutilisateurCreate( lutilisateur $user) {
-        if( empty($user->getIdlutilisateur()) ||empty($user->getLenomutilisateur()) ||empty($user->getLemotdepasse()) ||empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail()) ||empty($user->getLuniqueid())){
+        if( empty($user->getIdutilisateur()) ||empty($user->getLenomutilisateur()) ||empty($user->getLemotdepasse()) ||empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail()) ||empty($user->getLuniqueid())){
           return false;
     }
     $sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
     $insert = $this->db->prepare($sql);
-    $insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
+    $insert->bindvalue(1, $user->getIdutilisateur(),PDO::PARAM_STR);
     $insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
     $insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
     $insert->bindvalue(4, $user->getLenom(),PDO::PARAM_STR);
@@ -135,7 +135,7 @@ class lutilisateurManager {
 	if(!$emailExists) {
 		$sql = "INSERT INTO lutilisateur (idlutilisateur, lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUE(?,?,?,?,?,?,?);";
 		$insert = $this->db->prepare($sql);
-		$insert->bindvalue(1, $user->getIdlutilisateur(),PDO::PARAM_STR);
+		$insert->bindvalue(1, $user->getIdutilisateur(),PDO::PARAM_STR);
 		$insert->bindvalue(2, $user->getLenomutilisateur(),PDO::PARAM_STR);
 		$insert->bindvalue(3, $user->getLemotdepasse(),PDO::PARAM_STR);
 		$insert->bindvalue(4, $user->getLenom(),PDO::PARAM_STR);
@@ -203,8 +203,11 @@ class lutilisateurManager {
 
 
         $premsLIMIT = ($page - 1) * $nbParPage;
-        $sql = "SELECT * FROM lutilisateur
-		LIMIT  ?, ?
+        $sql = "SELECT lutilisateur.* ,lerole.lintitule FROM lutilisateur
+          INNER JOIN lutilisateur_has_lerole
+            on lutilisateur_has_lerole.lutilisateur_idutilisateur =lutilisateur.idlutilisateur
+            INNER JOIN lerole
+            on lerole.idlerole= lutilisateur_has_lerole.lerole_idlerole LIMIT ?,?;
 		";
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->bindValue(1, $premsLIMIT, PDO::PARAM_INT);
@@ -237,6 +240,101 @@ class lutilisateurManager {
         return (int) $recup['b'];
     }
 
+    public function SelectUserByRoleid( int $idutilisateur){
+        $sql="SELECT l.idlutilisateur,l.lenomutilisateur,l.lenom,l.leprenom,l.lemail,l.actif,GROUP_CONCAT(le.idlerole) AS idlerole,GROUP_CONCAT(le.lintitule SEPARATOR '|||') AS lintitule
+FROM lutilisateur l
+LEFT JOIN lutilisateur_has_lerole lu ON lu.lutilisateur_idutilisateur=l.idlutilisateur
+LEFT JOIN lerole le ON le.idlerole=lu.lerole_idlerole
+WHERE l.idlutilisateur = :id
+GROUP BY l.idlutilisateur
+";
+        $recup = $this->db->prepare($sql);
+        $recup->bindParam("id", $idutilisateur, PDO::PARAM_INT);
 
-}
+        try {
+            $recup->execute();
+
+            // si pas de résultats
+            if ($recup->rowCount() == 0) {
+                return [];
+            }
+
+            return $recup->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            return [];
+        }
+    }
+    function updateUserandlore(lutilisateur $utilisateur, array $idlore) {
+
+
+        $this->db->beginTransaction();
+
+        // update préparé de l'article
+        $sql = "UPDATE lutilisateur 
+            SET lenomutilisateur = :lenomutilisateura,
+                lenom = :lenoma,
+                leprenom = :leprenoma,
+                lemail = :lemaila
+            WHERE idlutilisateur = :idlutilisateura;";
+        $update = $this->db->prepare($sql);
+        $update->bindValue("idlutilisateura",$utilisateur->getIdutilisateur(), PDO::PARAM_INT);
+        $update->bindValue("lenomutilisateura", $utilisateur->getLenomutilisateur(), PDO::PARAM_STR);
+        $update->bindValue("lenoma", $utilisateur->getLenom(), PDO::PARAM_STR);
+        $update->bindValue("leprenoma", $utilisateur->getLeprenom(), PDO::PARAM_STR);
+        $update->bindValue("lemaila", $utilisateur->getLemail(), PDO::PARAM_STR);
+
+        $update->execute();
+
+
+
+
+        $sql = "DELETE FROM lutilisateur_has_lerole WHERE lutilisateur_idutilisateur = ?";
+        $delete = $this->db->prepare($sql);
+        $delete->bindValue(1, $utilisateur->getIdutilisateur(), PDO::PARAM_INT);
+
+        $delete->execute();
+
+        if (!empty($idlore)) {
+
+
+            $sql = "INSERT INTO lutilisateur_has_lerole (lutilisateur_idutilisateur,lerole_idlerole) VALUES ";
+
+            foreach ($idlore AS $id) {
+
+
+                $id = (int) $id;
+
+                $sql .= "({$utilisateur->getIdutilisateur()},$id),";
+
+            }
+
+
+            $sql = substr($sql, 0, -1);
+            //s($sql);
+
+            $this->db->exec($sql);
+
+        }
+
+        try{
+
+            $this->db->commit();
+            return true;
+        } catch (PDOException $ex) {
+
+            $this->db->rollBack();
+            echo '<h2 style="color: red;">ERROR: ' . $ex->getMessage() . '</h2>';
+            return false;
+        }
+    }
+    public function UserDelete(int $id):void
+    {
+        $sql = "DELETE FROM lutilisateur WHERE idlutilisateur=?";
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1, $id, PDO::PARAM_INT);
+        $req->execute();
+    }
+
+    }
 
