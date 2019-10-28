@@ -140,7 +140,7 @@ else{
 }elseif(isset($_GET['insertutilisateur'])){
       if(!empty($_POST)){
 
-elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
+}elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
 
 
 
@@ -186,24 +186,45 @@ elseif (isset($_GET['viewutilisateur'])){
     $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
     $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,NB_PG);
     $pagesLutisateur=pagination::pagine($nblutilisateur,NB_PG,$pageLutisateur,"viewutilisateur&pglutilisateur");
+
    
  echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
-}elseif(isset($_GET['insertutilisateur'])) {
-        if (!empty($_POST)) {
 
+
+
+
+}elseif(isset($_GET['insertutilisateur'])){
+      if(empty($_POST)){
+          
+          $recupRoles =$leroleM->selectAllLerole();
+        
+          
+          echo $twig->render("lutilisateur/lutilisateur_ajouter.html.twig",["roles"=> $recupRoles]);
+          
+          
+        }else{
             $newlutilisateur = new lutilisateur($_POST);
 
-            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig', ['lenom' => $lutilisateurM->lutilisateurCreate($newlutilisateur)]);
-            header('Location: ./?viewutilisateur');
+            $role=(int) $_POST['role'];
 
-        } else {
+           $insert =$lutilisateurM->lutilisateurCreate($newlutilisateur,$role);
 
-            echo $twig->render('lutilisateur/lutilisateur_ajouter.html.twig');
+           if($insert){
+               header("Location: ./?viewutilisateur");
+           }
+      }
+ 
 
-        }
 
 
-    }
+
+
+
+
+}
+
+}
+    
 
 }else{
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
@@ -213,5 +234,7 @@ elseif (isset($_GET['viewutilisateur'])){
     }else{
         $pourEntree = false;
     }
-    echo $twig->render('roles/admin/admin_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]);
-}
+    echo $twig->render('roles/admin/admin_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]); 
+
+    }
+
