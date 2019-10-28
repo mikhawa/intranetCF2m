@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block centre %}
+
+
+
     <!-- Page Content -->
     <main role="main" class="container">
         <div class="row">
@@ -16,9 +19,6 @@
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Modification utilisateur</p>
             </div>
-
-
-
 
             <div class="section col-lg-12">
                 <div class="section col-lg-12">
@@ -28,7 +28,7 @@
 
                 <form method='POST' name='monForm' action=''>
 
-                    <input type="hidden" name="idutilisateur" id="content-admin" value='{{ afficheuser.idlutilisateur }}'>
+                    <input type="hidden" name="idlutilisateur" id="content-admin" value='{{ afficheuser.idlutilisateur }}'>
 
                     <div class="form-group">
                         <label for="lenoma">Le nom </label>
@@ -43,34 +43,16 @@
                         <input type="email" class="form-control" id="lemaila" placeholder="ici votre titre" value='{{ afficheuser.lemail }}' name='lemail'>
                     </div>
 
-
-
-                    {% for cat in afficheroles %}
-
-
-
-                        {% set tabId = afficheuser.idlerole|split(",") %}
-
-                        {% if cat.idlerole in tabId %}
-
-                            {% set value = "checked" %}
-
-                        {% else %}
-                            {% set value = "" %}
-                        {% endif %}
                         <div class="form-check">
 
-                            <input name='idlerole[]' class="form-check-input" type="checkbox" value="{{ cat.idlerole }}" id="defaultCheck{{ loop.index }}" {{ value }}>
+                            <label for="idrole"><h6>Role</h6></label>
+                           <select id="idrole" name ="idlerole">
+                               {% for role in afficheroles %}
+                               <option value="{{ role.idlerole }}">{{ role.lintitule }}</option>
+                               {% endfor %}
+                           </select>
 
-                            <label class="form-check-label" for="defaultCheck{{ loop.index }}">
-                                {{ cat.lintitule }}
-
-                            </label>
                         </div>
-
-                    {% else %}
-                        <h3>Pas de Catégories!</h3>
-                    {% endfor %}
                     <br>
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>
