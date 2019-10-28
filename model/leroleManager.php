@@ -199,7 +199,7 @@ class leroleManager
 
 
 
-    public function afficheStagiaireRole(){
+    public function afficheStagiaireRole():array {
         $sql ="SELECT le.idlerole,le.lintitule 
 FROM lerole le 
 INNER JOIN lutilisateur_has_lerole lu ON lu.lerole_idlerole=le.idlerole 

@@ -1,5 +1,6 @@
 <?php
 class lutilisateurManager {
+
     private $db;
     public function __construct(MyPDO $connect) {
         $this->db = $connect;
@@ -212,7 +213,8 @@ class lutilisateurManager {
 
 
         $premsLIMIT = ($page - 1) * $nbParPage;
-        $sql = "SELECT lutilisateur.* ,lerole.lintitule FROM lutilisateur
+        $sql = "SELECT lutilisateur.* ,lerole.lintitule 
+             FROM lutilisateur
           INNER JOIN lutilisateur_has_lerole
             on lutilisateur_has_lerole.lutilisateur_idutilisateur =lutilisateur.idlutilisateur
             INNER JOIN lerole
@@ -247,12 +249,12 @@ class lutilisateurManager {
     }
 
     public function SelectUserByRoleid( int $idutilisateur){
-        $sql="SELECT l.idlutilisateur,l.lenomutilisateur,l.lenom,l.leprenom,l.lemail,l.actif,GROUP_CONCAT(le.idlerole) AS idlerole,GROUP_CONCAT(le.lintitule SEPARATOR '|||') AS lintitule
+        $sql="SELECT l.idlutilisateur,l.lenomutilisateur,l.lenom,l.leprenom,l.lemail,l.actif,le.idlerole ,le.lintitule 
 FROM lutilisateur l
 LEFT JOIN lutilisateur_has_lerole lu ON lu.lutilisateur_idutilisateur=l.idlutilisateur
 LEFT JOIN lerole le ON le.idlerole=lu.lerole_idlerole
 WHERE l.idlutilisateur = :id
-GROUP BY l.idlutilisateur
+
 ";
         $recup = $this->db->prepare($sql);
         $recup->bindParam("id", $idutilisateur, PDO::PARAM_INT);
@@ -271,7 +273,7 @@ GROUP BY l.idlutilisateur
             return [];
         }
     }
-    function updateUserandlore(lutilisateur $utilisateur, array $idlore) {
+    function updateUserandlore(lutilisateur $utilisateur,string $idlore) {
 
 
         $this->db->beginTransaction();
@@ -284,7 +286,7 @@ GROUP BY l.idlutilisateur
                 lemail = :lemaila
             WHERE idlutilisateur = :idlutilisateura;";
         $update = $this->db->prepare($sql);
-        $update->bindValue("idlutilisateura",$utilisateur->getIdutilisateur(), PDO::PARAM_INT);
+        $update->bindValue("idlutilisateura",$utilisateur->getIdlutilisateur(), PDO::PARAM_INT);
         $update->bindValue("lenomutilisateura", $utilisateur->getLenomutilisateur(), PDO::PARAM_STR);
         $update->bindValue("lenoma", $utilisateur->getLenom(), PDO::PARAM_STR);
         $update->bindValue("leprenoma", $utilisateur->getLeprenom(), PDO::PARAM_STR);
@@ -297,7 +299,7 @@ GROUP BY l.idlutilisateur
 
         $sql = "DELETE FROM lutilisateur_has_lerole WHERE lutilisateur_idutilisateur = ?";
         $delete = $this->db->prepare($sql);
-        $delete->bindValue(1, $utilisateur->getIdutilisateur(), PDO::PARAM_INT);
+        $delete->bindValue(1, $utilisateur->getIdlutilisateur(), PDO::PARAM_INT);
 
         $delete->execute();
 
@@ -306,18 +308,17 @@ GROUP BY l.idlutilisateur
 
             $sql = "INSERT INTO lutilisateur_has_lerole (lutilisateur_idutilisateur,lerole_idlerole) VALUES ";
 
-            foreach ($idlore AS $id) {
 
 
-                $id = (int) $id;
 
-                $sql .= "({$utilisateur->getIdutilisateur()},$id),";
+                $id = (int) $idlore;
 
-            }
+                $sql .= "(".$utilisateur->getIdlutilisateur().",$id),";
+
 
 
             $sql = substr($sql, 0, -1);
-            //s($sql);
+            s($sql);
 
             $this->db->exec($sql);
 
@@ -334,13 +335,5 @@ GROUP BY l.idlutilisateur
             return false;
         }
     }
-    public function UserDelete(int $id):void
-    {
-        $sql = "DELETE FROM lutilisateur WHERE idlutilisateur=?";
-        $req = $this->db->prepare($sql);
-        $req->bindValue(1, $id, PDO::PARAM_INT);
-        $req->execute();
-    }
 
-    }
-
+}
