@@ -90,12 +90,39 @@ elseif (isset($_GET['insertleconge']))
     }
   
   
-//inscription
-  
+//linscription
 }elseif (isset($_GET["viewlinscription"])) {
     echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $linscriptionM->selectAllLinscription()]);
+
 }elseif (isset($_GET["ajouterlinscription"])) {
+    if(!empty($_POST)){
+        $newlinscription = new linscription($_POST);
+        s($_POST,$newlinscription);
+        // insertion
+        $insert=$linscriptionM->linscriptionCreate($newlinscription);
+        }
+
+else{
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
+
+}
+
+//update linscription
+}elseif (isset($_GET["updatelinscription"])) {
+    echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
+
+//delete linscription
+}elseif(isset($_GET['deletelinscription']) && ctype_digit($_GET['deletelinscription'])){
+    $idDeletelinscription = (int)$_GET['deletelinscription'];
+    if(isset($_GET['ok'])){
+        $linscriptionM->deletelinscription($idDeletelinscription);
+      
+      
+      
+      }else{
+    echo $twig->render('lerole/lerole_delete.html.twig',['id'=>$idDeleteRole]);
+    }
+    
 
 }elseif (isset($_GET['updatelinscription'])&& ctype_digit($_GET['updatelinscription'])){
 
@@ -182,7 +209,7 @@ elseif (isset($_GET['viewutilisateur'])){
 
 }
 
-
+}
     
 
 }else{
@@ -193,5 +220,7 @@ elseif (isset($_GET['viewutilisateur'])){
     }else{
         $pourEntree = false;
     }
-    echo $twig->render('roles/admin/admin_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]);
-}
+    echo $twig->render('roles/admin/admin_homepage.html.twig', ['entree' => $pourEntree,"session"=>$_SESSION]); 
+
+    }
+
