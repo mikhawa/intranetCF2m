@@ -41,7 +41,7 @@ protected function hydrate (array $tablehydrate ){
      */
     public function getLenom()
     {
-        return $this->lenom;
+        return htmlspecialchars_decode($this->lenom,ENT_QUOTES);
     }
 
     /**
@@ -49,7 +49,7 @@ protected function hydrate (array $tablehydrate ){
      */
   public function getLacronyme()
     {
-        return $this->lacronyme;
+        return htmlspecialchars_decode($this->lacronyme,ENT_QUOTES);
     }
 
      /**
