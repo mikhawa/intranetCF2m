@@ -1,7 +1,6 @@
 {% extends "roles/pedagogique/template.pedagogique.html.twig" %}
 
 
-
 {% block centre %}
  <!-- content admin -->
 {% if entree %}
@@ -25,43 +24,42 @@
         <div id="menu-admin" class="row justify-content-center">
             <ul class="col-lg-3">
 
-            
-
-
-
-
-                <a href="?viewdetailsession"> {#lien vers web#}
+                <a href="?viewlutilisateur">
                     <li class="col-lg-12">
-                        <img src="img/user.png" alt="gestion des web" class="">
-                        Nouvelle évaluation
+                        <img src="img/user.png" alt="Gestions des utilisateurs" class="">
+                        Gestions des utilisateurs
                         </li>
                 </a>
-                <a href="?viewPao" alt="Gestions des PAO">{#lien vers PAO#}
+                <a href="?viewleconge">
                     <li class="col-lg-12">
-                        <img src="img/groupe.png" alt="gestion des pao" class="">
-                        Gestions ##
+                        <img src="img/groupe.png" alt="Gestions des congés" class="">
+                        Gestions des congés
                         </li>
                 </a>
-                <a href="?viewReseau">{#lien vers les reseaus #}
+                <a href="?viewlafiliere">
                     <li class="col-lg-12">
-                        <img src="img/droit.png" alt="gestion des reseaux" class="">
-                        Gestions ##
+                        <img src="img/droit.png" alt="Gestions des filières" class="">
+                        Gestions des filières
                         </li>
                 </a>
-				<a href="./?#">
+				<a href="./?viewlerole">
                     <li class="col-lg-12">
-                        <img src="img/droit.png" alt="gestion des sessions" class="">
-                        Gestions ##
+                        <img src="img/droit.png" alt="Gestions des rôles" class="">
+                        Gestions des rôles
                         </li>
                 </a>
-                <a href="?#" alt="Gestions des inscriptions">
+                <a href="?viewlasession">
                     <li class="col-lg-12">
-                        <img src="img/groupe.png" alt="gestion des inscriptions" class="">
-                        Gestions des ###
+                        <img src="img/groupe.png" alt="Gestions des sessions" class="">
+                        Gestions des sessions
                         </li>
                 </a>
-
-              
+				<a href="?viewlinscription">
+                    <li class="col-lg-12">
+                        <img src="img/groupe.png" alt="Gestions des inscriptions" class="">
+                        Gestions des inscriptions
+                        </li>
+                </a>              
 
             </ul>
         </div><!-- end menu générale admin -->
