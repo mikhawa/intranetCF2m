@@ -120,7 +120,7 @@ else{
       
       
       }else{
-    echo $twig->render('lerole/lerole_delete.html.twig',['id'=>$idDeleteRole]);
+    echo $twig->render('',['id'=>$idDeletelinscription]);
     }
     
 
@@ -201,16 +201,8 @@ elseif (isset($_GET['viewutilisateur'])){
       }
  
 
-
-
-
-
-
-
 }
 
-}
-    
 
 }else{
     // si on vient de se connecter la variable de session n'existe pas (donc affuchage du bandeau)
