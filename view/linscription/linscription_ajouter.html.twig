@@ -21,18 +21,18 @@
                
                
                 {# Affichage du formulaire d'inscription #}
-                <form action="./?viewlinscription" method="post" name"linscriptioncreate">
+                <form action="" method="post" name"linscriptioncreate">
 
                    
                    
-                    <label for="lutilisateur.idlutilisateur">Nom de l'utilisateur&nbsp</label>
-					<select id="lutilisateur.idlutilisateur" name="lutilisateur.idlutilisateur" required>
+                    <label for="utilisateur.idutilisateur">Nom de l'utilisateur&nbsp</label>
+					<select id="utilisateur.idutilisateur" name="utilisateur.idutilisateur" required>
                     {% for utilisateur in detailUsers %}
-						<option value="{{ utilisateur_idlutilisateur }}">{{ utilisateur.lenom }} {{utilisateur.leprenom }}</option>
+						<option value="{{ utilisateur.idlutilisateur }}">{{ utilisateur.lenom }} {{utilisateur.leprenom }}</option>
 					{% endfor %}
                     </select><br><br>
-                    <label for="lasession.idlasession">Nom de la session&nbsp</label>
-					<select id="lasession.idlasession" name="lasession.idlasession" required>
+                    <label for="lasession.idsession">Nom de la session&nbsp</label>
+					<select id="lasession.idsession" name="lasession_idsession" required>
 					{% for lasession in detailSession %}
 						<option value="{{ lasession.idlasession }}">{{lasession.lenom }}  </option>
 					{% endfor %}

@@ -81,7 +81,7 @@ class linscription
     /**
      * @return mixed
      */
-    public function getUtilisateurIdutilisateur()
+    public function getUtilisateur_idutilisateur()
     {
         return $this->utilisateur_idutilisateur;
     }
@@ -89,7 +89,7 @@ class linscription
     /**
      * @param mixed $utilisateur_idutilisateur
      */
-    public function setUtilisateurIdutilisateur($utilisateur_idutilisateur): void
+    public function setUtilisateur_idutilisateur($utilisateur_idutilisateur): void
     {
         $this->utilisateur_idutilisateur = $utilisateur_idutilisateur;
     }
@@ -97,7 +97,7 @@ class linscription
     /**
      * @return mixed
      */
-    public function getLasessionIdsession()
+    public function getLasession_idsession()
     {
         return $this->lasession_idsession;
     }
@@ -105,7 +105,7 @@ class linscription
     /**
      * @param mixed $lasession_idsession
      */
-    public function setLasessionIdsession($lasession_idsession): void
+    public function setLasession_idsession($lasession_idsession): void
     {
         $this->lasession_idsession = $lasession_idsession;
     }
