@@ -144,9 +144,9 @@ else{
 
         }else{
 
+			$_POST['lenomutilisateur'] = $_POST['lenom'] . '.' . $_POST['leprenom'];
+			
             $userUpdate = new lutilisateur($_POST);
-
-
 
             $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
 
