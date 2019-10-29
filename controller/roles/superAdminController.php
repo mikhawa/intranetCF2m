@@ -192,8 +192,9 @@ elseif (isset($_GET['viewutilisateur'])){
 
 
 
-}elseif(isset($_GET['insertutilisateur'])){
-      if(empty($_POST)){
+} elseif(isset($_GET['insertutilisateur'])) {
+	
+		if(empty($_POST)){
           
           $recupRoles =$leroleM->selectAllLerole();
         
@@ -201,17 +202,20 @@ elseif (isset($_GET['viewutilisateur'])){
           echo $twig->render("lutilisateur/lutilisateur_ajouter.html.twig",["roles"=> $recupRoles]);
           
           
-        }else{
+        } else {
+			
+			$_POST['lenomutilisateur'] = $_POST['lenom'] . '.' . $_POST['leprenom'];
+			
             $newlutilisateur = new lutilisateur($_POST);
 
             $role=(int) $_POST['role'];
 
-           $insert =$lutilisateurM->lutilisateurCreate($newlutilisateur,$role);
+			$insert =$lutilisateurM->lutilisateurCreate($newlutilisateur,$role);
 
-           if($insert){
-               header("Location: ./?viewutilisateur");
-           }
-      }
+			if($insert){
+				header("Location: ./?viewutilisateur");
+			}
+		}
  
 
 }
