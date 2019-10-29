@@ -79,7 +79,7 @@ class lecongeManager
     // création de l'affichage de toutes les sections avec ses utilisateurs sur l'accueil de l'administration du site
 
     public function lecongeCreate(leconge $conge){
-        if (empty($conge->getDebut())||empty($conge->getFin()) || empty($conge->getLetype()) ||empty($conge->getLasession_idlasession())) {
+        if (empty($conge->getDebut())||empty($conge->getFin()) || empty($conge->getLetype()) ) {
 			return false;
         }
 
@@ -90,7 +90,6 @@ class lecongeManager
         $insert->bindValue(1, $conge->getDebut(), PDO::PARAM_STR);
         $insert->bindValue(2, $conge->getFin(), PDO::PARAM_STR);
         $insert->bindValue(3, $conge->getLetype(), PDO::PARAM_STR);
-        $insert->bindValue(4, $conge->getLasession_idlasession(), PDO::PARAM_STR);            
 
         try
 		{
@@ -157,7 +156,7 @@ class lecongeManager
     public function updateConge(leconge $datas){
 		
         // vérification que les champs soient valides (pas vides)
-        if(empty($datas->getIdleconge())|| empty($datas->getDebut())||empty($datas->getFin())|| empty($datas->getLetype())||empty($datas->getLasession_idlasession())){
+        if(empty($datas->getIdleconge())|| empty($datas->getDebut())||empty($datas->getFin())|| empty($datas->getLetype())){
             return false;
         }
 
@@ -168,8 +167,7 @@ class lecongeManager
         $update->bindValue(1,$datas->getDebut(),PDO::PARAM_STR);
         $update->bindValue(2,$datas->getFin(),PDO::PARAM_STR);
 		$update->bindValue(3,$datas->getLetype(),PDO::PARAM_STR);
-		$update->bindValue(4,$datas->getLasession_idlasession(),PDO::PARAM_STR);
-        $update->bindValue(5,$datas->getIdleconge(),PDO::PARAM_INT);
+        $update->bindValue(4,$datas->getIdleconge(),PDO::PARAM_INT);
 
         try{
             $update->execute();
