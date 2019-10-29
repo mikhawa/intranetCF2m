@@ -3,6 +3,8 @@
 
 if (!empty($_GET)) {
     require_once "../controller/modules/gestionLafiliere.php";
+	
+	require_once "../controller/modules/gestionLasession.php";
 
 
     if (isset($_GET['viewdetailsession'])) {
