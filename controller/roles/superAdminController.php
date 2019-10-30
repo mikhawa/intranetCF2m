@@ -104,6 +104,7 @@ elseif (isset($_GET['insertleconge']))
 
 else{
     echo $twig->render("linscription/linscription_ajouter.html.twig", ['detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
+
 }
 
 //update linscription
@@ -133,58 +134,43 @@ $modifLinscription = new linscription($_POST);
     echo $twig->render('linscription/linscription_supprimer.html.twig',['id'=>$idDeleteLinscription]);
     }
     
-// Display views for sessions
-} elseif (isset($_GET['viewlasession'])) {
-    echo $twig->render("lasession/lasession_afficherliste.html.twig", ['detailsession' => $lasessionM->sessionSelectALL()]);
-} elseif (isset($_GET['updatelasession']) && ctype_digit($_GET['updatelasession'])) {
-    echo $twig->render("lasession/lasession_modifier.html.twig", ['detailsession' => $lasessionM->sessionSelectByID($_GET['updatelasession']), "filieres" => $lafiliereM->filiereSelectAll()]);
-} elseif (isset($_GET['insertlasession'])) {
-    echo $twig->render("lasession/lasession_ajouter.html.twig", ["filieres" => $lafiliereM->filiereSelectAll()]);
+
+}elseif (isset($_GET['updatelinscription'])&& ctype_digit($_GET['updatelinscription'])){
+
+}
+//Update lutilisateur
+    elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
 
 
-}elseif (isset($_GET['viewutilisateur'])){
-     $pageLutisateur=(isset($_GET['pglutilisateur']))?(int)$_GET['pglutilisateur']:1;
-    $nblutilisateur =$lutilisateurM->selectLutilisateurCountById();
-    $vuelutilisateur =$lutilisateurM->selectlutilisateurWithLimit($pageLutisateur,5);
-    $pagesLutisateur=pagination::pagine($nblutilisateur,5,$pageLutisateur,"viewutilisateur&pglutilisateur");
- echo $twig->render('lutilisateur/lutilisateur_afficher_presence.html.twig',["lutilisateur"=> $vuelutilisateur,"pagination"=>$pagesLutisateur]);
-}elseif(isset($_GET['insertutilisateur'])){
-      if(!empty($_POST)){
+        $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
 
-}elseif (isset($_GET['updatelutilisateur'])&& ctype_digit($_GET['updatelutilisateur'])){
+        $recuperationRole = $leroleM->SelectAllRoles();
 
 
-
-    $recuperationUtilisateur = $lutilisateurM->SelectUserByRoleid($_GET['updatelutilisateur']);
-
-    $recuperationRole = $leroleM->SelectAllRoles();
+        if(empty($_POST)){
 
 
-    if(empty($_POST)){
+            echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
 
 
-        echo $twig->render('lutilisateur/lutilisateur_modifier.html.twig',["afficheuser"=>$recuperationUtilisateur,"afficheroles"=>$recuperationRole]);
+        }else{
 
-
-    }else{
-
-        $userUpdate = new lutilisateur($_POST);
+            $userUpdate = new lutilisateur($_POST);
 
 
 
-        $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
+            $idroleUpdate = (isset($_POST['idlerole'])) ? $_POST['idlerole'] : [];
 
-        $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
+            $udateUtilisateur = $lutilisateurM->updateUserandlore($userUpdate,$idroleUpdate);
 
 
 
-        if($udateUtilisateur){
+            if($udateUtilisateur){
 
-            header("Location: ./?viewutilisateur");
+                header("Location: ./");
+            }
         }
-    }
-
-
+//Delete l'utilisateur
 }elseif (isset($_GET['deleteuser'])&& ctype_digit($_GET['deleteuser'])){
 
     $lutilisateurM->UserDelete($_GET['deleteuser']);
