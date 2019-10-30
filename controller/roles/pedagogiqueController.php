@@ -53,15 +53,19 @@ if (!empty($_GET)) {
 //recherche d'un stagiaire avec un moteur de recherche
     }elseif(isset($_GET['viewprofil'])){
 
-        
-
-
+                
 
              $stagiaire = rechercheStagiaire::searchStagiaire($_POST);
 
             echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['user'=>$stagiaire]);
             
+              
+        
         }
+        
+        
+        
+        
 
 
 

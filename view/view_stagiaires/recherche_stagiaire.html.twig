@@ -38,7 +38,7 @@
                  <div>
                  
                  <form>
-                 <label for="stagiaire">recherchez un stagiaire : </label><input type="text" id="stagiaire" name="idlutilisateur" value="{{user.lenom}}{{user.leprenom}}" />
+                 <label for="stagiaire">Entrez le nom ou le prenom d'un stagiaire: </label><input type="text" id="stagiaire" name="idlutilisateur" value="{{user.lenom}}{{user.leprenom}}" />
                 </form> 
                 
                  </div>
@@ -50,10 +50,10 @@
     </div>
 
     <!-- 1. On ajoute la librairie jQuery -->
-        <script src="jquery-3.3.1.js"></script>
+        <script src="../js/jquery-3.3.1.js"></script>
 		
 		<!-- 2. On ajoute la librairie jQuery UI -->
-		<script src="jquery-ui/jquery-ui.js"></script>
+		<script src="../js/jquery-ui"></script>
 		
 		<!-- 3. Notre script qui utilise jQuery et jQueryUI -->
 		<script type="text/javascript">
@@ -61,7 +61,7 @@
 			$("input#stagiaire").autocomplete({
 				source : function(request, response) {
 					$.ajax({
-						url: "choixstagiaire.php",
+						url: "../public/index_moteur.php",
 						type: "POST",
 						dataType:"json",
 						data : {

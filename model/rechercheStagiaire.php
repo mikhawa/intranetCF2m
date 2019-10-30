@@ -1,17 +1,13 @@
 <?php
-//require_once "jquery-3.3.1.js";
 
-//require_once "jquery-ui";
 
 class rechercheStagiaire{
 
 
     public static function searchStagiaire($data) {
 
-        if (isset($_POST['param'])) {
-            $demande = $_POST['param'];
         
-            if (!empty($demande)) {
+            if (!empty($data)) {
                 // variable contenant la requête MySQL
                 $sql1 = 'SELECT u.lenom, u.leprenom, s.lacronyme
                 FROM lutilisateur u
@@ -20,23 +16,25 @@ class rechercheStagiaire{
                 INNER JOIN lasession s
                 ON s.idlasession = i.lasession_idsession
                 WHERE (u.lenom  
-                LIKE "%'.$demande.'%") 
+                LIKE " % :nom %") 
                 OR (u.leprenom
-                LIKE "%'.$demande.'%")
+                LIKE "% :nom %")
                 ORDER BY s.lacronyme';
+
         
                 // exécution de la requête
                 $recup = $sql1->prepare();
-                $recup->bindValue(1,$data,PDO::PARAM_INT);
+                $recup->bindValue("nom",$data,PDO::PARAM_STR);
                 $recup->execute();
         
         
                         if ($recup->rowCount() === 0) {
                             return [];
                         }
-                        return $recup->fetchAll(PDO::FETCH_ASSOC);
+                       // return $recup->fetch(PDO::FETCH_ASSOC);
+
         
-                /*while ($row = mysqli_fetch_assoc($recup)){
+                while ($row = $recup->fetch(PDO::FETCH_ASSOC)){
                     $resultset[] = $row["leprenom"]." ".$row["lenom"]." ".$row["lacronyme"];
                 
                 
@@ -45,9 +43,11 @@ class rechercheStagiaire{
                 } else {
                     $chaineretour = json_encode("");
                 }
+                echo $chaineretour;
+
         
                 
-            }*/
+            }
          }
 
 
@@ -56,4 +56,3 @@ class rechercheStagiaire{
 
 
     }
-}
