@@ -107,19 +107,30 @@ else{
 }
 
 //update linscription
-}elseif (isset($_GET["updatelinscription"])) {
-    echo $twig->render("linscription/linscription_modifier.html.twig", ['modifutilisateur' => $lutilisateurM->lutilisateurSelectAll(), 'modifutilisateur' => $lasessionM->sessionSelectALL()]);
+}elseif(isset($_GET['updatelinscription']) && ctype_digit($_GET['updatelinscription'])) {
+    $testlinscription= (int) $_GET['updatelinscription'];
+    if(isset($_POST["idlutilisateur"])){
+        
+$modifLinscription = new linscription($_POST);
+        $update=$linscriptionM->linscriptionModifier($modifLinscription);
+        
+    }else{
+        echo $twig->render('linscription/linscription_modifier.html.twig',['modifUsers'=> $linscriptionM->linscriptionSelectById($testlinscription),
+        'detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
+
+        
+    }
 
 //delete linscription
-}elseif(isset($_GET['deletelinscription']) && ctype_digit($_GET['deletelinscription'])){
-    $idDeletelinscription = (int)$_GET['deletelinscription'];
+}elseif(isset($_GET['deleteLinscription']) && ctype_digit($_GET['deleteLinscription'])){
+    $idDeleteLinscription = (int)$_GET['deleteLinscription'];
     if(isset($_GET['ok'])){
-        $linscriptionM->deletelinscription($idDeletelinscription);
-      
+        $linscriptionM->deleteLinscription($idDeleteLinscription);
+        header("Location: ./?viewlinscription");
       
       
       }else{
-    echo $twig->render('lerole/lerole_delete.html.twig',['id'=>$idDeleteRole]);
+    echo $twig->render('linscription/linscription_supprimer.html.twig',['id'=>$idDeleteLinscription]);
     }
     
 // Display views for sessions
