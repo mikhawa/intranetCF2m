@@ -1,7 +1,10 @@
 <?php
 
+
 if (!empty($_GET)) {
     require_once "../controller/modules/gestionLafiliere.php";
+	
+	require_once "../controller/modules/gestionLasession.php";
 
 
     if (isset($_GET['viewdetailsession'])) {
@@ -34,22 +37,40 @@ if (!empty($_GET)) {
 
 
 //update des infos du stagiaire
-    } elseif (isset($_GET['ajoutInfo']) && ctype_digit($_GET['ajoutInfo'])) {
+    } elseif (isset($_GET['modifInfo']) && ctype_digit($_GET['modifInfo'])) {
 
         if (isset($_POST['idlutilisateur'])) {
 
             $updateStagiaire = new evaluation($_POST);
 
-            $evaluationM->updateStagiaire($updateStagiaire, $_GET['ajoutInfo']);
 
-            header("Location: ./?ajoutInfo");
+            $evaluationM->updateStagiaire($updateStagiaire, $_GET['modifInfo']);
+
+            header("Location: ./?modifInfo");
             var_dump($_POST);
         } else {
 
-            echo $twig->render('view_stagiaires/modifier_stagiaire.html.twig', ['section' => $evaluationM->selectProfilStagiaire($_GET['ajoutInfo'])]);
+            echo $twig->render('view_stagiaires/modifier_stagiaire.html.twig', ['section' => $evaluationM->selectProfilStagiaire($_GET['modifInfo'])]);
         }
 
-    }
+
+//recherche d'un stagiaire avec un moteur de recherche
+    }elseif(isset($_GET['viewprofil'])){
+
+
+             $stagiaire = rechercheStagiaire::searchStagiaire($_POST);
+
+            echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['user'=>$stagiaire]);
+            
+        }
+
+
+
+
+    
+
+
+
     } else {
 
 
