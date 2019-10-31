@@ -18,6 +18,7 @@ require_once "../controller/modules/gestionLasession.php";
 
 if (isset($_GET['confirmationdeleteleconge']) && ctype_digit($_GET['confirmationdeleteleconge'])) {
     $lecongeM->deleteConge($_GET['confirmationdeleteleconge']);
+    header("Location: ./?viewleconge");
 // Update
 } else if (isset($_POST['idleconge']) && ctype_digit($_POST['idleconge']) && isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['letype']) && ctype_digit($_POST['letype']) && isset($_POST['lasession_idlasession']) && ctype_digit($_POST['lasession_idlasession'])) {
     $leconge = new leconge($_POST);
