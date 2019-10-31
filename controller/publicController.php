@@ -11,6 +11,7 @@ if (isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
 } else if(isset($_GET['motdepasseoublier'])){
     $lutilisateurM = new lutilisateurManager($db_connect);
     $user = new lutilisateur($_POST);
+
     echo $twig->render("public/modepasseoublier.html.twig", ["motdepasse" => $lutilisateurM->motDePasseOublier($user)]);
 }else if(isset ($_GET['mail'])&& !empty($_GET['mail'])&& $utilisateurManager->checkMail(urldecode($_GET['mail']))){
 
@@ -44,23 +45,22 @@ else if(isset ($_GET['checkUniqueID'])){
     $idUtilisateur = (int) $_GET['checkUniqueID'];
 
 
-    if(!isset($_GET['key'])){
+    if(isset($_GET['key'])){
 
-        $recupIdPasswod = $lutilisateurM->checkPasswordInDb($_GET['key']);
+        $recupIdPasswod = $utilisateurManager->checkPasswordInDb($_GET['key']);
 
         echo $twig->render("public/newpassword.html.twig");
     }
 
-    $passwordUpdateID = new lutilisateur($_POST);
 
-    $recupIdPasswod = $lutilisateurM->checkPasswordInDb($_GET['key']);
+    $passwordUpdateID = new lutilisateur($_POST);
 
     if($passwordUpdateID->setLemotdepasseCrypte(1234)==$recupIdPasswod){
 
-        $updatePassword = $lutilisateurM->changePassword($user);
+        echo "Mot de passe deja utiliser";
 
     } else {
-        echo "Mot de passe deja utiliser";
+       $recup = $utilisateurManager->changePassword($passwordUpdateID);
     }
 
 
