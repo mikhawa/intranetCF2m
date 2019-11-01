@@ -364,14 +364,22 @@ WHERE l.idlutilisateur = :id
 
     public function changePassword(lutilisateur $user){
 
-        $user->setLemotdepasseCrypte($_POST);
+        $user->setLemotdepasseCrypte($user->getLemotdepasse());
 
-        $sql = "UPDATE lutilisateur SET lemotdepasse = :lemotdepasse WHERE idlutilisateur = :idlutilisateur";
+        $sql = "UPDATE lutilisateur SET lemotdepasse = :lemotdepasse WHERE luniqueid = :luniqueid";
         $update = $this->db->prepare($sql);
-        $update->bindValue("lemotdepasse",$user,PDO::PARAM_STR);
-        $update->bindValue("idlutilisateur",$user,PDO::PARAM_INT);
-        $update->execute();
+        $update->bindValue("lemotdepasse",$user->getLemotdepasse(),PDO::PARAM_STR);
+        $update->bindValue("luniqueid",$user->getLuniqueid(),PDO::PARAM_STR);
+
+        try {
+            $update->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
     }
+
+
     public function checkPasswordInDb($idPassword){
         $sql = "SELECT lemotdepasse FROM lutilisateur WHERE idlutilisateur= ?";
         $selectPasswordById = $this->db->prepare($sql);

@@ -4,7 +4,7 @@ define("DB_HOST","127.0.0.1");
 define("DB_NAME","intranetv6");
 define("DB_LOGIN","root");
 define("DB_PWD","");
-define("DB_PORT","3308");
+define("DB_PORT","3306");
 define("DB_CHARSET","utf8");
 
 // default development mode, change to true for product mode
