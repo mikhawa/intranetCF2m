@@ -340,6 +340,66 @@ WHERE l.idlutilisateur = :id
         $req = $this->db->prepare($sql);
         $req->bindValue(1, $id, PDO::PARAM_INT);
         $req->execute();
+
+    }
+    public function getUniqueId (string  $email){
+      $sql = "SELECT luniqueid FROM lutilisateur WHERE lemail = ? ";
+      $getUniqueid = $this->db->prepare($sql);
+      $getUniqueid->bindValue(1,$email, PDO::PARAM_STR);
+        try {
+            $getUniqueid->execute();
+
+            // si pas de résultats
+            if ($getUniqueid->rowCount() == 0) {
+                return [];
+            }
+
+            return $getUniqueid->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            return [];
+        }
     }
 
-}
+
+    public function changePassword(lutilisateur $user){
+
+        $user->setLemotdepasseCrypte($user->getLemotdepasse());
+
+        $sql = "UPDATE lutilisateur SET lemotdepasse = :lemotdepasse WHERE luniqueid = :luniqueid";
+        $update = $this->db->prepare($sql);
+        $update->bindValue("lemotdepasse",$user->getLemotdepasse(),PDO::PARAM_STR);
+        $update->bindValue("luniqueid",$user->getLuniqueid(),PDO::PARAM_STR);
+
+        try {
+            $update->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
+
+    public function checkPasswordInDb($idPassword){
+        $sql = "SELECT lemotdepasse FROM lutilisateur WHERE idlutilisateur= ?";
+        $selectPasswordById = $this->db->prepare($sql);
+        $selectPasswordById->bindValue(1,$idPassword,PDO::PARAM_INT);
+
+        try {
+            $selectPasswordById->execute();
+
+            // si pas de résultats
+            if ($selectPasswordById->rowCount() == 0) {
+                return [];
+            }
+
+            return $selectPasswordById->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            return [];
+        }
+
+    }
+    }
+
+
