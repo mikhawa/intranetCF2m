@@ -307,5 +307,23 @@ class lasessionManager
 
 
     }
+    public function sessionCount_Actif(): int
+    {
+
+        $sql = "SELECT COUNT(idlasession) AS nb
+		  FROM lasession
+		  WHERE actif=1";
+
+
+        $sqlQuery = $this->db->query($sql);
+
+
+        $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+        return (int)$recup['nb'];
+
+
+
+    }
+
 
 }
