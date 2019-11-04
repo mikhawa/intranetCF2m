@@ -257,5 +257,19 @@ public function selectSessionWithLimitPedagogique(int $pageSession,int $nbParPag
 
 
 }
+public function sessionSelectAll_Actif(){
+    $sql = "
+	SELECT
+		*
+      FROM
+		lasession
+	WHERE actif=1
+	
+	";
+    $sqlQuery = $this->db->query($sql);
+
+
+    $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+}
 
 }
