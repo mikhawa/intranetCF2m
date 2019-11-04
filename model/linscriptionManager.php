@@ -153,5 +153,35 @@ class linscriptionManager
         }
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
+public function inscriptionAllSelectWithUser(int $page ,int $nbParPage ) : array {
 
+    $premsLIMIT = ($page - 1) * $nbParPage;
+
+    $sql ="SELECT i.idlinscription,i.debut,i.fin,l.lenomutilisateur,s.lenom,s.lacronyme,s.lacronyme
+                  FROM linscription i 
+                  INNER JOIN lutilisateur l ON l.idlutilisateur = i.utilisateur_idutilisateur 
+                  INNER JOIN lasession s ON s.idlasession = i.lasession_idsession
+                  LIMIT ?,?
+                  ";
+    $recup = $this->db->prepare($sql);
+    $recup->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+    $recup->bindValue(2,$nbParPage,PDO::PARAM_INT);
+    $recup->execute();
+
+    return $recup->fetchAll(PDO::FETCH_ASSOC);
+
+  }
+    public function selectLinscriptionCountById(): int
+    {
+
+        $sql = "SELECT COUNT(idlinscription) AS nb
+		  FROM linscription";
+
+
+        $sqlQuery = $this->db->query($sql);
+
+
+        $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+        return (int)$recup['nb'];
+    }
 }
