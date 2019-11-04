@@ -285,5 +285,27 @@ class lasessionManager
             return false;
         }
     }
+    public function sessionSelectAllWithLimit_Actif(int $pageSession,int $nbParPageSession): array{
+
+
+        $premsLIMIT = ($pageSession-1)*$nbParPageSession;
+        $sql = "
+	SELECT
+		*
+	FROM
+		lasession
+	WHERE actif=1
+	ORDER BY debut
+	LIMIT  ?, ?
+	";
+        $sqlQuery = $this->db->prepare($sql);
+        $sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+        $sqlQuery->bindValue(2,$nbParPageSession,PDO::PARAM_INT);
+        $sqlQuery->execute();
+
+        return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+    }
 
 }
