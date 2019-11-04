@@ -324,6 +324,21 @@ class lasessionManager
 
 
     }
+    public function sessionCount_NonActif(): int
+    {
 
+        $sql = "SELECT COUNT(idlasession) AS nb
+		  FROM lasession
+		  WHERE actif= 0";
+
+
+        $sqlQuery = $this->db->query($sql);
+
+
+        $recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+        return (int)$recup['nb'];
+
+
+    }
 
 }
