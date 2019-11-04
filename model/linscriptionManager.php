@@ -21,22 +21,6 @@ class linscriptionManager
         return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function selectLinscription(int $id): array
-    {
-        $sql = "
-	SELECT
-		*
-	FROM
-		linscription
-	WHERE
-		idlinscription = :id;";
-        $sqlQuery = $this->db->prepare($sql);
-        $sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
-        $sqlQuery->execute();
-
-        return $sqlQuery->fetch(PDO::FETCH_ASSOC);
-    }
-
     public function linscriptionDelete(int $id): void
     {
         $sql = "DELETE FROM linscription WHERE idlinscription=?";
@@ -153,5 +137,110 @@ class linscriptionManager
         }
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
+	
+	public function inscriptionSelectAll_Actif(): array
+    {
+        $sql = "
+	SELECT
+		*
+	FROM
+		linscription
+	WHERE actif = 1";
+        $sqlQuery = $this->db->prepare($sql);
+        $sqlQuery->execute();
 
+        return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+    }
+	
+	public function inscriptionSelectAll_NonActif(): array
+    {
+        $sql = "
+	SELECT
+		*
+	FROM
+		linscription
+	WHERE actif = 0";
+        $sqlQuery = $this->db->prepare($sql);
+        $sqlQuery->execute();
+
+        return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+    }
+	
+	public function selectInscriptionCount_Actif(): int {
+
+		$sql="SELECT COUNT(idlinscription) AS nb
+		  FROM linscription
+		  WHERE actif=1";
+		  
+
+		$sqlQuery = $this->db->query($sql);
+
+
+		$recup = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+		return (int) $recup['nb'];
+
+
+		$recup= $sqlQuery->fetch(PDO::FETCH_ASSOC);	  
+		return (int) $recup['nb'];
+
+	}
+
+	public function inscriptionSelectAllWithLimit_Actif(int $pageInscription,int $nbParPageInscription): array{
+
+
+		$premsLIMIT = ($pageInscription-1)*$nbParPageInscription;
+		$sql = "
+		SELECT
+			*
+		FROM
+			linscription
+		WHERE actif=1
+		ORDER BY debut
+		LIMIT  ?, ?
+		";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+		$sqlQuery->bindValue(2,$nbParPageInscription,PDO::PARAM_INT);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+		
+	}
+
+	public function inscriptionSelectAllWithLimit_NonActif(int $pageInscription,int $nbParPageInscription): array{
+
+
+		$premsLIMIT = ($pageInscription-1)*$nbParPageInscription;
+		$sql = "
+		SELECT
+			*
+		FROM
+			linscription
+		WHERE actif=0
+		ORDER BY debut
+		LIMIT  ?, ?
+		";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindValue(1,$premsLIMIT,PDO::PARAM_INT);
+		$sqlQuery->bindValue(2,$nbParPageInscription,PDO::PARAM_INT);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+		
+	}
+	
+	public function inscriptionDelete_NonActif(int $id): void {
+		
+		$sql = "
+		DELETE
+		FROM
+		linscription
+		WHERE
+		idlinscription = :id AND actif = 0;";
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+		$sqlQuery->execute();
+		
+    }
+	
 }
