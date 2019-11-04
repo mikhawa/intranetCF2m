@@ -267,6 +267,23 @@ class lasessionManager
 
         $recup = $sqlQuery->fetchALL(PDO::FETCH_ASSOC);
     }
+    public function sessionDelete_NonActif(int $idlasession)
+    {
 
+        $sql = "DELETE FROM lasession WHERE idlasession=? AND actif = 0 ";
+
+        $delete = $this->db->prepare($sql);
+        $delete->bindValue(1, $idlasession, PDO:: PARAM_INT);
+
+        try {
+            $delete->execute();
+            return true;
+
+        } catch (PDOException $e) {
+            echo $e->getCode();
+
+            return false;
+        }
+    }
 
 }
