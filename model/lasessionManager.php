@@ -136,7 +136,7 @@ class lasessionManager
             return true;
 
         } catch (PDOException $e) {
-            echo $e->getCode();
+            echo $e->getMessage();
 
             return false;
 
