@@ -117,9 +117,28 @@ class lutilisateurManager {
 
     //create a new user
     public function lutilisateurCreate( lutilisateur $user,int $role) {
-        if(empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail())){
-          return false;
+		
+	if(empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail())){
+	  return false;
     }
+	
+	$sql = "SELECT * FROM lutilisateur WHERE lemail = ?";
+	$check = $this->db->prepare($sql);
+	$check->bindvalue(1, $user->getLemail(), PDO::PARAM_STR);
+	
+	try {
+		$check->execute();
+		$mail = $check->fetch(PDO::FETCH_ASSOC);
+	} catch(PDOException $e) {
+		echo $e->getCode();
+        return false;
+	}
+	
+	if($check->rowCount()) {
+		echo "<h2 style='color: red;'>Ce mail est déjà utilisé. Veuillez saisir un autre mail.</h2>";
+		return false;
+	}
+	
     $sql = "INSERT INTO lutilisateur ( lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUES(?,?,?,?,?,?);";
     $insert = $this->db->prepare($sql);
     // création de l'uniqueid et cryptage du mot de passe (1234 par défaut)
@@ -133,33 +152,30 @@ class lutilisateurManager {
     $insert->bindvalue(4, $user->getLeprenom(),PDO::PARAM_STR);
     $insert->bindvalue(5, $user->getLemail(),PDO::PARAM_STR);
     $insert->bindvalue(6, $user->getLuniqueid(),PDO::PARAM_STR);
+	
     //gestion des erreurs avec try catch
-    try{
+    try {
         $insert->execute();
-    }catch(PDOException $e){
+    } catch(PDOException $e) {
         echo $e->getCode();
         return false;
     }
 
-        $idutilisateur =$this->db->lastInsertId();
+	$idutilisateur = $this->db->lastInsertId();
 
-        $sql = "INSERT INTO  lutilisateur_has_lerole
-        (lutilisateur_idutilisateur,lerole_idlerole) VALUES ($idutilisateur,?)";
-        $req = $this->db->prepare($sql);
-        $req->bindValue(1, $role, PDO::PARAM_INT);
-           try{
-            $req->execute();
-               return true;
-
-           }catch(PDOException $e){
-              echo $e->getCode();
-                return false;
-           }
-         
-        
-
-
-        }
+	$sql = "INSERT INTO  lutilisateur_has_lerole
+	(lutilisateur_idutilisateur,lerole_idlerole) VALUES ($idutilisateur,?)";
+	$req = $this->db->prepare($sql);
+	$req->bindValue(1, $role, PDO::PARAM_INT);
+		try {
+			$req->execute();
+			return true;
+		} catch(PDOException $e) {
+			echo $e->getCode();
+			return false;
+		}
+		
+    }
 
 
    
