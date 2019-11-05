@@ -93,7 +93,13 @@ elseif (isset($_GET['insertleconge']))
   
 //linscription
 }elseif (isset($_GET["viewlinscription"])) {
-    echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $linscriptionM->selectAllLinscription()]);
+    $pageLinscription=(isset($_GET['pglinscription']))?(int)$_GET['pglinscription']:1;
+    $nbLinscription =$linscriptionM->selectLinscriptionCountById();
+    $vuelinscription =$linscriptionM->inscriptionAllSelectWithUser($pageLinscription,NB_PG);
+
+    $pagesLinsciption=pagination::pagine($nbLinscription,NB_PG,$pageLinscription,"viewlinscription&pglinscription");
+
+    echo $twig->render("linscription/linscription_afficherliste.html.twig", ['detailinscription' => $vuelinscription,"pagination"=>$pagesLinsciption]);
 
 }elseif (isset($_GET["ajouterlinscription"])) {
     if(!empty($_POST)){

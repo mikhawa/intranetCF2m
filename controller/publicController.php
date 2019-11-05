@@ -39,7 +39,7 @@ if (isset($_POST['lenomutilisateur']) && isset($_POST['lemotdepasse'])) {
     echo $twig->render("public/homepage.html.twig");
 
 }else if( isset($_GET['checkUniqueID']) && isset($_GET['key']) ) {
-    var_dump($_POST);
+
     //$recupIdPasswod = $utilisateurManager->checkPasswordInDb($_GET['key']);
 
     echo $twig->render("public/newpassword.html.twig", ['key' => $_GET['key']]);
