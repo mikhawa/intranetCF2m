@@ -1,11 +1,17 @@
 <?php
 
-
 class rechercheStagiaire{
 
 
-    public static function searchStagiaire($data) {
+public static function researchStagiaire(){
 
+     //require_once '../config.php';
+
+     //require_once 'index.php';
+
+         
+        /*if (isset($_POST['param'])) {
+            $demande = $_POST['param'];
         
             if (!empty($data)) {
                 // variable contenant la requête MySQL
@@ -16,25 +22,27 @@ class rechercheStagiaire{
                 INNER JOIN lasession s
                 ON s.idlasession = i.lasession_idsession
                 WHERE (u.lenom  
-                LIKE " % :nom %") 
+                LIKE "%?%") 
                 OR (u.leprenom
-                LIKE "% :nom %")
+                LIKE "%?%")
                 ORDER BY s.lacronyme';
-
+                 
+                 var_dump($data);
         
                 // exécution de la requête
-                $recup = $sql1->prepare();
-                $recup->bindValue("nom",$data,PDO::PARAM_STR);
+                $recup = $db->prepare($sql1);
+                $recup->bindValue(1,$data,PDO::PARAM_STR);
+                $recup->bindValue(2,$data,PDO::PARAM_STR);
                 $recup->execute();
         
         
                         if ($recup->rowCount() === 0) {
                             return [];
                         }
-                       // return $recup->fetch(PDO::FETCH_ASSOC);
+                        return $recup->fetch(PDO::FETCH_ASSOC);*/
 
         
-                while ($row = $recup->fetch(PDO::FETCH_ASSOC)){
+                while ($row = $recup->fetchAll(PDO::FETCH_ASSOC)){
                     $resultset[] = $row["leprenom"]." ".$row["lenom"]." ".$row["lacronyme"];
                 
                 
@@ -50,9 +58,7 @@ class rechercheStagiaire{
             }
          }
 
-
-      }
-
-
-
-    }
+        }
+    //}
+     
+}

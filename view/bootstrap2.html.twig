@@ -55,6 +55,58 @@
 </script>
 
 
+{#AJAX pour moteur de recherche#}
+
+ {#<script src= "js/jquery-ui/jquery-3.3.1.js" ></script>
+
+<!-- 2. On ajoute la librairie jQuery UI -->
+        <script src= "js/jquery-ui/jquery-ui.js" ></script>#}
+
+		
+		<!-- 3. Notre script qui utilise jQuery et jQueryUI -->
+        <script type="text/javascript">
+
+        
+
+            $(document).ready(function(){
+
+                
+                $("input#stagiaire").change(function(){
+                    console.log("CHANGE");
+                    console.log($("#stagiaire").val());
+                });
+                
+                
+                $("input#stagiaire").autocomplete({
+                    source : function(request, response) {
+                        $.ajax({
+                            url: "rechercheStagiaire.php",
+                            type: "POST",
+                            dataType:"text",
+                            data : {
+                                param : $("#stagiaire").val()
+                                },
+                            complete: function(resultat, status) {
+                                console.log("COMPLETE : "+ status);
+                                },
+                            success: function(resultat) { 
+                                console.log("SUCCESS : "+ resultat);
+                                response(resultat);
+                                },
+                            error: function(resultat, status, erreur) {
+                                console.log(erreur);
+                                }	
+                        });
+                    }
+                });
+
+
+            });
+        
+			
+		</script>
+
+
 
 {% endblock %}
 
