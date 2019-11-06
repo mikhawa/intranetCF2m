@@ -1,6 +1,7 @@
 <?php
 
 
+
 class rechercheStagiaire{
 
 
@@ -56,3 +57,4 @@ class rechercheStagiaire{
 
 
     }
+

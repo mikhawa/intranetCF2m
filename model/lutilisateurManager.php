@@ -71,7 +71,7 @@ class lutilisateurManager {
 		WHERE
 			idlutilisateur = :id;";
         $sqlQuery = $this->db->prepare($sql);
-        $sqlQuery->bindValue(":id", $user->getIdutilisateur(), PDO::PARAM_INT);
+        $sqlQuery->bindValue(":id", $user->getIdlutilisateur(), PDO::PARAM_INT);
         $sqlQuery->execute();
     }
     public function lutilisateurDelete(lutilisateur $user): void {
@@ -82,7 +82,7 @@ class lutilisateurManager {
 		WHERE
 			idlutilisateur = :id;";
         $sqlQuery = $this->db->prepare($sql);
-        $sqlQuery->bindValue(":id", $user->getIdutilisateur(), PDO::PARAM_INT);
+        $sqlQuery->bindValue(":id", $user->getIdlutilisateur(), PDO::PARAM_INT);
         $sqlQuery->execute();
     }
     public function lutilisateurSelectAll(): array {
@@ -117,9 +117,28 @@ class lutilisateurManager {
 
     //create a new user
     public function lutilisateurCreate( lutilisateur $user,int $role) {
-        if(empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail())){
-          return false;
+		
+	if(empty($user->getLenom()) ||empty($user->getLeprenom()) ||empty($user->getLemail())){
+	  return false;
     }
+	
+	$sql = "SELECT * FROM lutilisateur WHERE lemail = ?";
+	$check = $this->db->prepare($sql);
+	$check->bindvalue(1, $user->getLemail(), PDO::PARAM_STR);
+	
+	try {
+		$check->execute();
+		$mail = $check->fetch(PDO::FETCH_ASSOC);
+	} catch(PDOException $e) {
+		echo $e->getCode();
+        return false;
+	}
+	
+	if($check->rowCount()) {
+		echo "<h2 style='color: red;'>Ce mail est déjà utilisé. Veuillez saisir un autre mail.</h2>";
+		return false;
+	}
+	
     $sql = "INSERT INTO lutilisateur ( lenomutilisateur, lemotdepasse, lenom, leprenom, lemail, luniqueid) VALUES(?,?,?,?,?,?);";
     $insert = $this->db->prepare($sql);
     // création de l'uniqueid et cryptage du mot de passe (1234 par défaut)
@@ -133,33 +152,30 @@ class lutilisateurManager {
     $insert->bindvalue(4, $user->getLeprenom(),PDO::PARAM_STR);
     $insert->bindvalue(5, $user->getLemail(),PDO::PARAM_STR);
     $insert->bindvalue(6, $user->getLuniqueid(),PDO::PARAM_STR);
+	
     //gestion des erreurs avec try catch
-    try{
+    try {
         $insert->execute();
-    }catch(PDOException $e){
+    } catch(PDOException $e) {
         echo $e->getCode();
         return false;
     }
 
-        $idutilisateur =$this->db->lastInsertId();
+	$idutilisateur = $this->db->lastInsertId();
 
-        $sql = "INSERT INTO  lutilisateur_has_lerole
-        (lutilisateur_idutilisateur,lerole_idlerole) VALUES ($idutilisateur,?)";
-        $req = $this->db->prepare($sql);
-        $req->bindValue(1, $role, PDO::PARAM_INT);
-           try{
-            $req->execute();
-               return true;
-
-           }catch(PDOException $e){
-              echo $e->getCode();
-                return false;
-           }
-         
-        
-
-
-        }
+	$sql = "INSERT INTO  lutilisateur_has_lerole
+	(lutilisateur_idutilisateur,lerole_idlerole) VALUES ($idutilisateur,?)";
+	$req = $this->db->prepare($sql);
+	$req->bindValue(1, $role, PDO::PARAM_INT);
+		try {
+			$req->execute();
+			return true;
+		} catch(PDOException $e) {
+			echo $e->getCode();
+			return false;
+		}
+		
+    }
 
 
    
@@ -182,7 +198,7 @@ class lutilisateurManager {
         $sql="UPDATE lutilisateur SET lemotdepasse = ?  WHERE idlutilisateur = ?;";
         $insert = $this->db->prepare($sql);
         $insert->bindvalue(1, $user->getLemotdepasse(),PDO::PARAM_STR);
-        $insert->bindvalue(2, $user->getIdutilisateur(),PDO::PARAM_STR);
+        $insert->bindvalue(2, $user->getIdlutilisateur(),PDO::PARAM_STR);
         try{
             $insert->execute();
             return true;
@@ -273,7 +289,7 @@ WHERE l.idlutilisateur = :id
             return [];
         }
     }
-    function updateUserandlore(lutilisateur $utilisateur,string $idlore) {
+    function updateUserandlore(lutilisateur $utilisateur, $idlore) {
 
 
         $this->db->beginTransaction();
@@ -310,15 +326,12 @@ WHERE l.idlutilisateur = :id
 
 
 
-
                 $id = (int) $idlore;
 
-                $sql .= "(".$utilisateur->getIdlutilisateur().",$id),";
+                $sql .= "(".$utilisateur->getIdlutilisateur().",$id)";
 
 
 
-            $sql = substr($sql, 0, -1);
-            s($sql);
 
             $this->db->exec($sql);
 
@@ -336,4 +349,73 @@ WHERE l.idlutilisateur = :id
         }
     }
 
-}
+
+    public function UserDelete(int $id):void
+    {
+        $sql = "DELETE FROM lutilisateur WHERE idlutilisateur=?";
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1, $id, PDO::PARAM_INT);
+        $req->execute();
+
+    }
+    public function getUniqueId (string  $email){
+      $sql = "SELECT luniqueid FROM lutilisateur WHERE lemail = ? ";
+      $getUniqueid = $this->db->prepare($sql);
+      $getUniqueid->bindValue(1,$email, PDO::PARAM_STR);
+        try {
+            $getUniqueid->execute();
+
+            // si pas de résultats
+            if ($getUniqueid->rowCount() == 0) {
+                return [];
+            }
+
+            return $getUniqueid->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            return [];
+        }
+    }
+
+
+    public function changePassword(lutilisateur $user){
+
+        $user->setLemotdepasseCrypte($user->getLemotdepasse());
+
+        $sql = "UPDATE lutilisateur SET lemotdepasse = :lemotdepasse WHERE luniqueid = :luniqueid";
+        $update = $this->db->prepare($sql);
+        $update->bindValue("lemotdepasse",$user->getLemotdepasse(),PDO::PARAM_STR);
+        $update->bindValue("luniqueid",$user->getLuniqueid(),PDO::PARAM_STR);
+
+        try {
+            $update->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
+
+    public function checkPasswordInDb($idPassword){
+        $sql = "SELECT lemotdepasse FROM lutilisateur WHERE idlutilisateur= ?";
+        $selectPasswordById = $this->db->prepare($sql);
+        $selectPasswordById->bindValue(1,$idPassword,PDO::PARAM_INT);
+
+        try {
+            $selectPasswordById->execute();
+
+            // si pas de résultats
+            if ($selectPasswordById->rowCount() == 0) {
+                return [];
+            }
+
+            return $selectPasswordById->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            return [];
+        }
+
+    }
+    }
+
+
