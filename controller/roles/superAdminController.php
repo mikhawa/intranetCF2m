@@ -52,10 +52,28 @@ elseif (isset($_GET['updateleconge']) && ctype_digit($_GET['updateleconge']))
 elseif (isset($_GET['insertleconge']))
 {
     echo $twig->render("leconge/leconge_ajouter.html.twig", ["sessions" => $lasessionM->sessionSelectALL()]);
-      
-	  
-      
-//insert un nouveau rôle
+
+
+    //View le role
+} elseif (isset($_GET['viewlerole'])){
+    // page actuelle
+    $pageactu = (isset ($_GET['pg']))?(int)$_GET['pg']:1;
+    // nombre de rôles totaux à afficher
+    $nbRoles = $leroleM->selectRoleCountById();
+    // on va récupérer les rôles de la page actuelle
+
+    $articlesPageActu = $leroleM->selectRoleWithLimit($pageactu,3);
+
+
+    // création de la pagination
+    $affichePagination = pagination::pagine($nbRoles,3,$pageactu,"viewlerole&pg");
+
+
+    echo $twig->render('lerole/lerole_afficherliste.html.twig', [ "detailrole"=>$articlesPageActu,"pagination"=>$affichePagination]);
+
+
+
+    //insert un nouveau rôle
 } elseif(isset($_GET['insertLeRole'])){
     if(!empty($_POST)){
         $newLeRole = new lerole($_POST);
