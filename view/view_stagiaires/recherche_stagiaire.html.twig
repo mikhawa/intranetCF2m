@@ -1,10 +1,14 @@
+
  {# on étend le template depuis base.html.twig, qui est donc son parent #}
+
 {% extends "template.html.twig" %}
 
 {# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
 {% block title %}
     {{ parent() }}
+
     | Accueil evaluation filiere
+
 {% endblock %}
 
 {% block menuhaut %}
@@ -16,7 +20,9 @@
     <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
+
                 <h1 class="mt-5">Recherche </h1>
+
                 <p class="lead">rechercher un stagiaire</p>
 
             </div>
@@ -55,4 +61,6 @@
 {% endblock %}
 
 {#{% include "footer.html.twig" %}#}
+
+
 

@@ -1,7 +1,10 @@
 <?php
 
+
 if (!empty($_GET)) {
     require_once "../controller/modules/gestionLafiliere.php";
+	
+	require_once "../controller/modules/gestionLasession.php";
 
 
     if (isset($_GET['viewdetailsession'])) {
@@ -40,6 +43,7 @@ if (!empty($_GET)) {
 
             $updateStagiaire = new evaluation($_POST);
 
+
             $evaluationM->updateStagiaire($updateStagiaire, $_GET['modifInfo']);
 
             header("Location: ./?modifInfo");
@@ -52,6 +56,7 @@ if (!empty($_GET)) {
 
 //recherche d'un stagiaire avec un moteur de recherche
     }elseif(isset($_GET['viewprofil'])){
+
 
         
         
@@ -66,12 +71,11 @@ if (!empty($_GET)) {
 
 
 
-        
-        
-        
-        
 
-
+        
+        
+        
+        
 
 
 
