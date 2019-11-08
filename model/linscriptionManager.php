@@ -15,11 +15,39 @@ class linscriptionManager
         $sql = "
 		DESCRIBE
 			linscription;";
-        $sqlQuery = $this->db->prepare($sql);
-        $sqlQuery->execute();
 
-        return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
-    }
+		$sqlQuery = $this->db->prepare($sql);
+		$sqlQuery->execute();
+		
+		return $sqlQuery->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+public function selectLinscription(int $id): array {
+	$sql = "
+	SELECT
+		*
+	FROM
+		linscription
+	WHERE
+		idlinscription = :id;";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+	$sqlQuery->execute();
+	
+	return $sqlQuery->fetch(PDO::FETCH_ASSOC);
+}
+
+
+ public function linscriptionDelete(int $id):void{
+$sql="DELETE FROM linscription WHERE idlinscription=?";
+$req = $this->db->prepare($sql);
+$req->bindValue(1,$id, PDO::PARAM_INT);
+$req->execute();
+
+
+
+}
+
 
     public function linscriptionDelete(int $id): void
     {
@@ -76,15 +104,18 @@ class linscriptionManager
 		" . $updateDatas . "
 	WHERE
 		idlinscription = :id;";
-        $sqlQuery = $this->db->prepare($sql);
-        $sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
-        $sqlQuery->execute();
-    }
 
-    public function insertLinscription(array $datas): void
-    {
-        $sql = "
-	INSERT INTO linscription(debut, fin, utilisateur_idutilisateur, lasession_idsession)
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+	$sqlQuery->execute();
+
+	/*return $sqlQuery->fetch(PDO::FETCH_ASSOC);*/
+}
+
+
+public function insertLinscription(array $datas): void {
+	$sql = " 
+  INSERT INTO linscription(debut, fin, utilisateur_idutilisateur, lasession_idsession)
 	VALUES
 		(";
         foreach ($datas as $data) {
@@ -96,9 +127,26 @@ class linscriptionManager
         $sqlQuery->execute();
     }
 
-    public function deleteLinscription(int $id): void
-    {
-        $sql = "
+
+// requete pour modifier linscription
+
+public function linscriptionSelectByID(int $id): array {
+	$sql ="
+	SELECT i.idlinscription,i.debut,i.fin,l.lenomutilisateur,s.lenom,s.lacronyme,l.idlutilisateur,s.idlasession
+                  FROM linscription i 
+                  INNER JOIN lutilisateur l ON l.idlutilisateur = i.utilisateur_idutilisateur 
+                  INNER JOIN lasession s ON s.idlasession = i.lasession_idsession
+                  GROUP BY i.idlinscription 
+				  ";
+	$sqlQuery = $this->db->prepare($sql);
+	$sqlQuery->bindParam(":id", $id, PDO::PARAM_INT);
+	$sqlQuery->execute();
+
+	return $sqlQuery->fetch(PDO::FETCH_ASSOC);
+}
+
+public function deleteLinscription(int $id): void {
+	$sql = "
 	DELETE
 	FROM
 		linscription
