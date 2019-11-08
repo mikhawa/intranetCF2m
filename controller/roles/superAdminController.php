@@ -108,12 +108,14 @@ else{
 }
 
 //update linscription
-}elseif(isset($_GET['updatelinscription']) && ctype_digit($_GET['updatelinscription'])) {
+}elseif(isset($_GET['updatelinscription'])&& ctype_digit($_GET['updatelinscription'])) {
     $testlinscription= (int) $_GET['updatelinscription'];
+    
     if(isset($_POST["idlutilisateur"])){
         
 $modifLinscription = new linscription($_POST);
         $update=$linscriptionM->linscriptionModifier($modifLinscription);
+    
         
     }else{
         echo $twig->render('linscription/linscription_modifier.html.twig',['modifUsers'=> $linscriptionM->linscriptionSelectById($testlinscription),
@@ -121,6 +123,7 @@ $modifLinscription = new linscription($_POST);
 
         
     }
+
 
 //delete linscription
 }elseif(isset($_GET['deleteLinscription']) && ctype_digit($_GET['deleteLinscription'])){

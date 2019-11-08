@@ -105,7 +105,7 @@ public function updateLinscription(int $id, array $datas) {
 
 
 public function insertLinscription(array $datas): void {
-	$sql = "
+	$sql = " 
 	INSERT INTO linscription(debut, fin, utilisateur_idutilisateur, lasession_idsession)
 	VALUES
 		(";
