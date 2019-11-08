@@ -1,30 +1,12 @@
 <?php
-/*
- * 
- * Front Controller
- * 
- * 
- */
-/*
- * session start
- */
 session_start();
-/*
- * configuration
- */
+
 require_once '../config.php';
-/*
- 
-/*
-appel du fichier contenant la requête pour l'autocompletion
-*/
-require_once '../model/rechercheStagiaire.php';
 
+spl_autoload_register(function ($class) {
+    include '../model/' . $class . '.php';
+});
 
-
-/*
- * create a PDO connection with MyPDO
- */
 try {
     $db_connect = new MyPDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';port=' . DB_PORT . ';charset=' . DB_CHARSET,
             DB_LOGIN,
@@ -40,11 +22,13 @@ try {
  * Pas connecté, donc on veut afficher le contrôleur public
  */
 if (!isset($_SESSION['TheIdSess']) || $_SESSION['TheIdSess'] != session_id()) {
-    exit();
+    return false;
+} 
+
+if(isset($_POST['param'])){
+
+$research = new rechercheStagiaire($db_connect);
+$result = $research->researchStagiaire($_POST['param']);
+echo $result;
 }
-
-if(!empty($_POST)){
-    var_dump($_POST);
-}
-
-
+//var_dump($_POST);

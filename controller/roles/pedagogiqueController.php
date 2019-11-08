@@ -59,13 +59,22 @@ if (!empty($_GET)) {
 
 
 
-             $stagiaire = rechercheStagiaire::searchStagiaire($_POST);
 
-            echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['user'=>$stagiaire]);
-            
-              
+
         
+        
+            echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',["rechercheStagiaire"=>$_POST]);
+
+           
+
+              
         }
+             
+
+
+
+
+
         
         
         
