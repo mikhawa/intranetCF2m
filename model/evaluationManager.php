@@ -108,7 +108,7 @@ class evaluationManager {
     }
     
 
-    public function searchStagiaire(evaluation $search){
+    /*public function searchStagiaire(evaluation $search){
 
         
             if (!empty($search)) {
@@ -140,7 +140,7 @@ class evaluationManager {
             }
 
             
-    }
+    }*/
 
 
 

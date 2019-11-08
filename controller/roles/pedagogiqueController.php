@@ -53,15 +53,9 @@ if (!empty($_GET)) {
 //recherche d'un stagiaire avec un moteur de recherche
     }elseif(isset($_GET['viewprofil'])){
 
-        if (!empty($_POST['utilisateur'])){
-
-            $search = new evaluation($_POST);
-
-            $StagiaireInput = $evaluationM->searchStagiaire($search);
-
-            $moteurRechercheStagiaire = rechercheStagiaire::researchStagiaire($StagiaireInput);
         
-            echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',['user'=> $moteurRechercheStagiaire]);
+        
+            echo $twig->render('view_stagiaires/recherche_stagiaire.html.twig',["rechercheStagiaire"=>$_POST]);
 
            
 
@@ -69,7 +63,7 @@ if (!empty($_GET)) {
         }
              
 
-}
+
 
 
         
