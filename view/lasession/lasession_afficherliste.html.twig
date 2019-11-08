@@ -21,14 +21,16 @@
             </div>
             <br>
             <div class="col-lg-12 text-left">
+            <div class="pagination">
 			{{ pagination|raw }}
+            </div>
                 {# Faites apparaître les sections (celles du menu) cliquables dans un nouveau h4, sinon écrivez "Pas encore d'éléments dans le menu" #}
                 {% for item in detailsession %}					
 					<div class="section col-lg-12">
                     <h4 class="mt-3">{{ item.lenom }} | {{ item.lannee }}
                     <div class="content-menu">
                         <a href="?updatelasession={{ item.idlasession }}" class="modified">modifier</a>  
-                        <a class="delete" href="javascript:if(window.confirm('Voulez-vous vraiment supprimer cette session ?')) location='./?confirmationdeletelasession={{ item.idlasession }}';">supprimer</a>
+                        <a class="delete" href="?confirmationdeletelasession={{ item.idlasession }}">supprimer</a>
                     </div>
                     </h4>  
                     <p>Acronyme : {{ item.lacronyme }}</p>
@@ -40,7 +42,7 @@
                 {% else %}
 					<h4 class="mt-3">Pas encore de session sur notre page accueil</h4>
                 {% endfor %}
-				{{ pagination|raw }}
+
             </div>
         </div>
 </main>

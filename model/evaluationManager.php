@@ -46,7 +46,7 @@ class evaluationManager {
      //selection du stagiaire By id
     public function selectProfilStagiaire(int $idlutilisateur): array{
 
-        $sql="SELECT (u.lenom) AS nomFamille, u.leprenom, u.lemail, (f.lenom) AS filiereName, (s.lenom) AS sessionName, u.lenomutilisateur, u.idlutilisateur, r.lintitule
+        $sql="SELECT (u.lenom) AS nomFamille, u.leprenom, u.lemail, (f.lenom) AS filiereName, (s.lenom) AS sessionName, u.lenomutilisateur, u.idlutilisateur, r.lintitule, l.debut, l.fin
         FROM lutilisateur u
         INNER JOIN lutilisateur_has_lerole h
         ON h.lutilisateur_idutilisateur = u.idlutilisateur
@@ -68,7 +68,7 @@ class evaluationManager {
                 if ($recup->rowCount() === 0) {
                     return [];
                 }
-                return $recup->fetchAll(PDO::FETCH_ASSOC);  
+                return $recup->fetch(PDO::FETCH_ASSOC);  
 
 
     }
@@ -96,7 +96,7 @@ class evaluationManager {
 
         try{
 
-            $update->execute();
+            $updateLeStagiaire->execute();
             return true;
 
         } catch(PDOException $e){
@@ -105,7 +105,42 @@ class evaluationManager {
             return false;
 
         }
-	}
+    }
+    
+
+    /*public function searchStagiaire(evaluation $search){
+
+        
+            if (!empty($search)) {
+                // variable contenant la requête MySQL
+                $sql1 = 'SELECT u.lenom, u.leprenom, s.lacronyme
+                FROM lutilisateur u
+                INNER JOIN linscription i
+                ON i.utilisateur_idutilisateur = u.idlutilisateur
+                INNER JOIN lasession s
+                ON s.idlasession = i.lasession_idsession
+                WHERE (u.lenom  
+                LIKE "%?%") 
+                OR (u.leprenom
+                LIKE "%?%")
+                ORDER BY s.lacronyme';
+                 
+        
+                // exécution de la requête
+                $recup = $this->db->prepare($sql1);
+                $recup->bindValue(1,$search,PDO::PARAM_STR);
+                $recup->bindValue(2,$search,PDO::PARAM_STR);
+                $recup->execute();
+        
+        
+                        if ($recup->rowCount() === 0) {
+                            return [];
+                        }
+                        return $recup->fetchAll(PDO::FETCH_ASSOC);
+            }
+
+            
+    }*/
 
 
 
