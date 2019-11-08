@@ -22,7 +22,7 @@
                 {# Affichage du formulaire d'inscription #}
                 <form action="./?viewlinscription" method="post" name"updatelinscription">
 
-                    <label for="lutilisateur.idlutilisateur">Nom de l'utilisateur&nbsp</label>
+                    <label for="idla">Nom de l'utilisateur&nbsp</label>
 					<select id="lutilisateur.idlutilisateur" name="lutilisateur.idlutilisateur" required>
                     {% for utilisateur in detailUsers %}
 						<option value="{{ utilisateur.idlutilisateur }}">{{ utilisateur.lenom }} {{utilisateur.leprenom }}</option>

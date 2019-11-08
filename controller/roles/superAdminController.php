@@ -118,6 +118,7 @@ $modifLinscription = new linscription($_POST);
     
         
     }else{
+        s($linscriptionM->linscriptionSelectById($testlinscription),$lutilisateurM->lutilisateurSelectAll(),$lasessionM->sessionSelectALL());
         echo $twig->render('linscription/linscription_modifier.html.twig',['modifUsers'=> $linscriptionM->linscriptionSelectById($testlinscription),
         'detailUsers' => $lutilisateurM->lutilisateurSelectAll(), 'detailSession' => $lasessionM->sessionSelectALL()]);
 

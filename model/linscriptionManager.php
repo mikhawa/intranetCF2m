@@ -122,7 +122,7 @@ public function insertLinscription(array $datas): void {
 
 public function linscriptionSelectByID(int $id): array {
 	$sql ="
-	SELECT i.idlinscription,i.debut,i.fin,l.lenomutilisateur,s.lenom,s.lacronyme
+	SELECT i.idlinscription,i.debut,i.fin,l.lenomutilisateur,s.lenom,s.lacronyme,l.idlutilisateur,s.idlasession
                   FROM linscription i 
                   INNER JOIN lutilisateur l ON l.idlutilisateur = i.utilisateur_idutilisateur 
                   INNER JOIN lasession s ON s.idlasession = i.lasession_idsession
