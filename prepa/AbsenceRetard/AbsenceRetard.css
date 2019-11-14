@@ -1,0 +1,79 @@
+tr {
+    height: 2em;
+}
+
+.entete, .ladate, .regle, .oral, .ecrit, .contrat, .out {
+    min-width: 6em;
+}
+
+.separateur {
+    min-width:2em;
+}
+
+.ladate {
+    text-align: center;
+}
+
+.jan {
+    background-color: #FFCBA4;
+    color: #0C0C0C;
+}
+
+.feb {
+    background-color: #318CE7;
+    color: #FFFFFF;
+}
+
+.mar {
+    background-color: #CCCCFF;
+    color: #0C0C0C;
+}
+
+.apr {
+    background-color: #F6C9AA;
+    color: #0C0C0C;
+}
+
+.may {
+    background-color: #A9D171;
+    color: #0C0C0C;
+}
+
+.jun {
+    background-color: #FFFFDD;
+    color: #0C0C0C;
+}
+
+.jul {
+    background-color: #FFB0BA;
+    color: #0C0C0C;
+}
+
+.aug {
+    background-color: #9EFD38;
+    color: #303030;
+}
+
+.sep {
+    background-color: #B36700;
+    color: #FFFFFF;
+}
+
+.oct {
+    background-color: #A67EFF;
+    color: #FFFFFF;
+}
+
+.nov {
+    background-color: #DFF0D8;
+    color: #468847;
+}
+
+.dec {
+    background-color: #008080;
+    color: #FFFF00;
+}
+
+.tropproche {
+    font-weight: bold;
+}
