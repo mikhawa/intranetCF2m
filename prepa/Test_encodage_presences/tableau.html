@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <style>
+        th {
+            text-align: center;
+        }
+        
+        .table td {
+            padding: 0.1rem;
+            width: 5rem;
+        }
+        
+        .table td .nom {width: 8rem}
+        
+        .table td .jour {width:5rem}
+        
+        .case {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height:4em;
+            text-align: center;
+        }
+        
+        .case .code {
+            position: absolute;
+            top:0; left:0;
+            width: 40%;
+            height:2em;
+            line-height: 2em;
+        }
+        
+        .case .debut {
+            position: absolute;
+            top:0; left:40%;
+            width: 60%;
+            height: 2em;
+            line-height: 2em;
+        }
+
+        .case .code2 {
+            position: absolute;
+            top:2em; left:0;
+            width: 40%;
+            height:2em;
+            line-height: 2em;
+        }
+
+        .case .fin {
+            position: absolute;
+            top:2em; left:40%;
+            width: 60%;
+            height: 2em;
+            line-height: 2em;
+        }
+        
+        .PR {background-color: lightgreen; color: white;}
+        .DA {font-weight: bold;}
+        .AI {background-color: #FF0000; color: white;}
+        .RI {background-color: #0000FF; color: white;}
+        .AJ {background-color: #DD0000; color: white;}
+        .RJ {background-color: #00CCCC; color: white;}
+        .AM {background-color: #BB0000; color: white;}
+        .RM {background-color: #006699; color: white;}
+    </style>
+    <title>Grille horaire</title>
+  </head>
+  <body>
+    <main class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th class="nom">Stagiaires</th>
+            <th colspan="2" class="jour">Lundi 18-11</th>
+            <th colspan="2" class="jour">Mardi 19-11</th>
+            <th colspan="2" class="jour">Mercredi 20-11</th>
+            <th colspan="2" class="jour">Jeudi 21-11</th>
+            <th colspan="2" class="jour">Vendredi 22-11</th>
+          </tr>
+          <tr>
+            <td></td>
+            <th>Matin</th>
+            <th>Après-midi</th>  
+            <th>Matin</th>
+            <th>Après-midi</th>  
+            <th>Matin</th>
+            <th>Après-midi</th>  
+            <th>Matin</th>
+            <th>Après-midi</th>  
+            <th>Matin</th>
+            <th>Après-midi</th>  
+          </tr>
+        </thead>
+        <tfoot></tfoot>
+        <tbody id="contenu">
+            
+          <tr idstagiaire="9">
+            <td>UN test1</td>
+            <td>
+                <div class="case" data-id="1000" data-date="18-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1001" data-date="18-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code AI">AI</div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1002" data-date="19-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1003" data-date="19-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2 DA">DA</div>    
+                  <div class="fin DA">16:00</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1004" data-date="20-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1005" data-date="20-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1006" data-date="21-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1007" data-date="21-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1008" data-date="22-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1009" data-date="22-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+          </tr>
+            
+          <tr idstagiaire="10">
+            <td>DEUX test2</td>
+            <td>
+                <div class="case" data-id="1010" data-date="18-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code RJ">RJ</div>
+                  <div class="debut">10:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1011" data-date="18-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1012" data-date="19-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1013" data-date="19-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1014" data-date="20-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code RI">RI</div>
+                  <div class="debut">09:20</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1015" data-date="20-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1016" data-date="21-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1017" data-date="21-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1018" data-date="22-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1019" data-date="22-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+          </tr>
+
+          <tr idstagiaire="11">
+            <td>TROIS test3</td>
+            <td>
+                <div class="case" data-id="1020" data-date="18-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1021" data-date="18-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1022" data-date="19-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1023" data-date="19-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1024" data-date="20-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1025" data-date="20-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code RM">RM</div>
+                  <div class="debut">14:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="21-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="21-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="22-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="22-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+          </tr>
+
+          <tr idstagiaire="12">
+            <td>QUATRE test4</td>
+            <td>
+                <div class="case" data-id="1100" data-date="18-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1101" data-date="18-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1102" data-date="19-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1103" data-date="19-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code AJ">AJ</div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1104" data-date="20-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1105" data-date="20-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="21-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="21-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="22-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="22-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+          </tr>
+
+          <tr idstagiaire="13">
+            <td>CINQ test5</td>
+            <td>
+                <div class="case" data-id="1201" data-date="18-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1202" data-date="18-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1203" data-date="19-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code AM">AM</div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1204" data-date="19-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1205" data-date="20-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">09:00</div>
+                  <div class="code2"></div>    
+                  <div class="fin">12:15</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="1206" data-date="20-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code PR">PR</div>
+                  <div class="debut">13:15</div>
+                  <div class="code2"></div>    
+                  <div class="fin">16:30</div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="21-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="21-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="22-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+            <td>
+                <div class="case" data-id="" data-date="22-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                  <div class="code"></div>
+                  <div class="debut"></div>
+                  <div class="code2"></div>    
+                  <div class="fin"></div>    
+                </div>
+            </td>  
+          </tr>
+
+        </tbody>
+    </table>
+    </main>
+
+    <div id="details" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="nomStagiaire">Nom du stagiaire</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+                <p id="titre-details">Entrez les données pour le [date] - [type]</p>
+                <form>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="status">Status</label>
+                      <select id="status" class="form-control">
+                        <option value="?" selected>Choisissez...</option>
+                        <option value="PR">PR : Présent</option>
+                        <option value="RI">RI : Retard injustifié</option>
+                        <option value="RJ">RJ : Retard justifié</option>
+                        <option value="RM">RM : Retard avec message</option>
+                        <option value="AI">AI : Absence injustifiée</option>
+                        <option value="AJ">AJ : Absence justifiée</option>
+                        <option value="AM">AM : Absence avec message</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">Heure d'arrivée</label>
+                      <input type="time" class="form-control" id="debut" placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-row">    
+                    <div class="form-group col-md-6">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="depart">
+                        <label class="form-check-label" for="depart">Départ anticipé</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">Heure de départ</label>
+                      <input type="time" class="form-control" id="fin" placeholder="">
+                    </div>
+                  </div>
+                  <input type="hidden" id="lid" />
+                  <input type="hidden" id="ladate" />
+                  <input type="hidden" id="letype" />
+                </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
+            <button type="button" id="boutonSupprimer" class="btn btn-danger mr-auto">Supprimer</button>
+            <button type="button" id="boutonEnregistrer" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+      
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>  
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+      
+    <script>
+        $(document).ready(function(){
+            console.log("jQuery actif");
+            
+            const DebutMatin = "09:00:00";
+            const FinMatin = "12:15:00";
+            const DebutAprem = "13:15:00";
+            const FinAprem = "16:30:00";
+            
+            $("div.case").click(function(){
+                //console.log("clic sur une case horaire");
+
+                // recherche de la ligne avec les données sur le stagiaire
+                var TRparent = $(this).parent().parent();
+                
+                // récupération de l'ID du stagiaire
+                var IDstagiaire = TRparent[0].getAttribute("idstagiaire");
+
+                // récupération du nom du stagiaire
+                var nomPrenom = TRparent[0].children[0].innerHTML;
+                
+                // récupération de la date, du type (matin/après-midi), de l'ID de la case horaire
+                var ladate = $(this).attr("data-date");
+                var letype = $(this).attr("data-type");
+                var lid = $(this).attr("data-id");
+                
+                $("#ladate").val(ladate);
+                $("#letype").val(letype);
+                $("#lid").val(lid);
+
+                if (letype=="0") {
+                    var lemoment = " (matin)";
+/*                    $('#debut').val(DebutMatin);
+                    $('#fin').val(FinMatin);*/
+                } else {
+                    var lemoment = " (après-midi)"
+                    /*$('#debut').val(DebutAprem);
+                    $('#fin').val(FinAprem);*/
+                }
+
+                // remplissage de la fenêtre modale
+                $('#boutonSupprimer').hide();
+                $("#depart").prop('checked', false);
+                
+                $('#nomStagiaire').html(nomPrenom);
+                $('#titre-details').html('Entrez les données pour le '+ladate+lemoment);
+                
+                // détecter si la case est vide ou remplie
+                var codePresence = $(this).find('.code').html();
+                var debutPeriode = $(this).find('.debut').html();
+                var codeDepart = $(this).find('.code2').html();
+                var finPeriode = $(this).find('.fin').html();
+
+                if ( (codePresence=="")&&(debutPeriode=="")&&(codeDepart=="")&&(finPeriode=="") ){
+                    // case vide    : console.log("Case horaire vide");
+                    $("#status").val("?");
+                    $('#debut').val(0);
+                    $("#depart").prop('checked', false);
+                    $('#fin').val(0);
+                } else {
+                    // case remplie : console.log("Case horaire remplie");
+                    $('#boutonSupprimer').show(); // montrer le bouton supprimer
+                    
+                    $('#debut').val(debutPeriode);  // afficher l'heure de début de la période
+                    $('#fin').val(finPeriode);      // afficher l'heure de fin de la période
+                    
+                    if (codeDepart=="DA") {         // afficher la case à cocher
+                        $("#depart").prop('checked', true);
+                    }
+                    
+                    switch(codePresence) {
+                        case "PR" : $("#status").val("PR"); break;
+                        case "RI" : $("#status").val("RI"); break;
+                        case "RJ" : $("#status").val("RJ"); break;
+                        case "RM" : $("#status").val("RM"); break;
+                        case "AI" : $("#status").val("AI"); break;
+                        case "AJ" : $("#status").val("AJ"); break;
+                        case "AM" : $("#status").val("AM"); break;
+                        default : $("#status").val("?"); break;
+                    }
+                }
+            });
+                
+            $('#boutonSupprimer').click(function(){
+                console.log("Supprimer");
+                $('#details').modal("hide");
+            });
+
+            $('#boutonEnregistrer').click(function(){
+                console.log("Enregistrer");
+                
+                console.log($("#lid").val());
+                console.log($("#letype").val());
+                console.log($("#ladate").val());
+                
+                console.log($("#status").val());
+                console.log($('#debut').val());
+                console.log($("#depart").prop('checked'));
+                console.log($('#fin').val());
+                
+                $('#details').modal("hide");
+            });
+        });
+    </script>  
+  </body>
+</html>
