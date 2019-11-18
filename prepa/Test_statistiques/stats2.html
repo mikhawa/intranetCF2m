@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <style>
+        h1 {
+            text-align: center;
+        }
+        
+        th {
+            text-align: center;
+        }
+        
+        .table td {
+            padding: 0.1rem;
+            width: 5rem;
+        }
+        
+        .table td .nom {width: 8rem}
+        
+        .table td .jour {width:5rem}
+        
+        .semaine {height: 2.5rem}
+        
+        .case {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            min-height:2em;
+            text-align: center;
+        }
+        
+        .case .code {
+            position: absolute;
+            top:0; left:0;
+            width: 40%;
+            height:2em;
+            line-height: 2em;
+        }
+        
+        .case .debut, .case .duree {
+            position: absolute;
+            top:0; left:40%;
+            width: 60%;
+            height: 2em;
+            line-height: 2em;
+        }
+
+        .case .code2 {
+            position: absolute;
+            top:2em; left:0;
+            width: 40%;
+            height:2em;
+            line-height: 2em;
+        }
+
+        .case .fin {
+            position: absolute;
+            top:2em; left:40%;
+            width: 60%;
+            height: 2em;
+            line-height: 2em;
+        }
+        
+        .totaux, .totaux td, tfoot {
+            text-align: center;
+            height: 1em;
+            line-height: 1em;
+        }
+        
+        .separateur {
+            height: 1em;
+        }
+        
+        .mois td {
+            text-align: center;
+        }
+        
+        .PR {background-color: lightgreen; color: white;}
+        .AI {background-color: #FF0000; color: white;}
+        .RI {background-color: #0000FF; color: white;}
+        .AJ {background-color: #DD0000; color: white;}
+        .RJ {background-color: #00CCCC; color: white;}
+        .AM {background-color: #BB0000; color: white;}
+        .RM {background-color: #006699; color: white;}
+        
+        .DA, .D, .R, .A {    /* Mise en évidence des Départs anticipés, des Retards et des Absences */
+            font-weight: bold;        
+        }
+        .C {                 /* Mise en évidence des Congés (y compris jours fériés) */
+            background-color: lightgray;
+        }
+        
+    </style>
+    <title>Statistiques</title>
+  </head>
+  <body>
+    <main class="container">
+    <h1 class="jumbotron">[Nom du groupe] - [Nom du stagiaire]</h1>    
+    <div class="accordion" id="accordeon">
+       
+        <!-- DETAILS -->
+        
+        <h2 class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Oct-2019</h2>
+
+        <h2 class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nov-2019</h2>
+        
+        <!-- OCTOBRE -->
+        <div id="collapseOne" class="mois collapse" aria-labelledby="headingOne" data-parent="#accordeon">
+        
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th class="nom">Octobre 2019</th>
+                <th colspan="2" class="jour">Lundi</th>
+                <th colspan="2" class="jour">Mardi</th>
+                <th colspan="2" class="jour">Mercredi</th>
+                <th colspan="2" class="jour">Jeudi</th>
+                <th colspan="2" class="jour">Vendredi</th>
+              </tr>
+              <tr>
+                <th>Semaines</th>
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+              </tr>
+            </thead>
+            <tfoot>
+                <tr class="separateur"><td colspan="11"></td></tr>    
+<!--
+                <tr class="totaux">
+                  <th>Jours ouvrés</th>
+                  <th>23</th>
+                  <td colspan="4"></td>    
+                  <th>Totaux</th>
+                  <th>Jours</th>
+                  <th>23.0</th>
+                  <th>Heures</th>
+                  <th>161:00</th>
+                </tr>
+-->
+               <tr>
+                   <th colspan="3">Jours ouvrés</th>
+                   <td colspan="6"></td>
+                   <th colspan="2">Total</th>
+               </tr>
+               <tr>
+                   <th>Maximum</th>
+                   <th>Ecoulés</th>
+                   <th>Restants</th>
+                   <td colspan="6"></td>
+                   <th>Jours</th>
+                   <th>Heures</th>
+               </tr>
+               <tr>
+                   <th>23</th>
+                   <th>23</th>
+                   <th>0</th>
+                   <td colspan="6"></td>
+                   <th>23.0</th>
+                   <th>161:00</th>
+               </tr>
+            </tfoot>
+            <tbody class="contenu">
+
+              <tr class="semaine">
+                <td>Du 01 au 04</td>
+                <td>
+                    <div class="case" data-date="01-10-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="01-10-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 07 au 11</td>
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 14 au 18</td>
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 21 au 25</td>
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 28 au 31</td>
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="-10-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="01-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="01-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+              </tr>
+
+
+            </tbody>
+        </table>
+        </div>  <!-- fin mois : Octobre -->
+        
+        <!-- NOVEMBRE -->
+        <div id="collapseTwo" class="mois collapse" aria-labelledby="headingTwo" data-parent="#accordeon">
+        
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th class="nom">Novembre 2019</th>
+                <th colspan="2" class="jour">Lundi</th>
+                <th colspan="2" class="jour">Mardi</th>
+                <th colspan="2" class="jour">Mercredi</th>
+                <th colspan="2" class="jour">Jeudi</th>
+                <th colspan="2" class="jour">Vendredi</th>
+              </tr>
+              <tr>
+                <th>Semaines</th>
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+                <th>Matin</th>
+                <th>Après-midi</th>  
+              </tr>
+            </thead>
+            <tfoot>
+                <tr class="separateur"><td colspan="11"></td></tr>    
+<!--
+                <tr class="totaux">
+                  <th>Jours ouvrés</th>
+                  <th>19</th>
+                  <td colspan="4"></td>    
+                  <th>Totaux</th>
+                  <th>Jours</th>
+                  <th>11.0</th>
+                  <th>Heures</th>
+                  <th>75:10</th>
+                </tr>
+-->
+               <tr>
+                   <th colspan="3">Jours ouvrés</th>
+                   <td colspan="6"></td>
+                   <th colspan="2">Total</th>
+               </tr>
+               <tr>
+                   <th>Maximum</th>
+                   <th>Ecoulés</th>
+                   <th>Restants</th>
+                   <td colspan="6"></td>
+                   <th>Jours</th>
+                   <th>Heures</th>
+               </tr>
+               <tr>
+                   <th>19</th>
+                   <th>12</th>
+                   <th>7</th>
+                   <td colspan="6"></td>
+                   <th>11.0</th>
+                   <th>75:10</th>
+               </tr>
+                
+            </tfoot>
+            <tbody class="contenu">
+
+              <tr class="semaine">
+                <td>Du 01 au 01</td>
+                <td>
+                    <div class="case" data-date="28-10-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="28-10-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="29-10-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="29-10-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="30-10-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="30-10-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="31-10-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="31-10-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case C" data-date="01-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case C" data-date="01-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 04 au 08</td>
+                <td>
+                    <div class="case" data-date="04-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="04-11-2019" data-type="1">
+                      <div class="code AI">AI</div>
+                      <div class="duree A">00:00</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="05-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="05-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree D">03:00</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="06-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="06-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="07-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="07-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="08-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="08-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 11 au 15</td>
+                <td>
+                    <div class="case C" data-date="11-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case C" data-date="11-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="12-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="12-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="13-11-2019" data-type="0">
+                      <div class="code RI">RI</div>
+                      <div class="duree R">03:10</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="13-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="14-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="14-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="15-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="15-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 18 au 22</td>
+                <td>
+                    <div class="case" data-date="18-11-2019" data-type="0">
+                      <div class="code RJ">RJ</div>
+                      <div class="duree R">02:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="18-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="19-11-2019" data-type="0">
+                      <div class="code AM">AM</div>
+                      <div class="duree A">00:00</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="19-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="20-11-2019" data-type="0">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="20-11-2019" data-type="1">
+                      <div class="code PR">P</div>
+                      <div class="duree">03:30</div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="21-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                      <div class="code"></div>
+                      <div class="debut"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="21-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                      <div class="code"></div>
+                      <div class="debut"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="22-11-2019" data-type="0" data-toggle="modal" data-target="#details">
+                      <div class="code"></div>
+                      <div class="debut"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="22-11-2019" data-type="1" data-toggle="modal" data-target="#details">
+                      <div class="code"></div>
+                      <div class="debut"></div>
+                    </div>
+                </td>  
+              </tr>
+
+              <tr class="semaine">
+                <td>Du 25 au 29</td>
+                <td>
+                    <div class="case" data-date="25-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="25-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="26-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="26-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="27-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="27-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="28-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="28-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="29-11-2019" data-type="0">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="case" data-date="29-11-2019" data-type="1">
+                      <div class="code"></div>
+                      <div class="duree"></div>
+                    </div>
+                </td>  
+              </tr>
+
+            </tbody>
+        </table>
+        </div>  <!-- fin mois : Novembre -->
+                
+        <hr>    <!-- SYNTHESE -->
+        
+        <h2 class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAll" aria-expanded="true" aria-controls="collapseAll">Récapitulatif</h2>
+
+        <h2 class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMax" aria-expanded="true" aria-controls="collapseMax">Maximum possible</h2>
+        
+        <!-- RECAPITULATIF -->
+        <div id="collapseAll" class="mois collapse show" aria-labelledby="headingAll" data-parent="#accordeon">
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th colspan="3">Récapitulatif</th>
+                <th colspan="3">Totaux des présences pour le mois</th>
+                <th colspan="2">Cumul</th>
+              </tr>
+              <tr>
+                <th class="">Mois</th>
+                <th class="">Jours ouvrés</th>
+                <th class="">Max heures</th>  
+                <th class="">Jours</th>
+                <th class="">Heures</th>
+                <th class="">% Présence</th>
+                <th class="">Heures</th>
+                <th class="">% Présence</th>
+              </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody class="contenu">
+              <tr class="mois">
+                <td>Octobre 2019</td>
+                <td>23</td>
+                <td>161</td>  
+                <td>23.0</td>  
+                <td>161:00</td> 
+                <td>100.00%</td>  
+                <td>161:00</td>
+                <td>100.00%</td>
+              </tr>
+              <tr class="mois">
+                <td>Novembre 2019</td>
+                <td>19</td>
+                <td>133</td>  
+                <td>11.0</td>  
+                <td>75:10</td>
+                <td>56.52%</td>  
+                <td>236:10</td>
+                <td>80.32%</td>
+              </tr>
+            </tbody>
+        </table>
+        </div>    <!-- fin récapitulatif -->
+
+        <!-- MAXIMUM POSSIBLE -->
+        <div id="collapseMax" class="mois collapse" aria-labelledby="headingMax" data-parent="#accordeon">
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th colspan="3">Maximum possible</th>
+                <th colspan="2">Totaux des présences pour le mois</th>
+                <th colspan="2">Cumul</th>
+              </tr>
+              <tr>
+                <th class="">Mois</th>
+                <th class="">Jours ouvrés</th>
+                <th class="">Max heures</th>  
+                <th class="">Heures</th>
+                <th class="">% Présence</th>
+                <th class="">Heures</th>
+                <th class="">% Présence</th>
+              </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody class="contenu">
+              <tr class="mois">
+                <td>Octobre 2019</td>
+                <td>23</td>
+                <td>161</td>  
+                <td>161:00</td> 
+                <td>100.00%</td>  
+                <td>161:00</td>
+                <td>100.00%</td>
+              </tr>
+              <tr class="mois">
+                <td>Novembre 2019</td>
+                <td>19</td>
+                <td>133</td>  
+                <td>75:20</td>
+                <td>56.64%</td>  
+                <td>236:20</td>
+                <td>80.39%</td>
+              </tr>
+            </tbody>
+        </table>
+        </div>    <!-- fin max possible -->
+        
+    </div>    <!-- fin accordion -->
+    </main>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>  
+    <script src="bootstrap/js/bootstrap.js"></script>
+      
+    <script>
+        $(document).ready(function(){
+            console.log("jQuery actif");
+        });
+    </script>  
+  </body>
+</html>
