@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
         <title>Absences - Retards - Stagiaire</title>
         <link type="text/css" rel="stylesheet" href="AbsenceRetard.css" />
     </head>
     <body>
-        <h1>Absences et retards - Groupe : Prefo WEB 2018 - Stagiaire : UN test1</h1>
+        <h1 class="jumbotron">Groupe : Prefo WEB 2018 - Stagiaire : UN test1</h1>
         <h2>Absences (total = 5)</h2>
-        <table border="1" id="absences">
+        <table class="table" id="absences">
             <tr>
                 <th class="entete"></th>
 
@@ -47,7 +51,7 @@
             </tr>
         </table>
         <h2>Retards (total = 2)</h2>
-        <table border="1" id="retards">
+        <table class="table" id="retards">
             <tr>
                 <th class="entete"></th>
 
@@ -70,7 +74,9 @@
             </tr>
         </table>
         <h2>Départs (total = 0)</h2>
-        <table border="1" id="departs">
+        <h3 id="departs">Aucun départ anticipé</h3>
+        <!--
+        <table class="table" id="departs">
             <tr>
                 <th class="entete"></th>
             </tr>
@@ -78,8 +84,10 @@
                 <th>Injustifié</th>
             </tr>
         </table>
+        -->
+        <hr/>
         <h2>Avertissements</h2>
-        <table border="1" id="avertissements">
+        <table class="table" id="avertissements">
             <tr>
                 <th class="regle">Rappel Règle</th>
                 <th class="oral">A.O.</th>
@@ -88,12 +96,84 @@
                 <th class="out">Out</th>
             </tr>
             <tr>
-                <td class="ladate"></td>
-                <td class="ladate"></td>
-                <td class="ladate"></td>
-                <td class="ladate"></td>
-                <td class="ladate"></td>
+                <td class="avertissement" id="rappel" data-toggle="modal" data-target="#selection">27-11-2018</td>
+                <td class="avertissement" id="AO" data-toggle="modal" data-target="#selection"></td>
+                <td class="avertissement" id="AE" data-toggle="modal" data-target="#selection"></td>
+                <td class="avertissement" id="contrat" data-toggle="modal" data-target="#selection"></td>
+                <td class="avertissement" id="out" data-toggle="modal" data-target="#selection"></td>
             </tr>
         </table>
+        
+    <div id="selection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLiveLabel">Nom du stagiaire</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Indiquez la date de l'avertissement :</p>
+
+            <form>
+              <div class="form-row">    
+                <div class="form-group col-md-12">
+                  <label for="depart">Date de l'avertissement <span id="warningType"></span></label>
+                  <input type="date" class="form-control" id="warningDate" placeholder="">
+                </div>
+              </div>
+            </form>              
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+      
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>  
+    <script src="bootstrap/js/bootstrap.js"></script>
+      
+    <script>
+        $(document).ready(function(){
+            console.log("jQuery actif");
+            
+            $(".avertissement").click(function(){
+                var type = $(this).attr("id");
+                console.log("clic case d'avertissement : " + type);
+                switch(type){
+                    case "rappel": $("#warningType").html("(Rappel de la règle)"); 
+                        var laDate = $(this).html();
+                        console.log(laDate);
+                        $("#warningDate").value = laDate;
+                        break;
+                    case "AO" : $("#warningType").html("(Avertissement oral)"); 
+                        var laDate = $(this).html();
+                        $("#warningDate").html(laDate);
+                        break;
+                    case "AE" : $("#warningType").html("(Avertissement écrit)"); 
+                        console.log($(this).html());
+                        break;
+                    case "contrat" : $("#warningType").html("(Contrat)"); 
+                        console.log($(this).html());
+                        break;
+                    case "out" : $("#warningType").html("(Fin de formation)"); 
+                        console.log($(this).html());
+                        break;
+                    default : $("#warningType").html("(Erreur)");  
+                }
+                
+                
+            });
+        });
+    </script>  
+        
     </body>
 </html>
